@@ -1,0 +1,106 @@
+/* Animações (sem alteração) */
+@keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+@keyframes scaleUp { from { transform: scale(0.9); opacity: 0; } to { transform: scale(1); opacity: 1; } }
+
+.popup-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.7);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 2000;
+  animation: fadeIn 0.3s ease-out;
+}
+
+.popup-content {
+  background: #ffffff;
+  border-radius: 12px;
+  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.2);
+  width: 90%;
+  max-width: 800px; /* Aumenta a largura máxima para acomodar o novo layout */
+  position: relative;
+  color: #333;
+  animation: scaleUp 0.3s ease-out;
+  padding: 2rem; /* Adiciona um padding geral */
+}
+
+.popup-body {
+  display: flex;
+  align-items: center; /* Alinha verticalmente os itens */
+  gap: 2rem;
+}
+
+/* --- Coluna da Logo --- */
+.popup-logo-area {
+  flex-basis: 40%; /* Define um tamanho base para a coluna da logo */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.popup-logo {
+  height: 29vh; /* Mesmo tamanho da logo do footer para consistência */
+  width: auto;
+}
+
+/* --- Separador Vertical --- */
+.popup-separator {
+  width: 1px;
+  background-color: #e0e0e0; /* Cinza claro */
+  align-self: stretch; /* Faz o separador esticar na altura do container */
+  margin: -2rem 0; /* Truque para fazê-lo parecer mais curto que o conteúdo */
+  padding: 2.5rem 0; /* Espaçamento interno para encurtar a linha visível */
+  box-sizing: content-box;
+}
+
+/* --- Coluna de Detalhes --- */
+.popup-details-area {
+  flex-basis: 60%;
+}
+
+.close-button {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  background: none;
+  border: none;
+  font-size: 2rem;
+  line-height: 1;
+  color: #aaa;
+  cursor: pointer;
+  transition: color 0.2s ease;
+}
+.close-button:hover { color: #333; }
+
+.popup-details-area h2 { margin-top: 0; margin-bottom: 1rem; color: #002776; }
+.popup-intro { margin-bottom: 2rem; color: #666; }
+.contact-info { display: flex; flex-direction: column; gap: 1.5rem; }
+.contact-item { display: flex; align-items: center; gap: 1rem; }
+.contact-item svg { width: 24px; height: 24px; color: #007bff; flex-shrink: 0; }
+.contact-item div { display: flex; flex-direction: column; }
+.contact-item strong { font-weight: 600; color: #333; }
+.contact-item span { color: #555; }
+
+/* --- RESPONSIVIDADE --- */
+@media (max-width: 768px) {
+  .popup-content {
+    max-width: 500px; /* Diminui a largura em tablets */
+  }
+  .popup-body {
+    flex-direction: column; /* Empilha a logo e os detalhes */
+    gap: 1.5rem;
+  }
+  .popup-separator {
+    display: none; /* Esconde o separador em telas menores */
+  }
+  .popup-details-area {
+    text-align: center; /* Centraliza o texto */
+  }
+  .contact-item {
+    text-align: left; /* Mantém o alinhamento do texto dentro do item */
+    justify-content: center; /* Centraliza o item como um todo */
+  }
+}

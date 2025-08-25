@@ -1,0 +1,47 @@
+/* --- LAYOUT GERAL DA APLICAÇÃO --- */
+
+/* O container principal que envolve tudo */
+.App {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh; /* Garante que o app ocupe no mínimo a altura total da tela */
+  
+  /* IMPORTANTE: Espaço no topo para não ficar atrás do header fixo */
+  /* Este valor deve ser igual ou um pouco maior que a altura do seu header */
+  padding-top: 80px; 
+}
+
+/* --- CONTAINER DO CONTEÚDO PRINCIPAL --- */
+
+/* Uma classe para envolver o conteúdo de cada página */
+.main-content {
+  width: 100%;
+  max-width: 1280px; /* Largura máxima do conteúdo em telas grandes */
+  margin: 0 auto; /* Centraliza o container de conteúdo */
+  
+  /* Padding vertical e horizontal para o conteúdo não colar nas bordas */
+  padding: 2rem 1.5rem; 
+
+  /* Garante que o conteúdo empurre o rodapé para baixo em páginas curtas */
+  flex-grow: 1; 
+}
+
+
+
+
+/* --- AJUSTES RESPONSIVOS --- */
+
+/* Para tablets e telas menores */
+@media (max-width: 768px) {
+  .main-content {
+    padding-top: 1.5rem;
+    padding-bottom: 1.5rem;
+  }
+}
+
+/* Para celulares */
+@media (max-width: 480px) {
+  .main-content {
+    padding: 1rem;
+  }
+}

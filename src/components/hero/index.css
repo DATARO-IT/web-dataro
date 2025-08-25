@@ -1,0 +1,128 @@
+/* --- Container Principal da Seção Hero --- */
+.hero-section {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 3rem; /* Espaço entre o texto e o carrossel */
+  min-height: calc(100vh - 80px - 4rem); /* Ocupa a tela menos o header e o padding */
+}
+
+/* --- Lado Esquerdo: Conteúdo de Texto --- */
+.hero-content {
+  flex: 1; /* Ocupa o espaço disponível */
+  max-width: 600px;
+}
+
+.hero-title {
+  font-size: 2.8rem;
+  font-weight: 800;
+  line-height: 1.2;
+  color: #1e293b; /* Um preto mais escuro e profissional */
+}
+
+.hero-subtitle {
+  font-size: 1.1rem;
+  margin-top: 1rem;
+  color: #475569; /* Cinza para o subtítulo */
+}
+
+.hero-text {
+  margin-top: 1rem;
+}
+
+.hero-company-intro {
+  margin-top: 1.5rem;
+  background-color: #eef2ff; /* Fundo sutil para destacar */
+  padding: 1rem;
+  border-left: 4px solid #007bff;
+  border-radius: 4px;
+}
+
+.services-list {
+  list-style-position: inside;
+  padding-left: 0;
+  margin-top: 0.5rem;
+}
+
+.services-list li {
+  font-weight: 500;
+}
+
+.hero-cta-button {
+  display: inline-block;
+  margin-top: 2rem;
+  padding: 0.8rem 2rem;
+  background-color: #007bff;
+  color: #ffffff;
+  font-weight: 600;
+  border-radius: 8px;
+  text-decoration: none;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.hero-cta-button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 123, 255, 0.3);
+  opacity: 1;
+  text-decoration: none;
+}
+
+/* --- Lado Direito: Carrossel de Imagens --- */
+.hero-carousel {
+  flex: 1;
+  max-width: 500px;
+  position: relative;
+  border-radius: 12px;
+  overflow: hidden; /* Esconde partes da imagem que saem do container */
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+}
+
+.carousel-image {
+  width: 100%;
+  height: auto;
+  display: block;
+  aspect-ratio: 4 / 3; /* Proporção da imagem */
+  object-fit: cover;
+}
+
+.carousel-indicators {
+    position: absolute;
+    bottom: 15px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    gap: 8px;
+}
+
+.indicator-dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background-color: rgba(255, 255, 255, 0.5);
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.indicator-dot.active {
+    background-color: #ffffff;
+}
+
+/* --- RESPONSIVIDADE --- */
+@media (max-width: 992px) {
+  .hero-section {
+    flex-direction: column; /* Coloca o carrossel abaixo do texto */
+    text-align: center;
+    min-height: auto;
+    padding-top: 2rem;
+  }
+
+  .hero-company-intro {
+    text-align: left;
+  }
+}
+
+@media (max-width: 576px) {
+  .hero-title {
+    font-size: 2.2rem;
+  }
+}

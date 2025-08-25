@@ -1,0 +1,117 @@
+/* --- Container Principal do Footer --- */
+.footer-container {
+  background-color: #002776;
+  color: #f8f9fa;
+  padding-top: 4rem;
+  border-top: 4px solid #FEDD00;
+}
+
+/* --- Conteúdo Principal (Grid de Colunas) --- */
+.footer-main {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding:  1.5rem;
+  display: grid;
+  /* Grid com 4 colunas em telas grandes */
+  grid-template-columns: 1.5fr 1.5fr 1fr 1fr;
+  gap: 5rem; /* Espaçamento entre as colunas */
+}
+
+/* --- Coluna da Logo --- */
+.logo-area {
+  display: flex;
+  align-items: center; /* Alinha a logo verticalmente */
+}
+.footer-logo {
+  height: 220px; /* LOGO BEM GRANDE */
+  width: auto;
+}
+
+/* --- Coluna do Slogan --- */
+.slogan-area {
+  display: flex;
+  align-items: center;
+}
+.slogan-area p {
+  font-style: italic;
+  font-size: 1.2rem;
+  line-height: 1.6;
+  color: #ced4da;
+}
+
+/* --- Estilo Geral das Colunas de Conteúdo --- */
+.footer-column h3 {
+  font-size: 1.1rem;
+  font-weight: 600;
+  margin-bottom: 1.5rem;
+  color: #ffffff;
+  position: relative;
+  padding-bottom: 0.5rem;
+}
+.footer-column h3::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 30px;
+  height: 2px;
+  background-color: #009639;
+}
+
+/* Coluna de Links */
+.links ul { list-style: none; }
+.links li { margin-bottom: 0.75rem; }
+.links a { color: #ced4da; text-decoration: none; transition: color 0.2s ease; }
+.links a:hover { color: #009639; text-decoration: underline; opacity: 1; }
+
+/* Coluna de Contato e Social */
+.contact-item { display: flex; align-items: center; gap: 0.5rem; margin-bottom: 1rem; }
+.contact-item svg { flex-shrink: 0; }
+.social-icons { display: flex; gap: 1.5rem; margin-top: 1.5rem; }
+.social-icons a { color: #f8f9fa; }
+.social-icons svg { width: 24px; height: 24px; fill: none; stroke: currentColor; stroke-width: 2; transition: color 0.2s ease, transform 0.2s ease; }
+.social-icons a:hover { color: #009639; transform: translateY(-2px); opacity: 1; }
+
+/* --- Barra Inferior de Copyright --- */
+.footer-bottom {
+  text-align: center;
+  margin-top: 4rem;
+  padding: 1.5rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+.footer-bottom p { font-size: 0.9rem; color: #adb5bd; }
+
+/* --- RESPONSIVIDADE --- */
+@media (max-width: 1024px) {
+  .footer-main {
+    /* 2 colunas para tablets */
+    grid-template-columns: 1fr 1fr;
+  }
+  .logo-area {
+    /* Logo ocupa a primeira linha inteira */
+    grid-column: 1 / -1;
+    justify-content: center;
+    margin-bottom: -1rem; /* Reduz o espaço para o slogan */
+  }
+  .slogan-area {
+    /* Slogan ocupa a segunda linha inteira */
+    grid-column: 1 / -1;
+    text-align: center;
+    margin-bottom: 2rem;
+  }
+}
+
+@media (max-width: 576px) {
+  .footer-main {
+    /* 1 coluna para celulares */
+    grid-template-columns: 1fr;
+    text-align: center;
+  }
+  .footer-column h3::after {
+    left: 50%;
+    transform: translateX(-50%);
+  }
+  .contact-item, .social-icons {
+    justify-content: center;
+  }
+}
