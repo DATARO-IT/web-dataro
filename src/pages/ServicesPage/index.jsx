@@ -44,6 +44,7 @@ const servicesData = [
 function ServicesPage() {
   return (
     <div className="services-page-container">
+      <title>DATA-RO - Serviços</title>
       <div className="services-header">
         <h1>Nossas Soluções</h1>
         <p>Da estratégia à execução, a DATA-RO é sua parceira completa em tecnologia e comunicação digital.</p>

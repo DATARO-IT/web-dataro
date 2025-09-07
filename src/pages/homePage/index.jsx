@@ -25,6 +25,7 @@ const automacaoSlides = [
 function HomePage() {
   return (
     <>
+    <title>DATA-RO</title>
       <FeatureSection
         id="saude"
         title="Tecnologia a Serviço da Saúde"
