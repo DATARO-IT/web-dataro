@@ -12,11 +12,14 @@ const Login = () => {
   const { login } = useAuth();
   const navigate = useNavigate();
 
-  // Lista de alguns municípios para mostrar bandeiras
+  // Lista expandida de municípios para mostrar mais bandeiras (24 municípios)
   const municipiosDestaque = [
-    'Porto Velho', 'Ariquemes', 'Cacoal', 'Ji-Paraná', 'Vilhena',
-    'Rolim de Moura', 'Jaru', 'Pimenta Bueno', 'Ouro Preto do Oeste',
-    'Guajará-Mirim', 'Buritis', 'Espigão d\'Oeste'
+    'Porto Velho', 'Ariquemes', 'Cacoal', 'Ji-Paraná', 
+    'Vilhena', 'Rolim de Moura', 'Jaru', 'Pimenta Bueno',
+    'Ouro Preto do Oeste', 'Guajará-Mirim', 'Buritis', 'Espigão d\'Oeste',
+    'Alta Floresta d\'Oeste', 'Alto Alegre dos Parecis', 'Alto Paraíso', 'Alvorada d\'Oeste',
+    'Cacaulândia', 'Campo Novo de Rondônia', 'Candeias do Jamari', 'Cerejeiras',
+    'Chupinguaia', 'Corumbiara', 'Itapuã do Oeste', 'Machadinho d\'Oeste'
   ];
 
   const handleSubmit = async (e) => {
@@ -90,7 +93,7 @@ const Login = () => {
         </div>
       </div>
 
-      {/* Coluna Direita - Bandeiras */}
+      {/* Coluna Direita - Bandeiras (Grid 4x6 = 24 bandeiras) */}
       <div className="login-right">
         <h3>Municípios de Rondônia</h3>
         <div className="bandeiras-preview">
@@ -107,7 +110,7 @@ const Login = () => {
             </div>
           ))}
         </div>
-        <p className="total-municipios">48 municípios</p>
+        <p className="total-municipios">48 municípios do CIMCERO</p>
       </div>
     </div>
   );

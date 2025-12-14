@@ -1,8 +1,8 @@
 .login-container {
   min-height: 100vh;
   display: grid;
-  grid-template-columns: 1fr 1.2fr 1fr;
-  gap: 40px;
+  grid-template-columns: 0.8fr 1fr 1.2fr;
+  gap: 30px;
   background-color: #ffffff;
   padding: 40px;
   align-items: center;
@@ -40,23 +40,23 @@
 
 .login-logo {
   width: 100%;
-  max-width: 400px;
+  max-width: 350px;
   height: auto;
   margin-bottom: 30px;
   filter: drop-shadow(0 4px 12px rgba(0, 0, 0, 0.1));
 }
 
 .login-left h2 {
-  font-size: 24px;
+  font-size: 22px;
   color: #2E5C9A;
   margin-bottom: 12px;
   font-weight: 700;
 }
 
 .login-left p {
-  font-size: 16px;
+  font-size: 15px;
   color: #718096;
-  max-width: 300px;
+  max-width: 280px;
 }
 
 /* Coluna Centro - Formulário */
@@ -168,7 +168,7 @@
   color: #a0aec0;
 }
 
-/* Coluna Direita - Bandeiras */
+/* Coluna Direita - Bandeiras (Grid 4x6 = 24 bandeiras) */
 .login-right {
   display: flex;
   flex-direction: column;
@@ -182,22 +182,23 @@
 .login-right h3 {
   font-size: 20px;
   color: #2E5C9A;
-  margin-bottom: 24px;
+  margin-bottom: 20px;
   font-weight: 700;
   text-align: center;
 }
 
 .bandeiras-preview {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 12px;
-  margin-bottom: 20px;
-  max-width: 300px;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 10px;
+  margin-bottom: 16px;
+  max-width: 400px;
+  width: 100%;
 }
 
 .bandeira-mini {
-  width: 80px;
-  height: 60px;
+  width: 90px;
+  height: 65px;
   border-radius: 6px;
   overflow: hidden;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
