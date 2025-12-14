@@ -54,9 +54,13 @@ const Dashboard = () => {
   );
 
   const handleViewPainel = (municipio) => {
-    if (municipio.paineis_bi && municipio.paineis_bi.length > 0) {
-      navigate(`/paineis/municipio/${municipio.id}`);
-    }
+    navigate(`/paineis/municipio/${municipio.id}`);
+  };
+
+  // Função para gerar URL da bandeira
+  const getBandeiraUrl = (municipioNome) => {
+    // Placeholder com gradiente personalizado
+    return `https://via.placeholder.com/300x200/667eea/ffffff?text=${encodeURIComponent(municipioNome)}`;
   };
 
   return (
@@ -93,41 +97,52 @@ const Dashboard = () => {
         {loading ? (
           <div className="loading">Carregando municípios...</div>
         ) : (
-          <div className="municipios-grid">
+          <div className="bandeiras-grid">
             {filteredMunicipios.map((municipio) => {
               const hasPainel = municipio.paineis_bi && municipio.paineis_bi.length > 0;
               const painel = hasPainel ? municipio.paineis_bi[0] : null;
+              const painelAtivo = painel?.status === 'ativo';
 
               return (
                 <div
                   key={municipio.id}
-                  className={`municipio-card ${hasPainel ? 'has-painel' : 'no-painel'}`}
-                  onClick={() => hasPainel && handleViewPainel(municipio)}
-                  style={{ cursor: hasPainel ? 'pointer' : 'default' }}
+                  className={`bandeira-card ${painelAtivo ? 'com-painel' : 'sem-painel'}`}
+                  onClick={() => handleViewPainel(municipio)}
                 >
-                  <div className="card-header">
-                    <h3>{municipio.nome}</h3>
-                    <span className={`status-badge ${painel?.status || 'pendente'}`}>
-                      {painel?.status === 'ativo' ? 'Disponível' : 'Em breve'}
-                    </span>
-                  </div>
-                  <div className="card-body">
-                    <p><strong>Prefeito:</strong> {municipio.prefeito}</p>
-                    <p><strong>CNPJ:</strong> {municipio.cnpj}</p>
-                    {hasPainel && (
-                      <p className="painel-title">
-                        <strong>Painel:</strong> {painel.titulo}
-                      </p>
+                  <div className="bandeira-container">
+                    <img
+                      src={getBandeiraUrl(municipio.nome)}
+                      alt={`Bandeira de ${municipio.nome}`}
+                      className="bandeira-img"
+                      loading="lazy"
+                      onError={(e) => {
+                        e.target.src = `https://via.placeholder.com/300x200/667eea/ffffff?text=${encodeURIComponent(municipio.nome)}`;
+                      }}
+                    />
+                    {painelAtivo && (
+                      <div className="painel-badge">
+                        <span>✓ Painel Disponível</span>
+                      </div>
                     )}
                   </div>
-                  {!hasPainel && (
-                    <div className="card-footer">
-                      <p className="no-painel-message">Painel em desenvolvimento</p>
-                    </div>
-                  )}
+                  <div className="bandeira-info">
+                    <h3>{municipio.nome}</h3>
+                    <p className="bandeira-description">
+                      Acesse o painel do município de {municipio.nome}
+                    </p>
+                    {!painelAtivo && (
+                      <span className="em-desenvolvimento">Em desenvolvimento</span>
+                    )}
+                  </div>
                 </div>
               );
             })}
+          </div>
+        )}
+
+        {!loading && filteredMunicipios.length === 0 && (
+          <div className="no-results">
+            <p>Nenhum município encontrado com "{searchTerm}"</p>
           </div>
         )}
       </main>
