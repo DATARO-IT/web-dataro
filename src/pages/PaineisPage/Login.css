@@ -6,6 +6,24 @@
   background-color: #ffffff;
   padding: 40px;
   align-items: center;
+  position: relative;
+}
+
+.login-container::before {
+  content: '';
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 60%;
+  height: 60%;
+  background-image: url('../../assets/logo-watermark.png');
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: contain;
+  opacity: 0.05;
+  z-index: 0;
+  pointer-events: none;
 }
 
 /* Coluna Esquerda - Logo */
@@ -16,6 +34,8 @@
   justify-content: center;
   text-align: center;
   padding: 20px;
+  position: relative;
+  z-index: 1;
 }
 
 .login-logo {
@@ -44,6 +64,8 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  position: relative;
+  z-index: 1;
 }
 
 .login-box {
@@ -153,6 +175,8 @@
   align-items: center;
   justify-content: center;
   padding: 20px;
+  position: relative;
+  z-index: 1;
 }
 
 .login-right h3 {
