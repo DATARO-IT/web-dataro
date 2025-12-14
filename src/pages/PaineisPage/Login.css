@@ -1,39 +1,58 @@
 .login-container {
   min-height: 100vh;
+  display: grid;
+  grid-template-columns: 1fr 1.2fr 1fr;
+  gap: 40px;
+  background-color: #ffffff;
+  padding: 40px;
+  align-items: center;
+}
+
+/* Coluna Esquerda - Logo */
+.login-left {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 20px;
+}
+
+.login-logo {
+  width: 100%;
+  max-width: 400px;
+  height: auto;
+  margin-bottom: 30px;
+  filter: drop-shadow(0 4px 12px rgba(0, 0, 0, 0.1));
+}
+
+.login-left h2 {
+  font-size: 24px;
+  color: #2E5C9A;
+  margin-bottom: 12px;
+  font-weight: 700;
+}
+
+.login-left p {
+  font-size: 16px;
+  color: #718096;
+  max-width: 300px;
+}
+
+/* Coluna Centro - Formulário */
+.login-center {
   display: flex;
   align-items: center;
   justify-content: center;
-  background-color: #ffffff;
-  padding: 20px;
-  position: relative;
-}
-
-.login-container::before {
-  content: '';
-  position: fixed;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  width: 98%;
-  height: 98%;
-  background-image: url('../../assets/logo.png');
-  background-repeat: no-repeat;
-  background-position: center;
-  background-size: contain;
-  opacity: 0.12;
-  z-index: 0;
-  pointer-events: none;
 }
 
 .login-box {
   background: white;
   border-radius: 16px;
-  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.15);
   width: 100%;
   max-width: 450px;
   padding: 40px;
-  position: relative;
-  z-index: 1;
 }
 
 .login-header {
@@ -125,6 +144,75 @@
 .login-footer p {
   font-size: 12px;
   color: #a0aec0;
+}
+
+/* Coluna Direita - Bandeiras */
+.login-right {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+}
+
+.login-right h3 {
+  font-size: 20px;
+  color: #2E5C9A;
+  margin-bottom: 24px;
+  font-weight: 700;
+  text-align: center;
+}
+
+.bandeiras-preview {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+  margin-bottom: 20px;
+  max-width: 300px;
+}
+
+.bandeira-mini {
+  width: 80px;
+  height: 60px;
+  border-radius: 6px;
+  overflow: hidden;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  transition: transform 0.2s ease;
+}
+
+.bandeira-mini:hover {
+  transform: scale(1.05);
+}
+
+.bandeira-mini img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.total-municipios {
+  font-size: 14px;
+  color: #718096;
+  font-weight: 600;
+  text-align: center;
+}
+
+/* Responsivo */
+@media (max-width: 1200px) {
+  .login-container {
+    grid-template-columns: 1fr;
+    gap: 30px;
+    padding: 20px;
+  }
+
+  .login-left,
+  .login-right {
+    display: none;
+  }
+
+  .login-center {
+    width: 100%;
+  }
 }
 
 @media (max-width: 480px) {
