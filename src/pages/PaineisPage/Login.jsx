@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../../contexts/AuthContext';
 import { getBandeiraUrl } from '../../utils/bandeirasMap';
+import logoWatermark from '../../assets/logo-watermark.png';
 import './Login.css';
 
 const Login = () => {
@@ -42,7 +43,7 @@ const Login = () => {
     <div className="login-container">
       {/* Coluna Esquerda - Logo com opacidade */}
       <div className="login-left">
-        <img src="/src/assets/logo-watermark.png" alt="DATA-RO Logo" className="login-logo-watermark" />
+        <img src={logoWatermark} alt="DATA-RO Logo" className="login-logo-watermark" />
       </div>
 
       {/* Coluna Centro - Formulário */}
