@@ -1,7 +1,7 @@
 .login-container {
   min-height: 100vh;
   display: grid;
-  grid-template-columns: 0.8fr 1fr 1.2fr;
+  grid-template-columns: 1fr 1fr 1.2fr;
   gap: 30px;
   background-color: #ffffff;
   padding: 40px;
@@ -9,24 +9,12 @@
   position: relative;
 }
 
+/* Remover watermark de fundo centralizado */
 .login-container::before {
-  content: '';
-  position: fixed;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  width: 60%;
-  height: 60%;
-  background-image: url('../../assets/logo-watermark.png');
-  background-repeat: no-repeat;
-  background-position: center;
-  background-size: contain;
-  opacity: 0.05;
-  z-index: 0;
-  pointer-events: none;
+  display: none;
 }
 
-/* Coluna Esquerda - Logo */
+/* Coluna Esquerda - Logo com opacidade */
 .login-left {
   display: flex;
   flex-direction: column;
@@ -38,25 +26,12 @@
   z-index: 1;
 }
 
-.login-logo {
+.login-logo-watermark {
   width: 100%;
-  max-width: 350px;
+  max-width: 400px;
   height: auto;
-  margin-bottom: 30px;
-  filter: drop-shadow(0 4px 12px rgba(0, 0, 0, 0.1));
-}
-
-.login-left h2 {
-  font-size: 22px;
-  color: #2E5C9A;
-  margin-bottom: 12px;
-  font-weight: 700;
-}
-
-.login-left p {
-  font-size: 15px;
-  color: #718096;
-  max-width: 280px;
+  opacity: 0.05;
+  filter: drop-shadow(0 4px 12px rgba(0, 0, 0, 0.05));
 }
 
 /* Coluna Centro - Formulário */
