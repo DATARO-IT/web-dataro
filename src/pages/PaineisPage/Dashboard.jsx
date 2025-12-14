@@ -46,7 +46,8 @@ const Dashboard = () => {
 
   const handleLogout = () => {
     logout();
-    navigate('/paineis/login');
+    // Redireciona para a landing page da DATA-RO
+    window.location.href = '/';
   };
 
   const filteredMunicipios = municipios.filter(m =>
