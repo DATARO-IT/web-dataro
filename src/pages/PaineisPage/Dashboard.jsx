@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../../contexts/AuthContext';
 import { supabase } from '../../utils/supabaseClient';
+import { bandeirasMap } from '../../utils/bandeirasMap';
 import './Dashboard.css';
 
 const Dashboard = () => {
@@ -60,8 +61,21 @@ const Dashboard = () => {
 
   // Função para gerar URL da bandeira
   const getBandeiraUrl = (municipioNome) => {
-    // Placeholder com gradiente personalizado
-    return `https://via.placeholder.com/300x200/667eea/ffffff?text=${encodeURIComponent(municipioNome)}`;
+    const arquivo = bandeirasMap[municipioNome];
+    
+    if (arquivo) {
+      try {
+        // Importar bandeira dinamicamente
+        return require(`../../assets/bandeiras/${arquivo}`);
+      } catch (error) {
+        console.warn(`Bandeira não encontrada para ${municipioNome}:`, error);
+        // Fallback para placeholder
+        return `https://via.placeholder.com/300x200/7CB342/ffffff?text=${encodeURIComponent(municipioNome)}`;
+      }
+    }
+    
+    // Fallback para placeholder se não houver mapeamento
+    return `https://via.placeholder.com/300x200/7CB342/ffffff?text=${encodeURIComponent(municipioNome)}`;
   };
 
   return (
