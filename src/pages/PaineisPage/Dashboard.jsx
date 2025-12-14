@@ -140,15 +140,6 @@ const Dashboard = () => {
                       </div>
                     )}
                   </div>
-                  <div className="bandeira-info">
-                    <h3>{municipio.nome}</h3>
-                    <p className="bandeira-description">
-                      Acesse o painel do município de {municipio.nome}
-                    </p>
-                    {!painelAtivo && (
-                      <span className="em-desenvolvimento">Em desenvolvimento</span>
-                    )}
-                  </div>
                 </div>
               );
             })}

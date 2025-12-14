@@ -53,24 +53,24 @@
   text-transform: uppercase;
   transition: all 0.3s ease;
   cursor: pointer;
-  background: linear-gradient(135deg, #7CB342 0%, #F4D03F 50%, #2E5C9A 100%);
+  background: linear-gradient(135deg, rgba(124, 179, 66, 0.75) 0%, rgba(244, 208, 63, 0.75) 50%, rgba(46, 92, 154, 0.75) 100%);
   padding: 8px 16px;
   border-radius: 6px;
   text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
 }
 .header-container.scrolled .nav-menu a {
   color: white;
-  background: linear-gradient(135deg, #7CB342 0%, #F4D03F 50%, #2E5C9A 100%);
+  background: linear-gradient(135deg, rgba(124, 179, 66, 0.75) 0%, rgba(244, 208, 63, 0.75) 50%, rgba(46, 92, 154, 0.75) 100%);
 }
 .nav-menu a:hover {
   transform: translateY(-2px);
   box-shadow: 0 4px 12px rgba(124, 179, 66, 0.4);
-  background: linear-gradient(135deg, #8BC34A 0%, #FFEB3B 50%, #3F7AC2 100%);
+  background: linear-gradient(135deg, rgba(139, 195, 74, 0.85) 0%, rgba(255, 235, 59, 0.85) 50%, rgba(63, 122, 194, 0.85) 100%);
 }
 .header-container.scrolled .nav-menu a:hover {
   transform: translateY(-2px);
   box-shadow: 0 4px 12px rgba(124, 179, 66, 0.4);
-  background: linear-gradient(135deg, #8BC34A 0%, #FFEB3B 50%, #3F7AC2 100%);
+  background: linear-gradient(135deg, rgba(139, 195, 74, 0.85) 0%, rgba(255, 235, 59, 0.85) 50%, rgba(63, 122, 194, 0.85) 100%);
 }
 
 .menu-toggle {
@@ -147,7 +147,7 @@
 }
 /* Estilos para o link de Painéis BI */
 .nav-menu .paineis-link {
-  background: linear-gradient(135deg, #7CB342 0%, #F4D03F 50%, #2E5C9A 100%);
+  background: linear-gradient(135deg, rgba(124, 179, 66, 0.75) 0%, rgba(244, 208, 63, 0.75) 50%, rgba(46, 92, 154, 0.75) 100%);
   color: white !important;
   padding: 8px 16px;
   border-radius: 6px;
@@ -159,5 +159,5 @@
 .nav-menu .paineis-link:hover {
   transform: translateY(-2px);
   box-shadow: 0 4px 12px rgba(124, 179, 66, 0.4);
-  background: linear-gradient(135deg, #8BC34A 0%, #FFEB3B 50%, #3F7AC2 100%);
+  background: linear-gradient(135deg, rgba(139, 195, 74, 0.85) 0%, rgba(255, 235, 59, 0.85) 50%, rgba(63, 122, 194, 0.85) 100%);
 }
