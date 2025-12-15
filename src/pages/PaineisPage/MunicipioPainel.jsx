@@ -2,12 +2,13 @@ import React, { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { useAuth } from '../../contexts/AuthContext';
 import { supabase } from '../../utils/supabaseClient';
+import { getPainelConfig } from '../../utils/paineisConfig';
 import './MunicipioPainel.css';
 
 const MunicipioPainel = () => {
   const { id } = useParams();
   const [municipio, setMunicipio] = useState(null);
-  const [painel, setPainel] = useState(null);
+  const [painelConfig, setPainelConfig] = useState(null);
   const [loading, setLoading] = useState(true);
   const { user } = useAuth();
   const navigate = useNavigate();
@@ -33,16 +34,10 @@ const MunicipioPainel = () => {
       if (municipioError) throw municipioError;
       setMunicipio(municipioData);
 
-      // Buscar painel
-      const { data: painelData, error: painelError } = await supabase
-        .from('paineis_bi')
-        .select('*')
-        .eq('municipio_id', id)
-        .single();
+      // Buscar configuração do painel
+      const config = getPainelConfig(municipioData.nome);
+      setPainelConfig(config);
 
-      if (!painelError && painelData) {
-        setPainel(painelData);
-      }
     } catch (error) {
       console.error('Erro ao carregar dados:', error);
     } finally {
@@ -62,15 +57,39 @@ const MunicipioPainel = () => {
     );
   }
 
-  if (!municipio || !painel) {
+  if (!municipio) {
     return (
       <div className="painel-container">
         <div className="error-message">
-          <h2>Painel não encontrado</h2>
+          <h2>Município não encontrado</h2>
           <button onClick={handleBack} className="back-button">
             Voltar ao Dashboard
           </button>
         </div>
+      </div>
+    );
+  }
+
+  if (!painelConfig || !painelConfig.ativo) {
+    return (
+      <div className="painel-container">
+        <header className="painel-header">
+          <button onClick={handleBack} className="back-button">
+            ← Voltar
+          </button>
+          <div className="painel-info">
+            <h1>{municipio.nome}</h1>
+          </div>
+        </header>
+        <main className="painel-main">
+          <div className="no-painel">
+            <h2>Painel em desenvolvimento</h2>
+            <p>O painel de BI para {municipio.nome} ainda não está disponível.</p>
+            <button onClick={handleBack} className="back-button">
+              Voltar ao Dashboard
+            </button>
+          </div>
+        </main>
       </div>
     );
   }
@@ -83,36 +102,18 @@ const MunicipioPainel = () => {
         </button>
         <div className="painel-info">
           <h1>{municipio.nome}</h1>
-          <p>{painel.titulo}</p>
+          <p>{painelConfig.titulo}</p>
         </div>
       </header>
 
       <main className="painel-main">
-        {painel.embed_url ? (
-          <iframe
-            src={painel.embed_url}
-            frameBorder="0"
-            allowFullScreen={true}
-            className="powerbi-iframe"
-            title={`Painel de BI - ${municipio.nome}`}
-          />
-        ) : painel.url_powerbi ? (
-          <div className="painel-link-container">
-            <p>O painel está disponível em uma nova janela:</p>
-            <a
-              href={painel.url_powerbi}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="painel-link"
-            >
-              Abrir Painel de BI
-            </a>
-          </div>
-        ) : (
-          <div className="no-painel">
-            <p>Painel em desenvolvimento</p>
-          </div>
-        )}
+        <iframe
+          src={painelConfig.powerbi_url}
+          frameBorder="0"
+          allowFullScreen={true}
+          className="powerbi-iframe"
+          title={`Painel de BI - ${municipio.nome}`}
+        />
       </main>
     </div>
   );
