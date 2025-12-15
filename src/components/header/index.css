@@ -52,7 +52,7 @@
 .logo-text-line1 {
   font-size: 1.2rem;
   font-weight: 700;
-  color: #fff;
+  color: #1e3a8a;
   font-family: 'Poppins', sans-serif;
   letter-spacing: 0.5px;
 }
@@ -60,18 +60,18 @@
 .logo-text-line2 {
   font-size: 0.75rem;
   font-weight: 500;
-  color: rgba(255, 255, 255, 0.9);
+  color: #1e3a8a;
   font-family: 'Poppins', sans-serif;
   letter-spacing: 0.3px;
   text-transform: uppercase;
 }
 
 .header-container.scrolled .logo-text-line1 {
-  color: #333;
+  color: #1e3a8a;
 }
 
 .header-container.scrolled .logo-text-line2 {
-  color: #666;
+  color: #1e3a8a;
 }
 
 .header-container.scrolled .logo {

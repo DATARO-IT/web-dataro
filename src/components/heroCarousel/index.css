@@ -130,7 +130,9 @@
 /* --- ESTILOS PARA BANDEIRA DE RONDÔNIA --- */
 .bandeira-rondonia-hero {
   opacity: 0.3;
-  object-fit: contain !important;
+  object-fit: cover !important;
+  width: 100%;
+  height: 100%;
 }
 
 /* --- BOTÃO COM DEGRADÊ VERDE SUTIL --- */
