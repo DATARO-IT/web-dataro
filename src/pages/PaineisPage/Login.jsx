@@ -16,7 +16,7 @@ const Login = () => {
   // Lista expandida de municípios para mostrar mais bandeiras (24 municípios)
   const municipiosDestaque = [
     'Porto Velho', 'Ariquemes', 'Cacoal', 'Ji-Paraná', 
-    'Vilhena', 'Rolim de Moura', 'Jaru', 'Pimenta Bueno',
+    'Cacoal', 'Rolim de Moura', 'Jaru', 'Pimenta Bueno',
     'Ouro Preto do Oeste', 'Guajará-Mirim', 'Buritis', 'Espigão d\'Oeste',
     'Alta Floresta d\'Oeste', 'Alto Alegre dos Parecis', 'Alto Paraíso', 'Alvorada d\'Oeste',
     'Cacaulândia', 'Campo Novo de Rondônia', 'Candeias do Jamari', 'Cerejeiras',
