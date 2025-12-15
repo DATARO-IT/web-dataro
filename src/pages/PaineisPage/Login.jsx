@@ -1,8 +1,7 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../../contexts/AuthContext';
 import { getBandeiraUrl } from '../../utils/bandeirasMap';
-import logoWatermark from '../../assets/logo-watermark.png';
 import './Login.css';
 
 const Login = () => {
@@ -56,9 +55,24 @@ const Login = () => {
 
   return (
     <div className="login-container">
-      {/* Coluna Esquerda - Logo com opacidade */}
+      {/* Coluna Esquerda - Bandeiras */}
       <div className="login-left">
-        <img src={logoWatermark} alt="DATA-RO Logo" className="login-logo-watermark" />
+        <h3>Municípios de Rondônia</h3>
+        <div className="bandeiras-preview-left">
+          {municipiosDestaque.slice(0, 12).map((municipio, index) => (
+            <div key={index} className="bandeira-mini">
+              <img
+                src={getBandeiraUrl(municipio)}
+                alt={`Bandeira de ${municipio}`}
+                loading="lazy"
+                onError={(e) => {
+                  e.target.src = `https://via.placeholder.com/80x60/667eea/ffffff?text=${encodeURIComponent(municipio.substring(0, 3))}`;
+                }}
+              />
+              <span className="bandeira-nome">{municipio}</span>
+            </div>
+          ))}
+        </div>
       </div>
 
       {/* Coluna Centro - Formulário */}
@@ -117,11 +131,11 @@ const Login = () => {
         </div>
       </div>
 
-      {/* Coluna Direita - Bandeiras (Grid 4x6 = 24 bandeiras) */}
+      {/* Coluna Direita - Mais Bandeiras */}
       <div className="login-right">
-        <h3>Municípios de Rondônia</h3>
-        <div className="bandeiras-preview">
-          {municipiosDestaque.map((municipio, index) => (
+        <h3>Membros do CIMCERO</h3>
+        <div className="bandeiras-preview-right">
+          {municipiosDestaque.slice(12, 24).map((municipio, index) => (
             <div key={index} className="bandeira-mini">
               <img
                 src={getBandeiraUrl(municipio)}
@@ -131,10 +145,10 @@ const Login = () => {
                   e.target.src = `https://via.placeholder.com/80x60/667eea/ffffff?text=${encodeURIComponent(municipio.substring(0, 3))}`;
                 }}
               />
+              <span className="bandeira-nome">{municipio}</span>
             </div>
           ))}
         </div>
-        <p className="total-municipios">MEMBROS DO CIMCERO</p>
       </div>
     </div>
   );
