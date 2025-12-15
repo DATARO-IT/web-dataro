@@ -109,16 +109,43 @@ const Dashboard = () => {
 
       <main className="dashboard-main">
         <div className="search-section">
-          <input
-            type="text"
-            placeholder="Buscar município..."
-            value={searchTerm}
-            onChange={(e) => setSearchTerm(e.target.value)}
-            className="search-input"
-          />
+          <div className="search-container">
+            <div className="search-input-wrapper">
+              <svg className="search-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                <circle cx="11" cy="11" r="8"/>
+                <path d="m21 21-4.35-4.35"/>
+              </svg>
+              <input
+                type="text"
+                placeholder="Buscar município por nome..."
+                value={searchTerm}
+                onChange={(e) => setSearchTerm(e.target.value)}
+                className="search-input"
+              />
+              {searchTerm && (
+                <button 
+                  className="clear-search-button"
+                  onClick={() => setSearchTerm('')}
+                  title="Limpar busca"
+                >
+                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                    <line x1="18" y1="6" x2="6" y2="18"/>
+                    <line x1="6" y1="6" x2="18" y2="18"/>
+                  </svg>
+                </button>
+              )}
+            </div>
+          </div>
           <div className="results-info">
             <p className="results-count">
-              {filteredMunicipios.length} município(s) encontrado(s)
+              {filteredMunicipios.length === 0 ? (
+                <span className="no-results">Nenhum município encontrado</span>
+              ) : (
+                <span>
+                  <strong>{filteredMunicipios.length}</strong> município(s) encontrado(s)
+                  {searchTerm && <span className="search-term"> para "{searchTerm}"</span>}
+                </span>
+              )}
             </p>
             {totalPages > 1 && (
               <p className="page-info">
@@ -130,6 +157,25 @@ const Dashboard = () => {
 
         {loading ? (
           <div className="loading">Carregando municípios...</div>
+        ) : filteredMunicipios.length === 0 ? (
+          <div className="no-results-container">
+            <svg className="no-results-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+              <circle cx="11" cy="11" r="8"/>
+              <path d="m21 21-4.35-4.35"/>
+              <line x1="11" y1="8" x2="11" y2="14"/>
+              <circle cx="11" cy="17" r="0.5" fill="currentColor"/>
+            </svg>
+            <h2>Nenhum município encontrado</h2>
+            <p>Tente buscar com outro termo ou limpe o filtro para ver todos os municípios.</p>
+            {searchTerm && (
+              <button 
+                className="clear-filter-button"
+                onClick={() => setSearchTerm('')}
+              >
+                Limpar Filtro
+              </button>
+            )}
+          </div>
         ) : (
           <>
             <div className="municipios-grid">
