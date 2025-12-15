@@ -57,7 +57,7 @@
   font-family: 'Montserrat', sans-serif;
   font-size: 1.1rem;
   font-weight: 700;
-  color: white;
+  color: #1e3a8a;
   text-transform: uppercase;
   letter-spacing: 1px;
   transition: color 0.4s ease;
@@ -65,7 +65,7 @@
 }
 
 .header-container.scrolled .logo-text {
-  color: #2E5C9A;
+  color: #1e3a8a;
 }
 
 .nav-menu ul {
@@ -79,7 +79,7 @@
 
 .nav-menu a {
   text-decoration: none;
-  color: #000000;
+  color: #1e3a8a;
   font-weight: 700;
   font-family: 'Montserrat', sans-serif;
   font-size: 0.9rem;
@@ -91,7 +91,7 @@
 }
 
 .header-container.scrolled .nav-menu a {
-  color: #000000;
+  color: #1e3a8a;
 }
 
 .nav-menu a:hover {
