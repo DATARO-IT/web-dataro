@@ -1,7 +1,7 @@
 .login-container {
   min-height: 100vh;
   display: grid;
-  grid-template-columns: 1fr 1fr 1.2fr;
+  grid-template-columns: 1fr 1fr 1fr;
   gap: 30px;
   background-color: #ffffff;
   padding: 40px;
