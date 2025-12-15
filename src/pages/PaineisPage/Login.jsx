@@ -39,6 +39,21 @@ const Login = () => {
     setLoading(false);
   };
 
+  const handleVoltar = () => {
+    navigate('/');
+  };
+
+  const handleContato = () => {
+    navigate('/');
+    // Após navegar, rolar até a seção de contato
+    setTimeout(() => {
+      const contatoSection = document.getElementById('contato');
+      if (contatoSection) {
+        contatoSection.scrollIntoView({ behavior: 'smooth' });
+      }
+    }, 100);
+  };
+
   return (
     <div className="login-container">
       {/* Coluna Esquerda - Logo com opacidade */}
@@ -86,8 +101,18 @@ const Login = () => {
             </button>
           </form>
 
+          {/* Botões adicionais */}
+          <div className="login-actions">
+            <button onClick={handleVoltar} className="action-button secondary">
+              Voltar à página inicial
+            </button>
+            <button onClick={handleContato} className="action-button secondary">
+              Para ter acesso entre em contato conosco
+            </button>
+          </div>
+
           <div className="login-footer">
-            <p>© 2024 DATA-RO - Todos os direitos reservados</p>
+            <p>DATA-RO INTELIGÊNCIA TERRITORIAL. TODOS OS DIREITOS RESERVADOS</p>
           </div>
         </div>
       </div>
@@ -109,7 +134,7 @@ const Login = () => {
             </div>
           ))}
         </div>
-        <p className="total-municipios">48 municípios do CIMCERO</p>
+        <p className="total-municipios">MEMBROS DO CIMCERO</p>
       </div>
     </div>
   );

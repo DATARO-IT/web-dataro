@@ -39,8 +39,9 @@ const Header = ({ onContactClick }) => {
     <header className={headerClassName}>
       <div className="header-content">
         <div className="logo-container">
-          <Link to="/" onClick={() => setIsMenuOpen(false)}>
+          <Link to="/" onClick={() => setIsMenuOpen(false)} className="logo-link">
             <img src={logo} alt="Logo da Empresa" className="logo" />
+            <span className="logo-text">DATA-RO INTELIGÊNCIA TERRITORIAL</span>
           </Link>
         </div>
         
