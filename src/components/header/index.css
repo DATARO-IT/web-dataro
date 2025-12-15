@@ -189,6 +189,20 @@
     color: #333;
     font-size: 1.8rem;
   }
+
+  /* Ajustes específicos para o botão Painéis em mobile */
+  .nav-menu .paineis-link {
+    font-size: 1.6rem;
+    padding: 16px 32px;
+    background: linear-gradient(135deg, #7CB342 0%, #F4D03F 50%, #2E5C9A 100%);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+    border-radius: 12px;
+  }
+
+  .nav-menu .paineis-link:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 16px rgba(124, 179, 66, 0.5);
+  }
 }
 
 /* Estilos para o link de Painéis BI - mantém opacidade original */
