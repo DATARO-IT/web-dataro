@@ -15,12 +15,12 @@ const Login = () => {
 
   // Lista de municípios com bandeiras que funcionam corretamente (24 municípios)
   const municipiosDestaque = [
-    'Ariquemes', 'Cacoal', 'Ji-Paraná', 'Jaru',
-    'Pimenta Bueno', 'Buritis', 'Espigão d\'Oeste', 'Alta Floresta d\'Oeste',
-    'Alto Alegre dos Parecis', 'Alto Paraíso', 'Alvorada d\'Oeste', 'Cacaulândia',
-    'Campo Novo de Rondônia', 'Candeias do Jamari', 'Cerejeiras', 'Chupinguaia',
-    'Corumbiara', 'Itapuã do Oeste', 'Machadinho d\'Oeste', 'Ariquemes',
-    'Cacoal', 'Ji-Paraná', 'Jaru', 'Pimenta Bueno'
+    'Ariquemes', 'Cacoal', 'Jaru', 'Pimenta Bueno',
+    'Buritis', 'Espigão d\'Oeste', 'Alta Floresta d\'Oeste', 'Alto Alegre dos Parecis',
+    'Alto Paraíso', 'Alvorada d\'Oeste', 'Cacaulândia', 'Campo Novo de Rondônia',
+    'Candeias do Jamari', 'Cerejeiras', 'Chupinguaia', 'Corumbiara',
+    'Itapuã do Oeste', 'Machadinho d\'Oeste', 'Monte Negro', 'Nova Mamoré',
+    'Nova União', 'Novo Horizonte do Oeste', 'Parecis', 'Seringueiras'
   ];
 
   const handleSubmit = async (e) => {
