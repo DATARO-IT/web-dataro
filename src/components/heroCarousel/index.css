@@ -126,3 +126,23 @@
         bottom: 15px;
     }
 }
+
+/* --- ESTILOS PARA BANDEIRA DE RONDÔNIA --- */
+.bandeira-rondonia-hero {
+  opacity: 0.3;
+  object-fit: contain !important;
+}
+
+/* --- BOTÃO COM DEGRADÊ VERDE SUTIL --- */
+.cta-button-rondonia {
+  background: linear-gradient(135deg, rgba(5, 150, 105, 0.25) 0%, rgba(4, 120, 87, 0.25) 100%);
+  border: 2px solid rgba(255, 255, 255, 0.8);
+  color: #fff;
+  backdrop-filter: blur(10px);
+}
+
+.cta-button-rondonia:hover {
+  background: linear-gradient(135deg, rgba(5, 150, 105, 0.4) 0%, rgba(4, 120, 87, 0.4) 100%);
+  border-color: #fff;
+  color: #fff;
+}

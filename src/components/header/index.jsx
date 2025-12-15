@@ -42,6 +42,10 @@ const Header = ({ onContactClick }) => {
           <Link to="/" onClick={() => setIsMenuOpen(false)}>
             <img src={logo} alt="Logo da Empresa" className="logo" />
           </Link>
+          <div className="logo-text">
+            <span className="logo-text-line1">DATA-RO</span>
+            <span className="logo-text-line2">INTELIGÊNCIA TERRITORIAL</span>
+          </div>
         </div>
         
         <nav className={navClassName}>
@@ -49,7 +53,7 @@ const Header = ({ onContactClick }) => {
             <li><Link to="/" onClick={() => setIsMenuOpen(false)}>INÍCIO</Link></li>
             <li><Link to="/services" onClick={() => setIsMenuOpen(false)}>SERVIÇOS</Link></li>
             <li><a href="#" onClick={handleContactClick}>CONTATO</a></li>
-            <li><Link to="/paineis/login" className="paineis-link" onClick={() => setIsMenuOpen(false)}>PAINÉIS BI</Link></li>
+            <li><Link to="/paineis/login" className="paineis-link" onClick={() => setIsMenuOpen(false)}>RONDÔNIA EM NÚMEROS</Link></li>
           </ul>
         </nav>
 

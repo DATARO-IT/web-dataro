@@ -7,7 +7,8 @@ import './index.css';
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 
-// Seus imports de imagem continuam aqui
+// Imports de imagem
+import bandeiraRondonia from '../../assets/bandeira-ro-hero.png';
 import bgImage1 from '../../assets/gestao-bg.jpg';
 import bgImage2 from '../../assets/sites-bg.jpg';
 import bgImage3 from '../../assets/bi-bg.jpeg';
@@ -28,9 +29,18 @@ const HeroCarousel = () => {
     <div className="hero-carousel-container">
       <Slider {...settings}>
 
+        {/* Slide 0 - Bandeira de Rondônia */}
+        <div className="slide-item">
+          <img src={bandeiraRondonia} alt="Bandeira de Rondônia" className="slide-background-image bandeira-rondonia-hero" />
+          <div className="slide-content">
+            <p>RONDÔNIA EM NÚMEROS</p>
+            <h1>Plataforma de Gestão Integrada dos Municípios de Rondônia</h1>
+            <button className="cta-button cta-button-rondonia">RONDÔNIA EM NÚMEROS</button>
+          </div>
+        </div>
+
         {/* Slide 1 - Gestão */}
         <div className="slide-item">
-          {/* MÉTODO NOVO: Usando a tag <img> para a imagem de fundo */}
           <img src={bgImage1} alt="Gráficos e dados de gestão em telas digitais" className="slide-background-image" />
           <div className="slide-content">
             <p>SOLUÇÕES EM GESTÃO E TI</p>

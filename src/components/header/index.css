@@ -31,10 +31,47 @@
   min-height: 85px;
 }
 
+.logo-container {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
 .logo {
   height: 100px;
   width: auto;
   transition: height 0.4s ease;
+}
+
+.logo-text {
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+}
+
+.logo-text-line1 {
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: #fff;
+  font-family: 'Poppins', sans-serif;
+  letter-spacing: 0.5px;
+}
+
+.logo-text-line2 {
+  font-size: 0.75rem;
+  font-weight: 500;
+  color: rgba(255, 255, 255, 0.9);
+  font-family: 'Poppins', sans-serif;
+  letter-spacing: 0.3px;
+  text-transform: uppercase;
+}
+
+.header-container.scrolled .logo-text-line1 {
+  color: #333;
+}
+
+.header-container.scrolled .logo-text-line2 {
+  color: #666;
 }
 
 .header-container.scrolled .logo {
@@ -136,16 +173,30 @@
       font-size: 1.8rem; /* Fonte bem grande para fácil leitura e toque */
   }
 }
-/* Estilos para o link de Painéis BI */
+/* Estilos para o link de Rondônia em Números */
 .nav-menu .paineis-link {
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  background: linear-gradient(135deg, rgba(5, 150, 105, 0.25) 0%, rgba(4, 120, 87, 0.25) 100%);
   color: white !important;
   padding: 8px 16px;
   border-radius: 6px;
   transition: all 0.3s ease;
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+.header-container.scrolled .nav-menu .paineis-link {
+  background: linear-gradient(135deg, rgba(5, 150, 105, 0.15) 0%, rgba(4, 120, 87, 0.15) 100%);
+  color: #059669 !important;
+  border-color: rgba(5, 150, 105, 0.3);
 }
 
 .nav-menu .paineis-link:hover {
   transform: translateY(-2px);
-  box-shadow: 0 4px 12px rgba(102, 126, 234, 0.3);
+  background: linear-gradient(135deg, rgba(5, 150, 105, 0.4) 0%, rgba(4, 120, 87, 0.4) 100%);
+  box-shadow: 0 4px 12px rgba(5, 150, 105, 0.3);
+}
+
+.header-container.scrolled .nav-menu .paineis-link:hover {
+  background: linear-gradient(135deg, rgba(5, 150, 105, 0.25) 0%, rgba(4, 120, 87, 0.25) 100%);
+  color: #fff !important;
 }
