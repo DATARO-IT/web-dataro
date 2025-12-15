@@ -1,98 +1,98 @@
 .login-container {
-  min-height: 100vh;
   display: flex;
-  align-items: stretch;
-  justify-content: center;
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-  padding: 0;
+  min-height: 100vh;
+  background: #ffffff;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
 }
 
-/* Coluna Esquerda - Bandeiras */
+/* Coluna Esquerda - Logo DATA-RO */
 .login-left {
   flex: 1;
   display: flex;
-  flex-direction: column;
   align-items: center;
   justify-content: center;
-  padding: 40px 20px;
-  background: rgba(255, 255, 255, 0.1);
-  backdrop-filter: blur(10px);
+  padding: 2rem;
+  background: #ffffff;
 }
 
-.login-left h3 {
-  color: white;
-  font-size: 18px;
-  margin-bottom: 20px;
-  text-align: center;
-  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+.logo-watermark {
+  width: 100%;
+  max-width: 500px;
+  opacity: 0.5;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
-.bandeiras-preview-left {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 15px;
-  max-width: 300px;
+.logo-watermark img {
+  width: 100%;
+  height: auto;
+  object-fit: contain;
 }
 
 /* Coluna Centro - Formulário */
 .login-center {
-  flex: 1.2;
+  flex: 1;
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 40px 20px;
+  padding: 2rem;
+  background: #ffffff;
 }
 
 .login-box {
-  background: white;
-  border-radius: 16px;
-  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
   width: 100%;
   max-width: 450px;
-  padding: 40px;
+  background: white;
+  padding: 3rem;
+  border-radius: 16px;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
 }
 
 .login-header {
   text-align: center;
-  margin-bottom: 32px;
+  margin-bottom: 2.5rem;
 }
 
 .login-header h1 {
-  font-size: 28px;
-  color: #1a202c;
-  margin-bottom: 8px;
+  font-size: 2rem;
   font-weight: 700;
+  color: #1a202c;
+  margin: 0 0 0.5rem 0;
 }
 
 .login-header p {
-  font-size: 16px;
+  font-size: 0.95rem;
   color: #718096;
+  margin: 0;
 }
 
 .login-form {
   display: flex;
   flex-direction: column;
-  gap: 20px;
+  gap: 1.5rem;
 }
 
 .form-group {
   display: flex;
   flex-direction: column;
-  gap: 8px;
+  gap: 0.5rem;
 }
 
 .form-group label {
-  font-size: 14px;
+  font-size: 0.9rem;
   font-weight: 600;
   color: #2d3748;
 }
 
 .form-group input {
-  padding: 12px 16px;
+  padding: 0.875rem 1rem;
   border: 2px solid #e2e8f0;
   border-radius: 8px;
-  font-size: 16px;
-  transition: all 0.3s ease;
+  font-size: 1rem;
+  transition: all 0.2s;
+  background: white;
+  color: #2d3748;
 }
 
 .form-group input:focus {
@@ -101,31 +101,22 @@
   box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
 }
 
-.error-message {
-  background: #fed7d7;
-  color: #c53030;
-  padding: 12px 16px;
-  border-radius: 8px;
-  font-size: 14px;
-  text-align: center;
-}
-
 .login-button {
+  padding: 1rem;
   background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
   color: white;
-  padding: 14px 24px;
   border: none;
   border-radius: 8px;
-  font-size: 16px;
+  font-size: 1rem;
   font-weight: 600;
   cursor: pointer;
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
-  margin-top: 8px;
+  transition: all 0.3s;
+  margin-top: 0.5rem;
 }
 
 .login-button:hover:not(:disabled) {
   transform: translateY(-2px);
-  box-shadow: 0 10px 20px rgba(102, 126, 234, 0.3);
+  box-shadow: 0 10px 25px rgba(102, 126, 234, 0.3);
 }
 
 .login-button:disabled {
@@ -133,127 +124,207 @@
   cursor: not-allowed;
 }
 
-/* Botões de ação */
+.error-message {
+  padding: 0.875rem;
+  background: #fed7d7;
+  color: #c53030;
+  border-radius: 8px;
+  font-size: 0.9rem;
+  text-align: center;
+}
+
 .login-actions {
   display: flex;
   flex-direction: column;
-  gap: 10px;
-  margin-top: 20px;
+  gap: 0.75rem;
+  margin-top: 1.5rem;
 }
 
 .action-button {
-  padding: 10px 16px;
+  padding: 0.75rem;
+  border: none;
   border-radius: 8px;
-  font-size: 14px;
+  font-size: 0.9rem;
+  font-weight: 500;
   cursor: pointer;
-  transition: all 0.2s ease;
+  transition: all 0.2s;
 }
 
 .action-button.secondary {
-  background: transparent;
-  border: 2px solid #e2e8f0;
+  background: #f7fafc;
   color: #4a5568;
+  border: 1px solid #e2e8f0;
 }
 
 .action-button.secondary:hover {
-  border-color: #667eea;
-  color: #667eea;
+  background: #edf2f7;
+  border-color: #cbd5e0;
 }
 
 .login-footer {
-  margin-top: 32px;
+  margin-top: 2rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid #e2e8f0;
   text-align: center;
 }
 
 .login-footer p {
-  font-size: 12px;
+  font-size: 0.75rem;
   color: #a0aec0;
+  margin: 0;
 }
 
-/* Coluna Direita - Mais Bandeiras */
+/* Coluna Direita - Carrossel de Bandeiras */
 .login-right {
   flex: 1;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  padding: 40px 20px;
-  background: rgba(255, 255, 255, 0.1);
-  backdrop-filter: blur(10px);
+  padding: 2rem;
+  background: #ffffff;
 }
 
 .login-right h3 {
-  color: white;
-  font-size: 18px;
-  margin-bottom: 20px;
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #1a202c;
+  margin-bottom: 2rem;
   text-align: center;
-  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
 }
 
-.bandeiras-preview-right {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 15px;
-  max-width: 300px;
+.bandeiras-carousel {
+  position: relative;
+  width: 100%;
+  max-width: 400px;
+  height: 350px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  border-radius: 16px;
+  background: #f7fafc;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
 }
 
-/* Estilo das bandeiras */
-.bandeira-mini {
+.bandeira-carousel-item {
+  position: absolute;
+  width: 100%;
+  height: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 5px;
+  justify-content: center;
+  gap: 1.5rem;
+  padding: 2rem;
+  opacity: 0;
+  transform: scale(0.8);
+  transition: all 0.5s ease-in-out;
+  pointer-events: none;
 }
 
-.bandeira-mini img {
-  width: 80px;
-  height: 60px;
+.bandeira-carousel-item.active {
+  opacity: 1;
+  transform: scale(1);
+  pointer-events: auto;
+}
+
+.bandeira-carousel-item img {
+  width: 100%;
+  max-width: 280px;
+  height: auto;
+  border-radius: 12px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
   object-fit: contain;
-  border-radius: 4px;
-  background: white;
-  padding: 4px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
-  transition: transform 0.2s ease;
 }
 
-.bandeira-mini img:hover {
-  transform: scale(1.1);
-}
-
-.bandeira-nome {
-  font-size: 10px;
-  color: white;
+.bandeira-carousel-item .bandeira-nome {
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: #2d3748;
   text-align: center;
-  max-width: 80px;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+}
+
+/* Indicadores do carrossel */
+.carousel-indicators {
+  display: flex;
+  gap: 0.5rem;
+  margin-top: 1.5rem;
+  flex-wrap: wrap;
+  justify-content: center;
+  max-width: 400px;
+}
+
+.carousel-indicators .indicator {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #cbd5e0;
+  cursor: pointer;
+  transition: all 0.3s;
+}
+
+.carousel-indicators .indicator.active {
+  background: #667eea;
+  width: 24px;
+  border-radius: 4px;
+}
+
+.carousel-indicators .indicator:hover {
+  background: #a0aec0;
 }
 
 /* Responsividade */
-@media (max-width: 1024px) {
+@media (max-width: 1200px) {
   .login-container {
     flex-direction: column;
   }
 
   .login-left,
   .login-right {
-    display: none;
+    flex: none;
+    min-height: auto;
+  }
+
+  .login-left {
+    padding: 2rem;
+  }
+
+  .logo-watermark {
+    max-width: 300px;
   }
 
   .login-center {
-    flex: 1;
-    padding: 40px 20px;
+    padding: 2rem 1rem;
+  }
+
+  .login-right {
+    padding: 2rem 1rem 3rem 1rem;
+  }
+
+  .bandeiras-carousel {
+    height: 300px;
   }
 }
 
-@media (max-width: 480px) {
+@media (max-width: 768px) {
   .login-box {
-    padding: 24px;
+    padding: 2rem 1.5rem;
   }
 
   .login-header h1 {
-    font-size: 24px;
+    font-size: 1.75rem;
+  }
+
+  .bandeiras-carousel {
+    height: 250px;
+  }
+
+  .bandeira-carousel-item img {
+    max-width: 200px;
+  }
+
+  .bandeira-carousel-item .bandeira-nome {
+    font-size: 1.1rem;
   }
 }

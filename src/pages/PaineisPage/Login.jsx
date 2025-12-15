@@ -1,7 +1,8 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../../contexts/AuthContext';
 import { getBandeiraUrl } from '../../utils/bandeirasMap';
+import logo from '../../assets/logo.png';
 import './Login.css';
 
 const Login = () => {
@@ -9,10 +10,11 @@ const Login = () => {
   const [senha, setSenha] = useState('');
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
+  const [currentBandeiraIndex, setCurrentBandeiraIndex] = useState(0);
   const { login } = useAuth();
   const navigate = useNavigate();
 
-  // Lista de municípios com bandeiras que funcionam corretamente (24 municípios)
+  // Lista de 24 municípios para o carrossel
   const municipiosDestaque = [
     'Ariquemes', 'Cacoal', 'Jaru', 'Pimenta Bueno',
     'Buritis', 'Espigão d\'Oeste', 'Alta Floresta d\'Oeste', 'Alto Alegre dos Parecis',
@@ -21,6 +23,17 @@ const Login = () => {
     'Itapuã do Oeste', 'Machadinho d\'Oeste', 'Monte Negro', 'Nova Mamoré',
     'Nova União', 'Novo Horizonte do Oeste', 'Parecis', 'Seringueiras'
   ];
+
+  // Carrossel automático - troca a cada 3 segundos
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCurrentBandeiraIndex((prevIndex) => 
+        (prevIndex + 1) % municipiosDestaque.length
+      );
+    }, 3000);
+
+    return () => clearInterval(interval);
+  }, [municipiosDestaque.length]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -55,23 +68,10 @@ const Login = () => {
 
   return (
     <div className="login-container">
-      {/* Coluna Esquerda - Bandeiras */}
+      {/* Coluna Esquerda - Logo DATA-RO */}
       <div className="login-left">
-        <h3>Municípios de Rondônia</h3>
-        <div className="bandeiras-preview-left">
-          {municipiosDestaque.slice(0, 12).map((municipio, index) => (
-            <div key={index} className="bandeira-mini">
-              <img
-                src={getBandeiraUrl(municipio)}
-                alt={`Bandeira de ${municipio}`}
-                loading="lazy"
-                onError={(e) => {
-                  e.target.src = `https://via.placeholder.com/80x60/667eea/ffffff?text=${encodeURIComponent(municipio.substring(0, 3))}`;
-                }}
-              />
-              <span className="bandeira-nome">{municipio}</span>
-            </div>
-          ))}
+        <div className="logo-watermark">
+          <img src={logo} alt="DATA-RO" />
         </div>
       </div>
 
@@ -131,22 +131,36 @@ const Login = () => {
         </div>
       </div>
 
-      {/* Coluna Direita - Mais Bandeiras */}
+      {/* Coluna Direita - Carrossel de Bandeiras */}
       <div className="login-right">
-        <h3>Membros do CIMCERO</h3>
-        <div className="bandeiras-preview-right">
-          {municipiosDestaque.slice(12, 24).map((municipio, index) => (
-            <div key={index} className="bandeira-mini">
+        <h3>Municípios de Rondônia</h3>
+        <div className="bandeiras-carousel">
+          {municipiosDestaque.map((municipio, index) => (
+            <div 
+              key={index} 
+              className={`bandeira-carousel-item ${index === currentBandeiraIndex ? 'active' : ''}`}
+            >
               <img
                 src={getBandeiraUrl(municipio)}
                 alt={`Bandeira de ${municipio}`}
                 loading="lazy"
                 onError={(e) => {
-                  e.target.src = `https://via.placeholder.com/80x60/667eea/ffffff?text=${encodeURIComponent(municipio.substring(0, 3))}`;
+                  e.target.src = `https://via.placeholder.com/200x150/667eea/ffffff?text=${encodeURIComponent(municipio.substring(0, 3))}`;
                 }}
               />
               <span className="bandeira-nome">{municipio}</span>
             </div>
+          ))}
+        </div>
+        
+        {/* Indicadores do carrossel */}
+        <div className="carousel-indicators">
+          {municipiosDestaque.map((_, index) => (
+            <span 
+              key={index}
+              className={`indicator ${index === currentBandeiraIndex ? 'active' : ''}`}
+              onClick={() => setCurrentBandeiraIndex(index)}
+            />
           ))}
         </div>
       </div>
