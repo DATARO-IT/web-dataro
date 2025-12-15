@@ -82,7 +82,7 @@ export const bandeirasImportadas = {
   "Vilhena": vilhena
 };
 
-// Função otimizada para obter URL da bandeira
+// Função otimizada para obter URL da bandeira (atualizada em 14/12/2025)
 export const getBandeiraUrl = (municipioNome) => {
   return bandeirasImportadas[municipioNome] || null;
 };
