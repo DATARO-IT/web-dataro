@@ -84,5 +84,10 @@ export const bandeirasImportadas = {
 
 // Função otimizada para obter URL da bandeira (atualizada em 14/12/2025)
 export const getBandeiraUrl = (municipioNome) => {
-  return bandeirasImportadas[municipioNome] || null;
+  const url = bandeirasImportadas[municipioNome];
+  if (!url && (municipioNome === 'Porto Velho' || municipioNome === 'Ji-Paraná' || municipioNome === 'Vilhena' || municipioNome === 'Rolim de Moura' || municipioNome === 'Guajará-Mirim')) {
+    console.log('DEBUG - Bandeira não encontrada:', municipioNome);
+    console.log('DEBUG - Chaves disponíveis:', Object.keys(bandeirasImportadas));
+  }
+  return url || null;
 };
