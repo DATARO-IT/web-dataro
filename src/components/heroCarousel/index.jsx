@@ -8,7 +8,7 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 
 // Imports de imagem
-import bandeiraRondonia from '../../assets/bandeiras/Bandeira_de_Rondônia.png';
+import bandeiraRondonia from '../../assets/BandeiraRO.png';
 import bgImage2 from '../../assets/sites-bg.jpg';
 import bgImage3 from '../../assets/bi-bg.jpeg';
 
