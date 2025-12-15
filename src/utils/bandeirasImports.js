@@ -33,6 +33,11 @@ import teixeiropolis from '../assets/bandeiras/roTexeirópolis.png';
 import theobroma from '../assets/bandeiras/-theobroma-ro.png';
 import valeAnari from '../assets/bandeiras/Vale do Anari.png';
 import valeParaiso from '../assets/bandeiras/Vale do Paraiso.png';
+import portoVelho from '../assets/bandeiras/PortoVelho.png';
+import guajaraMirim from '../assets/bandeiras/Guajara-Mirim.png';
+import jiParana from '../assets/bandeiras/Ji-Parana.png';
+import rolimMoura from '../assets/bandeiras/RolimdeMoura.png';
+import vilhena from '../assets/bandeiras/Vilhena.png';
 
 // Mapa de municípios para bandeiras importadas
 export const bandeirasImportadas = {
@@ -69,7 +74,12 @@ export const bandeirasImportadas = {
   "Teixeirópolis": teixeiropolis,
   "Theobroma": theobroma,
   "Vale do Anari": valeAnari,
-  "Vale do Paraíso": valeParaiso
+  "Vale do Paraíso": valeParaiso,
+  "Porto Velho": portoVelho,
+  "Guajará-Mirim": guajaraMirim,
+  "Ji-Paraná": jiParana,
+  "Rolim de Moura": rolimMoura,
+  "Vilhena": vilhena
 };
 
 // Função otimizada para obter URL da bandeira
