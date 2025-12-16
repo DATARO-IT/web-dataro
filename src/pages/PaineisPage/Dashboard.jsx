@@ -205,7 +205,12 @@ const Dashboard = () => {
                   <div
                     key={municipio.id}
                     className={`municipio-card ${hasPainel ? 'has-painel' : 'no-painel'}`}
-                    onClick={(e) => hasPainel && handleViewPainel(e, municipio)}
+                    onClick={(e) => {
+                      console.log('Card clicado:', municipio.nome, 'hasPainel:', hasPainel);
+                      if (hasPainel) {
+                        handleViewPainel(e, municipio);
+                      }
+                    }}
                     style={{ cursor: hasPainel ? 'pointer' : 'default' }}
                   >
                     <div className="card-bandeira-section">
