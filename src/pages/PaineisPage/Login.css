@@ -28,43 +28,42 @@
   font-style: italic;
 }
 
-/* Container principal */
+/* Container principal - Layout centralizado */
 .login-container {
   display: flex;
   flex: 1;
   background: #ffffff;
+  align-items: center;
+  justify-content: center;
+  gap: 4rem;
+  padding: 2rem;
 }
 
-/* Coluna Esquerda - Logo DATA-RO */
+/* Coluna Esquerda - Logo DATA-RO (aumentada 75%) */
 .login-left {
-  flex: 1.5;
   display: flex;
   align-items: center;
   justify-content: center;
   padding: 2rem;
   background: #ffffff;
-  min-width: 450px;
 }
 
 .logo-watermark {
-  width: 100%;
-  max-width: 2000px;
-  opacity: 0.5;
   display: flex;
   align-items: center;
   justify-content: center;
 }
 
 .logo-watermark img {
-  width: 600px !important;
-  min-width: 600px !important;
+  width: 1050px !important;
+  min-width: 1050px !important;
   height: auto;
   object-fit: contain;
+  opacity: 0.85;
 }
 
-/* Coluna Centro - Formulário */
+/* Coluna Centro - Formulário (centralizado) */
 .login-center {
-  flex: 1;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -233,7 +232,6 @@
 
 /* Coluna Direita - Grid de Bandeiras com Carrossel */
 .login-right {
-  flex: 1;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -367,9 +365,28 @@
 }
 
 /* Responsividade */
+@media (max-width: 1800px) {
+  .logo-watermark img {
+    width: 800px !important;
+    min-width: 800px !important;
+  }
+}
+
+@media (max-width: 1600px) {
+  .logo-watermark img {
+    width: 700px !important;
+    min-width: 700px !important;
+  }
+
+  .login-container {
+    gap: 3rem;
+  }
+}
+
 @media (max-width: 1400px) {
-  .logo-watermark {
-    max-width: 1600px;
+  .logo-watermark img {
+    width: 550px !important;
+    min-width: 550px !important;
   }
 
   .bandeiras-grid-carousel {
@@ -380,33 +397,36 @@
   .bandeira-grid-item img {
     max-width: 90px;
   }
+
+  .login-container {
+    gap: 2rem;
+  }
 }
 
 @media (max-width: 1200px) {
   .login-container {
     flex-direction: column;
-  }
-
-  .login-left,
-  .login-right {
-    flex: none;
-    min-height: auto;
+    gap: 2rem;
   }
 
   .login-left {
-    padding: 2rem;
+    order: 1;
+    padding: 1rem;
   }
 
-  .logo-watermark {
-    max-width: 1000px;
+  .logo-watermark img {
+    width: 500px !important;
+    min-width: 500px !important;
   }
 
   .login-center {
-    padding: 2rem 1rem;
+    order: 2;
+    padding: 1rem;
   }
 
   .login-right {
-    padding: 2rem 1rem 3rem 1rem;
+    order: 3;
+    padding: 1rem 1rem 2rem 1rem;
   }
 
   .bandeiras-grid-carousel {
@@ -436,8 +456,9 @@
     width: 50px;
   }
 
-  .logo-watermark {
-    max-width: 700px;
+  .logo-watermark img {
+    width: 350px !important;
+    min-width: 350px !important;
   }
 
   .login-right h3 {
@@ -471,8 +492,9 @@
     gap: 0.5rem;
   }
 
-  .logo-watermark {
-    max-width: 500px;
+  .logo-watermark img {
+    width: 280px !important;
+    min-width: 280px !important;
   }
 
   .bandeira-grid-item img {

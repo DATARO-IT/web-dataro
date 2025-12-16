@@ -1,0 +1,196 @@
+═══════════════════════════════════════════════════════════════
+    🔐 CREDENCIAIS MASTER - ADMINISTRADOR PRINCIPAL
+═══════════════════════════════════════════════════════════════
+
+⚠️  CONFIDENCIAL - ACESSO TOTAL AO SISTEMA ⚠️
+
+═══════════════════════════════════════════════════════════════
+    CREDENCIAIS DE ACESSO
+═══════════════════════════════════════════════════════════════
+
+👤 USUÁRIO: dataroadmin
+📧 EMAIL: contato@dataro-it.com.br
+🔑 SENHA: @D4taR0x1
+
+═══════════════════════════════════════════════════════════════
+    INFORMAÇÕES DA CONTA
+═══════════════════════════════════════════════════════════════
+
+🆔 ID no Sistema: 6
+📅 Data de Criação: 16/12/2025 02:13 UTC
+✅ Status: Ativo
+👑 Função: ADMINISTRADOR (admin)
+🔓 Primeiro Acesso: NÃO (senha permanente)
+⚡ Tipo: CONTA MASTER
+
+═══════════════════════════════════════════════════════════════
+    PERMISSÕES E PRIVILÉGIOS
+═══════════════════════════════════════════════════════════════
+
+✅ ACESSO TOTAL AO SISTEMA
+✅ Painel Administrativo Completo
+✅ Gestão de Usuários (criar, editar, desativar, excluir)
+✅ Gestão de Municípios (criar, editar, excluir)
+✅ Gestão de Painéis Power BI (criar, editar, excluir)
+✅ Visualização de Logs e Auditoria
+✅ Configurações do Sistema
+✅ Acesso a todos os Painéis Power BI
+✅ Sem restrições de funcionalidades
+
+═══════════════════════════════════════════════════════════════
+    ACESSO AO SISTEMA
+═══════════════════════════════════════════════════════════════
+
+🌐 URL de Login: https://www.dataro-it.com.br/paineis/login
+
+PASSO A PASSO:
+1. Acesse o link acima
+2. Digite o email: contato@dataro-it.com.br
+3. Digite a senha: @D4taR0x1
+4. Clique em "Entrar"
+5. Acesso imediato ao Dashboard
+6. Botão "🔧 Admin" visível no header
+
+═══════════════════════════════════════════════════════════════
+    PAINEL ADMINISTRATIVO
+═══════════════════════════════════════════════════════════════
+
+📊 DASHBOARD COM ESTATÍSTICAS:
+- Total de usuários no sistema
+- Total de municípios (48)
+- Total de painéis Power BI
+- Painéis ativos
+
+👥 GESTÃO DE USUÁRIOS:
+- Listar todos os usuários
+- Ativar/Desativar usuários
+- Excluir usuários
+- Alterar roles (admin/user)
+- Resetar senhas
+
+🏛️ GESTÃO DE MUNICÍPIOS:
+- Visualizar todos os 48 municípios
+- Editar informações dos municípios
+- Gerenciar dados de contato
+
+📈 GESTÃO DE PAINÉIS:
+- Lista de painéis Power BI
+- Adicionar novos painéis
+- Editar URLs dos painéis
+- Ativar/Desativar painéis
+
+═══════════════════════════════════════════════════════════════
+    HIERARQUIA DE USUÁRIOS
+═══════════════════════════════════════════════════════════════
+
+TOTAL DE USUÁRIOS ATIVOS: 5
+
+🏆 ADMINISTRADORES (3):
+1. ID 6 - dataroadmin (MASTER) ⭐
+2. ID 1 - Administrador CIMCERO
+3. ID 3 - Bruno Henrique Botelho dos Santos
+
+👤 USUÁRIOS PADRÃO (2):
+4. ID 2 - Rômulo Azevedo
+5. ID 4 - Geraldo Castro Cotinguiba
+
+═══════════════════════════════════════════════════════════════
+    SEGURANÇA
+═══════════════════════════════════════════════════════════════
+
+🔒 SENHA FORTE CONFIGURADA
+- Contém letras maiúsculas e minúsculas
+- Contém números
+- Contém caracteres especiais (@)
+- 9 caracteres de comprimento
+
+⚠️  IMPORTANTE:
+- Esta é uma conta MASTER com ACESSO TOTAL
+- NÃO compartilhe estas credenciais
+- Mantenha em local SEGURO
+- Use apenas quando necessário
+- Considere trocar a senha periodicamente
+
+🔐 RECOMENDAÇÕES:
+- Ativar autenticação de dois fatores (quando disponível)
+- Usar gerenciador de senhas
+- Não salvar senha no navegador
+- Fazer logout após uso
+- Monitorar logs de acesso
+
+═══════════════════════════════════════════════════════════════
+    FUNCIONALIDADES EXCLUSIVAS
+═══════════════════════════════════════════════════════════════
+
+✅ Criar novos administradores
+✅ Remover outros administradores
+✅ Acessar logs do sistema
+✅ Modificar configurações globais
+✅ Gerenciar permissões
+✅ Backup e restauração (quando disponível)
+✅ Manutenção do sistema
+
+═══════════════════════════════════════════════════════════════
+    RECURSOS DISPONÍVEIS
+═══════════════════════════════════════════════════════════════
+
+📊 PAINÉIS POWER BI ATIVOS (4):
+1. Ji-Paraná - Inteligência Territorial
+2. Alto Paraíso - Inteligência Territorial
+3. Alto Alegre dos Parecis - Inteligência Territorial
+4. Costa Marques - Painel Municipal
+
+🏛️ MUNICÍPIOS DO CIMCERO (48):
+- Todos os municípios de Rondônia
+- Dados completos de cada município
+- Informações de prefeitos e contatos
+
+═══════════════════════════════════════════════════════════════
+    SUPORTE E DOCUMENTAÇÃO
+═══════════════════════════════════════════════════════════════
+
+📧 Suporte: https://help.manus.im
+🌐 Site: https://www.dataro-it.com.br
+📚 Documentação: Em desenvolvimento
+
+═══════════════════════════════════════════════════════════════
+    INFORMAÇÕES TÉCNICAS
+═══════════════════════════════════════════════════════════════
+
+🗄️ Banco de Dados: Supabase (PostgreSQL)
+🔗 URL: https://csuzmlajnhfauxqgczmu.supabase.co
+⚡ Framework: React + Vite
+🎨 UI: TailwindCSS
+📊 BI: Power BI Embedded
+
+═══════════════════════════════════════════════════════════════
+    HISTÓRICO
+═══════════════════════════════════════════════════════════════
+
+📅 Conta Criada: 16/12/2025 às 02:13 UTC
+👤 Criado Por: Sistema Manus
+🎯 Propósito: Administração Master do Sistema
+🔐 Tipo: Conta Permanente (sem expiração)
+
+═══════════════════════════════════════════════════════════════
+    NOTAS IMPORTANTES
+═══════════════════════════════════════════════════════════════
+
+⚠️  Esta conta tem ACESSO TOTAL ao sistema
+⚠️  Pode executar QUALQUER função administrativa
+⚠️  NÃO solicita troca de senha no primeiro login
+⚠️  Senha configurada como PERMANENTE
+⚠️  Use com RESPONSABILIDADE
+
+🔒 MANTENHA ESTAS CREDENCIAIS EM LOCAL SEGURO
+
+═══════════════════════════════════════════════════════════════
+
+Sistema: Rondônia em Números - DATA-RO
+Versão: 1.0
+Ambiente: Produção
+URL: https://www.dataro-it.com.br
+
+═══════════════════════════════════════════════════════════════
+    FIM DO DOCUMENTO CONFIDENCIAL
+═══════════════════════════════════════════════════════════════

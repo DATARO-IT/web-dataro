@@ -1,0 +1,78 @@
+═══════════════════════════════════════════════════════════════
+    CREDENCIAIS DE ACESSO - GERALDO CASTRO COTINGUIBA
+═══════════════════════════════════════════════════════════════
+
+📧 EMAIL: gcotinguiba@gmail.com
+🔑 SENHA INICIAL: 123456
+
+⚠️  IMPORTANTE: Alterar senha no primeiro acesso!
+
+═══════════════════════════════════════════════════════════════
+    INFORMAÇÕES DA CONTA
+═══════════════════════════════════════════════════════════════
+
+👤 Nome Completo: Geraldo Castro Cotinguiba
+🆔 ID no Sistema: 4
+📅 Data de Criação: 16/12/2025 02:07
+✅ Status: Ativo
+👔 Função: Usuário (user)
+🔐 Primeiro Acesso: SIM (senha deve ser alterada)
+
+═══════════════════════════════════════════════════════════════
+    ACESSO AO SISTEMA
+═══════════════════════════════════════════════════════════════
+
+🌐 URL de Login: https://www.dataro-it.com.br/paineis/login
+
+PASSO A PASSO:
+1. Acesse o link acima
+2. Digite o email: gcotinguiba@gmail.com
+3. Digite a senha: 123456
+4. Clique em "Entrar"
+5. VOCÊ SERÁ FORÇADO A ALTERAR A SENHA
+6. Digite uma nova senha segura
+7. Confirme a nova senha
+8. Clique em "Alterar Senha"
+
+═══════════════════════════════════════════════════════════════
+    RECURSOS DISPONÍVEIS
+═══════════════════════════════════════════════════════════════
+
+✅ Acesso ao Dashboard de Municípios
+✅ Visualização de Painéis Power BI
+✅ Busca de Municípios
+✅ Filtros e Navegação
+
+📊 PAINÉIS DISPONÍVEIS:
+- Ji-Paraná
+- Alto Paraíso
+- Alto Alegre dos Parecis
+- Costa Marques
+
+═══════════════════════════════════════════════════════════════
+    SEGURANÇA
+═══════════════════════════════════════════════════════════════
+
+⚠️  A senha inicial "123456" é TEMPORÁRIA e INSEGURA
+⚠️  O sistema FORÇARÁ a troca no primeiro login
+⚠️  Escolha uma senha forte com:
+    - Mínimo 6 caracteres (recomendado 8+)
+    - Letras maiúsculas e minúsculas
+    - Números
+    - Caracteres especiais
+
+═══════════════════════════════════════════════════════════════
+    SUPORTE
+═══════════════════════════════════════════════════════════════
+
+Em caso de dúvidas ou problemas:
+📧 Contato: https://help.manus.im
+🌐 Site: https://www.dataro-it.com.br
+
+═══════════════════════════════════════════════════════════════
+
+Conta criada em: 16/12/2025 às 02:07 UTC
+Sistema: Rondônia em Números - DATA-RO
+Versão: 1.0
+
+═══════════════════════════════════════════════════════════════

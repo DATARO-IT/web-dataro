@@ -1,0 +1,51 @@
+================================================================================
+CREDENCIAIS DE ACESSO - BRUNO HENRIQUE BOTELHO DOS SANTOS
+================================================================================
+
+DADOS DE LOGIN:
+---------------
+Email: brunohbotelhos@gmail.com
+Senha Inicial: 123456
+
+IMPORTANTE:
+-----------
+⚠️  Você DEVE alterar sua senha no primeiro acesso!
+⚠️  O sistema forçará a troca de senha automaticamente.
+
+APÓS EXECUTAR O SQL:
+--------------------
+1. Acesse: https://www.dataro-it.com.br/paineis/login
+2. Faça login com as credenciais acima
+3. Um modal aparecerá pedindo para alterar a senha
+4. Escolha uma senha forte (mínimo 6 caracteres)
+5. Faça login novamente com a nova senha
+
+PERMISSÕES:
+-----------
+✅ Role: Administrador (admin)
+✅ Acesso total ao sistema
+✅ Painel administrativo disponível
+✅ Gestão de usuários
+✅ Visualização de estatísticas
+
+PAINEL ADMINISTRATIVO:
+----------------------
+- Clique no botão "🔧 Admin" no header (após login)
+- Gerencie usuários, municípios e painéis
+- Visualize estatísticas em tempo real
+
+SCRIPT SQL NECESSÁRIO:
+----------------------
+Execute o arquivo: /home/ubuntu/web-dataro/scripts/add_admin_fields.sql
+no Supabase antes do primeiro login.
+
+SUPORTE:
+--------
+Em caso de problemas, consulte:
+/home/ubuntu/web-dataro/relatorio_admin_otimizacoes.md
+
+Data de Criação: 16/12/2025 00:50:11
+ID do Usuário: 3
+Status: Ativo
+
+================================================================================

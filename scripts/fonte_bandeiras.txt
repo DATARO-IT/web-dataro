@@ -1,0 +1,44 @@
+FONTE DAS BANDEIRAS DOS MUNICÍPIOS DE RONDÔNIA
+================================================
+
+URL do post com todas as 52 bandeiras:
+https://saimonrio.blogspot.com/2019/08/conheca-todas-as-bandeiras-dos-52.html
+
+Este post contém imagens de todas as bandeiras dos 52 municípios de Rondônia.
+As imagens estão incorporadas no post e podem ser baixadas individualmente.
+
+Para baixar as bandeiras:
+1. Abrir o post no navegador
+2. Rolar a página para ver todas as bandeiras
+3. Clicar com botão direito em cada imagem
+4. Selecionar "Salvar imagem como..."
+5. Salvar em: /home/ubuntu/web-dataro/src/assets/bandeiras/
+
+Municípios que ainda precisam de bandeiras (24 no total):
+- ALVORADA DO OESTE
+- CABIXI
+- CASTANHEIRAS
+- COLORADO DO OESTE
+- COSTA MARQUES
+- CUJUBIM
+- ESPIGÃO DO OESTE
+- GOVERNADOR JORGE TEIXEIRA
+- GUAJARÀ MIRRIM
+- JI-PARANÁ (já baixada)
+- MACHADINHO DO OESTE
+- MIRANTE DA SERRA
+- NOVA BRASILÂNDIA DO OESTE
+- OURO PRETO DO OESTE (já baixada)
+- PIMENTA BUENO
+- PIMENTEIRAS DO OESTE
+- PORTO VELHO (já baixada)
+- PRESIDENTE MÉDICI
+- PRIMAVERA DE RONDONIA
+- ROLIM DE MOURA (já baixada)
+- SÃO FRANCISCO DO GUAPORÉ
+- TEIXEIRÓPOLIS
+- URUPÁ
+- VILHENA (já baixada)
+
+Bandeiras já baixadas: 5
+Bandeiras restantes: 19

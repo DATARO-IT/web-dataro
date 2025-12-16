@@ -115,7 +115,7 @@ const Login = () => {
         {/* Coluna Esquerda - Logo DATA-RO */}
         <div className="login-left">
           <div className="logo-watermark">
-            <img src={logo} alt="DATA-RO" style={{ width: '400px', height: 'auto' }} />
+            <img src={logo} alt="DATA-RO" />
           </div>
         </div>
 
