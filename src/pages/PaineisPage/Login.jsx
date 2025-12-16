@@ -54,11 +54,11 @@ const Login = () => {
     preloadImages();
   }, []);
 
-  // Carrossel automático - troca o conjunto a cada 5 segundos
+  // Carrossel automático - troca o conjunto a cada 8 segundos
   useEffect(() => {
     const interval = setInterval(() => {
       setCurrentSet((prevSet) => (prevSet + 1) % totalSets);
-    }, 5000);
+    }, 8000);
 
     return () => clearInterval(interval);
   }, [totalSets]);
@@ -192,6 +192,8 @@ const Login = () => {
                   src={getBandeiraUrl(municipio)}
                   alt={`Bandeira de ${municipio}`}
                   className={loadedImages.has(municipio) ? 'loaded' : 'loading'}
+                  loading="eager"
+                  decoding="async"
                   onError={(e) => {
                     e.target.src = `https://via.placeholder.com/120x90/10b981/ffffff?text=${encodeURIComponent(municipio.substring(0, 3))}`;
                   }}

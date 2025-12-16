@@ -296,15 +296,17 @@
   object-fit: cover;
   border-radius: 6px;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-  transition: opacity 0.3s ease;
+  transition: opacity 0.5s ease, filter 0.5s ease;
 }
 
 .bandeira-grid-item img.loading {
-  opacity: 0.5;
+  opacity: 0.3;
+  filter: blur(2px);
 }
 
 .bandeira-grid-item img.loaded {
   opacity: 1;
+  filter: blur(0);
 }
 
 .bandeira-grid-item .bandeira-nome {
