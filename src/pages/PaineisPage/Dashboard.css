@@ -7,7 +7,7 @@
 }
 
 .dashboard-header {
-  background: linear-gradient(135deg, rgba(5, 150, 105, 0.5) 0%, rgba(4, 120, 87, 0.5) 100%);
+  background: linear-gradient(135deg, rgba(2, 80, 50, 0.85) 0%, rgba(5, 150, 105, 0.7) 100%);
   color: white;
   padding: 24px 0;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
@@ -38,7 +38,7 @@
 }
 
 .header-logo-dataro {
-  width: 125px; /* Dobro do tamanho original (62.5px x 2) */
+  width: 187px; /* 125px + 50% = 187px */
   height: auto;
   object-fit: contain;
 }
@@ -50,17 +50,19 @@
 }
 
 .header-brand {
-  font-size: 20px; /* 16px + 25% = 20px */
+  font-size: 24px;
   font-weight: 700;
   line-height: 1;
+  text-shadow: 1px 1px 2px rgba(0,0,0,0.2);
 }
 
 .header-subtitle {
-  font-size: 12.5px; /* 10px + 25% = 12.5px */
+  font-size: 14px;
   font-weight: 500;
-  opacity: 0.9;
+  opacity: 0.95;
   line-height: 1;
   letter-spacing: 0.5px;
+  text-shadow: 1px 1px 2px rgba(0,0,0,0.2);
 }
 
 .header-center {
@@ -120,21 +122,24 @@
 }
 
 .user-name {
-  font-size: 14px;
-  opacity: 0.9;
+  font-size: 18px;
+  font-weight: 500;
+  opacity: 1;
+  text-shadow: 1px 1px 2px rgba(0,0,0,0.2);
 }
 
 .logout-button {
-  background: rgba(255, 255, 255, 0.2);
+  background: rgba(255, 255, 255, 0.25);
   color: white;
-  border: 1px solid rgba(255, 255, 255, 0.3);
-  padding: 8px 16px;
-  border-radius: 6px;
+  border: 2px solid rgba(255, 255, 255, 0.4);
+  padding: 12px 24px;
+  border-radius: 8px;
   cursor: pointer;
-  font-size: 14px;
+  font-size: 18px;
   font-weight: 600;
   transition: all 0.3s ease;
   font-family: 'Poppins', sans-serif;
+  text-shadow: 1px 1px 2px rgba(0,0,0,0.2);
 }
 
 .logout-button:hover {
