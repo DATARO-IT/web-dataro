@@ -47,18 +47,16 @@
   background: var(--bg-primary, #ffffff);
   align-items: stretch;
   transition: background-color 0.3s ease;
-  position: relative;
 }
 
-/* Coluna Esquerda - Logo DATA-RO como marca d'água absoluta */
+/* Coluna Esquerda - Logo DATA-RO */
 .login-left {
-  position: absolute;
-  left: 0;
-  top: 50%;
-  transform: translateY(-50%);
-  z-index: 0;
-  pointer-events: none;
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   padding: 2rem;
+  background: var(--bg-primary, #ffffff);
 }
 
 .logo-watermark {
@@ -68,8 +66,8 @@
 }
 
 .logo-watermark img {
-  width: 600px !important;
-  min-width: 600px !important;
+  width: 550px !important;
+  min-width: 550px !important;
   height: auto;
   object-fit: contain;
   opacity: 0.5;
@@ -80,7 +78,6 @@
 /* Coluna Centro - Formulário (centralizado) */
 .login-center {
   flex: 1;
-  z-index: 1;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -257,7 +254,6 @@
 /* Coluna Direita - Grid de Bandeiras com Carrossel */
 .login-right {
   flex: 1;
-  z-index: 1;
   display: flex;
   flex-direction: column;
   align-items: center;
