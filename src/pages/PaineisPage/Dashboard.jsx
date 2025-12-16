@@ -66,7 +66,7 @@ const Dashboard = () => {
   };
 
   const handleViewPainel = (municipio) => {
-    navigate(`/paineis/${municipio.id}`, { state: { municipio } });
+    navigate(`/paineis/municipio/${municipio.id}`, { state: { municipio } });
   };
 
   const handleLogout = async () => {
