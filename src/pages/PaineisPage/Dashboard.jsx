@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../../contexts/AuthContext';
 import { supabase } from '../../utils/supabaseClient';
-import { getBandeira } from '../../utils/bandeirasData';
+import { getBandeiraUrl } from '../../utils/bandeirasMap';
 import AdminPanel from '../../components/AdminPanel/AdminPanel';
 import ChangePasswordModal from '../../components/ChangePasswordModal/ChangePasswordModal';
 import LazyImage from '../../components/LazyImage/LazyImage';
@@ -195,7 +195,7 @@ const Dashboard = () => {
               {currentMunicipios.map((municipio) => {
                 const hasPainel = municipio.paineis_bi && municipio.paineis_bi.length > 0;
                 const painel = hasPainel ? municipio.paineis_bi[0] : null;
-                const bandeira = getBandeira(municipio.nome);
+                const bandeira = getBandeiraUrl(municipio.nome);
 
                 return (
                   <div
