@@ -131,6 +131,19 @@
     height: 55px;
   }
 
+  /* Ajustes para o texto do logo em mobile */
+  .logo-text {
+    gap: 0.3rem;
+  }
+
+  .logo-text-line1 {
+    font-size: 1rem;
+  }
+
+  .logo-text-line2 {
+    font-size: 0.65rem;
+  }
+
   /* 1. Botão Hambúrguer: Garantimos que ele fique sempre por cima */
   .menu-toggle {
     display: block;
@@ -172,6 +185,33 @@
   .nav-menu a {
       color: #333; /* Links sempre escuros dentro do menu */
       font-size: 1.8rem; /* Fonte bem grande para fácil leitura e toque */
+  }
+}
+
+/* Ajustes para telas muito pequenas (< 400px) */
+@media (max-width: 400px) {
+  .logo-container {
+    gap: 0.5rem;
+  }
+
+  .logo {
+    height: 60px;
+  }
+
+  .header-container.scrolled .logo {
+    height: 50px;
+  }
+
+  .logo-text-line1 {
+    font-size: 0.9rem;
+  }
+
+  .logo-text-line2 {
+    font-size: 0.6rem;
+  }
+
+  .header-content {
+    padding: 0 1rem;
   }
 }
 /* Estilos para o link de Rondônia em Números */
