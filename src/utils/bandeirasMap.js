@@ -46,10 +46,10 @@ import saoMiguel from '../assets/bandeiras/São Miguel do Guaporé.png';
 import seringueiras from '../assets/bandeiras/Seringueiras.png';
 import teixeiropolis from '../assets/bandeiras/Teixeiropolis.png';
 import theobroma from '../assets/bandeiras/-theobroma-ro.png';
-import urupa from '../assets/bandeiras/urupa.png';
+import urupa from '../assets/bandeiras/Urupa.png';
 import valeAnari from '../assets/bandeiras/Vale do Anari.png';
 import valeParaiso from '../assets/bandeiras/Vale do Paraiso.png';
-import vilhena from '../assets/bandeiras/Vilhena.png';
+import vilhena from '../assets/bandeiras/vilhena.png';
 import bandeiraRondonia from '../assets/bandeiras/Bandeira_de_Rondônia.png';
 
 // Mapa de municípios para bandeiras importadas (MAIÚSCULAS - formato do banco)
