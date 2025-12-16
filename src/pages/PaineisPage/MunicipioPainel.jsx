@@ -103,14 +103,18 @@ const MunicipioPainel = () => {
         </button>
         <div className="painel-info">
           <div className="painel-header-content">
-            <img 
-              src={getBandeiraUrl(municipio.nome)} 
-              alt={`Bandeira de ${municipio.nome}`}
-              className="painel-bandeira"
-              onError={(e) => {
-                e.target.src = `https://via.placeholder.com/120x90/10b981/ffffff?text=${encodeURIComponent(municipio.nome.substring(0, 3))}`;
-              }}
-            />
+            {getBandeiraUrl(municipio.nome) ? (
+              <img 
+                src={getBandeiraUrl(municipio.nome)} 
+                alt={`Bandeira de ${municipio.nome}`}
+                className="painel-bandeira"
+              />
+            ) : (
+              <div className="bandeira-placeholder-small">
+                <span>{municipio.nome.substring(0, 3)}</span>
+              </div>
+            )}
+
             <div className="painel-text">
               <h1>{municipio.nome}</h1>
               <p>{painelConfig.titulo}</p>
