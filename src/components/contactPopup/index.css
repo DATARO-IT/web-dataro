@@ -104,3 +104,17 @@
     justify-content: center; /* Centraliza o item como um todo */
   }
 }
+
+/* WhatsApp Link no Popup */
+.whatsapp-link {
+  text-decoration: none;
+  color: inherit;
+  transition: all 0.2s ease;
+}
+.whatsapp-link:hover {
+  opacity: 0.8;
+}
+.whatsapp-link svg {
+  fill: #25D366 !important;
+  color: #25D366 !important;
+}

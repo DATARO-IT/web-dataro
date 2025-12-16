@@ -115,3 +115,20 @@
     justify-content: center;
   }
 }
+
+/* WhatsApp Link no Footer */
+.whatsapp-link {
+  color: #25D366;
+  text-decoration: none;
+  transition: all 0.2s ease;
+}
+.whatsapp-link:hover {
+  color: #128C7E;
+  opacity: 1;
+}
+.whatsapp-link svg {
+  fill: #25D366;
+}
+.whatsapp-link:hover svg {
+  fill: #128C7E;
+}
