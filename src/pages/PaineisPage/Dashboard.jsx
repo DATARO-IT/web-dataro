@@ -65,7 +65,11 @@ const Dashboard = () => {
     }
   };
 
-  const handleViewPainel = (municipio) => {
+  const handleViewPainel = (e, municipio) => {
+    e.preventDefault();
+    e.stopPropagation();
+    console.log('handleViewPainel chamado para:', municipio.nome, 'ID:', municipio.id);
+    console.log('Navegando para:', `/paineis/municipio/${municipio.id}`);
     navigate(`/paineis/municipio/${municipio.id}`, { state: { municipio } });
   };
 
@@ -201,7 +205,7 @@ const Dashboard = () => {
                   <div
                     key={municipio.id}
                     className={`municipio-card ${hasPainel ? 'has-painel' : 'no-painel'}`}
-                    onClick={() => hasPainel && handleViewPainel(municipio)}
+                    onClick={(e) => hasPainel && handleViewPainel(e, municipio)}
                     style={{ cursor: hasPainel ? 'pointer' : 'default' }}
                   >
                     <div className="card-bandeira-section">
