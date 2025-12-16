@@ -17,14 +17,52 @@ import Dashboard from './pages/PaineisPage/Dashboard';
 import MunicipioPainel from './pages/PaineisPage/MunicipioPainel';
 
 // Contexto de autenticação
-import { AuthProvider } from './contexts/AuthContext';
+import { AuthProvider, useAuth } from './contexts/AuthContext';
 
 import './App.css';
 
-// Componente para rotas protegidas
+// Componente para rotas protegidas - usa o contexto de autenticação
 const ProtectedRoute = ({ children }) => {
-  const user = localStorage.getItem('paineis_user');
-  return user ? children : <Navigate to="/paineis/login" />;
+  const { user, loading } = useAuth();
+  
+  // Enquanto está carregando, mostra um loading
+  if (loading) {
+    return (
+      <div style={{ 
+        display: 'flex', 
+        justifyContent: 'center', 
+        alignItems: 'center', 
+        height: '100vh',
+        backgroundColor: '#f5f5f5'
+      }}>
+        <div style={{ textAlign: 'center' }}>
+          <div style={{
+            width: '40px',
+            height: '40px',
+            border: '4px solid #e0e0e0',
+            borderTop: '4px solid #2e7d32',
+            borderRadius: '50%',
+            animation: 'spin 1s linear infinite',
+            margin: '0 auto 16px'
+          }}></div>
+          <p style={{ color: '#666' }}>Carregando...</p>
+        </div>
+        <style>{`
+          @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+          }
+        `}</style>
+      </div>
+    );
+  }
+  
+  // Se não há usuário após carregar, redireciona para login
+  if (!user) {
+    return <Navigate to="/paineis/login" />;
+  }
+  
+  return children;
 };
 
 // Layout para páginas públicas (com Header e Footer)
