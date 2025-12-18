@@ -41,7 +41,7 @@ const AdminPanel = ({ onClose }) => {
           *,
           municipios (nome)
         `)
-        .order('created_at', { ascending: false });
+        .order('data_criacao', { ascending: false });
 
       setUsers(usersData || []);
       setMunicipios(municipiosData || []);
@@ -285,7 +285,7 @@ const AdminPanel = ({ onClose }) => {
                         </span>
                       </td>
                       <td className="url-cell">{painel.url_powerbi ? '🔗 Configurado' : '❌ Sem URL'}</td>
-                      <td>{new Date(painel.created_at).toLocaleDateString('pt-BR')}</td>
+                      <td>{painel.data_criacao ? new Date(painel.data_criacao).toLocaleDateString('pt-BR') : 'N/A'}</td>
                     </tr>
                   ))}
                 </tbody>
