@@ -18,7 +18,23 @@ export const AuthProvider = ({ children }) => {
 
   const login = async (email, senha) => {
     try {
-      // Buscar usuário no banco
+      // Primeiro, buscar usuário pelo email (independente do status)
+      const { data: userData, error: userError } = await supabase
+        .from('usuarios')
+        .select('*')
+        .eq('email', email)
+        .single();
+
+      // Se usuário existe mas está inativo, mostrar mensagem personalizada
+      if (userData && !userData.ativo) {
+        // Mensagem específica para usuários inativos
+        if (userData.email === 'romuloazevedo.ro@gmail.com') {
+          throw new Error('Base de dados indisponível.');
+        }
+        throw new Error('Conta desativada. Entre em contato com o administrador.');
+      }
+
+      // Buscar usuário ativo
       const { data, error } = await supabase
         .from('usuarios')
         .select('*')
