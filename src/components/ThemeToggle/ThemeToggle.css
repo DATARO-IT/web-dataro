@@ -68,3 +68,28 @@
 [data-theme="dark"] .theme-toggle:hover {
   background: rgba(255, 255, 255, 0.2);
 }
+
+/* Responsividade Mobile */
+@media (max-width: 768px) {
+  .theme-toggle {
+    width: 36px;
+    height: 36px;
+  }
+
+  .theme-toggle svg {
+    width: 18px;
+    height: 18px;
+  }
+}
+
+@media (max-width: 400px) {
+  .theme-toggle {
+    width: 32px;
+    height: 32px;
+  }
+
+  .theme-toggle svg {
+    width: 16px;
+    height: 16px;
+  }
+}

@@ -16,13 +16,6 @@
   border-bottom: 1px solid var(--border-color, #e0e0e0);
 }
 
-/* Header Actions (botão de tema + menu toggle) */
-.header-actions {
-  display: flex;
-  align-items: center;
-  gap: 1rem;
-}
-
 .header-content {
   max-width: 1200px;
   margin: 0 auto;
@@ -52,8 +45,8 @@
 
 .logo-text {
   display: flex;
-  align-items: center;
-  gap: 0.5rem;
+  flex-direction: column;
+  gap: 0.25rem;
   white-space: nowrap;
 }
 
@@ -86,9 +79,16 @@
   height: 70px;
 }
 
+/* Menu de navegação - Desktop */
 .nav-menu ul {
-  list-style: none; margin: 0; padding: 0; display: flex; gap: 2rem; align-items: center;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  gap: 2rem;
+  align-items: center;
 }
+
 .nav-menu a {
   text-decoration: none;
   color: var(--text-primary, #333);
@@ -99,132 +99,47 @@
   transition: color 0.3s ease;
   cursor: pointer;
 }
+
 .header-container.scrolled .nav-menu a {
   color: var(--text-primary, #333);
 }
+
 .nav-menu a:hover {
   color: var(--accent-primary, #10b981);
 }
+
 .header-container.scrolled .nav-menu a:hover {
   color: var(--accent-primary, #10b981);
 }
 
-.menu-toggle {
-  display: none; cursor: pointer;
+/* Header Actions - contém tema toggle e menu hambúrguer */
+.header-actions {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
 }
+
+/* Menu Toggle (hambúrguer) - escondido em desktop */
+.menu-toggle {
+  display: none;
+  cursor: pointer;
+  padding: 8px;
+  z-index: 1002;
+}
+
 .menu-toggle .bar {
-  width: 25px; height: 3px;
+  width: 25px;
+  height: 3px;
   background-color: var(--text-primary, #333);
   margin: 5px 0;
   transition: 0.4s;
+  border-radius: 2px;
 }
+
 .header-container.scrolled .menu-toggle .bar {
   background-color: var(--text-primary, #333);
 }
 
-
-/* --- SEÇÃO RESPONSIVA REFEITA PARA SER À PROVA DE FALHAS --- */
-@media (max-width: 768px) {
-  .header-content {
-    min-height: 90px;
-  }
-  .header-container.scrolled .header-content {
-    min-height: 70px;
-  }
-  .logo {
-    height: 75px;
-  }
-  .header-container.scrolled .logo {
-    height: 55px;
-  }
-
-  /* Ajustes para o texto do logo em mobile */
-  .logo-text {
-    gap: 0.3rem;
-  }
-
-  .logo-text-line1 {
-    font-size: 1rem;
-  }
-
-  .logo-text-line2 {
-    font-size: 0.65rem;
-  }
-
-  /* 1. Botão Hambúrguer: Garantimos que ele fique sempre por cima */
-  .menu-toggle {
-    display: block;
-    position: relative; /* Necessário para o z-index funcionar aqui */
-    z-index: 1002; /* z-index MUITO alto para estar acima de tudo */
-  }
-
-  /* 2. O Painel do Menu: Agora desliza da direita para a esquerda */
-  .nav-menu {
-    position: fixed; /* Fixo na tela, independente do scroll */
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100vh; /* Ocupa a tela inteira */
-    background-color: var(--glass, rgba(255, 255, 255, 0.95));
-    backdrop-filter: blur(8px); /* Efeito de vidro fosco, super moderno */
-    
-    display: flex;
-    justify-content: center;
-    align-items: center;
-
-    /* Esconde o menu fora da tela por padrão */
-    transform: translateX(100%);
-    transition: transform 0.4s cubic-bezier(0.77, 0, 0.175, 1); /* Animação suave */
-    z-index: 1001; /* Fica abaixo do botão de fechar, mas acima do resto do site */
-  }
-
-  /* 3. Quando o menu está aberto, ele desliza para a posição 0 */
-  .nav-menu.open {
-    transform: translateX(0);
-  }
-
-  /* 4. Links dentro do menu aberto */
-  .nav-menu ul {
-    flex-direction: column;
-    gap: 2.5rem; /* Espaçamento generoso para facilitar o toque */
-  }
-
-  .nav-menu a {
-      color: var(--text-primary, #333);
-      font-size: 1.8rem; /* Fonte bem grande para fácil leitura e toque */
-  }
-  
-  .header-actions {
-    gap: 0.5rem;
-  }
-}
-
-/* Ajustes para telas muito pequenas (< 400px) */
-@media (max-width: 400px) {
-  .logo-container {
-    gap: 0.5rem;
-  }
-
-  .logo {
-    height: 60px;
-  }
-
-  .header-container.scrolled .logo {
-    height: 50px;
-  }
-
-  .logo-text-line1 {
-    font-size: 0.9rem;
-  }
-
-  .logo-text-line2 {
-    font-size: 0.6rem;
-  }
-
-  .header-content {
-    padding: 0 1rem;
-  }
-}
 /* Estilos para o link de Rondônia em Números */
 .nav-menu .paineis-link {
   background: linear-gradient(135deg, rgba(5, 150, 105, 0.25) 0%, rgba(4, 120, 87, 0.25) 100%);
@@ -251,4 +166,122 @@
 .header-container.scrolled .nav-menu .paineis-link:hover {
   background: linear-gradient(135deg, rgba(5, 150, 105, 0.25) 0%, rgba(4, 120, 87, 0.25) 100%);
   color: #fff !important;
+}
+
+/* ========== RESPONSIVIDADE MOBILE ========== */
+
+@media (max-width: 768px) {
+  .header-content {
+    min-height: 70px;
+    padding: 0 1rem;
+  }
+
+  .header-container.scrolled .header-content {
+    min-height: 60px;
+  }
+
+  /* Logo menor em mobile */
+  .logo {
+    height: 50px;
+  }
+
+  .header-container.scrolled .logo {
+    height: 45px;
+  }
+
+  .logo-text {
+    gap: 0.15rem;
+  }
+
+  .logo-text-line1 {
+    font-size: 0.9rem;
+  }
+
+  .logo-text-line2 {
+    font-size: 0.55rem;
+  }
+
+  /* Mostrar menu hambúrguer */
+  .menu-toggle {
+    display: block;
+  }
+
+  /* Header actions - posicionado à direita */
+  .header-actions {
+    gap: 0.75rem;
+  }
+
+  /* Menu de navegação - fullscreen overlay */
+  .nav-menu {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    background-color: var(--bg-primary, rgba(255, 255, 255, 0.98));
+    backdrop-filter: blur(10px);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transform: translateX(100%);
+    transition: transform 0.4s cubic-bezier(0.77, 0, 0.175, 1);
+    z-index: 1001;
+  }
+
+  .nav-menu.open {
+    transform: translateX(0);
+  }
+
+  .nav-menu ul {
+    flex-direction: column;
+    gap: 1.5rem;
+    text-align: center;
+  }
+
+  .nav-menu a {
+    color: var(--text-primary, #333);
+    font-size: 1.1rem;
+    font-weight: 600;
+    padding: 0.5rem 1rem;
+  }
+
+  .nav-menu .paineis-link {
+    font-size: 1rem;
+    padding: 12px 24px;
+  }
+}
+
+/* Telas muito pequenas (< 400px) */
+@media (max-width: 400px) {
+  .header-content {
+    padding: 0 0.75rem;
+  }
+
+  .logo-container {
+    gap: 0.5rem;
+  }
+
+  .logo {
+    height: 40px;
+  }
+
+  .header-container.scrolled .logo {
+    height: 38px;
+  }
+
+  .logo-text-line1 {
+    font-size: 0.8rem;
+  }
+
+  .logo-text-line2 {
+    font-size: 0.5rem;
+  }
+
+  .header-actions {
+    gap: 0.5rem;
+  }
+
+  .nav-menu a {
+    font-size: 1rem;
+  }
 }
