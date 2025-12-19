@@ -1,6 +1,7 @@
 // src/components/heroCarousel/index.jsx
 
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
 import Slider from 'react-slick';
 import './index.css';
 
@@ -14,6 +15,12 @@ import bgImage2 from '../../assets/sites-bg.jpg';
 import bgImage3 from '../../assets/bi-bg.jpeg';
 
 const HeroCarousel = () => {
+  const navigate = useNavigate();
+
+  const handleRondoniaClick = () => {
+    navigate('/paineis/login');
+  };
+
   const settings = {
     dots: true,
     infinite: true,
@@ -35,7 +42,7 @@ const HeroCarousel = () => {
           <div className="slide-content">
             <p>RONDÔNIA EM NÚMEROS</p>
             <h1>Plataforma de Gestão Integrada dos Municípios de Rondônia</h1>
-            <button className="cta-button cta-button-rondonia">RONDÔNIA EM NÚMEROS</button>
+            <button className="cta-button cta-button-rondonia" onClick={handleRondoniaClick}>RONDÔNIA EM NÚMEROS</button>
           </div>
         </div>
 
