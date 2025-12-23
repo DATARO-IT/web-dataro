@@ -423,6 +423,28 @@
   text-decoration: underline;
 }
 
+/* WhatsApp Link */
+.whatsapp-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  color: #25D366;
+  text-decoration: none;
+  font-weight: 500;
+  transition: all 0.2s ease;
+}
+
+.whatsapp-link:hover {
+  color: #128C7E;
+  text-decoration: none;
+}
+
+.whatsapp-icon {
+  width: 18px;
+  height: 18px;
+  flex-shrink: 0;
+}
+
 .footer-bottom {
   text-align: center;
   padding: 12px 32px;
