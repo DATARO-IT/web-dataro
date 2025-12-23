@@ -2,14 +2,13 @@ import React, { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { useAuth } from '../../contexts/AuthContext';
 import { supabase } from '../../utils/supabaseClient';
-import { getPainelConfig } from '../../utils/paineisConfig';
 import { getBandeiraUrl } from '../../utils/bandeirasMap';
 import './MunicipioPainel.css';
 
 const MunicipioPainel = () => {
   const { id } = useParams();
   const [municipio, setMunicipio] = useState(null);
-  const [painelConfig, setPainelConfig] = useState(null);
+  const [painel, setPainel] = useState(null);
   const [pageLoading, setPageLoading] = useState(true);
   const { user, loading: authLoading } = useAuth();
   const navigate = useNavigate();
@@ -38,9 +37,17 @@ const MunicipioPainel = () => {
       if (municipioError) throw municipioError;
       setMunicipio(municipioData);
 
-      // Buscar configuração do painel
-      const config = getPainelConfig(municipioData.nome);
-      setPainelConfig(config);
+      // Buscar painel do banco de dados
+      const { data: painelData, error: painelError } = await supabase
+        .from('paineis_bi')
+        .select('*')
+        .eq('municipio_id', id)
+        .eq('status', 'ativo')
+        .single();
+
+      if (!painelError && painelData) {
+        setPainel(painelData);
+      }
 
     } catch (error) {
       console.error('Erro ao carregar dados:', error);
@@ -75,7 +82,7 @@ const MunicipioPainel = () => {
     );
   }
 
-  if (!painelConfig || !painelConfig.ativo) {
+  if (!painel) {
     return (
       <div className="painel-container">
         <header className="painel-header">
@@ -121,7 +128,7 @@ const MunicipioPainel = () => {
 
             <div className="painel-text">
               <h1>{municipio.nome}</h1>
-              <p>{painelConfig.titulo}</p>
+              <p>{painel.titulo}</p>
             </div>
           </div>
         </div>
@@ -129,7 +136,7 @@ const MunicipioPainel = () => {
 
       <main className="painel-main">
         <iframe
-          src={painelConfig.powerbi_url}
+          src={painel.url_powerbi}
           frameBorder="0"
           allowFullScreen={true}
           className="powerbi-iframe"
