@@ -208,7 +208,7 @@ const MunicipioPainel = () => {
           </div>
           <div className="painel-copyright">
             <img src={logoDataRO} alt="DATA-RO" className="copyright-logo" />
-            <span>© DESENVOLVIDO POR DATA-RO INTELIGÊNCIA TERRITORIAL.<br/>TODOS OS DIREITOS RESERVADOS.</span>
+            <span>DESENVOLVIDO POR DATA-RO INTELIGÊNCIA TERRITORIAL.<br/>TODOS OS DIREITOS RESERVADOS. ©</span>
           </div>
         </div>
       </header>
