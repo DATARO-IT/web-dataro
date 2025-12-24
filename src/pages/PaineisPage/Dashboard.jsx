@@ -136,19 +136,26 @@ const Dashboard = () => {
           <div className="header-actions">
             <ThemeToggle />
             <span className="user-name">Olá, {user?.nome}</span>
-            {(user?.role === 'admin' || user?.role === 'superadmin') && (
-              <button onClick={() => setShowAdminPanel(true)} className="admin-button">
-                🔧 Admin
-              </button>
-            )}
-            {user?.role === 'superadmin' && (
-              <button onClick={() => setShowUserManagement(true)} className="admin-button users-button">
-                👥 Usuários
-              </button>
-            )}
             <button onClick={handleLogout} className="logout-button">
-              Sair
+              🚪 Sair
             </button>
+            {(user?.role === 'admin' || user?.role === 'superadmin') && (
+              <div className="admin-dropdown">
+                <button className="admin-button">
+                  ⚙️ Admin
+                </button>
+                <div className="admin-dropdown-content">
+                  <button onClick={() => setShowAdminPanel(true)}>
+                    📊 Painel Admin
+                  </button>
+                  {user?.role === 'superadmin' && (
+                    <button onClick={() => setShowUserManagement(true)}>
+                      👥 Usuários
+                    </button>
+                  )}
+                </div>
+              </div>
+            )}
           </div>
         </div>
       </header>
