@@ -10,6 +10,7 @@ import logo from '../../assets/logo.png';
 import logoCimcero from '../../assets/logo-cimcero.png';
 import ThemeToggle from '../../components/ThemeToggle';
 import AIAssistant from '../../components/AIAssistant';
+import TransferenciasDashboard from '../../components/TransferenciasDashboard';
 import { MinisteriosSidebar } from '../../components/Sidebar';
 import './Dashboard.css';
 
@@ -22,6 +23,8 @@ const Dashboard = () => {
   const [showChangePassword, setShowChangePassword] = useState(false);
   const [showAIAssistant, setShowAIAssistant] = useState(false);
   const [showMinisteriosSidebar, setShowMinisteriosSidebar] = useState(false);
+  const [showTransferenciasDashboard, setShowTransferenciasDashboard] = useState(false);
+  const [selectedMunicipioTransferencias, setSelectedMunicipioTransferencias] = useState(null);
   const { user, logout } = useAuth();
   const navigate = useNavigate();
 
@@ -283,22 +286,35 @@ const Dashboard = () => {
                           <span className="email-text">{municipio.email}</span>
                         </div>
                       )}
-                      {hasPainel ? (
-                        <div className="painel-info">
-                          <svg className="icon-check" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                            <polyline points="20 6 9 17 4 12"/>
-                          </svg>
-                          Painel disponível
-                        </div>
-                      ) : (
-                        <div className="painel-info pending">
-                          <svg className="icon-clock" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                            <circle cx="12" cy="12" r="10"/>
-                            <polyline points="12 6 12 12 16 14"/>
-                          </svg>
-                          Painel em breve
-                        </div>
-                      )}
+                      <div className="card-actions">
+                        {hasPainel ? (
+                          <div className="painel-info">
+                            <svg className="icon-check" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                              <polyline points="20 6 9 17 4 12"/>
+                            </svg>
+                            Painel disponível
+                          </div>
+                        ) : (
+                          <div className="painel-info pending">
+                            <svg className="icon-clock" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                              <circle cx="12" cy="12" r="10"/>
+                              <polyline points="12 6 12 12 16 14"/>
+                            </svg>
+                            Painel em breve
+                          </div>
+                        )}
+                        <button 
+                          className="btn-transferencias"
+                          onClick={(e) => {
+                            e.stopPropagation();
+                            setSelectedMunicipioTransferencias(municipio.nome);
+                            setShowTransferenciasDashboard(true);
+                          }}
+                          title="Ver transferências federais"
+                        >
+                          💰 Transferências
+                        </button>
+                      </div>
                     </div>
                   </div>
                 );
@@ -364,6 +380,21 @@ const Dashboard = () => {
           municipios={municipios}
           onClose={() => setShowAIAssistant(false)} 
         />
+      )}
+
+      {/* Transferências Dashboard Modal */}
+      {showTransferenciasDashboard && selectedMunicipioTransferencias && (
+        <div className="modal-overlay" onClick={() => setShowTransferenciasDashboard(false)}>
+          <div className="modal-transferencias" onClick={(e) => e.stopPropagation()}>
+            <TransferenciasDashboard 
+              municipio={selectedMunicipioTransferencias}
+              onClose={() => {
+                setShowTransferenciasDashboard(false);
+                setSelectedMunicipioTransferencias(null);
+              }} 
+            />
+          </div>
+        </div>
       )}
     </div>
   );

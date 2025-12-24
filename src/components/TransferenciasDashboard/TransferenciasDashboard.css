@@ -1,0 +1,631 @@
+.transferencias-dashboard {
+  background: #1a2332;
+  border-radius: 16px;
+  padding: 24px;
+  color: #fff;
+  max-height: 90vh;
+  overflow-y: auto;
+}
+
+.dashboard-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 24px;
+  padding-bottom: 16px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.header-info h2 {
+  margin: 0 0 8px 0;
+  font-size: 1.5rem;
+  color: #4ade80;
+}
+
+.municipio-nome {
+  font-size: 1.25rem;
+  margin: 0 0 4px 0;
+  color: #fff;
+}
+
+.codigo-ibge {
+  font-size: 0.85rem;
+  color: rgba(255, 255, 255, 0.6);
+}
+
+.btn-close {
+  background: rgba(255, 255, 255, 0.1);
+  border: none;
+  color: #fff;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  cursor: pointer;
+  font-size: 1.2rem;
+  transition: all 0.2s;
+}
+
+.btn-close:hover {
+  background: #ef4444;
+}
+
+/* Tabs */
+.dashboard-tabs {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 24px;
+  flex-wrap: wrap;
+}
+
+.dashboard-tabs .tab {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  color: rgba(255, 255, 255, 0.7);
+  padding: 10px 16px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 0.9rem;
+  transition: all 0.2s;
+}
+
+.dashboard-tabs .tab:hover {
+  background: rgba(255, 255, 255, 0.1);
+  color: #fff;
+}
+
+.dashboard-tabs .tab.active {
+  background: #4ade80;
+  color: #1a2332;
+  border-color: #4ade80;
+  font-weight: 600;
+}
+
+/* Cards Grid */
+.cards-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 16px;
+  margin-bottom: 24px;
+}
+
+.card {
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 12px;
+  padding: 20px;
+  display: flex;
+  gap: 16px;
+  border-left: 4px solid;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
+}
+
+.card-bolsa-familia { border-left-color: #f59e0b; }
+.card-bpc { border-left-color: #8b5cf6; }
+.card-fnde { border-left-color: #3b82f6; }
+.card-fns { border-left-color: #ef4444; }
+.card-convenios { border-left-color: #10b981; }
+.card-emendas { border-left-color: #ec4899; }
+
+.card-icon {
+  font-size: 2rem;
+  opacity: 0.9;
+}
+
+.card-info h3 {
+  margin: 0 0 8px 0;
+  font-size: 0.95rem;
+  color: rgba(255, 255, 255, 0.8);
+  font-weight: 500;
+}
+
+.card-info .valor {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #fff;
+  margin: 0 0 4px 0;
+}
+
+.card-info .detalhe {
+  font-size: 0.85rem;
+  color: rgba(255, 255, 255, 0.6);
+  display: block;
+}
+
+.variacao {
+  font-size: 0.85rem;
+  font-weight: 600;
+  display: inline-block;
+  margin-top: 4px;
+  padding: 2px 8px;
+  border-radius: 4px;
+}
+
+.variacao.positiva {
+  background: rgba(74, 222, 128, 0.2);
+  color: #4ade80;
+}
+
+.variacao.negativa {
+  background: rgba(239, 68, 68, 0.2);
+  color: #ef4444;
+}
+
+/* Barra de progresso */
+.barra-progresso {
+  height: 6px;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 3px;
+  margin-top: 8px;
+  position: relative;
+  overflow: hidden;
+}
+
+.barra-progresso .progresso {
+  position: absolute;
+  height: 100%;
+  border-radius: 3px;
+}
+
+.barra-progresso .empenhado {
+  background: rgba(236, 72, 153, 0.4);
+}
+
+.barra-progresso .pago {
+  background: #ec4899;
+}
+
+.legenda-barra {
+  font-size: 0.75rem;
+  color: rgba(255, 255, 255, 0.5);
+  margin-top: 4px;
+  display: block;
+}
+
+/* Total Geral */
+.total-geral {
+  background: linear-gradient(135deg, #4ade80 0%, #22c55e 100%);
+  border-radius: 12px;
+  padding: 24px;
+  text-align: center;
+}
+
+.total-geral h3 {
+  margin: 0 0 8px 0;
+  font-size: 1rem;
+  color: rgba(0, 0, 0, 0.7);
+}
+
+.total-geral .valor-total {
+  font-size: 2.5rem;
+  font-weight: 800;
+  color: #1a2332;
+  margin: 0;
+}
+
+/* Benefícios Tab */
+.info-populacao {
+  background: rgba(59, 130, 246, 0.2);
+  border-radius: 12px;
+  padding: 20px;
+  text-align: center;
+  margin-bottom: 24px;
+}
+
+.info-populacao h3 {
+  margin: 0 0 8px 0;
+  color: rgba(255, 255, 255, 0.7);
+  font-size: 0.95rem;
+}
+
+.valor-grande {
+  font-size: 2.5rem;
+  font-weight: 800;
+  color: #3b82f6;
+  margin: 0;
+}
+
+.beneficios-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 16px;
+}
+
+.beneficio-card {
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 12px;
+  padding: 20px;
+}
+
+.beneficio-card h4 {
+  margin: 0 0 16px 0;
+  color: #fff;
+  font-size: 1.1rem;
+}
+
+.beneficio-dados {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.beneficio-dados .dado {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 8px 0;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.beneficio-dados .dado:last-child {
+  border-bottom: none;
+}
+
+.beneficio-dados .label {
+  color: rgba(255, 255, 255, 0.6);
+  font-size: 0.9rem;
+}
+
+.beneficio-dados .valor {
+  color: #4ade80;
+  font-weight: 600;
+  font-size: 1.1rem;
+}
+
+/* Convênios Tab */
+.convenios-resumo {
+  display: flex;
+  gap: 24px;
+  margin-bottom: 24px;
+}
+
+.resumo-item {
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 12px;
+  padding: 20px 32px;
+  text-align: center;
+}
+
+.resumo-item .numero {
+  display: block;
+  font-size: 2rem;
+  font-weight: 700;
+  color: #4ade80;
+}
+
+.resumo-item .label {
+  color: rgba(255, 255, 255, 0.6);
+  font-size: 0.9rem;
+}
+
+.convenios-lista h4 {
+  margin: 0 0 16px 0;
+  color: #fff;
+}
+
+.tabela-convenios,
+.tabela-emendas {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.9rem;
+}
+
+.tabela-convenios th,
+.tabela-emendas th {
+  background: rgba(255, 255, 255, 0.05);
+  padding: 12px;
+  text-align: left;
+  color: rgba(255, 255, 255, 0.7);
+  font-weight: 500;
+}
+
+.tabela-convenios td,
+.tabela-emendas td {
+  padding: 12px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+  color: #fff;
+}
+
+.tabela-convenios tr:hover,
+.tabela-emendas tr:hover {
+  background: rgba(255, 255, 255, 0.03);
+}
+
+/* Tags */
+.tag {
+  display: inline-block;
+  padding: 4px 8px;
+  border-radius: 4px;
+  font-size: 0.75rem;
+  font-weight: 600;
+}
+
+.tag-mec { background: #3b82f6; color: #fff; }
+.tag-ms { background: #ef4444; color: #fff; }
+.tag-mcidades { background: #8b5cf6; color: #fff; }
+.tag-mda { background: #22c55e; color: #fff; }
+.tag-midr { background: #f59e0b; color: #fff; }
+.tag-mds { background: #ec4899; color: #fff; }
+
+/* Status */
+.status {
+  display: inline-block;
+  padding: 4px 10px;
+  border-radius: 12px;
+  font-size: 0.75rem;
+  font-weight: 500;
+}
+
+.status-em-execução { background: rgba(59, 130, 246, 0.2); color: #3b82f6; }
+.status-concluído { background: rgba(34, 197, 94, 0.2); color: #22c55e; }
+.status-em-análise { background: rgba(245, 158, 11, 0.2); color: #f59e0b; }
+.status-aguardando-prestação-de-contas { background: rgba(139, 92, 246, 0.2); color: #8b5cf6; }
+
+/* Programas Tab */
+.programas .subtitulo {
+  color: rgba(255, 255, 255, 0.6);
+  margin: -8px 0 24px 0;
+}
+
+.programas-lista {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 16px;
+}
+
+.programa-card {
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 12px;
+  padding: 20px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  transition: all 0.2s;
+}
+
+.programa-card:hover {
+  border-color: #4ade80;
+  transform: translateY(-2px);
+}
+
+.programa-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 12px;
+}
+
+.tag-ministerio {
+  padding: 4px 10px;
+  border-radius: 4px;
+  font-size: 0.75rem;
+  font-weight: 700;
+}
+
+.tag-mcidades { background: #8b5cf6; }
+.tag-mec { background: #3b82f6; }
+.tag-ms { background: #ef4444; }
+.tag-midr { background: #f59e0b; }
+.tag-mda { background: #22c55e; }
+.tag-mesporte { background: #06b6d4; }
+.tag-mtur { background: #ec4899; }
+.tag-mds { background: #a855f7; }
+
+.status-programa {
+  font-size: 0.75rem;
+  padding: 4px 8px;
+  border-radius: 4px;
+}
+
+.status-programa.aberto {
+  background: rgba(34, 197, 94, 0.2);
+  color: #22c55e;
+}
+
+.programa-card h4 {
+  margin: 0 0 4px 0;
+  color: #fff;
+  font-size: 1.05rem;
+}
+
+.programa-card .ministerio {
+  color: rgba(255, 255, 255, 0.5);
+  font-size: 0.85rem;
+  margin: 0 0 16px 0;
+}
+
+.programa-info {
+  display: flex;
+  gap: 16px;
+  margin-bottom: 12px;
+}
+
+.programa-info .info-item {
+  flex: 1;
+}
+
+.programa-info .label {
+  display: block;
+  font-size: 0.75rem;
+  color: rgba(255, 255, 255, 0.5);
+  margin-bottom: 4px;
+}
+
+.programa-info .valor {
+  font-size: 1rem;
+  font-weight: 600;
+  color: #4ade80;
+}
+
+.publico-alvo {
+  font-size: 0.85rem;
+  color: rgba(255, 255, 255, 0.7);
+  margin: 0 0 16px 0;
+}
+
+.btn-acessar {
+  display: inline-block;
+  background: #4ade80;
+  color: #1a2332;
+  padding: 10px 20px;
+  border-radius: 8px;
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 0.9rem;
+  transition: all 0.2s;
+}
+
+.btn-acessar:hover {
+  background: #22c55e;
+  transform: translateX(4px);
+}
+
+/* Emendas Tab */
+.emendas-resumo {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 16px;
+  margin-bottom: 24px;
+}
+
+.resumo-card {
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 12px;
+  padding: 20px;
+  text-align: center;
+}
+
+.resumo-card h4 {
+  margin: 0 0 8px 0;
+  color: rgba(255, 255, 255, 0.6);
+  font-size: 0.9rem;
+  font-weight: 500;
+}
+
+.resumo-card .valor-grande {
+  font-size: 1.5rem;
+  color: #4ade80;
+}
+
+.resumo-card .detalhe,
+.resumo-card .percentual {
+  font-size: 0.85rem;
+  color: rgba(255, 255, 255, 0.5);
+}
+
+.emendas-lista h4 {
+  margin: 0 0 16px 0;
+  color: #fff;
+}
+
+.parlamentar-info {
+  display: flex;
+  flex-direction: column;
+}
+
+.parlamentar-info .nome {
+  font-weight: 500;
+}
+
+.parlamentar-info .partido {
+  font-size: 0.75rem;
+  color: rgba(255, 255, 255, 0.5);
+}
+
+.tipo-emenda {
+  display: inline-block;
+  padding: 4px 8px;
+  border-radius: 4px;
+  font-size: 0.75rem;
+}
+
+.tipo-individual { background: rgba(59, 130, 246, 0.2); color: #3b82f6; }
+.tipo-bancada { background: rgba(245, 158, 11, 0.2); color: #f59e0b; }
+.tipo-comissão { background: rgba(139, 92, 246, 0.2); color: #8b5cf6; }
+
+.status-emenda {
+  display: inline-block;
+  padding: 4px 10px;
+  border-radius: 12px;
+  font-size: 0.75rem;
+}
+
+.status-empenhada { background: rgba(245, 158, 11, 0.2); color: #f59e0b; }
+.status-paga { background: rgba(34, 197, 94, 0.2); color: #22c55e; }
+.status-liquidada { background: rgba(59, 130, 246, 0.2); color: #3b82f6; }
+
+/* Footer */
+.dashboard-footer {
+  margin-top: 24px;
+  padding-top: 16px;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.8rem;
+  color: rgba(255, 255, 255, 0.4);
+}
+
+/* Loading */
+.dashboard-loading {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 60px;
+}
+
+.spinner {
+  width: 40px;
+  height: 40px;
+  border: 3px solid rgba(255, 255, 255, 0.1);
+  border-top-color: #4ade80;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+/* Responsivo */
+@media (max-width: 768px) {
+  .transferencias-dashboard {
+    padding: 16px;
+  }
+
+  .dashboard-tabs {
+    overflow-x: auto;
+    flex-wrap: nowrap;
+    padding-bottom: 8px;
+  }
+
+  .dashboard-tabs .tab {
+    white-space: nowrap;
+    flex-shrink: 0;
+  }
+
+  .cards-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .convenios-resumo {
+    flex-direction: column;
+  }
+
+  .tabela-convenios,
+  .tabela-emendas {
+    display: block;
+    overflow-x: auto;
+  }
+
+  .total-geral .valor-total {
+    font-size: 1.8rem;
+  }
+
+  .dashboard-footer {
+    flex-direction: column;
+    gap: 4px;
+    text-align: center;
+  }
+}
