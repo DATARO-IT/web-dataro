@@ -122,31 +122,106 @@
   box-shadow: 0 4px 12px rgba(99, 102, 241, 0.3);
 }
 
-/* Botão Assistente IA */
-.ai-assistant-button {
-  padding: 10px 20px;
+/* Botão Flutuante Assistente IA (FAB) */
+.ai-assistant-fab {
+  position: fixed;
+  bottom: 24px;
+  right: 24px;
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
   background: linear-gradient(135deg, #2e7d32 0%, #1b5e20 100%);
   color: white;
   border: none;
-  border-radius: 8px;
-  font-size: 14px;
-  font-weight: 600;
   cursor: pointer;
-  transition: all 0.2s;
   display: flex;
   align-items: center;
-  gap: 6px;
-  font-family: 'Poppins', sans-serif;
-  box-shadow: 0 2px 8px rgba(46, 125, 50, 0.3);
+  justify-content: center;
+  box-shadow: 0 4px 20px rgba(46, 125, 50, 0.4);
+  transition: all 0.3s ease;
+  z-index: 999;
+  animation: fabPulse 2s infinite;
 }
 
-.ai-assistant-button:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 4px 16px rgba(46, 125, 50, 0.4);
+.ai-assistant-fab svg {
+  width: 28px;
+  height: 28px;
+  stroke: white;
 }
 
-.ai-assistant-button:active {
-  transform: translateY(0);
+.ai-assistant-fab:hover {
+  transform: scale(1.1);
+  box-shadow: 0 6px 30px rgba(46, 125, 50, 0.5);
+}
+
+.ai-assistant-fab:hover .fab-tooltip {
+  opacity: 1;
+  visibility: visible;
+  transform: translateX(-10px);
+}
+
+.ai-assistant-fab:active {
+  transform: scale(0.95);
+}
+
+.fab-tooltip {
+  position: absolute;
+  right: 70px;
+  background: rgba(0, 0, 0, 0.8);
+  color: white;
+  padding: 8px 12px;
+  border-radius: 6px;
+  font-size: 13px;
+  font-weight: 500;
+  white-space: nowrap;
+  opacity: 0;
+  visibility: hidden;
+  transition: all 0.3s ease;
+  pointer-events: none;
+}
+
+.fab-tooltip::after {
+  content: '';
+  position: absolute;
+  right: -6px;
+  top: 50%;
+  transform: translateY(-50%);
+  border-width: 6px;
+  border-style: solid;
+  border-color: transparent transparent transparent rgba(0, 0, 0, 0.8);
+}
+
+@keyframes fabPulse {
+  0%, 100% {
+    box-shadow: 0 4px 20px rgba(46, 125, 50, 0.4);
+  }
+  50% {
+    box-shadow: 0 4px 30px rgba(46, 125, 50, 0.6), 0 0 0 8px rgba(46, 125, 50, 0.1);
+  }
+}
+
+/* Tema escuro para FAB */
+[data-theme="dark"] .ai-assistant-fab {
+  background: linear-gradient(135deg, #4caf50 0%, #2e7d32 100%);
+}
+
+/* Responsividade do FAB */
+@media (max-width: 768px) {
+  .ai-assistant-fab {
+    width: 56px;
+    height: 56px;
+    bottom: 20px;
+    right: 20px;
+  }
+  
+  .ai-assistant-fab svg {
+    width: 24px;
+    height: 24px;
+  }
+  
+  .fab-tooltip {
+    display: none;
+  }
 }
 
 .user-name {
