@@ -1,0 +1,388 @@
+/* Sidebar de Ministérios */
+.ministerios-sidebar {
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: 320px;
+  height: 100vh;
+  background: linear-gradient(180deg, #1a1a2e 0%, #16213e 100%);
+  color: white;
+  z-index: 100;
+  display: flex;
+  flex-direction: column;
+  transform: translateX(-100%);
+  transition: transform 0.3s ease;
+  box-shadow: 4px 0 20px rgba(0, 0, 0, 0.3);
+}
+
+.ministerios-sidebar.open {
+  transform: translateX(0);
+}
+
+/* Botão de toggle */
+.sidebar-toggle {
+  position: fixed;
+  left: 16px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #2e7d32 0%, #1b5e20 100%);
+  color: white;
+  border: none;
+  cursor: pointer;
+  font-size: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 15px rgba(46, 125, 50, 0.4);
+  z-index: 101;
+  transition: all 0.3s ease;
+}
+
+.sidebar-toggle:hover {
+  transform: translateY(-50%) scale(1.1);
+  box-shadow: 0 6px 20px rgba(46, 125, 50, 0.5);
+}
+
+.sidebar-toggle.open {
+  left: 336px;
+  background: linear-gradient(135deg, #c62828 0%, #b71c1c 100%);
+  box-shadow: 0 4px 15px rgba(198, 40, 40, 0.4);
+}
+
+/* Overlay para mobile */
+.sidebar-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.5);
+  z-index: 99;
+}
+
+/* Header da Sidebar */
+.sidebar-header {
+  padding: 24px 20px;
+  background: linear-gradient(135deg, #2e7d32 0%, #1b5e20 100%);
+  text-align: center;
+}
+
+.sidebar-header h2 {
+  margin: 0;
+  font-size: 20px;
+  font-weight: 700;
+}
+
+.sidebar-header p {
+  margin: 8px 0 0;
+  font-size: 12px;
+  opacity: 0.9;
+}
+
+/* Busca */
+.sidebar-search {
+  padding: 16px;
+  background: rgba(0, 0, 0, 0.2);
+}
+
+.sidebar-search input {
+  width: 100%;
+  padding: 12px 16px;
+  border: none;
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.1);
+  color: white;
+  font-size: 14px;
+}
+
+.sidebar-search input::placeholder {
+  color: rgba(255, 255, 255, 0.5);
+}
+
+.sidebar-search input:focus {
+  outline: none;
+  background: rgba(255, 255, 255, 0.15);
+}
+
+/* Conteúdo */
+.sidebar-content {
+  flex: 1;
+  overflow-y: auto;
+  padding: 8px;
+}
+
+.sidebar-content::-webkit-scrollbar {
+  width: 6px;
+}
+
+.sidebar-content::-webkit-scrollbar-track {
+  background: rgba(255, 255, 255, 0.05);
+}
+
+.sidebar-content::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 3px;
+}
+
+/* Item do Ministério */
+.ministerio-item {
+  margin-bottom: 4px;
+}
+
+.ministerio-header {
+  width: 100%;
+  padding: 12px;
+  background: rgba(255, 255, 255, 0.05);
+  border: none;
+  border-left: 4px solid transparent;
+  border-radius: 8px;
+  color: white;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  transition: all 0.2s ease;
+  text-align: left;
+}
+
+.ministerio-header:hover {
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.ministerio-header.expanded {
+  background: rgba(255, 255, 255, 0.15);
+  border-radius: 8px 8px 0 0;
+}
+
+.ministerio-icone {
+  font-size: 24px;
+  flex-shrink: 0;
+}
+
+.ministerio-info {
+  flex: 1;
+  min-width: 0;
+}
+
+.ministerio-sigla {
+  display: block;
+  font-weight: 700;
+  font-size: 14px;
+}
+
+.ministerio-nome {
+  display: block;
+  font-size: 11px;
+  opacity: 0.7;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.expand-icon {
+  font-size: 10px;
+  opacity: 0.5;
+}
+
+/* Detalhes do Ministério */
+.ministerio-details {
+  background: rgba(255, 255, 255, 0.05);
+  padding: 16px;
+  border-radius: 0 0 8px 8px;
+  animation: slideDown 0.2s ease;
+}
+
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.ministerio-descricao {
+  font-size: 12px;
+  opacity: 0.8;
+  margin: 0 0 16px;
+  line-height: 1.5;
+}
+
+.programas-lista {
+  margin-bottom: 16px;
+}
+
+.programas-lista h4 {
+  font-size: 12px;
+  margin: 0 0 8px;
+  opacity: 0.7;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.programa-link {
+  display: block;
+  padding: 8px 12px;
+  margin: 4px 0;
+  background: rgba(46, 125, 50, 0.2);
+  border-radius: 6px;
+  color: #81c784;
+  text-decoration: none;
+  font-size: 12px;
+  transition: all 0.2s ease;
+}
+
+.programa-link:hover {
+  background: rgba(46, 125, 50, 0.3);
+  transform: translateX(4px);
+}
+
+.ministerio-contato {
+  padding-top: 12px;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.ministerio-contato p {
+  font-size: 12px;
+  margin: 6px 0;
+  opacity: 0.8;
+}
+
+.site-link {
+  display: inline-block;
+  margin-top: 8px;
+  padding: 8px 16px;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 6px;
+  color: white;
+  text-decoration: none;
+  font-size: 12px;
+  transition: all 0.2s ease;
+}
+
+.site-link:hover {
+  background: rgba(255, 255, 255, 0.2);
+}
+
+/* Footer da Sidebar */
+.sidebar-footer {
+  padding: 16px;
+  background: rgba(0, 0, 0, 0.3);
+}
+
+.transferegov-section {
+  text-align: center;
+}
+
+.transferegov-section h3 {
+  font-size: 14px;
+  margin: 0 0 8px;
+}
+
+.transferegov-section p {
+  font-size: 11px;
+  opacity: 0.7;
+  margin: 0 0 12px;
+}
+
+.transferegov-btn {
+  display: inline-block;
+  padding: 12px 24px;
+  background: linear-gradient(135deg, #2e7d32 0%, #1b5e20 100%);
+  color: white;
+  text-decoration: none;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 600;
+  transition: all 0.2s ease;
+}
+
+.transferegov-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 15px rgba(46, 125, 50, 0.4);
+}
+
+/* Tema claro */
+[data-theme="light"] .ministerios-sidebar {
+  background: linear-gradient(180deg, #f5f5f5 0%, #e0e0e0 100%);
+  color: #333;
+}
+
+[data-theme="light"] .sidebar-header {
+  background: linear-gradient(135deg, #2e7d32 0%, #1b5e20 100%);
+  color: white;
+}
+
+[data-theme="light"] .sidebar-search input {
+  background: white;
+  color: #333;
+  border: 1px solid #ddd;
+}
+
+[data-theme="light"] .sidebar-search input::placeholder {
+  color: #999;
+}
+
+[data-theme="light"] .ministerio-header {
+  background: white;
+  color: #333;
+}
+
+[data-theme="light"] .ministerio-header:hover {
+  background: #f0f0f0;
+}
+
+[data-theme="light"] .ministerio-details {
+  background: #f9f9f9;
+}
+
+[data-theme="light"] .programa-link {
+  background: rgba(46, 125, 50, 0.1);
+  color: #2e7d32;
+}
+
+[data-theme="light"] .site-link {
+  background: #e0e0e0;
+  color: #333;
+}
+
+[data-theme="light"] .sidebar-footer {
+  background: #e0e0e0;
+}
+
+/* Responsividade */
+@media (max-width: 768px) {
+  .ministerios-sidebar {
+    width: 100%;
+    max-width: 320px;
+  }
+
+  .sidebar-toggle {
+    left: 12px;
+    width: 44px;
+    height: 44px;
+    font-size: 18px;
+  }
+
+  .sidebar-toggle.open {
+    left: auto;
+    right: 12px;
+    top: 12px;
+    transform: none;
+  }
+}
+
+@media (min-width: 1200px) {
+  .ministerios-sidebar {
+    width: 340px;
+  }
+
+  .sidebar-toggle.open {
+    left: 356px;
+  }
+}

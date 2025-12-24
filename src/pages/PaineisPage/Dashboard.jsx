@@ -10,6 +10,7 @@ import logo from '../../assets/logo.png';
 import logoCimcero from '../../assets/logo-cimcero.png';
 import ThemeToggle from '../../components/ThemeToggle';
 import AIAssistant from '../../components/AIAssistant';
+import { MinisteriosSidebar } from '../../components/Sidebar';
 import './Dashboard.css';
 
 const Dashboard = () => {
@@ -20,6 +21,7 @@ const Dashboard = () => {
   const [showAdminPanel, setShowAdminPanel] = useState(false);
   const [showChangePassword, setShowChangePassword] = useState(false);
   const [showAIAssistant, setShowAIAssistant] = useState(false);
+  const [showMinisteriosSidebar, setShowMinisteriosSidebar] = useState(false);
   const { user, logout } = useAuth();
   const navigate = useNavigate();
 
@@ -107,7 +109,12 @@ const Dashboard = () => {
   }
 
   return (
-    <div className="dashboard-container">
+    <div className={`dashboard-container ${showMinisteriosSidebar ? 'sidebar-open' : ''}`}>
+      {/* Sidebar de Ministérios */}
+      <MinisteriosSidebar 
+        isOpen={showMinisteriosSidebar} 
+        onToggle={() => setShowMinisteriosSidebar(!showMinisteriosSidebar)} 
+      />
       <header className="dashboard-header">
         <div className="header-content">
           <div className="header-left">

@@ -1,6 +1,5 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { useAuth } from '../../contexts/AuthContext';
-import MinisteriosSidebar from './MinisteriosSidebar';
 import { processarConsulta } from '../../services/aiService';
 import './AIAssistant.css';
 
@@ -15,8 +14,6 @@ const AIAssistant = ({ municipios = [], onClose }) => {
   ]);
   const [inputValue, setInputValue] = useState('');
   const [isLoading, setIsLoading] = useState(false);
-  const [showSidebar, setShowSidebar] = useState(false);
-  const [activeTab, setActiveTab] = useState('chat');
   const messagesEndRef = useRef(null);
   const { user } = useAuth();
 
@@ -69,13 +66,11 @@ const AIAssistant = ({ municipios = [], onClose }) => {
   };
 
   const processAIRequest = async (query, municipiosData) => {
-    // Usar o serviço de IA para processar a consulta
     try {
       const response = await processarConsulta(query, { municipios: municipiosData });
       return response;
     } catch (error) {
       console.error('Erro no processamento:', error);
-      // Fallback para resposta padrão
       return `Entendi sua pergunta sobre "${query}". 
 
 Para fornecer uma análise mais precisa, você pode:
@@ -85,7 +80,7 @@ Para fornecer uma análise mais precisa, você pode:
 3. **Ver recursos disponíveis**: Digite "recursos para [área]"
 4. **Analisar indicadores**: Digite "indicadores de [município]"
 
-Também pode acessar a aba "Ministérios" para ver informações sobre editais e programas federais disponíveis.`;
+Consulte também a barra lateral de Ministérios para ver informações sobre editais e programas federais disponíveis.`;
     }
   };
 
@@ -106,7 +101,7 @@ Também pode acessar a aba "Ministérios" para ver informações sobre editais e
 
   return (
     <div className="ai-assistant-overlay">
-      <div className="ai-assistant-container">
+      <div className="ai-assistant-container chat-only">
         {/* Header */}
         <div className="ai-assistant-header">
           <div className="header-left">
@@ -118,23 +113,11 @@ Também pode acessar a aba "Ministérios" para ver informações sobre editais e
             </div>
             <div className="header-info">
               <h3>Assistente DATA-RO</h3>
-              <span className="status-online">Online</span>
+              <span className="status-online">● Online</span>
             </div>
           </div>
           <div className="header-actions">
-            <button 
-              className={`tab-button ${activeTab === 'chat' ? 'active' : ''}`}
-              onClick={() => setActiveTab('chat')}
-            >
-              💬 Chat
-            </button>
-            <button 
-              className={`tab-button ${activeTab === 'ministerios' ? 'active' : ''}`}
-              onClick={() => setActiveTab('ministerios')}
-            >
-              🏛️ Ministérios
-            </button>
-            <button className="close-button" onClick={onClose}>
+            <button className="close-button" onClick={onClose} title="Fechar">
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
                 <line x1="18" y1="6" x2="6" y2="18"/>
                 <line x1="6" y1="6" x2="18" y2="18"/>
@@ -143,80 +126,71 @@ Também pode acessar a aba "Ministérios" para ver informações sobre editais e
           </div>
         </div>
 
-        {/* Content Area */}
-        <div className="ai-assistant-content">
-          {activeTab === 'chat' ? (
-            <>
-              {/* Messages Area */}
-              <div className="messages-container">
-                {messages.map((message) => (
-                  <div 
-                    key={message.id} 
-                    className={`message ${message.type} ${message.isError ? 'error' : ''}`}
-                  >
-                    <div className="message-content">
-                      <div className="message-text" dangerouslySetInnerHTML={{ 
-                        __html: message.content.replace(/\n/g, '<br/>').replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
-                      }} />
-                      <span className="message-time">{formatTimestamp(message.timestamp)}</span>
-                    </div>
-                  </div>
-                ))}
-                {isLoading && (
-                  <div className="message assistant loading">
-                    <div className="message-content">
-                      <div className="typing-indicator">
-                        <span></span>
-                        <span></span>
-                        <span></span>
-                      </div>
-                    </div>
-                  </div>
-                )}
-                <div ref={messagesEndRef} />
+        {/* Messages Area */}
+        <div className="messages-container">
+          {messages.map((message) => (
+            <div 
+              key={message.id} 
+              className={`message ${message.type} ${message.isError ? 'error' : ''}`}
+            >
+              <div className="message-content">
+                <div className="message-text" dangerouslySetInnerHTML={{ 
+                  __html: message.content.replace(/\n/g, '<br/>').replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
+                }} />
+                <span className="message-time">{formatTimestamp(message.timestamp)}</span>
               </div>
-
-              {/* Quick Actions */}
-              <div className="quick-actions">
-                <button onClick={() => handleQuickAction('Quais editais estão disponíveis?')}>
-                  📋 Ver Editais
-                </button>
-                <button onClick={() => handleQuickAction('Comparar municípios')}>
-                  📊 Comparar Municípios
-                </button>
-                <button onClick={() => handleQuickAction('Recursos do FNDE')}>
-                  💰 Recursos FNDE
-                </button>
-                <button onClick={() => handleQuickAction('Programas do Ministério da Saúde')}>
-                  🏥 Programas MS
-                </button>
+            </div>
+          ))}
+          {isLoading && (
+            <div className="message assistant loading">
+              <div className="message-content">
+                <div className="typing-indicator">
+                  <span></span>
+                  <span></span>
+                  <span></span>
+                </div>
               </div>
-
-              {/* Input Area */}
-              <div className="input-container">
-                <textarea
-                  value={inputValue}
-                  onChange={(e) => setInputValue(e.target.value)}
-                  onKeyPress={handleKeyPress}
-                  placeholder="Digite sua pergunta..."
-                  rows="1"
-                  disabled={isLoading}
-                />
-                <button 
-                  className="send-button" 
-                  onClick={handleSendMessage}
-                  disabled={!inputValue.trim() || isLoading}
-                >
-                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                    <line x1="22" y1="2" x2="11" y2="13"/>
-                    <polygon points="22 2 15 22 11 13 2 9 22 2"/>
-                  </svg>
-                </button>
-              </div>
-            </>
-          ) : (
-            <MinisteriosSidebar />
+            </div>
           )}
+          <div ref={messagesEndRef} />
+        </div>
+
+        {/* Quick Actions */}
+        <div className="quick-actions">
+          <button onClick={() => handleQuickAction('Quais editais estão disponíveis?')}>
+            📋 Ver Editais
+          </button>
+          <button onClick={() => handleQuickAction('Comparar municípios')}>
+            📊 Comparar Municípios
+          </button>
+          <button onClick={() => handleQuickAction('Recursos do FNDE')}>
+            💰 Recursos FNDE
+          </button>
+          <button onClick={() => handleQuickAction('Programas do Ministério da Saúde')}>
+            🏥 Programas MS
+          </button>
+        </div>
+
+        {/* Input Area */}
+        <div className="input-container">
+          <textarea
+            value={inputValue}
+            onChange={(e) => setInputValue(e.target.value)}
+            onKeyPress={handleKeyPress}
+            placeholder="Digite sua pergunta..."
+            rows="1"
+            disabled={isLoading}
+          />
+          <button 
+            className="send-button" 
+            onClick={handleSendMessage}
+            disabled={!inputValue.trim() || isLoading}
+          >
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+              <line x1="22" y1="2" x2="11" y2="13"/>
+              <polygon points="22 2 15 22 11 13 2 9 22 2"/>
+            </svg>
+          </button>
         </div>
 
         {/* Footer */}
