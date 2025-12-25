@@ -677,3 +677,396 @@
     text-align: center;
   }
 }
+
+
+/* Seletor de Ano */
+.ano-selector {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 20px;
+  padding: 12px 16px;
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 10px;
+}
+
+.ano-selector label {
+  color: rgba(255, 255, 255, 0.7);
+  font-size: 0.9rem;
+  font-weight: 500;
+}
+
+.anos-buttons {
+  display: flex;
+  gap: 8px;
+}
+
+.ano-btn {
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  color: rgba(255, 255, 255, 0.7);
+  padding: 8px 16px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 0.9rem;
+  font-weight: 500;
+  transition: all 0.2s;
+}
+
+.ano-btn:hover {
+  background: rgba(255, 255, 255, 0.15);
+  color: #fff;
+}
+
+.ano-btn.active {
+  background: #4ade80;
+  color: #1a2332;
+  border-color: #4ade80;
+  font-weight: 600;
+}
+
+/* Aba de Histórico */
+.tab-content.historico {
+  padding: 16px 0;
+}
+
+.tab-content.historico h4 {
+  margin: 0 0 20px 0;
+  color: #fff;
+  font-size: 1.1rem;
+}
+
+.historico-tabela {
+  overflow-x: auto;
+  margin-bottom: 32px;
+}
+
+.tabela-historico {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.9rem;
+}
+
+.tabela-historico th {
+  background: rgba(255, 255, 255, 0.08);
+  padding: 14px 16px;
+  text-align: right;
+  color: rgba(255, 255, 255, 0.8);
+  font-weight: 600;
+  border-bottom: 2px solid rgba(255, 255, 255, 0.1);
+}
+
+.tabela-historico th:first-child {
+  text-align: left;
+}
+
+.tabela-historico td {
+  padding: 14px 16px;
+  text-align: right;
+  color: #fff;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.tabela-historico td:first-child {
+  text-align: left;
+}
+
+.tabela-historico tr:hover {
+  background: rgba(255, 255, 255, 0.03);
+}
+
+.tabela-historico td.positiva {
+  color: #4ade80;
+  font-weight: 600;
+}
+
+.tabela-historico td.negativa {
+  color: #ef4444;
+  font-weight: 600;
+}
+
+.tabela-historico tfoot .total-row {
+  background: rgba(74, 222, 128, 0.1);
+}
+
+.tabela-historico tfoot .total-row td {
+  border-top: 2px solid #4ade80;
+  color: #4ade80;
+}
+
+/* Gráfico de Barras */
+.historico-grafico {
+  background: rgba(255, 255, 255, 0.03);
+  border-radius: 12px;
+  padding: 24px;
+}
+
+.historico-grafico h5 {
+  margin: 0 0 24px 0;
+  color: rgba(255, 255, 255, 0.8);
+  font-size: 1rem;
+  text-align: center;
+}
+
+.barras-container {
+  display: flex;
+  justify-content: space-around;
+  align-items: flex-end;
+  height: 250px;
+  padding: 0 20px;
+}
+
+.barra-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  flex: 1;
+  max-width: 120px;
+}
+
+.barra-valor {
+  font-size: 0.75rem;
+  color: rgba(255, 255, 255, 0.7);
+  margin-bottom: 8px;
+  text-align: center;
+  white-space: nowrap;
+}
+
+.barra-wrapper {
+  width: 60px;
+  height: 180px;
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 8px 8px 0 0;
+  display: flex;
+  align-items: flex-end;
+  overflow: hidden;
+}
+
+.barra {
+  width: 100%;
+  background: linear-gradient(180deg, #4ade80 0%, #22c55e 100%);
+  border-radius: 8px 8px 0 0;
+  transition: height 0.5s ease-out;
+  min-height: 4px;
+}
+
+.barra.selecionado {
+  background: linear-gradient(180deg, #60a5fa 0%, #3b82f6 100%);
+  box-shadow: 0 0 20px rgba(59, 130, 246, 0.4);
+}
+
+.barra-ano {
+  margin-top: 12px;
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: rgba(255, 255, 255, 0.8);
+}
+
+/* Data de Atualização */
+.data-atualizacao {
+  font-size: 0.8rem;
+  color: rgba(255, 255, 255, 0.4);
+  margin-top: 4px;
+}
+
+/* Responsividade para seletor de ano */
+@media (max-width: 768px) {
+  .ano-selector {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  
+  .anos-buttons {
+    flex-wrap: wrap;
+  }
+  
+  .barras-container {
+    height: 200px;
+  }
+  
+  .barra-wrapper {
+    width: 40px;
+    height: 140px;
+  }
+  
+  .barra-valor {
+    font-size: 0.65rem;
+  }
+}
+
+/* Tema Claro */
+[data-theme="light"] .transferencias-dashboard {
+  background: #ffffff;
+  color: #1a2332;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+}
+
+[data-theme="light"] .dashboard-header {
+  border-bottom-color: rgba(0, 0, 0, 0.1);
+}
+
+[data-theme="light"] .header-info h2 {
+  color: #059669;
+}
+
+[data-theme="light"] .municipio-nome {
+  color: #1a2332;
+}
+
+[data-theme="light"] .codigo-ibge {
+  color: rgba(0, 0, 0, 0.5);
+}
+
+[data-theme="light"] .dashboard-tabs .tab {
+  background: rgba(0, 0, 0, 0.03);
+  border-color: rgba(0, 0, 0, 0.1);
+  color: rgba(0, 0, 0, 0.6);
+}
+
+[data-theme="light"] .dashboard-tabs .tab:hover {
+  background: rgba(0, 0, 0, 0.05);
+  color: #1a2332;
+}
+
+[data-theme="light"] .dashboard-tabs .tab.active {
+  background: #059669;
+  color: #fff;
+  border-color: #059669;
+}
+
+[data-theme="light"] .card {
+  background: #f8fafc;
+  border: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+[data-theme="light"] .card-info h3 {
+  color: rgba(0, 0, 0, 0.7);
+}
+
+[data-theme="light"] .card-info .valor {
+  color: #1a2332;
+}
+
+[data-theme="light"] .card-info .detalhe {
+  color: rgba(0, 0, 0, 0.5);
+}
+
+[data-theme="light"] .ano-selector {
+  background: #f1f5f9;
+}
+
+[data-theme="light"] .ano-selector label {
+  color: rgba(0, 0, 0, 0.7);
+}
+
+[data-theme="light"] .ano-btn {
+  background: #fff;
+  border-color: rgba(0, 0, 0, 0.15);
+  color: rgba(0, 0, 0, 0.6);
+}
+
+[data-theme="light"] .ano-btn:hover {
+  background: #f8fafc;
+  color: #1a2332;
+}
+
+[data-theme="light"] .ano-btn.active {
+  background: #059669;
+  color: #fff;
+  border-color: #059669;
+}
+
+[data-theme="light"] .tabela-historico th {
+  background: #f1f5f9;
+  color: rgba(0, 0, 0, 0.8);
+  border-bottom-color: rgba(0, 0, 0, 0.1);
+}
+
+[data-theme="light"] .tabela-historico td {
+  color: #1a2332;
+  border-bottom-color: rgba(0, 0, 0, 0.05);
+}
+
+[data-theme="light"] .tabela-historico tr:hover {
+  background: rgba(0, 0, 0, 0.02);
+}
+
+[data-theme="light"] .historico-grafico {
+  background: #f8fafc;
+}
+
+[data-theme="light"] .historico-grafico h5 {
+  color: rgba(0, 0, 0, 0.8);
+}
+
+[data-theme="light"] .barra-valor {
+  color: rgba(0, 0, 0, 0.6);
+}
+
+[data-theme="light"] .barra-wrapper {
+  background: rgba(0, 0, 0, 0.05);
+}
+
+[data-theme="light"] .barra-ano {
+  color: rgba(0, 0, 0, 0.8);
+}
+
+[data-theme="light"] .total-geral {
+  background: linear-gradient(135deg, #059669 0%, #047857 100%);
+}
+
+[data-theme="light"] .total-geral h3 {
+  color: rgba(255, 255, 255, 0.9);
+}
+
+[data-theme="light"] .total-geral .valor-total {
+  color: #fff;
+}
+
+[data-theme="light"] .fonte-dados {
+  color: rgba(255, 255, 255, 0.7);
+}
+
+[data-theme="light"] .data-atualizacao {
+  color: rgba(255, 255, 255, 0.6);
+}
+
+[data-theme="light"] .beneficio-card,
+[data-theme="light"] .programa-card,
+[data-theme="light"] .resumo-item {
+  background: #f8fafc;
+  border: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+[data-theme="light"] .beneficio-card h4,
+[data-theme="light"] .convenios-lista h4 {
+  color: #1a2332;
+}
+
+[data-theme="light"] .beneficio-dados .label {
+  color: rgba(0, 0, 0, 0.5);
+}
+
+[data-theme="light"] .beneficio-dados .valor {
+  color: #059669;
+}
+
+[data-theme="light"] .tabela-convenios th,
+[data-theme="light"] .tabela-emendas th {
+  background: #f1f5f9;
+  color: rgba(0, 0, 0, 0.7);
+}
+
+[data-theme="light"] .tabela-convenios td,
+[data-theme="light"] .tabela-emendas td {
+  color: #1a2332;
+  border-bottom-color: rgba(0, 0, 0, 0.05);
+}
+
+[data-theme="light"] .resumo-item .numero {
+  color: #059669;
+}
+
+[data-theme="light"] .resumo-item .label {
+  color: rgba(0, 0, 0, 0.5);
+}

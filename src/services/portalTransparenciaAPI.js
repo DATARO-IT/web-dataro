@@ -1,6 +1,8 @@
 /**
  * Serviço de integração REAL com a API do Portal da Transparência
  * https://api.portaldatransparencia.gov.br
+ * 
+ * Coleta dados anuais dos últimos 4 anos (2021-2024) para todos os municípios de Rondônia
  */
 
 const API_BASE_URL = 'https://api.portaldatransparencia.gov.br/api-de-dados';
@@ -8,7 +10,10 @@ const API_BASE_URL = 'https://api.portaldatransparencia.gov.br/api-de-dados';
 // Chave de API - configurada via variável de ambiente ou fallback
 const API_KEY = import.meta.env.VITE_PORTAL_TRANSPARENCIA_API_KEY || 'c59b2392e33174e87d83d561179d7b46';
 
-// Códigos IBGE dos municípios de Rondônia
+// Anos para coleta de dados
+const ANOS_COLETA = [2021, 2022, 2023, 2024];
+
+// Códigos IBGE dos 52 municípios de Rondônia
 export const MUNICIPIOS_RO = {
   'Alta Floresta do Oeste': '1100015',
   'Alto Alegre dos Parecis': '1100379',
@@ -66,7 +71,7 @@ export const MUNICIPIOS_RO = {
 
 // Cache para evitar requisições repetidas
 const cache = new Map();
-const CACHE_DURATION = 5 * 60 * 1000; // 5 minutos
+const CACHE_DURATION = 30 * 60 * 1000; // 30 minutos para dados anuais
 
 /**
  * Função auxiliar para fazer requisições à API com cache
@@ -77,7 +82,6 @@ async function fetchAPI(endpoint, params = {}) {
   // Verificar cache
   const cached = cache.get(cacheKey);
   if (cached && Date.now() - cached.timestamp < CACHE_DURATION) {
-    console.log('Usando dados em cache para:', endpoint);
     return cached.data;
   }
 
@@ -94,7 +98,6 @@ async function fetchAPI(endpoint, params = {}) {
   };
 
   try {
-    console.log('Buscando dados reais de:', url.toString());
     const response = await fetch(url.toString(), { headers });
     
     if (!response.ok) {
@@ -115,132 +118,10 @@ async function fetchAPI(endpoint, params = {}) {
 }
 
 /**
- * Obtém o mês/ano atual no formato YYYYMM
- */
-function getMesAnoAtual() {
-  const now = new Date();
-  // Usar mês anterior pois dados do mês atual podem não estar disponíveis
-  now.setMonth(now.getMonth() - 1);
-  const ano = now.getFullYear();
-  const mes = String(now.getMonth() + 1).padStart(2, '0');
-  return `${ano}${mes}`;
-}
-
-/**
- * Obtém o ano atual
- */
-function getAnoAtual() {
-  return new Date().getFullYear();
-}
-
-/**
- * Consulta dados do Bolsa Família por município
- */
-export async function getBolsaFamiliaPorMunicipio(codigoIbge, mesAno = getMesAnoAtual()) {
-  try {
-    const data = await fetchAPI('/novo-bolsa-familia-por-municipio', {
-      codigoIbge,
-      mesAno,
-      pagina: 1
-    });
-    return data;
-  } catch (error) {
-    console.error('Erro ao buscar Bolsa Família:', error);
-    return [];
-  }
-}
-
-/**
- * Consulta dados do BPC por município
- */
-export async function getBPCPorMunicipio(codigoIbge, mesAno = getMesAnoAtual()) {
-  try {
-    const data = await fetchAPI('/bpc-por-municipio', {
-      codigoIbge,
-      mesAno,
-      pagina: 1
-    });
-    return data;
-  } catch (error) {
-    console.error('Erro ao buscar BPC:', error);
-    return [];
-  }
-}
-
-/**
- * Consulta dados do Auxílio Brasil / Bolsa Família por município (endpoint alternativo)
- */
-export async function getAuxilioBrasilPorMunicipio(codigoIbge, mesAno = getMesAnoAtual()) {
-  try {
-    const data = await fetchAPI('/auxilio-brasil-por-municipio', {
-      codigoIbge,
-      mesAno,
-      pagina: 1
-    });
-    return data;
-  } catch (error) {
-    console.error('Erro ao buscar Auxílio Brasil:', error);
-    return [];
-  }
-}
-
-/**
- * Consulta convênios por município
- */
-export async function getConveniosPorMunicipio(codigoIbge) {
-  try {
-    const data = await fetchAPI('/convenios', {
-      codigoIBGE: codigoIbge,
-      pagina: 1,
-      quantidade: 100
-    });
-    return data;
-  } catch (error) {
-    console.error('Erro ao buscar convênios:', error);
-    return [];
-  }
-}
-
-/**
- * Consulta emendas parlamentares por ano
- */
-export async function getEmendasParlamentares(ano = getAnoAtual()) {
-  try {
-    const data = await fetchAPI('/emendas', {
-      ano,
-      pagina: 1,
-      quantidade: 500
-    });
-    return data;
-  } catch (error) {
-    console.error('Erro ao buscar emendas:', error);
-    return [];
-  }
-}
-
-/**
- * Consulta transferências por favorecido (CNPJ do município)
- */
-export async function getTransferenciasPorFavorecido(cnpj, ano = getAnoAtual()) {
-  try {
-    const data = await fetchAPI('/despesas/recursos-recebidos', {
-      cpfCnpj: cnpj,
-      ano,
-      pagina: 1
-    });
-    return data;
-  } catch (error) {
-    console.error('Erro ao buscar transferências:', error);
-    return [];
-  }
-}
-
-/**
  * Função auxiliar para normalizar nome de município
  */
 function normalizarNomeMunicipio(nome) {
   if (!nome) return '';
-  // Converter para minúsculas e remover acentos para comparação
   return nome.toLowerCase()
     .normalize('NFD')
     .replace(/[\u0300-\u036f]/g, '')
@@ -251,12 +132,10 @@ function normalizarNomeMunicipio(nome) {
  * Função auxiliar para encontrar código IBGE do município (case-insensitive)
  */
 function encontrarCodigoIBGE(municipio) {
-  // Primeiro tenta busca direta
   if (MUNICIPIOS_RO[municipio]) {
     return { codigo: MUNICIPIOS_RO[municipio], nome: municipio };
   }
   
-  // Busca case-insensitive
   const municipioNormalizado = normalizarNomeMunicipio(municipio);
   
   for (const [nome, codigo] of Object.entries(MUNICIPIOS_RO)) {
@@ -269,7 +148,107 @@ function encontrarCodigoIBGE(municipio) {
 }
 
 /**
- * Busca dados completos de transferências para um município
+ * Consulta dados do Bolsa Família por município e ano
+ * Busca dados de todos os meses do ano e soma
+ */
+export async function getBolsaFamiliaPorAno(codigoIbge, ano) {
+  let totalValor = 0;
+  let totalBeneficiarios = 0;
+  
+  // Buscar dados de dezembro (acumulado do ano) ou último mês disponível
+  const meses = ano === 2024 ? [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11] : [12];
+  
+  for (const mes of meses) {
+    const mesFormatado = String(mes).padStart(2, '0');
+    try {
+      const data = await fetchAPI('/novo-bolsa-familia-por-municipio', {
+        codigoIbge,
+        mesAno: `${ano}${mesFormatado}`,
+        pagina: 1
+      });
+      
+      if (Array.isArray(data) && data.length > 0) {
+        data.forEach(item => {
+          totalValor += item.valor || 0;
+          totalBeneficiarios = Math.max(totalBeneficiarios, item.quantidadeBeneficiados || 0);
+        });
+        // Se encontrou dados, não precisa buscar outros meses
+        if (meses.length === 1) break;
+      }
+    } catch (error) {
+      // Continua para o próximo mês
+    }
+  }
+  
+  return { valor: totalValor, beneficiarios: totalBeneficiarios };
+}
+
+/**
+ * Consulta dados do BPC por município e ano
+ */
+export async function getBPCPorAno(codigoIbge, ano) {
+  let totalValor = 0;
+  let totalBeneficiarios = 0;
+  
+  const mes = ano === 2024 ? '11' : '12';
+  
+  try {
+    const data = await fetchAPI('/bpc-por-municipio', {
+      codigoIbge,
+      mesAno: `${ano}${mes}`,
+      pagina: 1
+    });
+    
+    if (Array.isArray(data) && data.length > 0) {
+      data.forEach(item => {
+        totalValor += item.valor || 0;
+        totalBeneficiarios += item.quantidadeBeneficiados || 0;
+      });
+    }
+  } catch (error) {
+    console.error(`Erro ao buscar BPC ${ano}:`, error);
+  }
+  
+  return { valor: totalValor, beneficiarios: totalBeneficiarios };
+}
+
+/**
+ * Consulta convênios por município (todos os anos)
+ */
+export async function getConveniosPorMunicipio(codigoIbge) {
+  try {
+    const data = await fetchAPI('/convenios', {
+      codigoIBGE: codigoIbge,
+      pagina: 1,
+      quantidade: 500
+    });
+    return Array.isArray(data) ? data : [];
+  } catch (error) {
+    console.error('Erro ao buscar convênios:', error);
+    return [];
+  }
+}
+
+/**
+ * Consulta emendas parlamentares por UF e ano
+ */
+export async function getEmendasPorUF(ano) {
+  try {
+    const data = await fetchAPI('/emendas', {
+      ano,
+      uf: 'RO',
+      pagina: 1,
+      quantidade: 500
+    });
+    return Array.isArray(data) ? data : [];
+  } catch (error) {
+    console.error('Erro ao buscar emendas:', error);
+    return [];
+  }
+}
+
+/**
+ * Busca dados completos de transferências para um município - TODOS OS ANOS
  */
 export async function getDadosCompletosMunicipio(municipio) {
   const resultado = encontrarCodigoIBGE(municipio);
@@ -280,53 +259,125 @@ export async function getDadosCompletosMunicipio(municipio) {
   }
   
   const { codigo: codigoIbge, nome: nomeMunicipio } = resultado;
-  console.log('Código IBGE encontrado:', codigoIbge, 'para município:', nomeMunicipio);
-
-  const mesAno = getMesAnoAtual();
-  const ano = getAnoAtual();
+  console.log('Buscando dados históricos para:', nomeMunicipio, '- Código IBGE:', codigoIbge);
 
   try {
-    // Buscar dados em paralelo para melhor performance
-    const [bolsaFamilia, bpc, convenios] = await Promise.all([
-      getBolsaFamiliaPorMunicipio(codigoIbge, mesAno).catch(() => []),
-      getBPCPorMunicipio(codigoIbge, mesAno).catch(() => []),
-      getConveniosPorMunicipio(codigoIbge).catch(() => [])
-    ]);
-
-    // Processar dados do Bolsa Família
-    let totalBolsaFamilia = 0;
-    let beneficiariosBolsaFamilia = 0;
-    if (Array.isArray(bolsaFamilia) && bolsaFamilia.length > 0) {
-      bolsaFamilia.forEach(item => {
-        totalBolsaFamilia += item.valor || 0;
-        beneficiariosBolsaFamilia += item.quantidadeBeneficiados || 1;
-      });
-    }
-
-    // Processar dados do BPC
-    let totalBPC = 0;
-    let beneficiariosBPC = 0;
-    if (Array.isArray(bpc) && bpc.length > 0) {
-      bpc.forEach(item => {
-        totalBPC += item.valor || 0;
-        beneficiariosBPC += item.quantidadeBeneficiados || 1;
-      });
-    }
-
-    // Processar convênios
-    let totalConvenios = 0;
-    let conveniosAtivos = 0;
-    let conveniosEmExecucao = 0;
-    const listaConvenios = [];
+    // Buscar convênios (não depende de ano)
+    const todosConvenios = await getConveniosPorMunicipio(codigoIbge);
     
-    if (Array.isArray(convenios) && convenios.length > 0) {
-      convenios.forEach(conv => {
-        totalConvenios += conv.valorGlobal || conv.valor || 0;
-        conveniosAtivos++;
-        if (conv.situacao && conv.situacao.toLowerCase().includes('execu')) {
-          conveniosEmExecucao++;
+    // Organizar dados por ano
+    const dadosPorAno = {};
+    
+    for (const ano of ANOS_COLETA) {
+      console.log(`Buscando dados de ${nomeMunicipio} para ${ano}...`);
+      
+      // Buscar Bolsa Família e BPC do ano
+      const [bolsaFamilia, bpc] = await Promise.all([
+        getBolsaFamiliaPorAno(codigoIbge, ano).catch(() => ({ valor: 0, beneficiarios: 0 })),
+        getBPCPorAno(codigoIbge, ano).catch(() => ({ valor: 0, beneficiarios: 0 }))
+      ]);
+      
+      // Filtrar convênios por ano
+      const conveniosAno = todosConvenios.filter(conv => {
+        const dataInicio = conv.dataInicioVigencia || conv.dataInicio;
+        if (!dataInicio) return false;
+        const anoConvenio = new Date(dataInicio).getFullYear();
+        return anoConvenio === ano;
+      });
+      
+      const totalConveniosAno = conveniosAno.reduce((acc, conv) => 
+        acc + (conv.valorGlobal || conv.valor || 0), 0);
+      
+      dadosPorAno[ano] = {
+        bolsaFamilia: {
+          valor: bolsaFamilia.valor,
+          beneficiarios: bolsaFamilia.beneficiarios
+        },
+        bpc: {
+          valor: bpc.valor,
+          beneficiarios: bpc.beneficiarios
+        },
+        fnde: { valor: 0, programas: ['PDDE', 'PNAE', 'PNATE'] },
+        fns: { valor: 0, programas: ['PAB', 'MAC', 'ESF'] },
+        convenios: {
+          valor: totalConveniosAno,
+          quantidade: conveniosAno.length,
+          lista: conveniosAno.map(conv => ({
+            numero: conv.numero || conv.numeroConvenio || 'N/A',
+            objeto: conv.objeto || 'Não informado',
+            valorTotal: conv.valorGlobal || conv.valor || 0,
+            valorLiberado: conv.valorLiberado || 0,
+            situacao: conv.situacao || 'Não informado',
+            orgao: conv.orgaoSuperior || conv.orgao || 'Não informado',
+            dataInicio: conv.dataInicioVigencia || conv.dataInicio,
+            dataFim: conv.dataFimVigencia || conv.dataFim
+          }))
+        },
+        emendas: { valor: 0, quantidade: 0, lista: [] }
+      };
+    }
+    
+    // Calcular totais e variações
+    const anoAtual = 2024;
+    const anoAnterior = 2023;
+    
+    const calcularVariacao = (valorAtual, valorAnterior) => {
+      if (!valorAnterior || valorAnterior === 0) return '0.0';
+      return ((valorAtual - valorAnterior) / valorAnterior * 100).toFixed(1);
+    };
+    
+    const dadosAtuais = dadosPorAno[anoAtual] || {};
+    const dadosAnteriores = dadosPorAno[anoAnterior] || {};
+    
+    // Calcular total de todos os convênios (todos os anos)
+    const totalGeralConvenios = todosConvenios.reduce((acc, conv) => 
+      acc + (conv.valorGlobal || conv.valor || 0), 0);
+    
+    const conveniosAtivos = todosConvenios.filter(conv => 
+      conv.situacao && !conv.situacao.toLowerCase().includes('conclu')).length;
+    
+    const conveniosEmExecucao = todosConvenios.filter(conv => 
+      conv.situacao && conv.situacao.toLowerCase().includes('execu')).length;
+
+    return {
+      municipio: nomeMunicipio,
+      codigoIbge,
+      dadosReais: true,
+      anosDisponiveis: ANOS_COLETA,
+      dadosPorAno,
+      resumo: {
+        anoReferencia: anoAtual,
+        bolsaFamilia: {
+          valor: dadosAtuais.bolsaFamilia?.valor || 0,
+          beneficiarios: dadosAtuais.bolsaFamilia?.beneficiarios || 0,
+          variacao: calcularVariacao(
+            dadosAtuais.bolsaFamilia?.valor || 0,
+            dadosAnteriores.bolsaFamilia?.valor || 0
+          )
+        },
+        bpc: {
+          valor: dadosAtuais.bpc?.valor || 0,
+          beneficiarios: dadosAtuais.bpc?.beneficiarios || 0,
+          variacao: calcularVariacao(
+            dadosAtuais.bpc?.valor || 0,
+            dadosAnteriores.bpc?.valor || 0
+          )
+        },
+        fnde: {
+          valor: dadosAtuais.fnde?.valor || 0,
+          variacao: '0.0'
+        },
+        fns: {
+          valor: dadosAtuais.fns?.valor || 0,
+          variacao: '0.0'
         }
-        listaConvenios.push({
+      },
+      convenios: {
+        totalGeral: totalGeralConvenios,
+        ativos: conveniosAtivos,
+        emExecucao: conveniosEmExecucao,
+        quantidade: todosConvenios.length,
+        lista: todosConvenios.slice(0, 20).map(conv => ({
           numero: conv.numero || conv.numeroConvenio || 'N/A',
           objeto: conv.objeto || 'Não informado',
           valorTotal: conv.valorGlobal || conv.valor || 0,
@@ -335,56 +386,68 @@ export async function getDadosCompletosMunicipio(municipio) {
           orgao: conv.orgaoSuperior || conv.orgao || 'Não informado',
           dataInicio: conv.dataInicioVigencia || conv.dataInicio,
           dataFim: conv.dataFimVigencia || conv.dataFim
-        });
-      });
-    }
-
-    return {
-      municipio,
-      codigoIbge,
-      periodo: `${mesAno.substring(0, 4)}/${mesAno.substring(4, 6)}`,
-      dadosReais: true,
-      transferencias: {
-        bolsaFamilia: {
-          valor: totalBolsaFamilia,
-          beneficiarios: beneficiariosBolsaFamilia,
-          variacao: '0.0', // Calcular comparando com mês anterior
-          dadosOriginais: bolsaFamilia
-        },
-        bpc: {
-          valor: totalBPC,
-          beneficiarios: beneficiariosBPC,
-          variacao: '0.0',
-          dadosOriginais: bpc
-        },
-        fnde: {
-          valor: 0, // FNDE requer API específica
-          programas: ['PDDE', 'PNAE', 'PNATE'],
-          variacao: '0.0'
-        },
-        fns: {
-          valor: 0, // FNS requer API específica
-          programas: ['PAB', 'MAC', 'ESF'],
-          variacao: '0.0'
-        }
-      },
-      convenios: {
-        ativos: conveniosAtivos,
-        valorTotal: totalConvenios,
-        emExecucao: conveniosEmExecucao,
-        lista: listaConvenios
+        }))
       },
       emendas: {
-        quantidade: 0, // Emendas requer processamento adicional
-        valorTotal: 0,
-        empenhado: 0,
-        pago: 0
-      }
+        quantidade: 0,
+        valorTotal: 0
+      },
+      dataAtualizacao: new Date().toISOString()
     };
   } catch (error) {
     console.error('Erro ao buscar dados completos:', error);
     return null;
   }
+}
+
+/**
+ * Busca dados de todos os municípios de Rondônia
+ * Útil para sincronização com banco de dados
+ */
+export async function getDadosTodosMunicipios(progressCallback = null) {
+  const resultados = [];
+  const municipios = Object.keys(MUNICIPIOS_RO);
+  
+  for (let i = 0; i < municipios.length; i++) {
+    const municipio = municipios[i];
+    
+    if (progressCallback) {
+      progressCallback({
+        atual: i + 1,
+        total: municipios.length,
+        municipio,
+        percentual: Math.round(((i + 1) / municipios.length) * 100)
+      });
+    }
+    
+    try {
+      const dados = await getDadosCompletosMunicipio(municipio);
+      if (dados) {
+        resultados.push(dados);
+      }
+      
+      // Pequeno delay para não sobrecarregar a API
+      await new Promise(resolve => setTimeout(resolve, 500));
+    } catch (error) {
+      console.error(`Erro ao buscar dados de ${municipio}:`, error);
+    }
+  }
+  
+  return resultados;
+}
+
+/**
+ * Retorna os anos disponíveis para coleta
+ */
+export function getAnosDisponiveis() {
+  return ANOS_COLETA;
+}
+
+/**
+ * Retorna lista de municípios
+ */
+export function getMunicipiosRO() {
+  return MUNICIPIOS_RO;
 }
 
 /**
@@ -396,13 +459,14 @@ export function limparCache() {
 }
 
 export default {
-  getBolsaFamiliaPorMunicipio,
-  getBPCPorMunicipio,
-  getAuxilioBrasilPorMunicipio,
-  getConveniosPorMunicipio,
-  getEmendasParlamentares,
-  getTransferenciasPorFavorecido,
   getDadosCompletosMunicipio,
+  getDadosTodosMunicipios,
+  getBolsaFamiliaPorAno,
+  getBPCPorAno,
+  getConveniosPorMunicipio,
+  getEmendasPorUF,
+  getAnosDisponiveis,
+  getMunicipiosRO,
   limparCache,
   MUNICIPIOS_RO
 };

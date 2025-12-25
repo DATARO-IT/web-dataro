@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import { getDadosCompletosMunicipio, MUNICIPIOS_RO } from '../../services/portalTransparenciaAPI';
+import { getDadosCompletosMunicipio, MUNICIPIOS_RO, getAnosDisponiveis } from '../../services/portalTransparenciaAPI';
+import { getDadosMunicipio, sincronizarTodosMunicipios } from '../../services/supabaseTransferenciasService';
 import { 
   getMockTransferencias, 
   getMockBeneficiosSociais, 
@@ -21,9 +22,14 @@ const TransferenciasDashboard = ({ municipio, onClose }) => {
   const [loading, setLoading] = useState(true);
   const [usandoDadosReais, setUsandoDadosReais] = useState(false);
   const [erro, setErro] = useState(null);
+  const [anoSelecionado, setAnoSelecionado] = useState(2024);
+  const [anosDisponiveis, setAnosDisponiveis] = useState([2021, 2022, 2023, 2024]);
+  const [sincronizando, setSincronizando] = useState(false);
+  const [progressoSync, setProgressoSync] = useState(null);
 
   useEffect(() => {
     carregarDados();
+    setAnosDisponiveis(getAnosDisponiveis());
   }, [municipio]);
 
   const carregarDados = async () => {
@@ -31,9 +37,16 @@ const TransferenciasDashboard = ({ municipio, onClose }) => {
     setErro(null);
     
     try {
-      // Tentar buscar dados reais da API do Portal da Transparência
-      console.log('Buscando dados reais para:', municipio);
-      const dadosReais = await getDadosCompletosMunicipio(municipio);
+      // Primeiro tentar buscar do Supabase (cache)
+      console.log('Buscando dados para:', municipio);
+      let dadosReais = null;
+      
+      try {
+        dadosReais = await getDadosMunicipio(municipio);
+      } catch (e) {
+        console.log('Erro ao buscar do Supabase, tentando API direta...');
+        dadosReais = await getDadosCompletosMunicipio(municipio);
+      }
       
       if (dadosReais && dadosReais.dadosReais) {
         console.log('Dados reais obtidos com sucesso!');
@@ -45,8 +58,8 @@ const TransferenciasDashboard = ({ municipio, onClose }) => {
           setConvenios({
             municipio,
             codigoIbge: dadosReais.codigoIbge,
-            totalConvenios: dadosReais.convenios.ativos,
-            valorTotalConvenios: dadosReais.convenios.valorTotal,
+            totalConvenios: dadosReais.convenios.quantidade || dadosReais.convenios.ativos,
+            valorTotalConvenios: dadosReais.convenios.totalGeral || dadosReais.convenios.valorTotal,
             convenios: dadosReais.convenios.lista
           });
         } else {
@@ -85,6 +98,15 @@ const TransferenciasDashboard = ({ municipio, onClose }) => {
     }
   };
 
+  // Função para obter dados do ano selecionado
+  const getDadosAno = (ano) => {
+    if (!dados || !dados.dadosPorAno) return null;
+    return dados.dadosPorAno[ano];
+  };
+
+  // Dados do ano selecionado
+  const dadosAnoAtual = getDadosAno(anoSelecionado);
+
   const formatarMoeda = (valor) => {
     return new Intl.NumberFormat('pt-BR', {
       style: 'currency',
@@ -96,6 +118,21 @@ const TransferenciasDashboard = ({ municipio, onClose }) => {
 
   const formatarNumero = (numero) => {
     return new Intl.NumberFormat('pt-BR').format(numero || 0);
+  };
+
+  // Calcular variação entre anos
+  const calcularVariacao = (anoAtual, anoAnterior, campo) => {
+    const dadosAtual = getDadosAno(anoAtual);
+    const dadosAnterior = getDadosAno(anoAnterior);
+    
+    if (!dadosAtual || !dadosAnterior) return null;
+    
+    const valorAtual = dadosAtual[campo]?.valor || 0;
+    const valorAnterior = dadosAnterior[campo]?.valor || 0;
+    
+    if (valorAnterior === 0) return null;
+    
+    return ((valorAtual - valorAnterior) / valorAnterior * 100).toFixed(1);
   };
 
   if (loading) {
@@ -132,12 +169,34 @@ const TransferenciasDashboard = ({ municipio, onClose }) => {
         </div>
       )}
 
+      {/* Seletor de Ano */}
+      <div className="ano-selector">
+        <label>Ano de Referência:</label>
+        <div className="anos-buttons">
+          {anosDisponiveis.map(ano => (
+            <button
+              key={ano}
+              className={`ano-btn ${anoSelecionado === ano ? 'active' : ''}`}
+              onClick={() => setAnoSelecionado(ano)}
+            >
+              {ano}
+            </button>
+          ))}
+        </div>
+      </div>
+
       <div className="dashboard-tabs">
         <button 
           className={`tab ${activeTab === 'resumo' ? 'active' : ''}`}
           onClick={() => setActiveTab('resumo')}
         >
           📈 Resumo
+        </button>
+        <button 
+          className={`tab ${activeTab === 'historico' ? 'active' : ''}`}
+          onClick={() => setActiveTab('historico')}
+        >
+          📊 Histórico
         </button>
         <button 
           className={`tab ${activeTab === 'beneficios' ? 'active' : ''}`}
@@ -166,18 +225,32 @@ const TransferenciasDashboard = ({ municipio, onClose }) => {
       </div>
 
       <div className="dashboard-content">
-        {activeTab === 'resumo' && dados && (
+        {activeTab === 'resumo' && (
           <div className="tab-content resumo">
             <div className="cards-grid">
               <div className="card card-bolsa-familia">
                 <div className="card-icon">👨‍👩‍👧‍👦</div>
                 <div className="card-info">
                   <h3>Bolsa Família</h3>
-                  <p className="valor">{formatarMoeda(dados.transferencias?.bolsaFamilia?.valor)}</p>
-                  <span className="detalhe">{formatarNumero(dados.transferencias?.bolsaFamilia?.beneficiarios)} beneficiários</span>
-                  {dados.transferencias?.bolsaFamilia?.variacao && (
-                    <span className={`variacao ${parseFloat(dados.transferencias.bolsaFamilia.variacao) >= 0 ? 'positiva' : 'negativa'}`}>
-                      {parseFloat(dados.transferencias.bolsaFamilia.variacao) >= 0 ? '↑' : '↓'} {dados.transferencias.bolsaFamilia.variacao}%
+                  <p className="valor">
+                    {formatarMoeda(
+                      dadosAnoAtual?.bolsaFamilia?.valor || 
+                      dados?.transferencias?.bolsaFamilia?.valor || 
+                      dados?.resumo?.bolsaFamilia?.valor
+                    )}
+                  </p>
+                  <span className="detalhe">
+                    {formatarNumero(
+                      dadosAnoAtual?.bolsaFamilia?.beneficiarios || 
+                      dados?.transferencias?.bolsaFamilia?.beneficiarios ||
+                      dados?.resumo?.bolsaFamilia?.beneficiarios
+                    )} beneficiários
+                  </span>
+                  {anoSelecionado > 2021 && (
+                    <span className={`variacao ${parseFloat(calcularVariacao(anoSelecionado, anoSelecionado - 1, 'bolsaFamilia') || 0) >= 0 ? 'positiva' : 'negativa'}`}>
+                      {calcularVariacao(anoSelecionado, anoSelecionado - 1, 'bolsaFamilia') ? 
+                        `${parseFloat(calcularVariacao(anoSelecionado, anoSelecionado - 1, 'bolsaFamilia')) >= 0 ? '↑' : '↓'} ${calcularVariacao(anoSelecionado, anoSelecionado - 1, 'bolsaFamilia')}% vs ${anoSelecionado - 1}` 
+                        : ''}
                     </span>
                   )}
                 </div>
@@ -187,11 +260,25 @@ const TransferenciasDashboard = ({ municipio, onClose }) => {
                 <div className="card-icon">🧓</div>
                 <div className="card-info">
                   <h3>BPC</h3>
-                  <p className="valor">{formatarMoeda(dados.transferencias?.bpc?.valor)}</p>
-                  <span className="detalhe">{formatarNumero(dados.transferencias?.bpc?.beneficiarios)} beneficiários</span>
-                  {dados.transferencias?.bpc?.variacao && (
-                    <span className={`variacao ${parseFloat(dados.transferencias.bpc.variacao) >= 0 ? 'positiva' : 'negativa'}`}>
-                      {parseFloat(dados.transferencias.bpc.variacao) >= 0 ? '↑' : '↓'} {dados.transferencias.bpc.variacao}%
+                  <p className="valor">
+                    {formatarMoeda(
+                      dadosAnoAtual?.bpc?.valor || 
+                      dados?.transferencias?.bpc?.valor ||
+                      dados?.resumo?.bpc?.valor
+                    )}
+                  </p>
+                  <span className="detalhe">
+                    {formatarNumero(
+                      dadosAnoAtual?.bpc?.beneficiarios || 
+                      dados?.transferencias?.bpc?.beneficiarios ||
+                      dados?.resumo?.bpc?.beneficiarios
+                    )} beneficiários
+                  </span>
+                  {anoSelecionado > 2021 && (
+                    <span className={`variacao ${parseFloat(calcularVariacao(anoSelecionado, anoSelecionado - 1, 'bpc') || 0) >= 0 ? 'positiva' : 'negativa'}`}>
+                      {calcularVariacao(anoSelecionado, anoSelecionado - 1, 'bpc') ? 
+                        `${parseFloat(calcularVariacao(anoSelecionado, anoSelecionado - 1, 'bpc')) >= 0 ? '↑' : '↓'} ${calcularVariacao(anoSelecionado, anoSelecionado - 1, 'bpc')}% vs ${anoSelecionado - 1}` 
+                        : ''}
                     </span>
                   )}
                 </div>
@@ -201,13 +288,14 @@ const TransferenciasDashboard = ({ municipio, onClose }) => {
                 <div className="card-icon">📚</div>
                 <div className="card-info">
                   <h3>FNDE (Educação)</h3>
-                  <p className="valor">{formatarMoeda(dados.transferencias?.fnde?.valor)}</p>
-                  <span className="detalhe">{dados.transferencias?.fnde?.programas?.join(', ') || 'PDDE, PNAE, PNATE'}</span>
-                  {dados.transferencias?.fnde?.variacao && (
-                    <span className={`variacao ${parseFloat(dados.transferencias.fnde.variacao) >= 0 ? 'positiva' : 'negativa'}`}>
-                      {parseFloat(dados.transferencias.fnde.variacao) >= 0 ? '↑' : '↓'} {dados.transferencias.fnde.variacao}%
-                    </span>
-                  )}
+                  <p className="valor">
+                    {formatarMoeda(
+                      dadosAnoAtual?.fnde?.valor || 
+                      dados?.transferencias?.fnde?.valor ||
+                      dados?.resumo?.fnde?.valor
+                    )}
+                  </p>
+                  <span className="detalhe">PDDE, PNAE, PNATE</span>
                 </div>
               </div>
 
@@ -215,22 +303,31 @@ const TransferenciasDashboard = ({ municipio, onClose }) => {
                 <div className="card-icon">🏥</div>
                 <div className="card-info">
                   <h3>FNS (Saúde)</h3>
-                  <p className="valor">{formatarMoeda(dados.transferencias?.fns?.valor)}</p>
-                  <span className="detalhe">{dados.transferencias?.fns?.programas?.join(', ') || 'PAB, MAC, ESF'}</span>
-                  {dados.transferencias?.fns?.variacao && (
-                    <span className={`variacao ${parseFloat(dados.transferencias.fns.variacao) >= 0 ? 'positiva' : 'negativa'}`}>
-                      {parseFloat(dados.transferencias.fns.variacao) >= 0 ? '↑' : '↓'} {dados.transferencias.fns.variacao}%
-                    </span>
-                  )}
+                  <p className="valor">
+                    {formatarMoeda(
+                      dadosAnoAtual?.fns?.valor || 
+                      dados?.transferencias?.fns?.valor ||
+                      dados?.resumo?.fns?.valor
+                    )}
+                  </p>
+                  <span className="detalhe">PAB, MAC, ESF</span>
                 </div>
               </div>
 
               <div className="card card-convenios">
                 <div className="card-icon">📝</div>
                 <div className="card-info">
-                  <h3>Convênios</h3>
-                  <p className="valor">{formatarMoeda(dados.convenios?.valorTotal)}</p>
-                  <span className="detalhe">{dados.convenios?.ativos || 0} ativos ({dados.convenios?.emExecucao || 0} em execução)</span>
+                  <h3>Convênios ({anoSelecionado})</h3>
+                  <p className="valor">
+                    {formatarMoeda(
+                      dadosAnoAtual?.convenios?.valor || 
+                      dados?.convenios?.totalGeral ||
+                      dados?.convenios?.valorTotal
+                    )}
+                  </p>
+                  <span className="detalhe">
+                    {dadosAnoAtual?.convenios?.quantidade || dados?.convenios?.quantidade || dados?.convenios?.ativos || 0} convênios
+                  </span>
                 </div>
               </div>
 
@@ -238,36 +335,154 @@ const TransferenciasDashboard = ({ municipio, onClose }) => {
                 <div className="card-icon">🏛️</div>
                 <div className="card-info">
                   <h3>Emendas Parlamentares</h3>
-                  <p className="valor">{formatarMoeda(dados.emendas?.valorTotal)}</p>
-                  <span className="detalhe">{dados.emendas?.quantidade || 0} emendas</span>
-                  {dados.emendas?.valorTotal > 0 && (
-                    <>
-                      <div className="barra-progresso">
-                        <div className="progresso empenhado" style={{width: `${(dados.emendas.empenhado / dados.emendas.valorTotal) * 100}%`}}></div>
-                        <div className="progresso pago" style={{width: `${(dados.emendas.pago / dados.emendas.valorTotal) * 100}%`}}></div>
-                      </div>
-                      <span className="legenda-barra">Pago: {formatarMoeda(dados.emendas.pago)}</span>
-                    </>
-                  )}
+                  <p className="valor">
+                    {formatarMoeda(
+                      dadosAnoAtual?.emendas?.valor || 
+                      dados?.emendas?.valorTotal
+                    )}
+                  </p>
+                  <span className="detalhe">
+                    {dadosAnoAtual?.emendas?.quantidade || dados?.emendas?.quantidade || 0} emendas
+                  </span>
                 </div>
               </div>
             </div>
 
             <div className="total-geral">
-              <h3>Total de Transferências Federais ({dados.periodo || '2024'})</h3>
+              <h3>Total de Transferências Federais ({anoSelecionado})</h3>
               <p className="valor-total">
                 {formatarMoeda(
-                  (dados.transferencias?.bolsaFamilia?.valor || 0) +
-                  (dados.transferencias?.bpc?.valor || 0) +
-                  (dados.transferencias?.fnde?.valor || 0) +
-                  (dados.transferencias?.fns?.valor || 0) +
-                  (dados.convenios?.valorTotal || 0) +
-                  (dados.emendas?.valorTotal || 0)
+                  (dadosAnoAtual?.bolsaFamilia?.valor || dados?.transferencias?.bolsaFamilia?.valor || dados?.resumo?.bolsaFamilia?.valor || 0) +
+                  (dadosAnoAtual?.bpc?.valor || dados?.transferencias?.bpc?.valor || dados?.resumo?.bpc?.valor || 0) +
+                  (dadosAnoAtual?.fnde?.valor || dados?.transferencias?.fnde?.valor || dados?.resumo?.fnde?.valor || 0) +
+                  (dadosAnoAtual?.fns?.valor || dados?.transferencias?.fns?.valor || dados?.resumo?.fns?.valor || 0) +
+                  (dadosAnoAtual?.convenios?.valor || dados?.convenios?.totalGeral || dados?.convenios?.valorTotal || 0) +
+                  (dadosAnoAtual?.emendas?.valor || dados?.emendas?.valorTotal || 0)
                 )}
               </p>
               {usandoDadosReais && (
                 <p className="fonte-dados">Fonte: Portal da Transparência do Governo Federal</p>
               )}
+              {dados?.dataAtualizacao && (
+                <p className="data-atualizacao">
+                  Última atualização: {new Date(dados.dataAtualizacao).toLocaleString('pt-BR')}
+                </p>
+              )}
+            </div>
+          </div>
+        )}
+
+        {/* Nova aba de Histórico */}
+        {activeTab === 'historico' && dados?.dadosPorAno && (
+          <div className="tab-content historico">
+            <h4>📊 Evolução das Transferências (2021-2024)</h4>
+            
+            <div className="historico-tabela">
+              <table className="tabela-historico">
+                <thead>
+                  <tr>
+                    <th>Programa</th>
+                    {anosDisponiveis.map(ano => (
+                      <th key={ano}>{ano}</th>
+                    ))}
+                    <th>Variação</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><strong>👨‍👩‍👧‍👦 Bolsa Família</strong></td>
+                    {anosDisponiveis.map(ano => (
+                      <td key={ano}>{formatarMoeda(dados.dadosPorAno[ano]?.bolsaFamilia?.valor)}</td>
+                    ))}
+                    <td className={parseFloat(calcularVariacao(2024, 2021, 'bolsaFamilia') || 0) >= 0 ? 'positiva' : 'negativa'}>
+                      {calcularVariacao(2024, 2021, 'bolsaFamilia') ? `${calcularVariacao(2024, 2021, 'bolsaFamilia')}%` : '-'}
+                    </td>
+                  </tr>
+                  <tr>
+                    <td><strong>🧓 BPC</strong></td>
+                    {anosDisponiveis.map(ano => (
+                      <td key={ano}>{formatarMoeda(dados.dadosPorAno[ano]?.bpc?.valor)}</td>
+                    ))}
+                    <td className={parseFloat(calcularVariacao(2024, 2021, 'bpc') || 0) >= 0 ? 'positiva' : 'negativa'}>
+                      {calcularVariacao(2024, 2021, 'bpc') ? `${calcularVariacao(2024, 2021, 'bpc')}%` : '-'}
+                    </td>
+                  </tr>
+                  <tr>
+                    <td><strong>📚 FNDE</strong></td>
+                    {anosDisponiveis.map(ano => (
+                      <td key={ano}>{formatarMoeda(dados.dadosPorAno[ano]?.fnde?.valor)}</td>
+                    ))}
+                    <td>-</td>
+                  </tr>
+                  <tr>
+                    <td><strong>🏥 FNS</strong></td>
+                    {anosDisponiveis.map(ano => (
+                      <td key={ano}>{formatarMoeda(dados.dadosPorAno[ano]?.fns?.valor)}</td>
+                    ))}
+                    <td>-</td>
+                  </tr>
+                  <tr>
+                    <td><strong>📝 Convênios</strong></td>
+                    {anosDisponiveis.map(ano => (
+                      <td key={ano}>{formatarMoeda(dados.dadosPorAno[ano]?.convenios?.valor)}</td>
+                    ))}
+                    <td className={parseFloat(calcularVariacao(2024, 2021, 'convenios') || 0) >= 0 ? 'positiva' : 'negativa'}>
+                      {calcularVariacao(2024, 2021, 'convenios') ? `${calcularVariacao(2024, 2021, 'convenios')}%` : '-'}
+                    </td>
+                  </tr>
+                </tbody>
+                <tfoot>
+                  <tr className="total-row">
+                    <td><strong>TOTAL</strong></td>
+                    {anosDisponiveis.map(ano => {
+                      const dadosAno = dados.dadosPorAno[ano];
+                      const total = (dadosAno?.bolsaFamilia?.valor || 0) +
+                                   (dadosAno?.bpc?.valor || 0) +
+                                   (dadosAno?.fnde?.valor || 0) +
+                                   (dadosAno?.fns?.valor || 0) +
+                                   (dadosAno?.convenios?.valor || 0);
+                      return <td key={ano}><strong>{formatarMoeda(total)}</strong></td>;
+                    })}
+                    <td>-</td>
+                  </tr>
+                </tfoot>
+              </table>
+            </div>
+
+            {/* Gráfico de barras simples */}
+            <div className="historico-grafico">
+              <h5>Evolução Total por Ano</h5>
+              <div className="barras-container">
+                {anosDisponiveis.map(ano => {
+                  const dadosAno = dados.dadosPorAno[ano];
+                  const total = (dadosAno?.bolsaFamilia?.valor || 0) +
+                               (dadosAno?.bpc?.valor || 0) +
+                               (dadosAno?.fnde?.valor || 0) +
+                               (dadosAno?.fns?.valor || 0) +
+                               (dadosAno?.convenios?.valor || 0);
+                  
+                  // Calcular altura relativa (máximo = 100%)
+                  const maxTotal = Math.max(...anosDisponiveis.map(a => {
+                    const d = dados.dadosPorAno[a];
+                    return (d?.bolsaFamilia?.valor || 0) + (d?.bpc?.valor || 0) + 
+                           (d?.fnde?.valor || 0) + (d?.fns?.valor || 0) + (d?.convenios?.valor || 0);
+                  }));
+                  const altura = maxTotal > 0 ? (total / maxTotal) * 100 : 0;
+                  
+                  return (
+                    <div key={ano} className="barra-item">
+                      <div className="barra-valor">{formatarMoeda(total)}</div>
+                      <div className="barra-wrapper">
+                        <div 
+                          className={`barra ${ano === anoSelecionado ? 'selecionado' : ''}`} 
+                          style={{ height: `${altura}%` }}
+                        ></div>
+                      </div>
+                      <div className="barra-ano">{ano}</div>
+                    </div>
+                  );
+                })}
+              </div>
             </div>
           </div>
         )}
