@@ -380,20 +380,21 @@
 }
 
 .logout-button {
-  background: transparent;
-  color: rgba(255, 255, 255, 0.85);
-  border: none;
-  padding: 6px 10px;
+  padding: 6px 12px;
+  background: rgba(255, 255, 255, 0.15);
+  color: white;
+  border: 1px solid rgba(255, 255, 255, 0.3);
   border-radius: 6px;
-  cursor: pointer;
   font-size: 12px;
-  font-weight: 500;
-  transition: all 0.3s ease;
-  font-family: 'Poppins', sans-serif;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s;
   display: flex;
-  flex-direction: column; /* Ícone acima do texto */
+  flex-direction: column;
   align-items: center;
   gap: 2px;
+  font-family: 'Poppins', sans-serif;
+  backdrop-filter: blur(4px);
 }
 
 .logout-icon {
@@ -404,6 +405,7 @@
 .logout-text {
   font-size: 11px;
   line-height: 1;
+  font-weight: 600;
 }
 
 .logout-button:hover {
