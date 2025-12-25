@@ -94,6 +94,45 @@ function encontrarCodigoIBGE(municipio) {
 }
 
 /**
+ * Busca dados de emendas parlamentares de um município do Supabase
+ */
+async function buscarEmendasSupabase(codigo) {
+  try {
+    const { data, error } = await supabase
+      .from('emendas_parlamentares')
+      .select('*')
+      .eq('municipio_codigo', codigo)
+      .eq('ano', 2024);
+    
+    if (error || !data || data.length === 0) {
+      return { quantidade: 0, valorTotal: 0, parlamentares: [] };
+    }
+    
+    const valorTotal = data.reduce((acc, item) => acc + (parseFloat(item.valor_empenhado) || 0), 0);
+    const valorPago = data.reduce((acc, item) => acc + (parseFloat(item.valor_pago) || 0), 0);
+    
+    const parlamentares = data.map(item => ({
+      nome: item.parlamentar_nome,
+      partido: item.parlamentar_partido,
+      tipo: item.parlamentar_tipo,
+      valor: parseFloat(item.valor_empenhado) || 0,
+      valorPago: parseFloat(item.valor_pago) || 0,
+      situacao: item.situacao
+    }));
+    
+    return {
+      quantidade: data.length,
+      valorTotal,
+      valorPago,
+      parlamentares
+    };
+  } catch (error) {
+    console.error('Erro ao buscar emendas:', error);
+    return { quantidade: 0, valorTotal: 0, parlamentares: [] };
+  }
+}
+
+/**
  * Busca dados de convênios de um município do Supabase
  */
 async function buscarConveniosSupabase(codigo) {
@@ -153,6 +192,9 @@ export async function buscarTransferenciasSupabase(municipio) {
     // Buscar convênios
     const conveniosData = await buscarConveniosSupabase(codigo);
     
+    // Buscar emendas parlamentares
+    const emendasData = await buscarEmendasSupabase(codigo);
+    
     // Organizar dados por ano
     const dadosPorAno = {};
     
@@ -207,9 +249,10 @@ export async function buscarTransferenciasSupabase(municipio) {
         lista: []
       },
       emendas: {
-        quantidade: 0,
-        valorTotal: 0,
-        parlamentares: []
+        quantidade: emendasData.quantidade,
+        valorTotal: emendasData.valorTotal,
+        valorPago: emendasData.valorPago,
+        parlamentares: emendasData.parlamentares
       },
       dataAtualizacao: data[0]?.data_atualizacao
     };
