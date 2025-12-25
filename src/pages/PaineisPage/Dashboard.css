@@ -75,9 +75,10 @@
 }
 
 .header-logo-dataro {
-  width: 187px; /* 125px + 50% = 187px */
+  width: 280px; /* 187px + 50% = 280px */
   height: auto;
   object-fit: contain;
+  filter: drop-shadow(0 0 10px rgba(255, 255, 255, 0.8)) drop-shadow(0 0 20px rgba(255, 255, 255, 0.5));
 }
 
 .header-text {
