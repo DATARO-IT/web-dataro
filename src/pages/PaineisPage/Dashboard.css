@@ -34,7 +34,7 @@
 }
 
 .header-content {
-  max-width: 1400px;
+  max-width: 1600px;
   margin: 0 auto;
   padding: 0 24px;
   display: flex;
@@ -48,6 +48,7 @@
   display: flex;
   align-items: center;
   gap: 16px;
+  margin-left: -50px; /* Mover 5cm (~50px) para a esquerda */
 }
 
 .header-logo {
@@ -139,6 +140,7 @@
   display: flex;
   align-items: center;
   gap: 12px;
+  margin-right: -50px; /* Mover 5cm (~50px) para a direita */
 }
 
 /* Dropdown Admin */
