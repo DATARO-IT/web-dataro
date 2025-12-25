@@ -17,30 +17,30 @@ const Login = () => {
   const { login } = useAuth();
   const navigate = useNavigate();
 
-  // Apenas municípios do CIMCERO (48 municípios)
-  const municipiosCimcero = [
+  // Todos os 52 municípios de Rondônia
+  const municipiosRondonia = [
     'Alta Floresta d\'Oeste', 'Alto Alegre dos Parecis', 'Alto Paraíso', 'Alvorada d\'Oeste',
     'Ariquemes', 'Buritis', 'Cabixi', 'Cacaulândia',
     'Cacoal', 'Campo Novo de Rondônia', 'Candeias do Jamari', 'Castanheiras',
-    'Cerejeiras', 'Colorado do Oeste', 'Corumbiara', 'Costa Marques',
-    'Espigão d\'Oeste', 'Governador Jorge Teixeira', 'Guajará-Mirim', 'Itapuã do Oeste',
+    'Cerejeiras', 'Chupinguaia', 'Colorado do Oeste', 'Corumbiara', 'Costa Marques',
+    'Cujubim', 'Espigão d\'Oeste', 'Governador Jorge Teixeira', 'Guajará-Mirim', 'Itapuã do Oeste',
     'Jaru', 'Ji-Paraná', 'Machadinho d\'Oeste', 'Ministro Andreazza',
     'Mirante da Serra', 'Monte Negro', 'Nova Brasilândia d\'Oeste', 'Nova Mamoré',
     'Nova União', 'Novo Horizonte do Oeste', 'Ouro Preto do Oeste', 'Parecis',
     'Pimenta Bueno', 'Pimenteiras do Oeste', 'Porto Velho', 'Presidente Médici',
-    'Primavera de Rondônia', 'Rolim de Moura', 'Santa Luzia d\'Oeste', 'São Felipe d\'Oeste',
+    'Primavera de Rondônia', 'Rio Crespo', 'Rolim de Moura', 'Santa Luzia d\'Oeste', 'São Felipe d\'Oeste',
     'São Francisco do Guaporé', 'São Miguel do Guaporé', 'Seringueiras', 'Teixeirópolis',
-    'Theobroma', 'Urupá', 'Vale do Anari', 'Vilhena'
+    'Theobroma', 'Urupá', 'Vale do Anari', 'Vale do Paraíso', 'Vilhena'
   ];
 
   // Grid 3x4 = 12 bandeiras por conjunto
   const bandeirasPerSet = 12;
-  const totalSets = Math.ceil(municipiosCimcero.length / bandeirasPerSet);
+  const totalSets = Math.ceil(municipiosRondonia.length / bandeirasPerSet);
 
   // Preload de imagens para otimizar carregamento
   useEffect(() => {
     const preloadImages = () => {
-      municipiosCimcero.forEach((municipio) => {
+      municipiosRondonia.forEach((municipio) => {
         const img = new Image();
         img.src = getBandeiraUrl(municipio);
         img.onload = () => {
@@ -67,7 +67,7 @@ const Login = () => {
   // Obter bandeiras do conjunto atual
   const getBandeirasAtuais = () => {
     const startIndex = currentSet * bandeirasPerSet;
-    return municipiosCimcero.slice(startIndex, startIndex + bandeirasPerSet);
+    return municipiosRondonia.slice(startIndex, startIndex + bandeirasPerSet);
   };
 
   const handleSubmit = async (e) => {
@@ -183,7 +183,7 @@ const Login = () => {
 
         {/* Coluna Direita - Grid de Bandeiras com Carrossel */}
         <div className="login-right">
-          <h3>Municípios do CIMCERO</h3>
+          <h3>Municípios de Rondônia</h3>
           <div className="bandeiras-grid-carousel">
             {getBandeirasAtuais().map((municipio, index) => (
               <div key={`${currentSet}-${index}`} className="bandeira-grid-item">
