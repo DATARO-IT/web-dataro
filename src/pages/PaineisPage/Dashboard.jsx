@@ -137,7 +137,6 @@ const Dashboard = () => {
             </div>
           </div>
           <div className="header-actions">
-            <ThemeToggle />
             <span className="user-name">Olá, {user?.nome}</span>
             {(user?.role === 'admin' || user?.role === 'superadmin') && (
               <div className={`admin-dropdown ${showAdminDropdown ? 'open' : ''}`}>
@@ -164,6 +163,7 @@ const Dashboard = () => {
             <button onClick={handleLogout} className="logout-button">
               🚪 Sair
             </button>
+            <ThemeToggle />
           </div>
         </div>
       </header>
