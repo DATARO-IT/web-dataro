@@ -103,18 +103,20 @@
 }
 
 .header-title-group h1 {
-  font-size: 32px; /* Aumentado de 28px para 32px para maior destaque */
-  font-weight: 800; /* Aumentado de 700 para 800 */
+  font-size: 36px; /* Tamanho maior para destaque */
+  font-weight: 800;
   margin: 0;
-  text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+  text-shadow: 3px 3px 6px rgba(0,0,0,0.4), 0 0 20px rgba(255,255,255,0.15); /* Sombra mais forte + brilho */
+  letter-spacing: 1px;
 }
 
 .header-title-subtitle {
-  font-size: 18px; /* Aumentado de 16px para 18px para maior destaque */
-  font-weight: 600; /* Aumentado de 500 para 600 */
-  opacity: 1; /* Aumentado de 0.9 para 1 */
-  letter-spacing: 1.5px; /* Aumentado de 1px para 1.5px */
-  text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+  font-size: 20px; /* Tamanho maior */
+  font-weight: 600;
+  opacity: 1;
+  letter-spacing: 2px;
+  text-shadow: 2px 2px 4px rgba(0,0,0,0.4), 0 0 15px rgba(255,255,255,0.1); /* Sombra + brilho */
+  text-transform: uppercase;
 }
 
 .logo-cimcero {
@@ -138,9 +140,16 @@
 
 .header-actions {
   display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 6px;
+  margin-right: 0;
+}
+
+.header-actions-row {
+  display: flex;
   align-items: center;
-  gap: 12px;
-  margin-right: 0; /* Alinhamento padrão */
+  gap: 8px;
 }
 
 /* Dropdown Admin */
@@ -150,18 +159,18 @@
 }
 
 .admin-button {
-  padding: 10px 20px;
+  padding: 6px 12px; /* Reduzido */
   background: rgba(255, 255, 255, 0.15);
   color: white;
   border: 1px solid rgba(255, 255, 255, 0.3);
-  border-radius: 8px;
-  font-size: 14px;
+  border-radius: 6px; /* Reduzido */
+  font-size: 12px; /* Reduzido */
   font-weight: 600;
   cursor: pointer;
   transition: all 0.2s;
   display: flex;
   align-items: center;
-  gap: 6px;
+  gap: 4px; /* Reduzido */
   font-family: 'Poppins', sans-serif;
   backdrop-filter: blur(4px);
 }
@@ -330,26 +339,27 @@
 }
 
 .user-name {
-  font-size: 14px; /* Reduzido de 18px para 14px */
-  font-weight: 400; /* Reduzido de 500 para 400 */
-  opacity: 0.9; /* Reduzido de 1 para 0.9 */
+  font-size: 12px; /* Tamanho menor */
+  font-weight: 500;
+  opacity: 0.85;
   text-shadow: 1px 1px 2px rgba(0,0,0,0.2);
+  white-space: nowrap;
 }
 
 .logout-button {
   background: transparent;
   color: rgba(255, 255, 255, 0.85);
   border: none;
-  padding: 8px 12px;
+  padding: 6px 10px; /* Reduzido */
   border-radius: 6px;
   cursor: pointer;
-  font-size: 14px;
+  font-size: 12px; /* Reduzido */
   font-weight: 500;
   transition: all 0.3s ease;
   font-family: 'Poppins', sans-serif;
   display: flex;
   align-items: center;
-  gap: 6px;
+  gap: 4px; /* Reduzido */
 }
 
 .logout-button:hover {

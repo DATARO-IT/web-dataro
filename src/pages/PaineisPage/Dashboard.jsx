@@ -134,32 +134,34 @@ const Dashboard = () => {
           </div>
           <div className="header-actions">
             <span className="user-name">Olá, {user?.nome}</span>
-            {(user?.role === 'admin' || user?.role === 'superadmin') && (
-              <div className={`admin-dropdown ${showAdminDropdown ? 'open' : ''}`}>
-                <button 
-                  className="admin-button"
-                  onClick={() => setShowAdminDropdown(!showAdminDropdown)}
-                >
-                  ⚙️ Admin {showAdminDropdown ? '▲' : '▼'}
-                </button>
-                {showAdminDropdown && (
-                  <div className="admin-dropdown-content">
-                    <button onClick={() => { setShowAdminPanel(true); setShowAdminDropdown(false); }}>
-                      📊 Painel Admin
-                    </button>
-                    {user?.role === 'superadmin' && (
-                      <button onClick={() => { setShowUserManagement(true); setShowAdminDropdown(false); }}>
-                        👥 Usuários
+            <div className="header-actions-row">
+              {(user?.role === 'admin' || user?.role === 'superadmin') && (
+                <div className={`admin-dropdown ${showAdminDropdown ? 'open' : ''}`}>
+                  <button 
+                    className="admin-button"
+                    onClick={() => setShowAdminDropdown(!showAdminDropdown)}
+                  >
+                    ⚙️ Admin {showAdminDropdown ? '▲' : '▼'}
+                  </button>
+                  {showAdminDropdown && (
+                    <div className="admin-dropdown-content">
+                      <button onClick={() => { setShowAdminPanel(true); setShowAdminDropdown(false); }}>
+                        📊 Painel Admin
                       </button>
-                    )}
-                  </div>
-                )}
-              </div>
-            )}
-            <button onClick={handleLogout} className="logout-button">
-              🚪 Sair
-            </button>
-            <ThemeToggle />
+                      {user?.role === 'superadmin' && (
+                        <button onClick={() => { setShowUserManagement(true); setShowAdminDropdown(false); }}>
+                          👥 Usuários
+                        </button>
+                      )}
+                    </div>
+                  )}
+                </div>
+              )}
+              <button onClick={handleLogout} className="logout-button">
+                🚪 Sair
+              </button>
+              <ThemeToggle />
+            </div>
           </div>
         </div>
       </header>
