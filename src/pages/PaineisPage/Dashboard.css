@@ -120,20 +120,22 @@
 }
 
 .header-title-group h1 {
-  font-size: 36px; /* Tamanho maior para destaque */
+  font-size: 42px; /* Tamanho aumentado para destaque */
   font-weight: 800;
   margin: 0;
   text-shadow: 3px 3px 6px rgba(0,0,0,0.4), 0 0 20px rgba(255,255,255,0.15); /* Sombra mais forte + brilho */
   letter-spacing: 1px;
+  color: #1a1a1a; /* Cor escura para contrastar com faixa branca */
 }
 
 .header-title-subtitle {
-  font-size: 20px; /* Tamanho maior */
-  font-weight: 600;
+  font-size: 26px; /* Tamanho aumentado */
+  font-weight: 700;
   opacity: 1;
-  letter-spacing: 2px;
-  text-shadow: 2px 2px 4px rgba(0,0,0,0.4), 0 0 15px rgba(255,255,255,0.1); /* Sombra + brilho */
+  letter-spacing: 3px;
+  text-shadow: 2px 2px 4px rgba(0,0,0,0.5), 0 0 15px rgba(255,255,255,0.2); /* Sombra + brilho */
   text-transform: uppercase;
+  color: #ffffff; /* Cor branca para contrastar com faixa azul */
 }
 
 .logo-cimcero {
