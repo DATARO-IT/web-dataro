@@ -47,7 +47,7 @@
 .header-left {
   display: flex;
   align-items: center;
-  gap: 16px;
+  gap: 8px; /* Reduzido de 16px para 8px para aproximar texto da logo */
   margin-left: -50px; /* Mover 5cm (~50px) para a esquerda */
 }
 
