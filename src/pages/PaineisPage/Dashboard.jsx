@@ -8,6 +8,7 @@ import ChangePasswordModal from '../../components/ChangePasswordModal/ChangePass
 import LazyImage from '../../components/LazyImage/LazyImage';
 import logo from '../../assets/logo.png';
 import logoCimcero from '../../assets/logo-cimcero.png';
+import headerBg from '../../assets/header-bg.png';
 import ThemeToggle from '../../components/ThemeToggle';
 import AIAssistant from '../../components/AIAssistant';
 import TransferenciasDashboard from '../../components/TransferenciasDashboard';
@@ -121,7 +122,7 @@ const Dashboard = () => {
         isOpen={showMinisteriosSidebar} 
         onToggle={() => setShowMinisteriosSidebar(!showMinisteriosSidebar)} 
       />
-      <header className="dashboard-header">
+      <header className="dashboard-header" style={{ backgroundImage: `url(${headerBg})` }}>
         <div className="header-content">
           <div className="header-left">
             <img src={logo} alt="Logo DataRO" className="header-logo-dataro" />
