@@ -41,13 +41,16 @@
   justify-content: space-between;
   align-items: center;
   position: relative;
+  min-height: 80px;
 }
 
 .header-left {
   display: flex;
   align-items: center;
   gap: 0;
-  z-index: 1;
+  position: relative;
+  z-index: 2;
+  background: transparent;
 }
 
 .header-logo {
@@ -95,7 +98,8 @@
   align-items: center;
   justify-content: center;
   gap: 4px;
-  z-index: 0;
+  z-index: 1;
+  pointer-events: none; /* Permite cliques nos elementos atrás */
 }
 
 .header-title-group {
@@ -146,7 +150,9 @@
   flex-direction: column;
   align-items: flex-end;
   gap: 4px;
-  z-index: 1;
+  position: relative;
+  z-index: 2;
+  background: transparent;
 }
 
 .header-actions-row {
