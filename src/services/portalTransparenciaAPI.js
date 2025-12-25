@@ -236,15 +236,51 @@ export async function getTransferenciasPorFavorecido(cnpj, ano = getAnoAtual()) 
 }
 
 /**
+ * Função auxiliar para normalizar nome de município
+ */
+function normalizarNomeMunicipio(nome) {
+  if (!nome) return '';
+  // Converter para minúsculas e remover acentos para comparação
+  return nome.toLowerCase()
+    .normalize('NFD')
+    .replace(/[\u0300-\u036f]/g, '')
+    .trim();
+}
+
+/**
+ * Função auxiliar para encontrar código IBGE do município (case-insensitive)
+ */
+function encontrarCodigoIBGE(municipio) {
+  // Primeiro tenta busca direta
+  if (MUNICIPIOS_RO[municipio]) {
+    return { codigo: MUNICIPIOS_RO[municipio], nome: municipio };
+  }
+  
+  // Busca case-insensitive
+  const municipioNormalizado = normalizarNomeMunicipio(municipio);
+  
+  for (const [nome, codigo] of Object.entries(MUNICIPIOS_RO)) {
+    if (normalizarNomeMunicipio(nome) === municipioNormalizado) {
+      return { codigo, nome };
+    }
+  }
+  
+  return null;
+}
+
+/**
  * Busca dados completos de transferências para um município
  */
 export async function getDadosCompletosMunicipio(municipio) {
-  const codigoIbge = MUNICIPIOS_RO[municipio];
+  const resultado = encontrarCodigoIBGE(municipio);
   
-  if (!codigoIbge) {
+  if (!resultado) {
     console.error('Município não encontrado:', municipio);
     return null;
   }
+  
+  const { codigo: codigoIbge, nome: nomeMunicipio } = resultado;
+  console.log('Código IBGE encontrado:', codigoIbge, 'para município:', nomeMunicipio);
 
   const mesAno = getMesAnoAtual();
   const ano = getAnoAtual();
