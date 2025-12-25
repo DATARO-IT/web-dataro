@@ -329,7 +329,16 @@ const Dashboard = () => {
                           className="btn-transferencias"
                           onClick={(e) => {
                             e.stopPropagation();
-                            setSelectedMunicipioTransferencias(municipio.nome);
+                            // Normalizar o nome do município para Title Case
+                            const nomeNormalizado = municipio.nome.split(' ').map(word => {
+                              // Palavras que devem ficar em minúsculo
+                              const minusculas = ['do', 'da', 'de', 'dos', 'das', 'e'];
+                              if (minusculas.includes(word.toLowerCase())) {
+                                return word.toLowerCase();
+                              }
+                              return word.charAt(0).toUpperCase() + word.slice(1).toLowerCase();
+                            }).join(' ');
+                            setSelectedMunicipioTransferencias(nomeNormalizado);
                             setShowTransferenciasDashboard(true);
                           }}
                           title="Ver transferências federais"
