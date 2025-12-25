@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { getDadosCompletosMunicipio, MUNICIPIOS_RO, getAnosDisponiveis } from '../../services/portalTransparenciaAPI';
-import { getDadosMunicipio, sincronizarTodosMunicipios } from '../../services/supabaseTransferenciasService';
+import { buscarTransferenciasSupabase, MUNICIPIOS_RO } from '../../services/transferenciasSupabase';
 import { 
   getMockTransferencias, 
   getMockBeneficiosSociais, 
@@ -11,6 +10,9 @@ import {
   getMockEmendasRO 
 } from '../../services/transferegovService';
 import './TransferenciasDashboard.css';
+
+// Anos disponíveis para consulta
+const getAnosDisponiveis = () => [2024];
 
 const TransferenciasDashboard = ({ municipio, onClose }) => {
   const [activeTab, setActiveTab] = useState('resumo');
@@ -37,49 +39,30 @@ const TransferenciasDashboard = ({ municipio, onClose }) => {
     setErro(null);
     
     try {
-      // Primeiro tentar buscar do Supabase (cache)
+      // Buscar dados do Supabase
       console.log('Buscando dados para:', municipio);
-      let dadosReais = null;
+      const dadosSupabase = await buscarTransferenciasSupabase(municipio);
       
-      try {
-        dadosReais = await getDadosMunicipio(municipio);
-      } catch (e) {
-        console.log('Erro ao buscar do Supabase, tentando API direta...');
-        dadosReais = await getDadosCompletosMunicipio(municipio);
-      }
-      
-      if (dadosReais && dadosReais.dadosReais) {
-        console.log('Dados reais obtidos com sucesso!');
-        setDados(dadosReais);
+      if (dadosSupabase && dadosSupabase.dadosReais) {
+        console.log('Dados reais obtidos do Supabase!');
+        setDados(dadosSupabase);
         setUsandoDadosReais(true);
-        
-        // Usar dados reais de convênios se disponíveis
-        if (dadosReais.convenios && dadosReais.convenios.lista) {
-          setConvenios({
-            municipio,
-            codigoIbge: dadosReais.codigoIbge,
-            totalConvenios: dadosReais.convenios.quantidade || dadosReais.convenios.ativos,
-            valorTotalConvenios: dadosReais.convenios.totalGeral || dadosReais.convenios.valorTotal,
-            convenios: dadosReais.convenios.lista
-          });
-        } else {
-          setConvenios(getMockConvenios(municipio));
-        }
+        setConvenios(getMockConvenios(municipio));
       } else {
-        // Fallback para dados mockados se a API falhar
+        // Fallback para dados mockados se não encontrar no Supabase
         console.log('Usando dados mockados como fallback');
         setDados(getMockTransferencias(municipio));
         setConvenios(getMockConvenios(municipio));
         setUsandoDadosReais(false);
       }
       
-      // Dados de benefícios (ainda mockados - requer API específica)
+      // Dados de benefícios (ainda mockados)
       setBeneficios(getMockBeneficiosSociais(municipio));
       
       // Programas disponíveis (dados estáticos)
       setProgramas(getMockProgramasDisponiveis());
       
-      // Emendas (ainda mockadas - requer processamento adicional)
+      // Emendas (ainda mockadas)
       setEmendas(getMockEmendasRO());
       
     } catch (error) {
