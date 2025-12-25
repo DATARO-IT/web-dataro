@@ -148,8 +148,14 @@
 
 .form-group label {
   font-size: 0.9rem;
-  font-weight: 600;
-  color: #1e3a8a;
+  font-weight: 700;
+  color: #0f172a;
+  letter-spacing: 0.3px;
+}
+
+/* Modo claro - garantir visibilidade das labels */
+[data-theme="light"] .form-group label {
+  color: #0f172a;
 }
 
 [data-theme="dark"] .form-group label {
