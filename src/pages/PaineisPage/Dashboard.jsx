@@ -27,6 +27,7 @@ const Dashboard = () => {
   const [showTransferenciasDashboard, setShowTransferenciasDashboard] = useState(false);
   const [selectedMunicipioTransferencias, setSelectedMunicipioTransferencias] = useState(null);
   const [showUserManagement, setShowUserManagement] = useState(false);
+  const [showAdminDropdown, setShowAdminDropdown] = useState(false);
   const { user, logout } = useAuth();
   const navigate = useNavigate();
 
@@ -140,20 +141,25 @@ const Dashboard = () => {
               🚪 Sair
             </button>
             {(user?.role === 'admin' || user?.role === 'superadmin') && (
-              <div className="admin-dropdown">
-                <button className="admin-button">
-                  ⚙️ Admin
+              <div className={`admin-dropdown ${showAdminDropdown ? 'open' : ''}`}>
+                <button 
+                  className="admin-button"
+                  onClick={() => setShowAdminDropdown(!showAdminDropdown)}
+                >
+                  ⚙️ Admin {showAdminDropdown ? '▲' : '▼'}
                 </button>
-                <div className="admin-dropdown-content">
-                  <button onClick={() => setShowAdminPanel(true)}>
-                    📊 Painel Admin
-                  </button>
-                  {user?.role === 'superadmin' && (
-                    <button onClick={() => setShowUserManagement(true)}>
-                      👥 Usuários
+                {showAdminDropdown && (
+                  <div className="admin-dropdown-content">
+                    <button onClick={() => { setShowAdminPanel(true); setShowAdminDropdown(false); }}>
+                      📊 Painel Admin
                     </button>
-                  )}
-                </div>
+                    {user?.role === 'superadmin' && (
+                      <button onClick={() => { setShowUserManagement(true); setShowAdminDropdown(false); }}>
+                        👥 Usuários
+                      </button>
+                    )}
+                  </div>
+                )}
               </div>
             )}
           </div>

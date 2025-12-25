@@ -161,7 +161,7 @@
   border: 1px solid rgba(255, 255, 255, 0.1);
 }
 
-.admin-dropdown:hover .admin-dropdown-content {
+.admin-dropdown.open .admin-dropdown-content {
   display: block;
   animation: fadeIn 0.2s ease;
 }
