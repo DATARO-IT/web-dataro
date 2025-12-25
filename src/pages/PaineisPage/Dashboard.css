@@ -366,27 +366,43 @@
 }
 
 .user-name {
-  font-size: 12px; /* Tamanho menor */
+  font-size: 12px;
   font-weight: 500;
-  opacity: 0.85;
+  color: #3b82f6; /* Azul */
   text-shadow: 1px 1px 2px rgba(0,0,0,0.2);
   white-space: nowrap;
+}
+
+.user-name::selection {
+  color: #000000; /* Preto quando selecionado */
+  background: rgba(59, 130, 246, 0.3);
 }
 
 .logout-button {
   background: transparent;
   color: rgba(255, 255, 255, 0.85);
   border: none;
-  padding: 6px 10px; /* Reduzido */
+  padding: 6px 10px;
   border-radius: 6px;
   cursor: pointer;
-  font-size: 12px; /* Reduzido */
+  font-size: 12px;
   font-weight: 500;
   transition: all 0.3s ease;
   font-family: 'Poppins', sans-serif;
   display: flex;
+  flex-direction: column; /* Ícone acima do texto */
   align-items: center;
-  gap: 4px; /* Reduzido */
+  gap: 2px;
+}
+
+.logout-icon {
+  font-size: 16px;
+  line-height: 1;
+}
+
+.logout-text {
+  font-size: 11px;
+  line-height: 1;
 }
 
 .logout-button:hover {

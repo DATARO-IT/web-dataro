@@ -160,7 +160,8 @@ const Dashboard = () => {
                 </div>
               )}
               <button onClick={handleLogout} className="logout-button">
-                🚪 Sair
+                <span className="logout-icon">🚪</span>
+                <span className="logout-text">Sair</span>
               </button>
               <ThemeToggle />
             </div>
