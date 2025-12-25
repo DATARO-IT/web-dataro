@@ -510,6 +510,7 @@
   display: flex;
   flex-direction: column;
   min-height: 120px;
+  justify-content: space-between; /* Distribui o conteúdo e empurra o botão para baixo */
 }
 
 .card-body p {
@@ -1056,7 +1057,8 @@
   display: flex;
   flex-direction: column;
   gap: 8px;
-  margin-top: 12px;
+  margin-top: auto; /* Empurra para o final do card */
+  padding-top: 12px;
 }
 
 .btn-transferencias {

@@ -125,10 +125,6 @@ const Dashboard = () => {
         <div className="header-content">
           <div className="header-left">
             <img src={logo} alt="Logo DataRO" className="header-logo-dataro" />
-            <div className="header-text">
-              <span className="header-brand">DATA-RO</span>
-              <span className="header-subtitle">INTELIGÊNCIA TERRITORIAL</span>
-            </div>
           </div>
           <div className="header-center">
             <div className="header-title-group">
