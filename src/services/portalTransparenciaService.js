@@ -205,12 +205,41 @@ export async function getContratos(dataInicial, dataFinal, pagina = 1) {
 /**
  * Gera dados mockados de transferências para um município
  */
+// Função auxiliar para encontrar código IBGE (case-insensitive)
+function encontrarCodigoIBGE(municipio) {
+  if (!municipio) return '1100000';
+  
+  // Busca direta primeiro
+  if (MUNICIPIOS_RO[municipio]) {
+    return MUNICIPIOS_RO[municipio];
+  }
+  
+  // Normalizar para busca case-insensitive
+  const municipioNormalizado = municipio.toLowerCase()
+    .normalize('NFD')
+    .replace(/[\u0300-\u036f]/g, '')
+    .trim();
+  
+  for (const [nome, codigo] of Object.entries(MUNICIPIOS_RO)) {
+    const nomeNormalizado = nome.toLowerCase()
+      .normalize('NFD')
+      .replace(/[\u0300-\u036f]/g, '')
+      .trim();
+    if (nomeNormalizado === municipioNormalizado) {
+      return codigo;
+    }
+  }
+  
+  return '1100000';
+}
+
 export function getMockTransferencias(municipio) {
   const baseValue = Math.random() * 5000000 + 1000000;
+  const codigoIbge = encontrarCodigoIBGE(municipio);
   
   return {
     municipio,
-    codigoIbge: MUNICIPIOS_RO[municipio] || '1100000',
+    codigoIbge,
     periodo: '2024',
     transferencias: {
       bolsaFamilia: {
@@ -253,10 +282,11 @@ export function getMockTransferencias(municipio) {
  */
 export function getMockBeneficiosSociais(municipio) {
   const populacao = Math.floor(Math.random() * 50000 + 5000);
+  const codigoIbge = encontrarCodigoIBGE(municipio);
   
   return {
     municipio,
-    codigoIbge: MUNICIPIOS_RO[municipio] || '1100000',
+    codigoIbge,
     populacaoEstimada: populacao,
     beneficios: {
       bolsaFamilia: {
@@ -304,7 +334,7 @@ export function getMockConvenios(municipio) {
   
   return {
     municipio,
-    codigoIbge: MUNICIPIOS_RO[municipio] || '1100000',
+    codigoIbge: encontrarCodigoIBGE(municipio),
     totalConvenios: convenios.length,
     valorTotalConvenios: convenios.reduce((sum, c) => sum + c.valorTotal, 0),
     convenios
