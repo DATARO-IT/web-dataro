@@ -142,7 +142,8 @@ const Dashboard = () => {
                     className="admin-button"
                     onClick={() => setShowAdminDropdown(!showAdminDropdown)}
                   >
-                    ⚙️ Admin {showAdminDropdown ? '▲' : '▼'}
+                    <span className="admin-icon">⚙️</span>
+                    <span className="admin-text">Admin {showAdminDropdown ? '▲' : '▼'}</span>
                   </button>
                   {showAdminDropdown && (
                     <div className="admin-dropdown-content">

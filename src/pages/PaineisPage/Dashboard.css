@@ -44,7 +44,7 @@
   left: 0;
   right: 0;
   bottom: 0;
-  background: rgba(2, 80, 50, 0.20); /* Overlay verde com 20% para dar 80% de transparência à imagem */
+  background: rgba(2, 80, 50, 0.05); /* Overlay verde com 5% para dar 95% de transparência à imagem */
   z-index: 0;
 }
 
@@ -175,20 +175,31 @@
 }
 
 .admin-button {
-  padding: 6px 12px; /* Reduzido */
+  padding: 6px 12px;
   background: rgba(255, 255, 255, 0.15);
   color: white;
   border: 1px solid rgba(255, 255, 255, 0.3);
-  border-radius: 6px; /* Reduzido */
-  font-size: 12px; /* Reduzido */
+  border-radius: 6px;
+  font-size: 12px;
   font-weight: 600;
   cursor: pointer;
   transition: all 0.2s;
   display: flex;
+  flex-direction: column; /* Ícone acima do texto */
   align-items: center;
-  gap: 4px; /* Reduzido */
+  gap: 2px;
   font-family: 'Poppins', sans-serif;
   backdrop-filter: blur(4px);
+}
+
+.admin-icon {
+  font-size: 16px;
+  line-height: 1;
+}
+
+.admin-text {
+  font-size: 11px;
+  line-height: 1;
 }
 
 .admin-button:hover {
