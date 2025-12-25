@@ -460,7 +460,7 @@ const UserManagement = ({ onClose }) => {
                     >
                       <option value="consulta">👁️ Consulta - Apenas visualização</option>
                       <option value="admin">🔧 Administrador - Gerenciar painéis</option>
-                      {isSuperAdmin && editingUser?.email !== 'admin@cimcero.ro.gov.br' && (
+                      {isSuperAdmin && (
                         <option value="superadmin">👑 Super Admin - Acesso total</option>
                       )}
                     </select>
