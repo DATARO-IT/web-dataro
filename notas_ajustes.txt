@@ -1,0 +1,9 @@
+Observações do Layout Atual:
+- "DATA-RO" e "INTELIGÊNCIA TERRITORIAL" estão à esquerda da logo
+- O usuário quer mover esse texto MAIS para a esquerda, aproximando-o da logo
+- Atualmente há margin-left: -50px no header-left (linha 51 do Dashboard.css)
+- O gap entre logo e texto é 4px (linha 50 do Dashboard.css)
+
+Ajustes necessários:
+1. Reduzir ainda mais o gap entre logo e texto (de 4px para 2px)
+2. Aumentar o margin-left negativo para mover mais para esquerda (de -50px para -80px)
