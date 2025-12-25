@@ -431,6 +431,8 @@
   border: 2px solid var(--border-light, transparent);
   display: flex;
   flex-direction: column;
+  min-height: 420px;
+  height: 100%;
 }
 
 .municipio-card.has-painel:hover {
@@ -471,12 +473,17 @@
 }
 
 .card-header h3 {
-  font-size: 18px;
+  font-size: 15px;
   color: var(--text-primary, #1a202c);
   margin: 0;
   flex: 1;
-  line-height: 1.3;
+  line-height: 1.2;
   font-weight: 600;
+  min-height: 36px;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
 }
 
 .status-badge {
@@ -500,13 +507,19 @@
 .card-body {
   padding: 8px 20px 16px 20px;
   flex: 1;
+  display: flex;
+  flex-direction: column;
+  min-height: 120px;
 }
 
 .card-body p {
-  margin: 8px 0;
-  font-size: 14px;
+  margin: 6px 0;
+  font-size: 13px;
   color: var(--text-secondary, #4a5568);
-  line-height: 1.5;
+  line-height: 1.4;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
 .card-body strong {
@@ -683,15 +696,20 @@
 
 @media (max-width: 480px) {
   .card-header h3 {
-    font-size: 16px;
+    font-size: 14px;
+    min-height: 32px;
   }
 
   .card-body p {
-    font-size: 13px;
+    font-size: 12px;
   }
 
   .card-bandeira-section {
-    height: 120px;
+    height: 100px;
+  }
+
+  .municipio-card {
+    min-height: 360px;
   }
 
   .results-info {
@@ -707,6 +725,14 @@
     width: 32px;
     height: 32px;
     font-size: 12px;
+  }
+
+  .header-left {
+    margin-left: 0;
+  }
+
+  .header-actions {
+    margin-right: 0;
   }
 }
 
