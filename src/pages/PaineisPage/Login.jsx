@@ -17,20 +17,26 @@ const Login = () => {
   const { login } = useAuth();
   const navigate = useNavigate();
 
-  // Todos os 52 municípios de Rondônia
+  // Todos os 52 municípios de Rondônia (organizados para carrossel harmônico)
   const municipiosRondonia = [
+    // Página 1 (12 municípios)
     'Alta Floresta d\'Oeste', 'Alto Alegre dos Parecis', 'Alto Paraíso', 'Alvorada d\'Oeste',
     'Ariquemes', 'Buritis', 'Cabixi', 'Cacaulândia',
     'Cacoal', 'Campo Novo de Rondônia', 'Candeias do Jamari', 'Castanheiras',
-    'Cerejeiras', 'Chupinguaia', 'Colorado do Oeste', 'Corumbiara', 'Costa Marques',
-    'Cujubim', 'Espigão d\'Oeste', 'Governador Jorge Teixeira', 'Guajará-Mirim', 'Itapuã do Oeste',
-    'Jaru', 'Ji-Paraná', 'Machadinho d\'Oeste', 'Ministro Andreazza',
-    'Mirante da Serra', 'Monte Negro', 'Nova Brasilândia d\'Oeste', 'Nova Mamoré',
-    'Nova União', 'Novo Horizonte do Oeste', 'Ouro Preto do Oeste', 'Parecis',
-    'Pimenta Bueno', 'Pimenteiras do Oeste', 'Porto Velho', 'Presidente Médici',
-    'Primavera de Rondônia', 'Rio Crespo', 'Rolim de Moura', 'Santa Luzia d\'Oeste', 'São Felipe d\'Oeste',
-    'São Francisco do Guaporé', 'São Miguel do Guaporé', 'Seringueiras', 'Teixeirópolis',
-    'Theobroma', 'Urupá', 'Vale do Anari', 'Vale do Paraíso', 'Vilhena'
+    // Página 2 (12 municípios)
+    'Cerejeiras', 'Chupinguaia', 'Colorado do Oeste', 'Corumbiara',
+    'Costa Marques', 'Cujubim', 'Espigão d\'Oeste', 'Governador Jorge Teixeira',
+    'Guajará-Mirim', 'Itapuã do Oeste', 'Jaru', 'Ji-Paraná',
+    // Página 3 (12 municípios)
+    'Machadinho d\'Oeste', 'Ministro Andreazza', 'Mirante da Serra', 'Monte Negro',
+    'Nova Brasilândia d\'Oeste', 'Nova Mamoré', 'Nova União', 'Novo Horizonte do Oeste',
+    'Ouro Preto do Oeste', 'Parecis', 'Pimenta Bueno', 'Pimenteiras do Oeste',
+    // Página 4 (12 municípios)
+    'Porto Velho', 'Presidente Médici', 'Primavera de Rondônia', 'Rio Crespo',
+    'Rolim de Moura', 'Santa Luzia d\'Oeste', 'São Felipe d\'Oeste', 'São Francisco do Guaporé',
+    'São Miguel do Guaporé', 'Seringueiras', 'Teixeirópolis', 'Theobroma',
+    // Página 5 (4 municípios - organizados para visual harmônico)
+    'Urupá', 'Vale do Anari', 'Vale do Paraíso', 'Vilhena'
   ];
 
   // Grid 3x4 = 12 bandeiras por conjunto

@@ -13,6 +13,7 @@ import candeias from '../assets/bandeiras/Candeias do Jamari RO.png';
 import castanheiras from '../assets/bandeiras/Castanheiras.png';
 import cerejeiras from '../assets/bandeiras/Cerejeiras.png';
 import chupinguaia from '../assets/bandeiras/Chupinguaia.png';
+import cujubim from '../assets/bandeiras/cujubim.png';
 import colorado from '../assets/bandeiras/Colorado do Oeste.png';
 import corumbiara from '../assets/bandeiras/Corumbiara.png';
 import costaMarques from '../assets/bandeiras/Costa Marques.png';
@@ -69,6 +70,7 @@ const bandeirasImportadas = {
   "CASTANHEIRAS": castanheiras,
   "CEREJEIRAS": cerejeiras,
   "CHUPINGUAIA": chupinguaia,
+  "CUJUBIM": cujubim,
   "COLORADO DO OESTE": colorado,
   "CORUMBIARA": corumbiara,
   "COSTA MARQUES": costaMarques,
@@ -124,6 +126,7 @@ const bandeirasImportadas = {
   "Castanheiras": castanheiras,
   "Cerejeiras": cerejeiras,
   "Chupinguaia": chupinguaia,
+  "Cujubim": cujubim,
   "Colorado do Oeste": colorado,
   "Corumbiara": corumbiara,
   "Costa Marques": costaMarques,
