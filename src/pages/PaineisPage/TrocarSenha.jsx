@@ -61,11 +61,12 @@ const TrocarSenha = () => {
         return;
       }
 
-      // Atualizar senha
+      // Atualizar senha e marcar primeiro_acesso como false
       const { error: updateError } = await supabase
         .from('usuarios')
         .update({ 
           senha_hash: novaSenha,
+          primeiro_acesso: false,
           data_atualizacao: new Date().toISOString()
         })
         .eq('id', user.id);

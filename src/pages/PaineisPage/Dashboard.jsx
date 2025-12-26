@@ -14,6 +14,7 @@ import AIAssistant from '../../components/AIAssistant';
 import TransferenciasDashboard from '../../components/TransferenciasDashboard';
 import { MinisteriosSidebar } from '../../components/Sidebar';
 import UserManagement from '../../components/UserManagement';
+import Anotacoes from '../../components/Anotacoes/Anotacoes';
 import './Dashboard.css';
 
 const Dashboard = () => {
@@ -29,6 +30,8 @@ const Dashboard = () => {
   const [selectedMunicipioTransferencias, setSelectedMunicipioTransferencias] = useState(null);
   const [showUserManagement, setShowUserManagement] = useState(false);
   const [showAdminDropdown, setShowAdminDropdown] = useState(false);
+  const [showAnotacoes, setShowAnotacoes] = useState(false);
+  const [podeAnotacoes, setPodeAnotacoes] = useState(false);
   const { user, logout } = useAuth();
   const navigate = useNavigate();
 
@@ -42,7 +45,25 @@ const Dashboard = () => {
     }
 
     fetchMunicipios();
+    verificarPermissaoAnotacoes();
   }, [user, navigate]);
+
+  const verificarPermissaoAnotacoes = async () => {
+    if (!user) return;
+    try {
+      const { data, error } = await supabase
+        .from('usuarios')
+        .select('pode_anotacoes')
+        .eq('id', user.id)
+        .single();
+      
+      if (!error && data) {
+        setPodeAnotacoes(data.pode_anotacoes || false);
+      }
+    } catch (err) {
+      console.error('Erro ao verificar permissão de anotações:', err);
+    }
+  };
 
   const fetchMunicipios = async () => {
     try {
@@ -393,6 +414,18 @@ const Dashboard = () => {
         />
       )}
 
+      {/* Botão Flutuante de Anotações - apenas para usuários com permissão */}
+      {podeAnotacoes && (
+        <button 
+          className="anotacoes-fab"
+          onClick={() => setShowAnotacoes(true)}
+          title="Minhas Anotações"
+        >
+          📝
+          <span className="anotacoes-fab-tooltip">Anotações</span>
+        </button>
+      )}
+
       {/* Botão Flutuante do Assistente IA */}
       <button 
         className="ai-assistant-fab"
@@ -432,6 +465,14 @@ const Dashboard = () => {
       {/* User Management Modal - Apenas para SuperAdmin */}
       {showUserManagement && user?.role === 'superadmin' && (
         <UserManagement onClose={() => setShowUserManagement(false)} />
+      )}
+
+      {/* Modal de Anotações */}
+      {podeAnotacoes && (
+        <Anotacoes 
+          isOpen={showAnotacoes} 
+          onClose={() => setShowAnotacoes(false)} 
+        />
       )}
     </div>
   );

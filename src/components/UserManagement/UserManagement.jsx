@@ -23,7 +23,8 @@ const UserManagement = ({ onClose }) => {
     municipio_id: '',
     role: 'consulta',
     observacoes: '',
-    ativo: true
+    ativo: true,
+    pode_anotacoes: false
   });
 
   const [formErrors, setFormErrors] = useState({});
@@ -121,6 +122,7 @@ const UserManagement = ({ onClose }) => {
           role: formData.role,
           observacoes: formData.observacoes || null,
           ativo: formData.ativo,
+          pode_anotacoes: formData.pode_anotacoes,
           data_atualizacao: new Date().toISOString()
         };
 
@@ -151,6 +153,7 @@ const UserManagement = ({ onClose }) => {
             role: formData.role,
             observacoes: formData.observacoes || null,
             ativo: formData.ativo,
+            pode_anotacoes: formData.pode_anotacoes,
             primeiro_acesso: true,
             criado_por: user?.id,
             data_criacao: new Date().toISOString()
@@ -183,7 +186,8 @@ const UserManagement = ({ onClose }) => {
       municipio_id: '',
       role: 'consulta',
       observacoes: '',
-      ativo: true
+      ativo: true,
+      pode_anotacoes: false
     });
     setFormErrors({});
     setEditingUser(null);
@@ -201,7 +205,8 @@ const UserManagement = ({ onClose }) => {
       municipio_id: userToEdit.municipio_id || '',
       role: userToEdit.role || 'consulta',
       observacoes: userToEdit.observacoes || '',
-      ativo: userToEdit.ativo !== false
+      ativo: userToEdit.ativo !== false,
+      pode_anotacoes: userToEdit.pode_anotacoes || false
     });
     setShowAddForm(true);
   };
@@ -496,6 +501,19 @@ const UserManagement = ({ onClose }) => {
                     placeholder="Observações adicionais sobre o usuário..."
                     rows="3"
                   />
+                </div>
+
+                <div className="form-group checkbox-group">
+                  <label className="checkbox-label">
+                    <input
+                      type="checkbox"
+                      name="pode_anotacoes"
+                      checked={formData.pode_anotacoes}
+                      onChange={(e) => setFormData({...formData, pode_anotacoes: e.target.checked})}
+                    />
+                    <span>📝 Permitir Anotações</span>
+                    <small>(Máx. 15 anotações de 500 caracteres cada)</small>
+                  </label>
                 </div>
 
                 <div className="form-actions">
