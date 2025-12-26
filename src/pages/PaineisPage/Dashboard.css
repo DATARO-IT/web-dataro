@@ -683,20 +683,28 @@
 /* Responsividade */
 @media (max-width: 1024px) {
   .header-content {
-    flex-direction: column;
-    text-align: center;
+    grid-template-columns: 1fr;
+    gap: 15px;
+    padding: 10px 15px;
   }
 
   .header-left {
-    order: 1;
+    justify-content: center;
   }
 
   .header-center {
-    order: 2;
+    order: 0;
   }
 
   .header-actions {
-    order: 3;
+    align-items: center;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  .header-logo-dataro {
+    width: 180px;
   }
 
   .municipios-grid {
@@ -705,12 +713,64 @@
 }
 
 @media (max-width: 768px) {
-  .header-center h1 {
-    font-size: 22px;
+  .header-content {
+    grid-template-columns: 1fr;
+    gap: 10px;
+    padding: 10px;
   }
 
-  .header-center p {
+  .header-left {
+    justify-content: center;
+  }
+
+  .header-logo-dataro {
+    width: 150px;
+  }
+
+  .header-center h1,
+  .header-title-group h1 {
+    font-size: 20px !important;
+  }
+
+  .header-center p,
+  .header-title-subtitle {
+    font-size: 14px !important;
+    letter-spacing: 1px;
+  }
+
+  .header-actions {
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    flex-wrap: wrap;
+  }
+
+  .header-actions-row {
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  .user-name {
+    font-size: 11px;
+    text-align: center;
+    width: 100%;
+  }
+
+  .admin-button,
+  .logout-button {
+    padding: 5px 10px;
+    font-size: 11px;
+  }
+
+  .admin-icon,
+  .logout-icon {
     font-size: 14px;
+  }
+
+  .admin-text,
+  .logout-text {
+    font-size: 10px;
   }
 
   .header-logo {
@@ -734,11 +794,13 @@
   }
 
   .dashboard-main {
-    padding: 24px 16px;
+    padding: 16px 10px;
   }
 
   .pagination {
     gap: 8px;
+    flex-wrap: wrap;
+    justify-content: center;
   }
 
   .pagination-button {
@@ -751,9 +813,35 @@
     height: 36px;
     font-size: 13px;
   }
+
+  .ministerios-button {
+    width: 45px;
+    height: 45px;
+    font-size: 18px;
+  }
 }
 
 @media (max-width: 480px) {
+  .header-content {
+    padding: 8px;
+    gap: 8px;
+  }
+
+  .header-logo-dataro {
+    width: 120px;
+  }
+
+  .header-center h1,
+  .header-title-group h1 {
+    font-size: 16px !important;
+  }
+
+  .header-center p,
+  .header-title-subtitle {
+    font-size: 12px !important;
+    letter-spacing: 0.5px;
+  }
+
   .card-header h3 {
     font-size: 14px;
     min-height: 32px;
@@ -768,12 +856,13 @@
   }
 
   .municipio-card {
-    min-height: 360px;
+    min-height: 340px;
   }
 
   .results-info {
     flex-direction: column;
     align-items: flex-start;
+    gap: 8px;
   }
 
   .pagination-numbers {
@@ -792,6 +881,17 @@
 
   .header-actions {
     margin-right: 0;
+    gap: 6px;
+  }
+
+  .admin-button,
+  .logout-button {
+    padding: 4px 8px;
+  }
+
+  .search-input {
+    font-size: 14px;
+    padding: 10px 12px;
   }
 }
 
