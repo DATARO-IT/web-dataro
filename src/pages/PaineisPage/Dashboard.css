@@ -178,12 +178,12 @@
 }
 
 .admin-button {
-  padding: 6px 12px;
-  background: rgba(255, 255, 255, 0.15);
+  padding: 5px 11px;
+  background: rgba(0, 51, 153, 0.85); /* Fundo azul para garantir legibilidade */
   color: white;
   border: 1px solid rgba(255, 255, 255, 0.3);
-  border-radius: 6px;
-  font-size: 12px;
+  border-radius: 5px;
+  font-size: 11px;
   font-weight: 600;
   cursor: pointer;
   transition: all 0.2s;
@@ -196,12 +196,12 @@
 }
 
 .admin-icon {
-  font-size: 16px;
+  font-size: 15px;
   line-height: 1;
 }
 
 .admin-text {
-  font-size: 11px;
+  font-size: 10px;
   line-height: 1;
 }
 
@@ -382,12 +382,12 @@
 }
 
 .logout-button {
-  padding: 6px 12px;
-  background: rgba(255, 255, 255, 0.15);
+  padding: 5px 11px;
+  background: rgba(0, 51, 153, 0.85); /* Fundo azul para garantir legibilidade */
   color: white;
   border: 1px solid rgba(255, 255, 255, 0.3);
-  border-radius: 6px;
-  font-size: 12px;
+  border-radius: 5px;
+  font-size: 11px;
   font-weight: 600;
   cursor: pointer;
   transition: all 0.2s;
@@ -400,19 +400,19 @@
 }
 
 .logout-icon {
-  font-size: 16px;
+  font-size: 15px;
   line-height: 1;
 }
 
 .logout-text {
-  font-size: 11px;
+  font-size: 10px;
   line-height: 1;
   font-weight: 600;
 }
 
 .logout-button:hover {
-  background: rgba(239, 68, 68, 0.15);
-  color: #ef4444;
+  background: rgba(220, 38, 38, 0.85); /* Vermelho no hover */
+  color: white;
 }
 
 .dashboard-main {
@@ -759,18 +759,19 @@
 
   .admin-button,
   .logout-button {
-    padding: 5px 10px;
-    font-size: 11px;
+    padding: 4px 9px;
+    font-size: 10px;
+    background: rgba(0, 51, 153, 0.95); /* Fundo azul mais forte em mobile */
   }
 
   .admin-icon,
   .logout-icon {
-    font-size: 14px;
+    font-size: 13px;
   }
 
   .admin-text,
   .logout-text {
-    font-size: 10px;
+    font-size: 9px;
   }
 
   .header-logo {
@@ -886,7 +887,18 @@
 
   .admin-button,
   .logout-button {
-    padding: 4px 8px;
+    padding: 3px 7px;
+    background: rgba(0, 51, 153, 0.95); /* Fundo azul para legibilidade */
+  }
+
+  .admin-icon,
+  .logout-icon {
+    font-size: 12px;
+  }
+
+  .admin-text,
+  .logout-text {
+    font-size: 8px;
   }
 
   .search-input {
