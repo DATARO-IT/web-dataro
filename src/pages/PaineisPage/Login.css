@@ -51,7 +51,7 @@
 /* A Imagem em si */
 .header-image {
   width: 100%;
-  height: auto; /* Mantém a proporção */
+  height: auto;
   
   /* Limites definidos */
   max-width: 900px;
@@ -60,8 +60,8 @@
   /* Garante que a imagem não estique */
   object-fit: contain;
   
-  /* Sombra para destaque */
-  filter: drop-shadow(0 4px 8px rgba(0,0,0,0.4));
+  /* Remove qualquer fundo xadrez/transparente */
+  background: transparent;
   
   /* Se a imagem não carregar, isso garante que ela não ocupe espaço invisível */
   display: block; 

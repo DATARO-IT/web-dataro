@@ -4,7 +4,7 @@ import { useAuth } from '../../contexts/AuthContext';
 import { getBandeiraUrl } from '../../utils/bandeirasMap';
 import logo from '../../assets/logo.png';
 import bandeiraRondonia from '../../assets/bandeira-rondonia.png';
-import headerImage from '../../assets/header-inteligencia-territorial.png';
+import headerImage from '../../assets/header-login.svg';
 import ThemeToggle from '../../components/ThemeToggle';
 import './Login.css';
 
@@ -116,10 +116,16 @@ const Login = () => {
     <div className="login-page-wrapper">
       {/* Cabeçalho da Página */}
       <header className="page-header page-header-with-image">
-        <div className="header-text-fallback">
-          <h1>DATA-RO</h1>
-          <p>INTELIGÊNCIA TERRITORIAL</p>
-        </div>
+        <img 
+          src={headerImage} 
+          alt="DATA-RO INTELIGÊNCIA TERRITORIAL" 
+          className="header-image"
+          onError={(e) => {
+            console.error('Erro ao carregar imagem do header:', headerImage);
+            e.target.style.display = 'none';
+          }}
+          onLoad={() => console.log('Imagem do header carregada com sucesso!')}
+        />
         <ThemeToggle className="header-theme-toggle" />
       </header>
 
