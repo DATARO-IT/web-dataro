@@ -48,16 +48,16 @@ const Header = ({ onContactClick }) => {
             <span className="logo-text-line2">INTELIGÊNCIA TERRITORIAL</span>
           </div>
         </div>
-        
-        <nav className={navClassName}>
-          <ul>
-            <li><Link to="/" onClick={() => setIsMenuOpen(false)}>INÍCIO</Link></li>
-            <li><Link to="/services" onClick={() => setIsMenuOpen(false)}>SERVIÇOS</Link></li>
-            <li><a href="#" onClick={handleContactClick}>CONTATO</a></li>
-            <li><Link to="/paineis/login" className="paineis-link" onClick={() => setIsMenuOpen(false)}>RONDÔNIA EM NÚMEROS</Link></li>
-          </ul>
-        </nav>
-
+        <div className="nav-center-wrapper">
+          <nav className={navClassName}>
+            <ul>
+              <li><Link to="/" onClick={() => setIsMenuOpen(false)}>INÍCIO</Link></li>
+              <li><Link to="/services" onClick={() => setIsMenuOpen(false)}>SERVIÇOS</Link></li>
+              <li><a href="#" onClick={handleContactClick}>CONTATO</a></li>
+              <li><Link to="/paineis/login" className="paineis-link" onClick={() => setIsMenuOpen(false)}>RONDÔNIA EM NÚMEROS</Link></li>
+            </ul>
+          </nav>
+        </div>
         <div className="header-actions">
           <ThemeToggle />
           <div className="menu-toggle" onClick={toggleMenu}>
