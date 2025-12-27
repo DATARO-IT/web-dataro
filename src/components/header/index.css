@@ -17,11 +17,12 @@
 }
 
 .header-content {
-  max-width: 1200px;
+  max-width: 1400px;
   margin: 0 auto;
   padding: 0 2rem;
   display: flex;
   align-items: center;
+  justify-content: space-between;
   min-height: 120px;
   transition: min-height 0.4s ease;
   position: relative;
@@ -36,6 +37,7 @@
   align-items: center;
   gap: 1rem;
   flex: 0 0 auto;
+  min-width: 280px;
 }
 
 .logo {
