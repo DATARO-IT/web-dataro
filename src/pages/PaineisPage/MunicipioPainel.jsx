@@ -53,12 +53,7 @@ const MunicipioPainel = () => {
         .single();
 
       if (!painelError && painelData) {
-        console.log('Painel carregado:', painelData);
-        console.log('URL Power BI:', painelData.url_powerbi);
-        console.log('Embed URL:', painelData.embed_url);
         setPainel(painelData);
-      } else {
-        console.log('Nenhum painel encontrado para município ID:', id);
       }
 
     } catch (error) {

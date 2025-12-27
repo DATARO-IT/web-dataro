@@ -108,7 +108,6 @@ export async function salvarTransferenciasMunicipio(dados) {
       }
     }
 
-    console.log(`Dados de ${municipio} salvos com sucesso`);
     return true;
   } catch (error) {
     console.error(`Erro ao salvar dados de ${municipio}:`, error);
@@ -266,8 +265,6 @@ export async function getDadosMunicipio(municipio, forcarAtualizacao = false) {
   const atualizar = forcarAtualizacao || await precisaAtualizar(codigoIbge);
 
   if (atualizar) {
-    console.log(`Atualizando dados de ${municipio} da API...`);
-    
     // Buscar da API
     const dadosAPI = await getDadosCompletosMunicipio(municipio);
     
@@ -279,7 +276,6 @@ export async function getDadosMunicipio(municipio, forcarAtualizacao = false) {
   }
 
   // Buscar do Supabase
-  console.log(`Buscando dados de ${municipio} do cache...`);
   const dadosCache = await buscarTransferenciasMunicipio(codigoIbge);
   
   if (dadosCache && dadosCache.transferencias?.length > 0) {

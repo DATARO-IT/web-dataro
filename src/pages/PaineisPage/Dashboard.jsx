@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useMemo, useCallback } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../../contexts/AuthContext';
 import { supabase } from '../../utils/supabaseClient';
@@ -70,14 +70,17 @@ const Dashboard = () => {
       const { data, error } = await supabase
         .from('municipios')
         .select(`
-          *,
-          paineis_bi (
+          id,
+          nome,
+          paineis_bi!inner (
             id,
             titulo,
             url_powerbi,
+            embed_url,
             status
           )
         `)
+        .eq('paineis_bi.status', 'ativo')
         .order('nome', { ascending: true });
 
       if (error) throw error;
@@ -98,29 +101,32 @@ const Dashboard = () => {
     }
   };
 
-  const handleViewPainel = (e, municipio) => {
+  const handleViewPainel = useCallback((e, municipio) => {
     e.preventDefault();
     e.stopPropagation();
-    console.log('handleViewPainel chamado para:', municipio.nome, 'ID:', municipio.id);
-    console.log('Navegando para:', `/paineis/municipio/${municipio.id}`);
     navigate(`/paineis/municipio/${municipio.id}`, { state: { municipio } });
-  };
+  }, [navigate]);
 
-  const handleLogout = async () => {
+  const handleLogout = useCallback(async () => {
     await logout();
     navigate('/paineis/login');
-  };
+  }, [logout, navigate]);
 
-  // Filtrar municípios com base no termo de busca
-  const filteredMunicipios = municipios.filter((municipio) =>
-    municipio.nome.toLowerCase().includes(searchTerm.toLowerCase())
+  // Filtrar municípios com base no termo de busca (memoizado)
+  const filteredMunicipios = useMemo(() => 
+    municipios.filter((municipio) =>
+      municipio.nome.toLowerCase().includes(searchTerm.toLowerCase())
+    ), [municipios, searchTerm]
   );
 
-  // Calcular paginação
-  const totalPages = Math.ceil(filteredMunicipios.length / itemsPerPage);
-  const startIndex = (currentPage - 1) * itemsPerPage;
-  const endIndex = startIndex + itemsPerPage;
-  const currentMunicipios = filteredMunicipios.slice(startIndex, endIndex);
+  // Calcular paginação (memoizado)
+  const { totalPages, currentMunicipios } = useMemo(() => {
+    const totalPages = Math.ceil(filteredMunicipios.length / itemsPerPage);
+    const startIndex = (currentPage - 1) * itemsPerPage;
+    const endIndex = startIndex + itemsPerPage;
+    const currentMunicipios = filteredMunicipios.slice(startIndex, endIndex);
+    return { totalPages, currentMunicipios };
+  }, [filteredMunicipios, currentPage]);
 
   // Reset para primeira página quando o termo de busca mudar
   useEffect(() => {

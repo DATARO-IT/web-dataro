@@ -39,8 +39,7 @@ import bandeiraJiParana from '../assets/bandeiras/Ji-Parana.png';
 import bandeiraRolimMoura from '../assets/bandeiras/RolimdeMoura.png';
 import bandeiraVilhena from '../assets/bandeiras/Vilhena.png';
 
-// Forçar uso dos imports (evitar tree-shaking) - SEMPRE executar, não só em DEV
-console.log('Bandeiras carregadas:', { bandeiraPortoVelho, bandeiraGuajaraMirim, bandeiraJiParana, bandeiraRolimMoura, bandeiraVilhena });
+// Forçar uso dos imports (evitar tree-shaking)
 
 // Mapa de municípios para bandeiras importadas
 export const bandeirasImportadas = {
@@ -87,10 +86,5 @@ export const bandeirasImportadas = {
 
 // Função otimizada para obter URL da bandeira (atualizada em 14/12/2025)
 export const getBandeiraUrl = (municipioNome) => {
-  const url = bandeirasImportadas[municipioNome];
-  if (!url && (municipioNome === 'Porto Velho' || municipioNome === 'Ji-Paraná' || municipioNome === 'Vilhena' || municipioNome === 'Rolim de Moura' || municipioNome === 'Guajará-Mirim')) {
-    console.log('DEBUG - Bandeira não encontrada:', municipioNome);
-    console.log('DEBUG - Chaves disponíveis:', Object.keys(bandeirasImportadas));
-  }
-  return url || null;
+  return bandeirasImportadas[municipioNome] || null;
 };
