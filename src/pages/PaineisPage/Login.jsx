@@ -4,7 +4,7 @@ import { useAuth } from '../../contexts/AuthContext';
 import { getBandeiraUrl } from '../../utils/bandeirasMap';
 import logo from '../../assets/logo.png';
 import bandeiraRondonia from '../../assets/bandeira-rondonia.png';
-import headerImage from '../../assets/hhheader.png';
+import headerImage from '../../assets/headerr.png';
 import ThemeToggle from '../../components/ThemeToggle';
 import './Login.css';
 
