@@ -1,0 +1,20 @@
+-- Atualizar Rio Crespo com a nova URL pública validada
+
+UPDATE paineis_bi
+SET 
+  url_powerbi = 'https://app.powerbi.com/view?r=eyJrIjoiYjNmMDM2MzMtNGIwNS00NDk2LWJmZGEtNDA0MDFjYWEyNzgyIiwidCI6IjliZDQ3NzVkLTk5OWYtNGM4Ny1iM2NmLWJmZjA0YmI0YTFlNCJ9',
+  embed_url = 'https://app.powerbi.com/view?r=eyJrIjoiYjNmMDM2MzMtNGIwNS00NDk2LWJmZGEtNDA0MDFjYWEyNzgyIiwidCI6IjliZDQ3NzVkLTk5OWYtNGM4Ny1iM2NmLWJmZjA0YmI0YTFlNCJ9',
+  data_atualizacao = NOW()
+WHERE id = 99;
+
+-- Verificar a atualização
+SELECT 
+  pb.id,
+  m.nome as municipio,
+  pb.titulo,
+  pb.url_powerbi,
+  pb.embed_url,
+  pb.data_atualizacao
+FROM paineis_bi pb
+JOIN municipios m ON pb.municipio_id = m.id
+WHERE pb.id = 99;
