@@ -478,7 +478,7 @@
   font-weight: 700;
   font-style: normal;
   letter-spacing: 1px;
-  color: var(--blue-primary, #1e3a8a);
+  color: var(--text-secondary, #718096);
 }
 
 /* Responsividade */
