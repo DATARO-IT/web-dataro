@@ -27,18 +27,20 @@
 .page-header-with-image {
   width: 100%;
   padding: 0;
+  margin: 0;
   
   /* Fundo branco */
   background: #ffffff;
   
-  /* Centraliza a imagem dentro dele */
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  /* Remove flexbox para evitar centralização */
+  display: block;
   
   /* Borda sutil */
   border-bottom: 1px solid #e2e8f0;
   box-sizing: border-box;
+  
+  /* Garante que não há overflow */
+  overflow: hidden;
 }
 
 /* Tema escuro */
@@ -49,23 +51,25 @@
 
 /* A Imagem em si */
 .header-image {
+  /* Preenche 100% da largura do container */
   width: 100%;
+  
+  /* Altura automática para manter proporção */
   height: auto;
   
-  /* Ocupa toda a largura disponível */
-  max-width: 100%;
+  /* Remove qualquer limite */
+  max-width: none;
+  max-height: none;
   
-  /* Sem limite de altura - deixa a imagem definir */
-  /* max-height: removido para ocupar todo o espaço */
+  /* Exibe como bloco para remover espaços */
+  display: block;
   
-  /* CONTAIN para mostrar a imagem inteira sem cortes */
-  object-fit: contain;
-  
-  /* Remove qualquer fundo xadrez/transparente */
+  /* Remove qualquer fundo */
   background: transparent;
   
-  /* Se a imagem não carregar, isso garante que ela não ocupe espaço invisível */
-  display: block; 
+  /* Garante que não há margens ou padding */
+  margin: 0;
+  padding: 0;
 }
 
 .page-header h2 {
