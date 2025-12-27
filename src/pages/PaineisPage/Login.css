@@ -459,13 +459,55 @@
   background: var(--text-tertiary, #a0aec0);
 }
 
-/* Rodapé da Página com Fundo Azul Claro */
+/* Rodapé da Página com Gradiente e Estrelas */
 .page-footer {
   width: 100%;
   padding: 1.5rem 2rem;
-  background: #4a90c2;
+  background: linear-gradient(135deg, #1a365d 0%, #2c5282 30%, #3182ce 60%, #4a90c2 100%);
   text-align: center;
   border-top: none;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Efeito de estrelas/pontos luminosos */
+.page-footer::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-image: 
+    radial-gradient(2px 2px at 10% 20%, rgba(255, 255, 255, 0.8) 0%, transparent 100%),
+    radial-gradient(2px 2px at 25% 60%, rgba(255, 255, 255, 0.6) 0%, transparent 100%),
+    radial-gradient(1px 1px at 40% 30%, rgba(255, 255, 255, 0.9) 0%, transparent 100%),
+    radial-gradient(2px 2px at 55% 70%, rgba(255, 255, 255, 0.7) 0%, transparent 100%),
+    radial-gradient(1px 1px at 70% 15%, rgba(255, 255, 255, 0.8) 0%, transparent 100%),
+    radial-gradient(2px 2px at 85% 50%, rgba(255, 255, 255, 0.6) 0%, transparent 100%),
+    radial-gradient(1px 1px at 95% 80%, rgba(255, 255, 255, 0.9) 0%, transparent 100%),
+    radial-gradient(2px 2px at 15% 85%, rgba(255, 255, 255, 0.5) 0%, transparent 100%),
+    radial-gradient(1px 1px at 50% 10%, rgba(255, 255, 255, 0.7) 0%, transparent 100%),
+    radial-gradient(2px 2px at 75% 90%, rgba(255, 255, 255, 0.6) 0%, transparent 100%),
+    radial-gradient(1px 1px at 30% 45%, rgba(255, 255, 255, 0.8) 0%, transparent 100%),
+    radial-gradient(2px 2px at 60% 25%, rgba(255, 255, 255, 0.5) 0%, transparent 100%),
+    radial-gradient(1px 1px at 90% 35%, rgba(255, 255, 255, 0.7) 0%, transparent 100%),
+    radial-gradient(2px 2px at 5% 55%, rgba(255, 255, 255, 0.6) 0%, transparent 100%),
+    radial-gradient(1px 1px at 45% 95%, rgba(255, 255, 255, 0.8) 0%, transparent 100%);
+  pointer-events: none;
+  animation: twinkle 3s ease-in-out infinite alternate;
+}
+
+@keyframes twinkle {
+  0% { opacity: 0.6; }
+  100% { opacity: 1; }
+}
+
+.page-footer p,
+.page-footer .copyright,
+.page-footer .footer-brand {
+  position: relative;
+  z-index: 1;
 }
 
 .page-footer p {
@@ -473,6 +515,7 @@
   color: #ffffff;
   margin: 0;
   font-style: italic;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
 }
 
 .page-footer .copyright {
@@ -481,7 +524,8 @@
   font-weight: 600;
   font-style: normal;
   letter-spacing: 0.5px;
-  color: rgba(255, 255, 255, 0.85);
+  color: rgba(255, 255, 255, 0.9);
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
 }
 
 .page-footer .footer-brand {
@@ -491,6 +535,7 @@
   font-style: normal;
   letter-spacing: 1px;
   color: #ffffff;
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
 }
 
 /* Responsividade */
