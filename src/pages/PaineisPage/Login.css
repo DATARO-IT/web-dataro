@@ -29,11 +29,13 @@
   padding: 0;
   margin: 0;
   
-  /* Fundo branco */
-  background: #ffffff;
+  /* Fundo azul claro para preencher laterais */
+  background: linear-gradient(90deg, #5ba3d9 0%, #5ba3d9 100%);
   
-  /* Remove flexbox para evitar centralização */
-  display: block;
+  /* Centraliza a imagem */
+  display: flex;
+  justify-content: center;
+  align-items: center;
   
   /* Borda sutil */
   border-bottom: 1px solid #e2e8f0;
@@ -45,31 +47,33 @@
 
 /* Tema escuro */
 [data-theme="dark"] .page-header-with-image {
-  background: var(--bg-primary, #1a202c);
+  background: linear-gradient(90deg, #3a7ca5 0%, #3a7ca5 100%);
   border-bottom: 1px solid #2d3748;
 }
 
 /* A Imagem em si */
 .header-image {
-  /* Preenche 100% da largura do container */
-  width: 100%;
+  /* Altura definida para preencher o cabeçalho */
+  height: 180px;
   
-  /* Altura automática para manter proporção */
-  height: auto;
+  /* Largura automática para manter proporção */
+  width: auto;
   
-  /* Remove qualquer limite */
-  max-width: none;
-  max-height: none;
+  /* Limita a largura máxima */
+  max-width: 100%;
   
-  /* Exibe como bloco para remover espaços */
+  /* Exibe como bloco */
   display: block;
   
   /* Remove qualquer fundo */
   background: transparent;
   
-  /* Garante que não há margens ou padding */
-  margin: 0;
+  /* Centraliza horizontalmente */
+  margin: 0 auto;
   padding: 0;
+  
+  /* Mantém proporção */
+  object-fit: contain;
 }
 
 .page-header h2 {
