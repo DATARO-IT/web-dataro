@@ -179,7 +179,7 @@
 .municipio-info-details {
   display: flex;
   flex-direction: column;
-  gap: 6px;
+  gap: 2px;
   margin-top: 12px;
   padding: 12px;
   background: rgba(255, 255, 255, 0.15);
@@ -188,22 +188,24 @@
 }
 
 .info-item {
-  display: flex;
-  align-items: center;
-  gap: 8px;
+  display: block;
   font-size: 13px;
+  margin-bottom: 2px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .info-label {
   font-weight: 700;
   opacity: 0.95;
-  min-width: 90px;
+  margin-right: 4px;
 }
 
 .info-value {
   opacity: 0.9;
-  flex: 1;
   font-weight: 700;
+  display: inline;
 }
 
 .site-link {
