@@ -132,7 +132,7 @@
 
 .painel-copyright span {
   font-size: 10px;
-  font-weight: 500;
+  font-weight: 700;
   opacity: 0.95;
   line-height: 1.4;
   text-align: left;
@@ -169,6 +169,7 @@
   font-size: 14px;
   margin: 4px 0 8px 0;
   opacity: 0.9;
+  font-weight: 700;
 }
 
 /* ========== INFORMAÇÕES DO MUNICÍPIO ========== */
@@ -191,7 +192,7 @@
 }
 
 .info-label {
-  font-weight: 600;
+  font-weight: 700;
   opacity: 0.95;
   min-width: 90px;
 }
@@ -199,6 +200,26 @@
 .info-value {
   opacity: 0.9;
   flex: 1;
+  font-weight: 700;
+}
+
+.site-link {
+  color: #ffffff;
+  text-decoration: underline;
+  transition: all 0.2s ease;
+}
+
+.site-link:hover {
+  color: #a5d6a7;
+  text-decoration: underline;
+}
+
+[data-theme="light"] .site-link {
+  color: #1e3a8a;
+}
+
+[data-theme="light"] .site-link:hover {
+  color: #2563eb;
 }
 
 .bandeira-placeholder-small {

@@ -224,6 +224,19 @@ const MunicipioPainel = () => {
                     <span className="info-value">{municipio.email}</span>
                   </div>
                 )}
+                {municipio.site_prefeitura && (
+                  <div className="info-item">
+                    <span className="info-label">Site:</span>
+                    <a 
+                      href={municipio.site_prefeitura} 
+                      target="_blank" 
+                      rel="noopener noreferrer"
+                      className="info-value site-link"
+                    >
+                      {municipio.site_prefeitura.replace(/^https?:\/\//, '')}
+                    </a>
+                  </div>
+                )}
               </div>
             </div>
           </div>
