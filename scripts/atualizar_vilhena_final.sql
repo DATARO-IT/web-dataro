@@ -1,9 +1,9 @@
--- Atualizar Vilhena com a nova URL pública validada
+-- Atualizar Vilhena com a nova URL pública validada (republicado)
 
 UPDATE paineis_bi
 SET 
-  url_powerbi = 'https://app.powerbi.com/view?r=eyJrIjoiMTEzYmNiNTYtYTY3Zi00ZTI2LTliMGEtNzZkMjExYWNmN2Y0IiwidCI6IjliZDQ3NzVkLTk5OWYtNGM4Ny1iM2NmLWJmZjA0YmI0YTFlNCJ9',
-  embed_url = 'https://app.powerbi.com/view?r=eyJrIjoiMTEzYmNiNTYtYTY3Zi00ZTI2LTliMGEtNzZkMjExYWNmN2Y0IiwidCI6IjliZDQ3NzVkLTk5OWYtNGM4Ly1iM2NmLWJmZjA0YmI0YTFlNCJ9',
+  url_powerbi = 'https://app.powerbi.com/view?r=eyJrIjoiMmZlNWRlYTktOTYwYS00NWZiLWFkZWEtNzk4Mjk4MDI3YjE4IiwidCI6IjliZDQ3NzVkLTk5OWYtNGM4Ny1iM2NmLWJmZjA0YmI0YTFlNCJ9',
+  embed_url = 'https://app.powerbi.com/view?r=eyJrIjoiMmZlNWRlYTktOTYwYS00NWZiLWFkZWEtNzk4Mjk4MDI3YjE4IiwidCI6IjliZDQ3NzVkLTk5OWYtNGM4Ny1iM2NmLWJmZjA0YmI0YTFlNCJ9',
   data_atualizacao = NOW()
 WHERE municipio_id = (
   SELECT id FROM municipios WHERE nome = 'Vilhena'
