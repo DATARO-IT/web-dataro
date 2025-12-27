@@ -115,17 +115,10 @@ const Login = () => {
   return (
     <div className="login-page-wrapper">
       {/* Cabeçalho da Página */}
-      <header className="page-header page-header-with-image">
-        <img 
-          src={headerImage} 
-          alt="DATA-RO INTELIGÊNCIA TERRITORIAL" 
-          className="header-image"
-          onError={(e) => {
-            console.error('Erro ao carregar imagem do header:', headerImage);
-            e.target.style.display = 'none';
-          }}
-          onLoad={() => console.log('Imagem do header carregada com sucesso!')}
-        />
+      <header 
+        className="page-header page-header-with-image"
+        style={{ backgroundImage: `url(${headerImage})` }}
+      >
         <ThemeToggle className="header-theme-toggle" />
       </header>
 
