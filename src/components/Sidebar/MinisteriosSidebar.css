@@ -324,12 +324,14 @@
 .transferegov-section h3 {
   font-size: 14px;
   margin: 0 0 8px;
+  font-weight: 700;
 }
 
 .transferegov-section p {
   font-size: 11px;
   opacity: 0.7;
   margin: 0 0 12px;
+  font-weight: 700;
 }
 
 .transferegov-btn {
@@ -340,7 +342,7 @@
   text-decoration: none;
   border-radius: 8px;
   font-size: 14px;
-  font-weight: 600;
+  font-weight: 700;
   transition: all 0.2s ease;
 }
 
@@ -359,6 +361,7 @@
   font-size: 12px;
   margin: 0 0 8px;
   opacity: 0.7;
+  font-weight: 700;
 }
 
 .portais-uteis a {
@@ -368,6 +371,7 @@
   text-decoration: none;
   font-size: 12px;
   transition: all 0.2s ease;
+  font-weight: 700;
 }
 
 .portais-uteis a:hover {
