@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useMemo, useCallback } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 import { useAuth } from '../../contexts/AuthContext';
 import { supabase } from '../../utils/supabaseClient';
 import { getBandeiraUrl } from '../../utils/bandeirasMap';
@@ -159,10 +159,16 @@ const Dashboard = () => {
               <h1>Painéis de BI</h1>
               <span className="header-title-subtitle">Rondônia em Números</span>
             </div>
+            <nav className="dashboard-nav">
+              <Link to="/" className="nav-link">INÍCIO</Link>
+              <Link to="/services" className="nav-link">SERVIÇOS</Link>
+              <a href="/#contato" className="nav-link">CONTATO</a>
+            </nav>
           </div>
           <div className="header-actions">
             <span className="user-name">Olá, {user?.nome}</span>
             <div className="header-actions-row">
+              <ThemeToggle />
               {(user?.role === 'admin' || user?.role === 'superadmin') && (
                 <div className={`admin-dropdown ${showAdminDropdown ? 'open' : ''}`}>
                   <button 
@@ -190,7 +196,6 @@ const Dashboard = () => {
                 <span className="logout-icon">🚪</span>
                 <span className="logout-text">Sair</span>
               </button>
-              <ThemeToggle />
             </div>
           </div>
         </div>

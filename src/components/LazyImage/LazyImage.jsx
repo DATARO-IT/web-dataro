@@ -37,7 +37,7 @@ const LazyImage = ({ src, alt, className, placeholder }) => {
   };
 
   return (
-    <div ref={imgRef} className={`lazy-image-container ${className || ''}`}>
+    <div ref={imgRef} className="lazy-image-container">
       {!isLoaded && (
         <div className="lazy-image-placeholder">
           {placeholder || (
@@ -49,7 +49,7 @@ const LazyImage = ({ src, alt, className, placeholder }) => {
         <img
           src={src}
           alt={alt}
-          className={`lazy-image ${isLoaded ? 'loaded' : 'loading'}`}
+          className={`lazy-image ${className || ''} ${isLoaded ? 'loaded' : 'loading'}`}
           onLoad={handleLoad}
           loading="lazy"
         />

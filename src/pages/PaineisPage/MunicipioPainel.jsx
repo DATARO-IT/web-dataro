@@ -204,6 +204,27 @@ const MunicipioPainel = () => {
             <div className="painel-text">
               <h1>{municipio.nome}</h1>
               <p>{painel.titulo}</p>
+              
+              <div className="municipio-info-details">
+                {municipio.prefeito && (
+                  <div className="info-item">
+                    <span className="info-label">Prefeito(a):</span>
+                    <span className="info-value">{municipio.prefeito}</span>
+                  </div>
+                )}
+                {municipio.telefone && (
+                  <div className="info-item">
+                    <span className="info-label">Telefone:</span>
+                    <span className="info-value">{municipio.telefone}</span>
+                  </div>
+                )}
+                {municipio.email && (
+                  <div className="info-item">
+                    <span className="info-label">E-mail:</span>
+                    <span className="info-value">{municipio.email}</span>
+                  </div>
+                )}
+              </div>
             </div>
           </div>
           <div className="painel-copyright">
