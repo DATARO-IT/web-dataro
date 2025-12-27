@@ -1,10 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../../contexts/AuthContext';
+import { useTheme } from '../../contexts/ThemeContext';
 import { getBandeiraUrl } from '../../utils/bandeirasMap';
 import logo from '../../assets/logo.png';
 import bandeiraRondonia from '../../assets/bandeira-rondonia.png';
-import headerImage from '../../assets/header-opt41.png';
+import headerImageLight from '../../assets/header-opt41.png';
+import headerImageDark from '../../assets/header-opt6.png';
 import ThemeToggle from '../../components/ThemeToggle';
 import './Login.css';
 
@@ -16,7 +18,11 @@ const Login = () => {
   const [currentSet, setCurrentSet] = useState(0);
   const [loadedImages, setLoadedImages] = useState(new Set());
   const { login } = useAuth();
+  const { theme } = useTheme();
   const navigate = useNavigate();
+
+  // Selecionar header baseado no tema
+  const headerImage = theme === 'dark' ? headerImageDark : headerImageLight;
 
   // Todos os 52 municípios de Rondônia (organizados para carrossel harmônico)
   const municipiosRondonia = [
