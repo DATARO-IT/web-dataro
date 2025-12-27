@@ -66,14 +66,14 @@
 /* Header da Sidebar */
 .sidebar-header {
   padding: 24px 20px;
-  background: #ffffff;
+  background: #ffffff !important;
   text-align: center;
   color: #1e3a8a !important;
 }
 
 /* Tema escuro - manter mesma cor azul no header */
 [data-theme="dark"] .sidebar-header {
-  background: #ffffff;
+  background: #ffffff !important;
   color: #1e3a8a !important;
 }
 
@@ -89,6 +89,15 @@
   align-items: center;
   justify-content: center;
   gap: 10px;
+  color: #1e3a8a !important;
+}
+
+.ministerios-sidebar .sidebar-header {
+  background: #ffffff !important;
+  color: #1e3a8a !important;
+}
+
+.ministerios-sidebar .sidebar-header h2 {
   color: #1e3a8a !important;
 }
 
