@@ -159,7 +159,7 @@ const Dashboard = () => {
           </div>
           <div className="header-center">
             <div className="header-title-group">
-              <h1>Painéis de BI</h1>
+              <h1>Painéis de Inteligência Territorial</h1>
               <span className="header-title-subtitle">Rondônia em Números</span>
             </div>
           </div>
