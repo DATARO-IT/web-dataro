@@ -203,10 +203,52 @@
   font-weight: 700;
 }
 
+
 .site-link {
   color: #ffffff;
   text-decoration: underline;
   transition: all 0.2s ease;
+  font-weight: 800;
+}
+
+.site-prefeitura-header {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 12px 0 18px 0;
+}
+
+.site-link.destaque {
+  font-size: 1.35rem;
+  padding: 6px 24px;
+  border-radius: 8px;
+  background: rgba(30,58,138,0.12);
+  color: #fff;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+  text-align: center;
+  font-weight: 900;
+  letter-spacing: 0.5px;
+  border: 2px solid rgba(255,255,255,0.18);
+}
+
+[data-theme="light"] .site-link.destaque {
+  background: rgba(30,58,138,0.08);
+  color: #1e3a8a;
+  border: 2px solid #1e3a8a22;
+}
+
+.site-link.destaque:hover {
+  background: #2563eb;
+  color: #fff;
+  border-color: #2563eb;
+  text-decoration: underline;
+}
+
+[data-theme="light"] .site-link.destaque:hover {
+  background: #1e40af;
+  color: #fff;
+  border-color: #1e40af;
 }
 
 .site-link:hover {
