@@ -231,26 +231,30 @@
   border-radius: 8px;
   font-size: 1rem;
   transition: all 0.2s;
-  background: #ffffff;
+  background: #ffffff !important;
   color: #000000 !important;
   font-family: 'Poppins', sans-serif;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  -webkit-text-fill-color: #000000;
 }
 
 [data-theme="dark"] .form-group input {
-  background: #1e293b;
+  background: #1e293b !important;
   color: #f1f5f9 !important;
   border-color: #10b981;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+  -webkit-text-fill-color: #f1f5f9;
 }
 
 .form-group input::placeholder {
-  color: #6b7280 !important;
-  opacity: 1;
+  color: #555555 !important;
+  opacity: 1 !important;
+  -webkit-text-fill-color: #555555;
 }
 
 [data-theme="dark"] .form-group input::placeholder {
   color: #94a3b8 !important;
+  -webkit-text-fill-color: #94a3b8;
 }
 
 .form-group input:focus {
