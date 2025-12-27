@@ -209,10 +209,14 @@
 }
 
 .site-link {
-  color: #ffffff;
+  color: inherit;
   text-decoration: underline;
-  transition: all 0.2s ease;
-  font-weight: 800;
+  transition: color 0.2s;
+  font-weight: 700;
+  background: none !important;
+  box-shadow: none !important;
+  border: none !important;
+  padding: 0 !important;
 }
 
 .site-prefeitura-header {
@@ -252,13 +256,11 @@
 }
 
 .site-link:hover {
-  color: #a5d6a7;
+  color: inherit;
   text-decoration: underline;
 }
 
-[data-theme="light"] .site-link {
-  color: #1e3a8a;
-}
+
 
 [data-theme="light"] .site-link:hover {
   color: #2563eb;
