@@ -1,19 +1,31 @@
-.services-page-container {
-  padding: 2rem 0;
+/* Adicione no index.css */
+
+.project-visual {
+  width: 100%;
+  max-width: 500px; /* Tamanho máximo do ícone grande */
+  height: auto;
+  display: block;
+  margin: 0 auto; /* Centralizar */
 }
 
-.services-header {
+/* Resto do CSS continua igual... */
+.projects-page-container {
+  padding: 2rem 0;
+}
+/* ... */
+
+.projects-header {
   text-align: center;
   margin-bottom: 5rem;
 }
 
-.services-header h1 {
+.projects-header h1 {
   font-size: 3rem;
   font-weight: 800;
   margin-bottom: 1rem;
 }
 
-.services-header p {
+.projects-header p {
   font-size: 1.2rem;
   color: #64748b;
   max-width: 600px;

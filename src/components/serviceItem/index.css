@@ -1,8 +1,91 @@
+/* --- CONFIGURAÇÃO DE CORES (VARIÁVEIS) --- */
+:root {
+  /* Cores Padrão (Modo Claro) */
+  --bg-color: #ffffff;
+  --text-title: #1e293b;      /* Slate 800 */
+  --text-body: #64748b;       /* Slate 500 */
+  --icon-color: #0ea5e9;      /* Sky 500 */
+}
+
+/* Configuração automática para Modo Escuro */
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg-color: #0f172a;      /* Slate 900 (Fundo Escuro) */
+    --text-title: #f1f5f9;    /* Slate 100 (Texto Claro) */
+    --text-body: #94a3b8;     /* Slate 400 (Texto Suave Claro) */
+  }
+}
+
+/* Aplica o fundo globalmente ao container da página */
+.projects-page-container {
+  padding: 2rem 0;
+  background-color: var(--bg-color);
+  min-height: 100vh; /* Garante que cubra a tela toda */
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* --- ESTILOS DO CABEÇALHO --- */
+.projects-header {
+  text-align: center;
+  margin-bottom: 5rem;
+  padding: 0 1rem;
+}
+
+.projects-header h1 {
+  font-size: 3rem;
+  font-weight: 800;
+  margin-bottom: 1rem;
+  color: var(--text-title); /* Usa a variável dinâmica */
+}
+
+.projects-header p {
+  font-size: 1.2rem;
+  max-width: 600px;
+  margin: 0 auto;
+  color: var(--text-body); /* Usa a variável dinâmica */
+}
+
+/* --- ESTILOS PARA AS ILUSTRAÇÕES (SVG) --- */
+.project-visual {
+  width: 100%;
+  max-width: 500px;
+  height: auto;
+  display: block;
+  margin: 0 auto;
+  /* Opcional: Diminui um pouco o brilho das ilustrações no modo escuro para não ofuscar */
+  filter: drop-shadow(0 4px 6px rgba(0,0,0,0.1));
+}
+
+@media (prefers-color-scheme: dark) {
+  .project-visual {
+    opacity: 0.9; /* Leve ajuste visual no modo escuro */
+  }
+}
+
+/* --- REFORÇO PARA O COMPONENTE SERVICEITEM --- */
+/* (Caso o CSS do ServiceItem não esteja importando as variáveis, forçamos aqui) */
+
+.service-title h3 {
+  color: var(--text-title) !important;
+}
+
+.service-content-wrapper p {
+  color: var(--text-body) !important;
+}
+
+.service-title svg {
+  color: var(--icon-color);
+}
+
+
 .service-item-container {
   display: flex;
-  gap: 3rem;
   align-items: center;
-  margin-bottom: 6rem; /* Espaço entre os serviços */
+  justify-content: space-between;
+  gap: 4rem;
+  margin-bottom: 6rem; /* Espaço entre os projetos */
+  /* Adicionei padding para telas menores não colarem na borda */
+  padding: 0 1rem; 
 }
 
 .service-item-container.reverse {
@@ -11,20 +94,30 @@
 
 .service-image-wrapper {
   flex: 1;
-  border-radius: 12px;
-  overflow: hidden;
-  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+  display: flex;
+  justify-content: center; /* Centraliza o SVG */
+  align-items: center;
 }
 
+/* Regra para a Imagem antiga (se houver) */
 .service-image-wrapper img {
   width: 100%;
-  display: block;
-  aspect-ratio: 16 / 10;
-  object-fit: cover;
+  max-width: 500px;
+  border-radius: 12px;
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+}
+
+/* NOVA REGRA: Regra para o SVG (VisualComponent) */
+.service-image-wrapper svg.project-visual {
+  width: 100%;
+  max-width: 500px; /* Tamanho máximo do ícone */
+  height: auto;
+  /* Opcional: Adiciona uma sombra suave no próprio SVG se desejar profundidade */
+  filter: drop-shadow(0 10px 15px rgba(0, 0, 0, 0.1));
 }
 
 .service-content-wrapper {
-  flex: 1.2; /* Dá um pouco mais de espaço para o texto */
+  flex: 1;
 }
 
 .service-title {
@@ -34,29 +127,39 @@
   margin-bottom: 1rem;
 }
 
+/* Cor do ícone pequeno ao lado do título */
 .service-title svg {
   width: 32px;
   height: 32px;
-  color: #007bff;
+  color: #0ea5e9; /* Azul padrão, pode ajustar conforme sua paleta */
 }
 
 .service-title h3 {
   font-size: 2rem;
   font-weight: 700;
+  color: #1e293b;
   margin: 0;
 }
 
 .service-content-wrapper p {
-  font-size: 1.1rem;
+  font-size: 1.125rem;
   line-height: 1.7;
   color: #475569;
 }
 
-@media (max-width: 992px) {
-  .service-item-container,
+/* Responsividade para celular */
+@media (max-width: 768px) {
+  .service-item-container {
+    flex-direction: column;
+    text-align: center;
+    gap: 2rem;
+  }
+
   .service-item-container.reverse {
     flex-direction: column;
-    gap: 2rem;
-    margin-bottom: 4rem;
+  }
+
+  .service-title {
+    justify-content: center;
   }
 }
