@@ -7,7 +7,8 @@
     "dev": "vite",
     "build": "vite build",
     "lint": "eslint .",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "test": "echo \"Sem testes configurados\" && exit 0"
   },
   "dependencies": {
     "@supabase/supabase-js": "^2.87.1",
