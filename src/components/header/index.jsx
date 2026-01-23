@@ -52,7 +52,7 @@ const Header = ({ onContactClick }) => {
           <nav className={navClassName}>
             <ul>
               <li><Link to="/" onClick={() => setIsMenuOpen(false)}>INÍCIO</Link></li>
-              <li><Link to="/services" onClick={() => setIsMenuOpen(false)}>SERVIÇOS</Link></li>
+              <li><Link to="/services" onClick={() => setIsMenuOpen(false)}>PORTFÓLIO</Link></li>
               <li><a href="#" onClick={handleContactClick}>CONTATO</a></li>
               <li><Link to="/about-us" onClick={() => setIsMenuOpen(false)}>SOBRE NÓS</Link></li>
               <li><Link to="/paineis/login" className="paineis-link" onClick={() => setIsMenuOpen(false)}>RONDÔNIA EM NÚMEROS</Link></li>
