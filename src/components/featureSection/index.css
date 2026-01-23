@@ -1,92 +1,159 @@
-/* --- Container Principal da Seção --- */
-.feature-section {
-  display: flex;
-  align-items: center;
-  gap: 3rem;
-  padding: 8rem 0; /* Espaçamento vertical entre as seções */
+/* src/components/featureSection/index.css */
+
+/* --- Container Principal (Wrapper da Seção) --- */
+.feature-section-component {
+  width: 100%;
+  padding: 6rem 0; /* Espaçamento vertical generoso */
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05); /* Linha sutil separando seções */
 }
 
-/* --- Lógica de Layout Alternado --- */
-.feature-section.reverse {
+/* Alternância de fundo para não ficar monótono */
+/* Seção Ímpar: Navy Padrão */
+.feature-section-component:nth-of-type(odd) {
+  background-color: #0f172a; 
+}
+/* Seção Par: Navy Levemente mais claro */
+.feature-section-component:nth-of-type(even) {
+  background-color: #1e293b; 
+}
+
+/* --- Container Centralizado (Limita a largura) --- */
+.feature-container {
+  width: 100%;
+  max-width: 1100px; /* Alinhado com o resto do site */
+  margin: 0 auto;
+  padding: 0 1.5rem;
+  
+  display: flex;
+  align-items: center;
+  gap: 4rem; /* Espaço entre texto e imagem */
+}
+
+/* --- Lógica de Inversão (Zigue-Zague) --- */
+/* Se a prop 'reverse' for true, inverte a ordem flex */
+.feature-section-component.reverse .feature-container {
   flex-direction: row-reverse;
 }
 
 /* --- Conteúdo de Texto --- */
 .feature-content {
-  flex: 0.9; /* Ocupa 50% do espaço */
+  flex: 1; /* Ocupa metade */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
 
 .feature-title {
-  font-size: 2.5rem;
-  font-weight: 700;
+  font-size: 2.2rem;
+  font-weight: 800;
   line-height: 1.2;
   margin-bottom: 1.5rem;
+  color: #f8fafc; /* Branco gelo */
 }
 
 .feature-description {
   font-size: 1.1rem;
-  color: #475569;
+  color: #cbd5e1; /* Cinza claro para leitura em fundo escuro */
   line-height: 1.7;
+  margin-bottom: 2rem;
 }
 
+/* Box de Menção da Empresa */
 .feature-company-mention {
-  margin-top: 1.5rem;
-  padding: 1rem;
-  background-color: rgba(255, 255, 255, 0.7); /* Fundo branco semi-transparente para destacar do fundo geométrico */
-  border-left: 4px solid #007bff;
-  border-radius: 4px;
-  font-weight: 500;
+  background-color: rgba(56, 189, 248, 0.1); /* Azul bem transparente */
+  border-left: 4px solid #38bdf8; /* Borda Neon Azul */
+  padding: 1.2rem;
+  border-radius: 0 8px 8px 0;
+}
+
+.feature-company-mention p {
+  font-size: 0.95rem;
+  font-style: italic;
+  color: #e2e8f0;
+  margin: 0;
 }
 
 /* --- Carrossel de Imagens --- */
 .feature-carousel {
-  flex: 1; /* Ocupa 50% do espaço */
+  flex: 1; /* Ocupa a outra metade */
   position: relative;
-  border-radius: 12px;
+  border-radius: 16px;
   overflow: hidden;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 20px 40px -10px rgba(0, 0, 0, 0.5); /* Sombra forte para profundidade */
+  border: 1px solid rgba(255, 255, 255, 0.1); /* Borda sutil */
+  background: #000; /* Fundo preto enquanto carrega */
+  aspect-ratio: 16 / 10; /* Mantém proporção retangular */
 }
 
 .carousel-inner {
   display: flex;
-  transition: transform 0.5s ease-in-out;
+  height: 100%;
+  width: 100%;
+  transition: transform 0.6s cubic-bezier(0.25, 1, 0.5, 1); /* Animação suave */
+}
+
+.carousel-slide {
+  min-width: 100%;
+  height: 100%;
 }
 
 .carousel-image {
-  flex-shrink: 0;
   width: 100%;
-  aspect-ratio: 16 / 10;
-  object-fit: cover;
+  height: 100%;
+  object-fit: cover; /* Garante que a imagem preencha o quadro sem distorcer */
 }
 
+/* Bolinhas (Indicadores) */
 .carousel-indicators {
   position: absolute;
-  bottom: 15px;
+  bottom: 20px;
   left: 50%;
   transform: translateX(-50%);
   display: flex;
-  gap: 10px;
+  gap: 12px;
+  z-index: 10;
+  background: rgba(0, 0, 0, 0.3); /* Fundo sutil atrás das bolinhas */
+  padding: 6px 12px;
+  border-radius: 20px;
 }
 
 .indicator-dot {
-  width: 12px;
-  height: 12px;
+  width: 10px;
+  height: 10px;
   border-radius: 50%;
-  background-color: rgba(255, 255, 255, 0.5);
+  background-color: rgba(255, 255, 255, 0.4);
   cursor: pointer;
-  transition: background-color 0.3s ease;
+  transition: all 0.3s ease;
 }
 
 .indicator-dot.active {
-  background-color: #ffffff;
+  background-color: #4ade80; /* Verde Neon Ativo */
+  transform: scale(1.2);
 }
 
 /* --- RESPONSIVIDADE --- */
-@media (max-width: 992px) {
-  .feature-section,
-  .feature-section.reverse {
-    flex-direction: column; /* Empilha tudo verticalmente */
-    gap: 2rem;
-    padding: 3rem 0;
+@media (max-width: 900px) {
+  .feature-container {
+    flex-direction: column; /* Empilha verticalmente no mobile */
+    gap: 3rem;
+    text-align: center;
+  }
+
+  /* No mobile, mesmo se for reverse, volta ao normal (imagem em cima ou embaixo padrão) */
+  .feature-section-component.reverse .feature-container {
+    flex-direction: column; 
+  }
+
+  /* Reordenar para Imagem ficar em cima do texto no mobile? */
+  .feature-carousel {
+    order: -1; /* Joga a imagem para o topo */
+    width: 100%;
+  }
+
+  .feature-company-mention {
+    text-align: left; /* Mantém o texto da citação alinhado para leitura */
+    border-radius: 8px;
+    border-left: none;
+    border-top: 4px solid #38bdf8; /* Borda no topo no mobile */
   }
 }

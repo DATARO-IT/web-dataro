@@ -1,47 +1,48 @@
+/* src/App.css */
+
 /* --- LAYOUT GERAL DA APLICAÇÃO --- */
 
-/* O container principal que envolve tudo */
 .App {
   display: flex;
   flex-direction: column;
-  min-height: 100vh; /* Garante que o app ocupe no mínimo a altura total da tela */
+  min-height: 100vh; /* Garante que o rodapé vá para o fundo */
   
-  /* IMPORTANTE: Espaço no topo para não ficar atrás do header fixo */
-  /* Este valor deve ser igual ou um pouco maior que a altura do seu header */
-  padding-top: 80px; 
-}
-
-/* --- CONTAINER DO CONTEÚDO PRINCIPAL --- */
-
-/* Uma classe para envolver o conteúdo de cada página */
-.main-content {
+  /* IMPORTANTE: Garante que o App ocupe a tela toda */
   width: 100%;
-  max-width: 1280px; /* Largura máxima do conteúdo em telas grandes */
-  margin: 0 auto; /* Centraliza o container de conteúdo */
+  max-width: 100%;
   
-  /* Padding vertical e horizontal para o conteúdo não colar nas bordas */
-  padding: 2rem 1.5rem; 
-
-  /* Garante que o conteúdo empurre o rodapé para baixo em páginas curtas */
-  flex-grow: 1; 
+  /* Mantenha isso SÓ SE o seu Header for "fixed" (preso no topo). 
+     Se o Header for normal, mude para 0. */
+  padding-top: 120px; 
+  
+  overflow-x: hidden; /* Trava scroll lateral indesejado */
 }
 
+/* --- O CONTAINER QUE ESTAVA TE ATRAPALHANDO --- */
 
+.main-content {
+  /* AGORA SIM: Sem limites */
+  width: 100%;
+  max-width: 100%; 
+  margin: 0; 
+  padding: 0; /* Zero padding para não criar borda branca */
 
+  /* Empurra o rodapé para baixo */
+  flex-grow: 1; 
+  
+  /* Flex para garantir que o filho (HomePage) estique */
+  display: flex;
+  flex-direction: column;
+}
 
 /* --- AJUSTES RESPONSIVOS --- */
+/* (Removi os paddings laterais aqui também, senão volta a borda no celular) */
 
-/* Para tablets e telas menores */
 @media (max-width: 768px) {
-  .main-content {
-    padding-top: 1.5rem;
-    padding-bottom: 1.5rem;
-  }
-}
-
-/* Para celulares */
-@media (max-width: 480px) {
-  .main-content {
-    padding: 1rem;
+  /* Se precisar ajustar algo no mobile, faça aqui, 
+     mas NÃO coloque padding lateral no container pai */
+  .App {
+    /* Ajuste o topo se o header mobile for menor */
+    padding-top: 60px; 
   }
 }

@@ -1,0 +1,414 @@
+/* src/pages/homePage/index.css */
+
+/* --- VARIÁVEIS --- */
+:root {
+  --primary-navy: #0f172a;    
+  --secondary-navy: #1e293b;  
+  --card-border: #334155;     
+  --accent-green: #4ade80;    
+  --accent-blue: #38bdf8;     
+  --text-white: #ffffff;      
+  --text-muted: #cbd5e1;      
+  --font-main: 'Inter', system-ui, sans-serif;
+}
+
+/* --- ESTRUTURA BASE --- */
+.home-page-wrapper {
+  background-color: var(--primary-navy);
+  color: var(--text-white);
+  font-family: var(--font-main);
+  width: 100%;
+}
+
+.home-container {
+  width: 100%;
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 0 1.5rem;
+}
+
+/* --- CABEÇALHOS --- */
+.section-header-center {
+  text-align: center;
+  margin-bottom: 3.5rem;
+  max-width: 800px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.badge {
+  background: rgba(74, 222, 128, 0.15);
+  color: var(--accent-green);
+  font-size: 0.85rem;
+  font-weight: 700;
+  padding: 0.5rem 1.2rem;
+  border-radius: 50px;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  display: inline-block;
+  margin-bottom: 1.5rem;
+  border: 1px solid rgba(74, 222, 128, 0.2);
+}
+
+.section-header-center h2 {
+  font-size: 2.8rem;
+  font-weight: 800;
+  line-height: 1.1;
+  margin-bottom: 1.5rem;
+  color: var(--text-white);
+  letter-spacing: -0.02em;
+}
+
+.highlight-text {
+  background: linear-gradient(90deg, var(--accent-green), var(--accent-blue));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.section-desc {
+  color: var(--text-muted);
+  font-size: 1.15rem;
+  line-height: 1.7;
+  max-width: 650px;
+  margin: 0 auto;
+}
+
+/* --- SEÇÃO METODOLOGIA --- */
+.tech-explanation-section {
+  width: 100%;
+  padding: 5rem 0;
+  background-color: var(--primary-navy);
+  background-image: radial-gradient(#334155 1px, transparent 1px);
+  background-size: 40px 40px;
+}
+
+.tech-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 1.5rem;
+  justify-content: center;
+}
+
+.tech-card {
+  background: var(--secondary-navy);
+  padding: 2rem;
+  border-radius: 12px;
+  border: 1px solid var(--card-border);
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.3);
+  transition: all 0.3s ease;
+  display: flex;
+  flex-direction: column;
+}
+
+.tech-card:hover {
+  transform: translateY(-5px);
+  border-color: var(--accent-blue);
+  background: #24344d;
+}
+
+.tech-icon-box {
+  background: rgba(56, 189, 248, 0.1);
+  color: var(--accent-blue);
+  width: 56px;
+  height: 56px;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 1.2rem;
+}
+
+.tech-card h3 {
+  font-size: 1.35rem;
+  font-weight: 700;
+  margin-bottom: 0.8rem;
+  color: var(--text-white);
+}
+
+.tech-card p {
+  color: var(--text-muted);
+  line-height: 1.6;
+  font-size: 1rem;
+}
+
+/* --- SEÇÃO CASE SEDEC --- */
+.partners-section {
+  width: 100%;
+  padding: 5rem 0;
+  background: linear-gradient(to right, #0b1120, #111827);
+  border-top: 1px solid var(--card-border);
+  border-bottom: 1px solid var(--card-border);
+}
+
+.partners-content {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  align-items: center;
+  gap: 3rem;
+}
+
+.partners-text h2 {
+  font-size: 2.5rem;
+  font-weight: 800;
+  margin-bottom: 1.2rem;
+  color: var(--text-white);
+}
+
+.partners-text p {
+  color: var(--text-muted);
+  font-size: 1.1rem;
+  margin-bottom: 2rem;
+  line-height: 1.6;
+}
+
+.badge-outline {
+  border: 1px solid var(--accent-blue);
+  color: var(--accent-blue);
+  padding: 0.3rem 0.8rem;
+  border-radius: 50px;
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  display: inline-block;
+  margin-bottom: 1rem;
+}
+
+.btn-arrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: var(--accent-green);
+  font-weight: 700;
+  text-decoration: none;
+  font-size: 1rem;
+  transition: gap 0.3s ease;
+  border-bottom: 1px solid transparent;
+}
+
+.btn-arrow:hover {
+  gap: 0.8rem;
+  color: var(--text-white);
+  border-bottom-color: var(--text-white);
+}
+
+/* Card SEDEC */
+.case-card {
+  background: #ffffff;
+  border-radius: 12px;
+  padding: 2.5rem;
+  color: #0f172a;
+  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.3);
+  position: relative;
+  width: 100%; 
+}
+
+.case-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 6px;
+  height: 100%;
+  background: var(--accent-green);
+  border-top-left-radius: 12px;
+  border-bottom-left-radius: 12px;
+}
+
+.case-header strong {
+  font-size: 1.6rem;
+  font-weight: 800;
+  color: #0f172a;
+}
+
+.case-header span {
+  font-size: 0.9rem;
+  color: #64748b;
+  text-transform: uppercase;
+  font-weight: 700;
+  display: block;
+}
+
+.case-body h4 {
+  font-size: 1.25rem;
+  font-weight: 700;
+  margin-bottom: 0.5rem;
+  margin-top: 1rem;
+  color: #0f172a;
+}
+
+.case-body p {
+  color: #475569;
+  font-size: 1rem;
+}
+
+.tags {
+  display: flex;
+  gap: 0.5rem;
+  margin-top: 1.5rem;
+}
+
+.tags span {
+  background: #f1f5f9;
+  color: #334155;
+  padding: 0.3rem 0.8rem;
+  border-radius: 6px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  border: 1px solid #e2e8f0;
+}
+
+/* --- ESTILOS DAS FEATURES (NOVO!) --- */
+/* Isso vai arrumar a bagunça do saude/educacao/agro */
+
+/* 1. O Container Externo da Feature */
+.feature-section {
+  width: 100%;
+  padding: 5rem 0;
+  border-bottom: 1px solid var(--card-border);
+}
+
+/* Alternância de cores para não ficar tudo igual */
+.feature-section:nth-child(even) {
+  background-color: var(--secondary-navy); /* Fundo um pouco mais claro */
+}
+.feature-section:nth-child(odd) {
+  background-color: var(--primary-navy);   /* Fundo padrão */
+}
+
+/* 2. O Container Interno (Centralizado) */
+/* Se o seu componente FeatureSection usar 'container', esse CSS vai pegar */
+.feature-section > div, 
+.feature-container {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 0 1.5rem;
+  display: grid;
+  grid-template-columns: 1fr 1fr; /* Divide meio a meio */
+  align-items: center;
+  gap: 4rem;
+}
+
+/* 3. Inversão (Zigue Zague) */
+/* Se o componente tiver a classe 'reverse' */
+.feature-section.reverse > div,
+.feature-container.reverse {
+  direction: rtl; /* Truque rápido para inverter a ordem visual */
+}
+
+.feature-section.reverse > div > *,
+.feature-container.reverse > * {
+  direction: ltr; /* Restaura a direção do texto dentro dos filhos */
+}
+
+/* 4. Títulos e Textos das Features */
+.feature-section h2, .feature-title {
+  font-size: 2.2rem;
+  font-weight: 800;
+  color: var(--text-white);
+  margin-bottom: 1rem;
+}
+
+.feature-section p, .feature-description {
+  font-size: 1.1rem;
+  line-height: 1.6;
+  color: var(--text-muted);
+  margin-bottom: 1.5rem;
+}
+
+.feature-company-mention {
+  background: rgba(56, 189, 248, 0.1);
+  border-left: 4px solid var(--accent-blue);
+  padding: 1rem;
+  color: var(--text-white);
+  font-size: 0.95rem;
+  font-style: italic;
+  border-radius: 0 8px 8px 0;
+}
+
+/* --- SEÇÃO INSIGHTS --- */
+.insights-section {
+  width: 100%;
+  padding: 5rem 0;
+  background-color: var(--primary-navy);
+}
+
+.articles-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 2rem;
+  justify-content: center;
+}
+
+.article-card {
+  background: var(--secondary-navy);
+  border: 1px solid var(--card-border);
+  border-radius: 12px;
+  padding: 2rem;
+  transition: all 0.3s ease;
+  display: flex;
+  flex-direction: column;
+}
+
+.article-card:hover {
+  background: #24344d;
+  transform: translateY(-5px);
+  border-color: var(--text-muted);
+}
+
+.article-date {
+  color: var(--accent-green);
+  font-size: 0.8rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  margin-bottom: 1rem;
+  display: block;
+  letter-spacing: 0.05em;
+}
+
+.article-card h3 {
+  font-size: 1.4rem;
+  font-weight: 700;
+  margin-bottom: 1rem;
+  line-height: 1.4;
+  color: var(--text-white);
+}
+
+.article-card p {
+  color: var(--text-muted);
+  margin-bottom: 2rem;
+  line-height: 1.6;
+}
+
+.read-more {
+  color: var(--text-white);
+  text-decoration: none;
+  font-weight: 600;
+  border-bottom: 2px solid var(--accent-green);
+  align-self: flex-start;
+  padding-bottom: 2px;
+}
+
+/* --- RESPONSIVIDADE GERAL --- */
+@media (max-width: 900px) {
+  .section-header-center h2 { font-size: 2.2rem; }
+  
+  .partners-content,
+  .feature-section > div, 
+  .feature-container {
+    grid-template-columns: 1fr; /* Coluna única no mobile */
+    text-align: center;
+    gap: 3rem;
+  }
+
+  .partners-text { order: 1; }
+  .partners-logos { order: 2; }
+  .btn-arrow { justify-content: center; }
+  
+  .home-container { padding: 0 1.5rem; }
+
+  /* Resetar direção no mobile para features */
+  .feature-section.reverse > div,
+  .feature-container.reverse {
+    direction: ltr;
+  }
+}

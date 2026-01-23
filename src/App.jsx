@@ -8,6 +8,7 @@ import ContactPopup from './components/contactPopup';
 
 // Importando as PÁGINAS
 import HomePage from './pages/homePage';
+import AboutUs from './pages/AboutUs';
 import ServicesPage from './pages/ServicesPage/index';
 
 // Importando páginas de Painéis
@@ -96,6 +97,7 @@ function App() {
           {/* Rotas públicas */}
           <Route path="/" element={<PublicLayout><HomePage /></PublicLayout>} />
           <Route path="/services" element={<PublicLayout><ServicesPage /></PublicLayout>} />
+          <Route path="/about-us" element={<PublicLayout><AboutUs /></PublicLayout>} />
 
           {/* Rotas de Painéis */}
           <Route path="/paineis/login" element={<Login />} />
