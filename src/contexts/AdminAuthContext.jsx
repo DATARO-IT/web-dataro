@@ -81,12 +81,51 @@ export const AdminAuthProvider = ({ children }) => {
         nome: data.nome,
         role: data.role,
         avatar_url: data.avatar_url,
-        is_super_admin: data.is_super_admin || data.email === 'contato@dataro-it.com.br'
+        is_super_admin: data.is_super_admin || data.email === 'contato@dataro-it.com.br',
+        primeiro_acesso: data.primeiro_acesso
       };
 
       setAdminUser(adminData);
       localStorage.setItem('admin_user', JSON.stringify(adminData));
       
+      return { success: true, primeiro_acesso: data.primeiro_acesso };
+    } catch (error) {
+      return { success: false, error: error.message };
+    }
+  };
+
+  const atualizarSenha = async (novaSenha) => {
+    try {
+      if (!adminUser) {
+        throw new Error('Usuário não autenticado');
+      }
+
+      // Atualizar senha no banco
+      const { error } = await supabase
+        .from('admin_usuarios')
+        .update({ 
+          senha_hash: novaSenha,
+          primeiro_acesso: false,
+          updated_at: new Date().toISOString()
+        })
+        .eq('id', adminUser.id);
+
+      if (error) {
+        throw new Error('Erro ao atualizar senha');
+      }
+
+      // Registrar log
+      await registrarLogAuditoriaAdmin(
+        adminUser.email,
+        'SENHA_ALTERADA',
+        `Senha alterada com sucesso. Nome: ${adminUser.nome}`
+      );
+
+      // Atualizar estado local
+      const updatedUser = { ...adminUser, primeiro_acesso: false };
+      setAdminUser(updatedUser);
+      localStorage.setItem('admin_user', JSON.stringify(updatedUser));
+
       return { success: true };
     } catch (error) {
       return { success: false, error: error.message };
@@ -114,6 +153,7 @@ export const AdminAuthProvider = ({ children }) => {
       adminUser, 
       loginAdmin, 
       logoutAdmin, 
+      atualizarSenha,
       loading,
       isSuperAdmin 
     }}>

@@ -23,6 +23,8 @@ import {
   AdminLayout, 
   AdminDashboard, 
   AdminClientes,
+  AdminUsuarios,
+  AdminTrocarSenha,
   AdminPlaceholder 
 } from './pages/AdminPage';
 
@@ -121,6 +123,53 @@ const AdminProtectedRoute = ({ children }) => {
     return <Navigate to="/admin/login" />;
   }
   
+  // Se é primeiro acesso, redireciona para troca de senha
+  if (adminUser.primeiro_acesso) {
+    return <Navigate to="/admin/trocar-senha" />;
+  }
+  
+  return children;
+};
+
+// Componente para rota de troca de senha (precisa estar logado mas não precisa ter trocado a senha)
+const AdminTrocarSenhaRoute = ({ children }) => {
+  const { adminUser, loading } = useAdminAuth();
+  
+  if (loading) {
+    return (
+      <div style={{ 
+        display: 'flex', 
+        justifyContent: 'center', 
+        alignItems: 'center', 
+        height: '100vh',
+        background: 'linear-gradient(135deg, #064e3b 0%, #022c22 40%, #0a0f0d 100%)'
+      }}>
+        <div style={{ textAlign: 'center' }}>
+          <div style={{
+            width: '40px',
+            height: '40px',
+            border: '4px solid rgba(16, 185, 129, 0.2)',
+            borderTop: '4px solid #10b981',
+            borderRadius: '50%',
+            animation: 'spin 1s linear infinite',
+            margin: '0 auto 16px'
+          }}></div>
+          <p style={{ color: 'rgba(255,255,255,0.7)' }}>Carregando...</p>
+        </div>
+        <style>{`
+          @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+          }
+        `}</style>
+      </div>
+    );
+  }
+  
+  if (!adminUser) {
+    return <Navigate to="/admin/login" />;
+  }
+  
   return children;
 };
 
@@ -181,6 +230,14 @@ function App() {
 
             {/* Rotas de Admin */}
             <Route path="/admin/login" element={<AdminLogin />} />
+            <Route 
+              path="/admin/trocar-senha" 
+              element={
+                <AdminTrocarSenhaRoute>
+                  <AdminTrocarSenha />
+                </AdminTrocarSenhaRoute>
+              } 
+            />
             <Route
               path="/admin"
               element={
@@ -196,7 +253,7 @@ function App() {
               <Route path="relatorios" element={<AdminPlaceholder />} />
               <Route path="contatos" element={<AdminPlaceholder />} />
               <Route path="perfil" element={<AdminPlaceholder />} />
-              <Route path="usuarios" element={<AdminPlaceholder />} />
+              <Route path="usuarios" element={<AdminUsuarios />} />
               <Route path="credenciais" element={<AdminPlaceholder />} />
               <Route path="busca" element={<AdminPlaceholder />} />
               <Route path="logs" element={<AdminPlaceholder />} />
