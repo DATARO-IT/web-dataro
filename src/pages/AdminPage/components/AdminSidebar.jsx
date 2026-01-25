@@ -82,6 +82,12 @@ const Icons = {
       <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path>
     </svg>
   ),
+  Financeiro: () => (
+    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+      <line x1="12" y1="1" x2="12" y2="23"></line>
+      <path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path>
+    </svg>
+  ),
   Configuracoes: () => (
     <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
       <circle cx="12" cy="12" r="3"></circle>
@@ -129,6 +135,7 @@ const menuItems = [
   { path: '/admin/perfil', icon: Icons.Perfil, label: 'Meu Perfil' },
   { path: '/admin/usuarios', icon: Icons.Usuarios, label: 'Usuários', superAdminOnly: true },
   { path: '/admin/credenciais', icon: Icons.Credenciais, label: 'Credenciais de Clientes', superAdminOnly: true },
+  { path: '/admin/financeiro', icon: Icons.Financeiro, label: 'Financeiro', superAdminOnly: true },
   { path: '/admin/busca', icon: Icons.Busca, label: 'Busca de Arquivos' },
   { path: '/admin/logs', icon: Icons.Logs, label: 'Logs de Acesso', superAdminOnly: true },
   { path: '/admin/excluidos', icon: Icons.Excluidos, label: 'Arquivos Excluídos' },

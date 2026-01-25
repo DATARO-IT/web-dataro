@@ -6,3 +6,4 @@ export { default as AdminClientes } from './AdminClientes';
 export { default as AdminUsuarios } from './AdminUsuarios';
 export { default as AdminTrocarSenha } from './AdminTrocarSenha';
 export { default as AdminPlaceholder } from './AdminPlaceholder';
+export { default as AdminFinanceiro } from './AdminFinanceiro';
