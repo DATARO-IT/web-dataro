@@ -112,6 +112,76 @@ const Icons = {
       <path d="M21.21 15.89A10 10 0 1 1 8 2.83"></path>
       <path d="M22 12A10 10 0 0 0 12 2v10z"></path>
     </svg>
+  ),
+  Calculator: () => (
+    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+      <rect x="4" y="2" width="16" height="20" rx="2"></rect>
+      <line x1="8" y1="6" x2="16" y2="6"></line>
+      <line x1="8" y1="10" x2="8" y2="10"></line>
+      <line x1="12" y1="10" x2="12" y2="10"></line>
+      <line x1="16" y1="10" x2="16" y2="10"></line>
+      <line x1="8" y1="14" x2="8" y2="14"></line>
+      <line x1="12" y1="14" x2="12" y2="14"></line>
+      <line x1="16" y1="14" x2="16" y2="14"></line>
+      <line x1="8" y1="18" x2="8" y2="18"></line>
+      <line x1="12" y1="18" x2="12" y2="18"></line>
+      <line x1="16" y1="18" x2="16" y2="18"></line>
+    </svg>
+  ),
+  BarChart: () => (
+    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+      <line x1="12" y1="20" x2="12" y2="10"></line>
+      <line x1="18" y1="20" x2="18" y2="4"></line>
+      <line x1="6" y1="20" x2="6" y2="16"></line>
+    </svg>
+  ),
+  Clipboard: () => (
+    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+      <path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"></path>
+      <rect x="8" y="2" width="8" height="4" rx="1" ry="1"></rect>
+    </svg>
+  ),
+  Activity: () => (
+    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+      <polyline points="22 12 18 12 15 21 9 3 6 12 2 12"></polyline>
+    </svg>
+  ),
+  Briefcase: () => (
+    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+      <rect x="2" y="7" width="20" height="14" rx="2" ry="2"></rect>
+      <path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"></path>
+    </svg>
+  ),
+  Percent: () => (
+    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+      <line x1="19" y1="5" x2="5" y2="19"></line>
+      <circle cx="6.5" cy="6.5" r="2.5"></circle>
+      <circle cx="17.5" cy="17.5" r="2.5"></circle>
+    </svg>
+  ),
+  ChevronDown: () => (
+    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+      <polyline points="6 9 12 15 18 9"></polyline>
+    </svg>
+  ),
+  ChevronRight: () => (
+    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+      <polyline points="9 18 15 12 9 6"></polyline>
+    </svg>
+  ),
+  Printer: () => (
+    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+      <polyline points="6 9 6 2 18 2 18 9"></polyline>
+      <path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"></path>
+      <rect x="6" y="14" width="12" height="8"></rect>
+    </svg>
+  ),
+  RefreshCw: () => (
+    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+      <polyline points="23 4 23 10 17 10"></polyline>
+      <polyline points="1 20 1 14 7 14"></polyline>
+      <path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"></path>
+    </svg>
   )
 };
 
@@ -148,16 +218,44 @@ const formasPagamento = [
   'Cheque'
 ];
 
+// Tabelas de impostos Simples Nacional 2024
+const tabelasSimples = {
+  anexoIII: { // Serviços
+    faixas: [
+      { ate: 180000, aliquota: 6.00, deducao: 0 },
+      { ate: 360000, aliquota: 11.20, deducao: 9360 },
+      { ate: 720000, aliquota: 13.50, deducao: 17640 },
+      { ate: 1800000, aliquota: 16.00, deducao: 35640 },
+      { ate: 3600000, aliquota: 21.00, deducao: 125640 },
+      { ate: 4800000, aliquota: 33.00, deducao: 648000 }
+    ]
+  },
+  anexoV: { // Serviços com maior tributação
+    faixas: [
+      { ate: 180000, aliquota: 15.50, deducao: 0 },
+      { ate: 360000, aliquota: 18.00, deducao: 4500 },
+      { ate: 720000, aliquota: 19.50, deducao: 9900 },
+      { ate: 1800000, aliquota: 20.50, deducao: 17100 },
+      { ate: 3600000, aliquota: 23.00, deducao: 62100 },
+      { ate: 4800000, aliquota: 30.50, deducao: 540000 }
+    ]
+  }
+};
+
 const AdminFinanceiro = () => {
   const { adminUser, isSuperAdmin } = useAdminAuth();
   const [activeTab, setActiveTab] = useState('dashboard');
+  const [activeSubTab, setActiveSubTab] = useState(null);
   const [transacoes, setTransacoes] = useState([]);
   const [documentos, setDocumentos] = useState([]);
+  const [contratos, setContratos] = useState([]);
   const [loading, setLoading] = useState(true);
   const [showModal, setShowModal] = useState(false);
   const [showDocumentoModal, setShowDocumentoModal] = useState(false);
+  const [showContratoModal, setShowContratoModal] = useState(false);
   const [modalMode, setModalMode] = useState('create');
   const [selectedTransacao, setSelectedTransacao] = useState(null);
+  const [selectedContrato, setSelectedContrato] = useState(null);
   const [filtros, setFiltros] = useState({
     tipo: 'todos',
     status: 'todos',
@@ -185,84 +283,83 @@ const AdminFinanceiro = () => {
     valor: '',
     arquivo: null
   });
+  const [contratoForm, setContratoForm] = useState({
+    cliente: '',
+    descricao: '',
+    valor_mensal: '',
+    data_inicio: '',
+    data_fim: '',
+    dia_vencimento: '10',
+    status: 'ativo'
+  });
+  
+  // Estados para calculadora de impostos
+  const [calcImpostos, setCalcImpostos] = useState({
+    faturamento12Meses: '',
+    faturamentoMes: '',
+    regime: 'simples_anexoIII',
+    aliquotaISS: '5'
+  });
+  const [resultadoImpostos, setResultadoImpostos] = useState(null);
+  
+  // Estados para balanço
+  const [periodoBalanco, setPeriodoBalanco] = useState({
+    mes: new Date().getMonth() + 1,
+    ano: new Date().getFullYear()
+  });
+  
   const fileInputRef = useRef(null);
 
-  // Carregar transações do localStorage (simulando banco de dados)
+  // Carregar dados do localStorage
   useEffect(() => {
     const loadData = () => {
       try {
         const savedTransacoes = localStorage.getItem('fin_transacoes');
         const savedDocumentos = localStorage.getItem('fin_documentos');
+        const savedContratos = localStorage.getItem('fin_contratos');
         
         if (savedTransacoes) {
           setTransacoes(JSON.parse(savedTransacoes));
         } else {
           // Dados de exemplo
-          const exemploTransacoes = [
-            {
-              id: '1',
-              tipo: 'receita',
-              descricao: 'Consultoria BI - Prefeitura de Ji-Paraná',
-              valor: 15000,
-              data_vencimento: '2026-01-30',
-              data_pagamento: '2026-01-25',
-              status: 'pago',
-              categoria: 'consultoria',
-              forma_pagamento: 'Transferência Bancária',
-              numero_documento: 'NF-001/2026',
-              entidade_nome: 'Prefeitura de Ji-Paraná',
-              created_at: '2026-01-10'
-            },
-            {
-              id: '2',
-              tipo: 'receita',
-              descricao: 'Desenvolvimento Dashboard - CIMCERO',
-              valor: 25000,
-              data_vencimento: '2026-02-15',
-              status: 'pendente',
-              categoria: 'desenvolvimento',
-              entidade_nome: 'CIMCERO',
-              created_at: '2026-01-15'
-            },
-            {
-              id: '3',
-              tipo: 'despesa',
-              descricao: 'Servidor Cloud AWS',
-              valor: 2500,
-              data_vencimento: '2026-01-28',
-              data_pagamento: '2026-01-20',
-              status: 'pago',
-              categoria: 'infraestrutura',
-              forma_pagamento: 'Cartão de Crédito',
-              created_at: '2026-01-05'
-            },
-            {
-              id: '4',
-              tipo: 'despesa',
-              descricao: 'Licença Power BI Pro',
-              valor: 500,
-              data_vencimento: '2026-02-01',
-              status: 'pendente',
-              categoria: 'software',
-              created_at: '2026-01-20'
-            },
-            {
-              id: '5',
-              tipo: 'despesa',
-              descricao: 'Salários - Janeiro/2026',
-              valor: 35000,
-              data_vencimento: '2026-01-31',
-              status: 'pendente',
-              categoria: 'salarios',
-              created_at: '2026-01-25'
-            }
-          ];
+          const exemploTransacoes = gerarDadosExemplo();
           setTransacoes(exemploTransacoes);
           localStorage.setItem('fin_transacoes', JSON.stringify(exemploTransacoes));
         }
         
         if (savedDocumentos) {
           setDocumentos(JSON.parse(savedDocumentos));
+        }
+        
+        if (savedContratos) {
+          setContratos(JSON.parse(savedContratos));
+        } else {
+          const exemploContratos = [
+            {
+              id: '1',
+              cliente: 'CIMCERO',
+              descricao: 'Manutenção mensal - Rondônia em Números',
+              valor_mensal: 5000,
+              data_inicio: '2026-01-01',
+              data_fim: '2026-12-31',
+              dia_vencimento: '10',
+              status: 'ativo',
+              created_at: '2026-01-01'
+            },
+            {
+              id: '2',
+              cliente: 'Prefeitura de Ji-Paraná',
+              descricao: 'Consultoria BI - Pacote Anual',
+              valor_mensal: 3500,
+              data_inicio: '2026-01-01',
+              data_fim: '2026-06-30',
+              dia_vencimento: '15',
+              status: 'ativo',
+              created_at: '2026-01-01'
+            }
+          ];
+          setContratos(exemploContratos);
+          localStorage.setItem('fin_contratos', JSON.stringify(exemploContratos));
         }
       } catch (error) {
         console.error('Erro ao carregar dados:', error);
@@ -274,225 +371,109 @@ const AdminFinanceiro = () => {
     loadData();
   }, []);
 
-  // Salvar transações no localStorage
+  // Gerar dados de exemplo
+  const gerarDadosExemplo = () => {
+    return [
+      {
+        id: '1',
+        tipo: 'receita',
+        descricao: 'Consultoria BI - Prefeitura de Ji-Paraná',
+        valor: 15000,
+        data_vencimento: '2026-01-30',
+        data_pagamento: '2026-01-25',
+        status: 'pago',
+        categoria: 'consultoria',
+        forma_pagamento: 'Transferência Bancária',
+        numero_documento: 'NF-001/2026',
+        entidade_nome: 'Prefeitura de Ji-Paraná',
+        created_at: '2026-01-10'
+      },
+      {
+        id: '2',
+        tipo: 'receita',
+        descricao: 'Desenvolvimento Dashboard - CIMCERO',
+        valor: 25000,
+        data_vencimento: '2026-02-15',
+        status: 'pendente',
+        categoria: 'desenvolvimento',
+        entidade_nome: 'CIMCERO',
+        created_at: '2026-01-15'
+      },
+      {
+        id: '3',
+        tipo: 'despesa',
+        descricao: 'Servidor Cloud AWS',
+        valor: 2500,
+        data_vencimento: '2026-01-28',
+        data_pagamento: '2026-01-20',
+        status: 'pago',
+        categoria: 'infraestrutura',
+        forma_pagamento: 'Cartão de Crédito',
+        created_at: '2026-01-05'
+      },
+      {
+        id: '4',
+        tipo: 'despesa',
+        descricao: 'Licença Power BI Pro',
+        valor: 500,
+        data_vencimento: '2026-02-01',
+        status: 'pendente',
+        categoria: 'software',
+        created_at: '2026-01-20'
+      },
+      {
+        id: '5',
+        tipo: 'despesa',
+        descricao: 'Folha de Pagamento - Janeiro',
+        valor: 18000,
+        data_vencimento: '2026-01-31',
+        data_pagamento: '2026-01-30',
+        status: 'pago',
+        categoria: 'salarios',
+        forma_pagamento: 'Transferência Bancária',
+        created_at: '2026-01-25'
+      },
+      {
+        id: '6',
+        tipo: 'receita',
+        descricao: 'Treinamento Power BI - Equipe SEDUC',
+        valor: 8000,
+        data_vencimento: '2026-01-20',
+        data_pagamento: '2026-01-18',
+        status: 'pago',
+        categoria: 'treinamentos',
+        forma_pagamento: 'PIX',
+        numero_documento: 'NF-002/2026',
+        entidade_nome: 'SEDUC-RO',
+        created_at: '2026-01-05'
+      }
+    ];
+  };
+
+  // Salvar transações
   const saveTransacoes = (newTransacoes) => {
     setTransacoes(newTransacoes);
     localStorage.setItem('fin_transacoes', JSON.stringify(newTransacoes));
   };
 
-  // Salvar documentos no localStorage
+  // Salvar documentos
   const saveDocumentos = (newDocumentos) => {
     setDocumentos(newDocumentos);
     localStorage.setItem('fin_documentos', JSON.stringify(newDocumentos));
   };
 
-  // Calcular métricas
-  const calcularMetricas = () => {
-    const hoje = new Date();
-    const inicioMes = new Date(hoje.getFullYear(), hoje.getMonth(), 1);
-    const fimMes = new Date(hoje.getFullYear(), hoje.getMonth() + 1, 0);
-
-    const transacoesMes = transacoes.filter(t => {
-      const dataVenc = new Date(t.data_vencimento);
-      return dataVenc >= inicioMes && dataVenc <= fimMes;
-    });
-
-    const receitasMes = transacoesMes
-      .filter(t => t.tipo === 'receita')
-      .reduce((acc, t) => acc + Number(t.valor), 0);
-
-    const despesasMes = transacoesMes
-      .filter(t => t.tipo === 'despesa')
-      .reduce((acc, t) => acc + Number(t.valor), 0);
-
-    const receitasPagas = transacoesMes
-      .filter(t => t.tipo === 'receita' && t.status === 'pago')
-      .reduce((acc, t) => acc + Number(t.valor), 0);
-
-    const despesasPagas = transacoesMes
-      .filter(t => t.tipo === 'despesa' && t.status === 'pago')
-      .reduce((acc, t) => acc + Number(t.valor), 0);
-
-    const pendentes = transacoes.filter(t => t.status === 'pendente');
-    const atrasadas = transacoes.filter(t => {
-      const dataVenc = new Date(t.data_vencimento);
-      return t.status === 'pendente' && dataVenc < hoje;
-    });
-
-    return {
-      receitasMes,
-      despesasMes,
-      saldoMes: receitasMes - despesasMes,
-      receitasPagas,
-      despesasPagas,
-      saldoRealizado: receitasPagas - despesasPagas,
-      totalPendentes: pendentes.length,
-      valorPendentes: pendentes.reduce((acc, t) => acc + Number(t.valor), 0),
-      totalAtrasadas: atrasadas.length,
-      valorAtrasadas: atrasadas.reduce((acc, t) => acc + Number(t.valor), 0)
-    };
+  // Salvar contratos
+  const saveContratos = (newContratos) => {
+    setContratos(newContratos);
+    localStorage.setItem('fin_contratos', JSON.stringify(newContratos));
   };
 
-  const metricas = calcularMetricas();
-
-  // Filtrar transações
-  const transacoesFiltradas = transacoes.filter(t => {
-    if (filtros.tipo !== 'todos' && t.tipo !== filtros.tipo) return false;
-    if (filtros.status !== 'todos' && t.status !== filtros.status) return false;
-    if (filtros.categoria !== 'todas' && t.categoria !== filtros.categoria) return false;
-    
-    if (filtros.periodo !== 'todos') {
-      const hoje = new Date();
-      const dataVenc = new Date(t.data_vencimento);
-      
-      if (filtros.periodo === 'mes_atual') {
-        const inicioMes = new Date(hoje.getFullYear(), hoje.getMonth(), 1);
-        const fimMes = new Date(hoje.getFullYear(), hoje.getMonth() + 1, 0);
-        if (dataVenc < inicioMes || dataVenc > fimMes) return false;
-      } else if (filtros.periodo === 'proximo_mes') {
-        const inicioProximoMes = new Date(hoje.getFullYear(), hoje.getMonth() + 1, 1);
-        const fimProximoMes = new Date(hoje.getFullYear(), hoje.getMonth() + 2, 0);
-        if (dataVenc < inicioProximoMes || dataVenc > fimProximoMes) return false;
-      }
-    }
-    
-    return true;
-  });
-
-  // Handlers
-  const handleOpenModal = (mode, transacao = null) => {
-    setModalMode(mode);
-    if (mode === 'edit' && transacao) {
-      setSelectedTransacao(transacao);
-      setFormData({
-        tipo: transacao.tipo,
-        descricao: transacao.descricao,
-        valor: transacao.valor.toString(),
-        data_vencimento: transacao.data_vencimento,
-        data_pagamento: transacao.data_pagamento || '',
-        status: transacao.status,
-        categoria: transacao.categoria,
-        forma_pagamento: transacao.forma_pagamento || '',
-        numero_documento: transacao.numero_documento || '',
-        observacoes: transacao.observacoes || '',
-        entidade_nome: transacao.entidade_nome || ''
-      });
-    } else {
-      setSelectedTransacao(null);
-      setFormData({
-        tipo: 'receita',
-        descricao: '',
-        valor: '',
-        data_vencimento: '',
-        data_pagamento: '',
-        status: 'pendente',
-        categoria: '',
-        forma_pagamento: '',
-        numero_documento: '',
-        observacoes: '',
-        entidade_nome: ''
-      });
-    }
-    setShowModal(true);
-  };
-
-  const handleCloseModal = () => {
-    setShowModal(false);
-    setSelectedTransacao(null);
-  };
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    
-    const novaTransacao = {
-      ...formData,
-      valor: parseFloat(formData.valor),
-      id: modalMode === 'edit' ? selectedTransacao.id : Date.now().toString(),
-      created_at: modalMode === 'edit' ? selectedTransacao.created_at : new Date().toISOString().split('T')[0],
-      updated_at: new Date().toISOString().split('T')[0]
-    };
-
-    if (modalMode === 'edit') {
-      const updatedTransacoes = transacoes.map(t => 
-        t.id === selectedTransacao.id ? novaTransacao : t
-      );
-      saveTransacoes(updatedTransacoes);
-    } else {
-      saveTransacoes([...transacoes, novaTransacao]);
-    }
-
-    handleCloseModal();
-  };
-
-  const handleDelete = (id) => {
-    if (window.confirm('Tem certeza que deseja excluir esta transação?')) {
-      const updatedTransacoes = transacoes.filter(t => t.id !== id);
-      saveTransacoes(updatedTransacoes);
-    }
-  };
-
-  const handleMarcarPago = (transacao) => {
-    const updatedTransacoes = transacoes.map(t => {
-      if (t.id === transacao.id) {
-        return {
-          ...t,
-          status: 'pago',
-          data_pagamento: new Date().toISOString().split('T')[0]
-        };
-      }
-      return t;
-    });
-    saveTransacoes(updatedTransacoes);
-  };
-
-  const handleFileUpload = (e) => {
-    const file = e.target.files[0];
-    if (file) {
-      // Simular upload - em produção, enviaria para o Supabase Storage
-      const reader = new FileReader();
-      reader.onload = (event) => {
-        setDocumentoForm({
-          ...documentoForm,
-          arquivo: {
-            nome: file.name,
-            tipo: file.type,
-            tamanho: file.size,
-            data: event.target.result
-          }
-        });
-      };
-      reader.readAsDataURL(file);
-    }
-  };
-
-  const handleSubmitDocumento = (e) => {
-    e.preventDefault();
-    
-    const novoDocumento = {
-      ...documentoForm,
-      id: Date.now().toString(),
-      transacao_id: selectedTransacao?.id,
-      created_at: new Date().toISOString()
-    };
-
-    saveDocumentos([...documentos, novoDocumento]);
-    setShowDocumentoModal(false);
-    setDocumentoForm({
-      tipo: 'nota_fiscal',
-      numero: '',
-      descricao: '',
-      data_emissao: '',
-      valor: '',
-      arquivo: null
-    });
-  };
-
-  // Formatar valores
+  // Funções auxiliares
   const formatarMoeda = (valor) => {
     return new Intl.NumberFormat('pt-BR', {
       style: 'currency',
       currency: 'BRL'
-    }).format(valor);
+    }).format(valor || 0);
   };
 
   const formatarData = (data) => {
@@ -513,46 +494,415 @@ const AdminFinanceiro = () => {
   };
 
   const getStatusClass = (status, dataVencimento) => {
-    if (status === 'pago') return 'status-pago';
-    if (status === 'cancelado') return 'status-cancelado';
-    
-    const hoje = new Date();
-    const vencimento = new Date(dataVencimento);
-    if (vencimento < hoje) return 'status-atrasado';
-    
-    return 'status-pendente';
+    if (status === 'pago') return 'pago';
+    if (status === 'cancelado') return 'cancelado';
+    if (dataVencimento) {
+      const hoje = new Date();
+      const vencimento = new Date(dataVencimento + 'T00:00:00');
+      if (vencimento < hoje) return 'vencido';
+    }
+    return 'pendente';
   };
 
   const getStatusLabel = (status, dataVencimento) => {
     if (status === 'pago') return 'Pago';
     if (status === 'cancelado') return 'Cancelado';
-    
-    const hoje = new Date();
-    const vencimento = new Date(dataVencimento);
-    if (vencimento < hoje) return 'Atrasado';
-    
+    if (dataVencimento) {
+      const hoje = new Date();
+      const vencimento = new Date(dataVencimento + 'T00:00:00');
+      if (vencimento < hoje) return 'Vencido';
+    }
     return 'Pendente';
   };
 
-  // Verificar se é super admin
-  if (!isSuperAdmin()) {
+  // Calcular métricas
+  const calcularMetricas = () => {
+    const hoje = new Date();
+    const mesAtual = hoje.getMonth();
+    const anoAtual = hoje.getFullYear();
+
+    const transacoesMes = transacoes.filter(t => {
+      const dataVenc = new Date(t.data_vencimento + 'T00:00:00');
+      return dataVenc.getMonth() === mesAtual && dataVenc.getFullYear() === anoAtual;
+    });
+
+    const receitasMes = transacoesMes.filter(t => t.tipo === 'receita').reduce((acc, t) => acc + t.valor, 0);
+    const despesasMes = transacoesMes.filter(t => t.tipo === 'despesa').reduce((acc, t) => acc + t.valor, 0);
+    const receitasPagas = transacoesMes.filter(t => t.tipo === 'receita' && t.status === 'pago').reduce((acc, t) => acc + t.valor, 0);
+    const despesasPagas = transacoesMes.filter(t => t.tipo === 'despesa' && t.status === 'pago').reduce((acc, t) => acc + t.valor, 0);
+    const totalPendentes = transacoes.filter(t => t.status === 'pendente').length;
+    const vencidos = transacoes.filter(t => {
+      if (t.status !== 'pendente') return false;
+      const venc = new Date(t.data_vencimento + 'T00:00:00');
+      return venc < hoje;
+    }).length;
+
+    return {
+      receitasMes,
+      despesasMes,
+      receitasPagas,
+      despesasPagas,
+      saldoMes: receitasMes - despesasMes,
+      saldoRealizado: receitasPagas - despesasPagas,
+      totalPendentes,
+      vencidos
+    };
+  };
+
+  const metricas = calcularMetricas();
+
+  // Filtrar transações
+  const filtrarTransacoes = () => {
+    let resultado = [...transacoes];
+
+    if (filtros.tipo !== 'todos') {
+      resultado = resultado.filter(t => t.tipo === filtros.tipo);
+    }
+
+    if (filtros.status !== 'todos') {
+      resultado = resultado.filter(t => t.status === filtros.status);
+    }
+
+    if (filtros.categoria !== 'todas') {
+      resultado = resultado.filter(t => t.categoria === filtros.categoria);
+    }
+
+    if (filtros.periodo !== 'todos') {
+      const hoje = new Date();
+      resultado = resultado.filter(t => {
+        const dataVenc = new Date(t.data_vencimento + 'T00:00:00');
+        if (filtros.periodo === 'mes_atual') {
+          return dataVenc.getMonth() === hoje.getMonth() && dataVenc.getFullYear() === hoje.getFullYear();
+        } else if (filtros.periodo === 'proximo_mes') {
+          const proximoMes = new Date(hoje.getFullYear(), hoje.getMonth() + 1, 1);
+          return dataVenc.getMonth() === proximoMes.getMonth() && dataVenc.getFullYear() === proximoMes.getFullYear();
+        }
+        return true;
+      });
+    }
+
+    return resultado.sort((a, b) => new Date(a.data_vencimento) - new Date(b.data_vencimento));
+  };
+
+  const transacoesFiltradas = filtrarTransacoes();
+
+  // Handlers de CRUD
+  const handleOpenModal = (mode, transacao = null) => {
+    setModalMode(mode);
+    if (mode === 'edit' && transacao) {
+      setSelectedTransacao(transacao);
+      setFormData({
+        tipo: transacao.tipo,
+        descricao: transacao.descricao,
+        valor: transacao.valor.toString(),
+        data_vencimento: transacao.data_vencimento,
+        data_pagamento: transacao.data_pagamento || '',
+        status: transacao.status,
+        categoria: transacao.categoria,
+        forma_pagamento: transacao.forma_pagamento || '',
+        numero_documento: transacao.numero_documento || '',
+        observacoes: transacao.observacoes || '',
+        entidade_nome: transacao.entidade_nome || ''
+      });
+    } else {
+      setSelectedTransacao(null);
+      setFormData({
+        tipo: activeTab === 'despesas' ? 'despesa' : 'receita',
+        descricao: '',
+        valor: '',
+        data_vencimento: '',
+        data_pagamento: '',
+        status: 'pendente',
+        categoria: '',
+        forma_pagamento: '',
+        numero_documento: '',
+        observacoes: '',
+        entidade_nome: ''
+      });
+    }
+    setShowModal(true);
+  };
+
+  const handleSaveTransacao = () => {
+    if (!formData.descricao || !formData.valor || !formData.data_vencimento) {
+      alert('Preencha todos os campos obrigatórios');
+      return;
+    }
+
+    const novaTransacao = {
+      ...formData,
+      valor: parseFloat(formData.valor),
+      id: modalMode === 'edit' ? selectedTransacao.id : Date.now().toString(),
+      created_at: modalMode === 'edit' ? selectedTransacao.created_at : new Date().toISOString().split('T')[0]
+    };
+
+    if (modalMode === 'edit') {
+      const updated = transacoes.map(t => t.id === selectedTransacao.id ? novaTransacao : t);
+      saveTransacoes(updated);
+    } else {
+      saveTransacoes([...transacoes, novaTransacao]);
+    }
+
+    setShowModal(false);
+  };
+
+  const handleDelete = (id) => {
+    if (window.confirm('Tem certeza que deseja excluir esta transação?')) {
+      saveTransacoes(transacoes.filter(t => t.id !== id));
+    }
+  };
+
+  const handleMarcarPago = (transacao) => {
+    const updated = transacoes.map(t => {
+      if (t.id === transacao.id) {
+        return {
+          ...t,
+          status: 'pago',
+          data_pagamento: new Date().toISOString().split('T')[0]
+        };
+      }
+      return t;
+    });
+    saveTransacoes(updated);
+  };
+
+  // Handler para documentos
+  const handleSaveDocumento = () => {
+    if (!documentoForm.descricao) {
+      alert('Preencha a descrição do documento');
+      return;
+    }
+
+    const novoDocumento = {
+      ...documentoForm,
+      id: Date.now().toString(),
+      transacao_id: selectedTransacao?.id || null,
+      created_at: new Date().toISOString().split('T')[0]
+    };
+
+    saveDocumentos([...documentos, novoDocumento]);
+    setShowDocumentoModal(false);
+    setDocumentoForm({
+      tipo: 'nota_fiscal',
+      numero: '',
+      descricao: '',
+      data_emissao: '',
+      valor: '',
+      arquivo: null
+    });
+  };
+
+  // Handler para contratos
+  const handleSaveContrato = () => {
+    if (!contratoForm.cliente || !contratoForm.valor_mensal) {
+      alert('Preencha todos os campos obrigatórios');
+      return;
+    }
+
+    const novoContrato = {
+      ...contratoForm,
+      valor_mensal: parseFloat(contratoForm.valor_mensal),
+      id: modalMode === 'edit' ? selectedContrato.id : Date.now().toString(),
+      created_at: modalMode === 'edit' ? selectedContrato.created_at : new Date().toISOString().split('T')[0]
+    };
+
+    if (modalMode === 'edit') {
+      const updated = contratos.map(c => c.id === selectedContrato.id ? novoContrato : c);
+      saveContratos(updated);
+    } else {
+      saveContratos([...contratos, novoContrato]);
+    }
+
+    setShowContratoModal(false);
+    setContratoForm({
+      cliente: '',
+      descricao: '',
+      valor_mensal: '',
+      data_inicio: '',
+      data_fim: '',
+      dia_vencimento: '10',
+      status: 'ativo'
+    });
+  };
+
+  // Calculadora de Impostos
+  const calcularImpostos = () => {
+    const faturamento12 = parseFloat(calcImpostos.faturamento12Meses) || 0;
+    const faturamentoMes = parseFloat(calcImpostos.faturamentoMes) || 0;
+    
+    if (faturamento12 <= 0 || faturamentoMes <= 0) {
+      alert('Preencha os valores de faturamento');
+      return;
+    }
+
+    let resultado = {
+      faturamentoMes,
+      faturamento12Meses: faturamento12,
+      impostos: {}
+    };
+
+    if (calcImpostos.regime.startsWith('simples')) {
+      // Cálculo Simples Nacional
+      const anexo = calcImpostos.regime === 'simples_anexoIII' ? tabelasSimples.anexoIII : tabelasSimples.anexoV;
+      const faixa = anexo.faixas.find(f => faturamento12 <= f.ate) || anexo.faixas[anexo.faixas.length - 1];
+      
+      const aliquotaEfetiva = ((faturamento12 * faixa.aliquota / 100) - faixa.deducao) / faturamento12 * 100;
+      const valorImposto = faturamentoMes * (aliquotaEfetiva / 100);
+
+      resultado.impostos = {
+        regime: 'Simples Nacional',
+        anexo: calcImpostos.regime === 'simples_anexoIII' ? 'Anexo III' : 'Anexo V',
+        aliquotaNominal: faixa.aliquota,
+        aliquotaEfetiva: aliquotaEfetiva.toFixed(2),
+        valorDAS: valorImposto,
+        total: valorImposto
+      };
+    } else if (calcImpostos.regime === 'lucro_presumido') {
+      // Cálculo Lucro Presumido (serviços)
+      const baseIRPJ = faturamentoMes * 0.32; // 32% para serviços
+      const irpj = baseIRPJ * 0.15;
+      const adicionalIR = baseIRPJ > 20000 ? (baseIRPJ - 20000) * 0.10 : 0;
+      const csll = baseIRPJ * 0.09;
+      const pis = faturamentoMes * 0.0065;
+      const cofins = faturamentoMes * 0.03;
+      const iss = faturamentoMes * (parseFloat(calcImpostos.aliquotaISS) / 100);
+
+      resultado.impostos = {
+        regime: 'Lucro Presumido',
+        irpj,
+        adicionalIR,
+        csll,
+        pis,
+        cofins,
+        iss,
+        total: irpj + adicionalIR + csll + pis + cofins + iss
+      };
+    } else {
+      // MEI
+      resultado.impostos = {
+        regime: 'MEI',
+        das: 70.60, // Valor aproximado para serviços
+        total: 70.60
+      };
+    }
+
+    setResultadoImpostos(resultado);
+  };
+
+  // Calcular Balanço
+  const calcularBalanco = () => {
+    const transacoesPeriodo = transacoes.filter(t => {
+      const data = new Date(t.data_vencimento + 'T00:00:00');
+      return data.getMonth() + 1 === periodoBalanco.mes && data.getFullYear() === periodoBalanco.ano;
+    });
+
+    const receitas = transacoesPeriodo.filter(t => t.tipo === 'receita');
+    const despesas = transacoesPeriodo.filter(t => t.tipo === 'despesa');
+
+    const totalReceitas = receitas.reduce((acc, t) => acc + t.valor, 0);
+    const totalDespesas = despesas.reduce((acc, t) => acc + t.valor, 0);
+    const receitasRealizadas = receitas.filter(t => t.status === 'pago').reduce((acc, t) => acc + t.valor, 0);
+    const despesasRealizadas = despesas.filter(t => t.status === 'pago').reduce((acc, t) => acc + t.valor, 0);
+
+    // Agrupar por categoria
+    const receitasPorCategoria = {};
+    receitas.forEach(t => {
+      const cat = getCategoriaNome(t.categoria, 'receita');
+      receitasPorCategoria[cat] = (receitasPorCategoria[cat] || 0) + t.valor;
+    });
+
+    const despesasPorCategoria = {};
+    despesas.forEach(t => {
+      const cat = getCategoriaNome(t.categoria, 'despesa');
+      despesasPorCategoria[cat] = (despesasPorCategoria[cat] || 0) + t.valor;
+    });
+
+    return {
+      totalReceitas,
+      totalDespesas,
+      receitasRealizadas,
+      despesasRealizadas,
+      lucroLiquido: totalReceitas - totalDespesas,
+      lucroRealizado: receitasRealizadas - despesasRealizadas,
+      receitasPorCategoria,
+      despesasPorCategoria,
+      margemLucro: totalReceitas > 0 ? ((totalReceitas - totalDespesas) / totalReceitas * 100).toFixed(2) : 0
+    };
+  };
+
+  // Fluxo de Caixa Projetado
+  const calcularFluxoCaixa = () => {
+    const hoje = new Date();
+    const meses = [];
+    
+    for (let i = 0; i < 6; i++) {
+      const mes = new Date(hoje.getFullYear(), hoje.getMonth() + i, 1);
+      const transacoesMes = transacoes.filter(t => {
+        const data = new Date(t.data_vencimento + 'T00:00:00');
+        return data.getMonth() === mes.getMonth() && data.getFullYear() === mes.getFullYear();
+      });
+
+      // Adicionar receitas de contratos ativos
+      const receitasContratos = contratos
+        .filter(c => c.status === 'ativo')
+        .filter(c => {
+          const inicio = new Date(c.data_inicio + 'T00:00:00');
+          const fim = c.data_fim ? new Date(c.data_fim + 'T00:00:00') : new Date(2099, 11, 31);
+          return mes >= inicio && mes <= fim;
+        })
+        .reduce((acc, c) => acc + c.valor_mensal, 0);
+
+      const receitas = transacoesMes.filter(t => t.tipo === 'receita').reduce((acc, t) => acc + t.valor, 0) + receitasContratos;
+      const despesas = transacoesMes.filter(t => t.tipo === 'despesa').reduce((acc, t) => acc + t.valor, 0);
+
+      meses.push({
+        mes: mes.toLocaleDateString('pt-BR', { month: 'short', year: 'numeric' }),
+        receitas,
+        despesas,
+        saldo: receitas - despesas
+      });
+    }
+
+    return meses;
+  };
+
+  // Verificar acesso
+  if (!isSuperAdmin) {
     return (
-      <div className="admin-financeiro-blocked">
-        <Icons.AlertCircle />
-        <h2>Acesso Restrito</h2>
-        <p>Esta área é exclusiva para Super Administradores.</p>
+      <div className="admin-financeiro acesso-negado">
+        <div className="acesso-negado-content">
+          <Icons.AlertCircle />
+          <h2>Acesso Restrito</h2>
+          <p>Esta área é restrita a Super Administradores.</p>
+        </div>
       </div>
     );
   }
 
   if (loading) {
     return (
-      <div className="admin-financeiro-loading">
+      <div className="admin-financeiro loading">
         <div className="spinner"></div>
         <p>Carregando dados financeiros...</p>
       </div>
     );
   }
+
+  const balanco = calcularBalanco();
+  const fluxoCaixa = calcularFluxoCaixa();
+
+  // Menu de navegação lateral
+  const menuItems = [
+    { id: 'dashboard', icon: <Icons.PieChart />, label: 'Dashboard' },
+    { id: 'receitas', icon: <Icons.TrendingUp />, label: 'Receitas' },
+    { id: 'despesas', icon: <Icons.TrendingDown />, label: 'Despesas' },
+    { id: 'notas_fiscais', icon: <Icons.FileText />, label: 'Notas Fiscais' },
+    { id: 'calculadora', icon: <Icons.Calculator />, label: 'Calculadora de Impostos' },
+    { id: 'balancos', icon: <Icons.BarChart />, label: 'Balanços' },
+    { id: 'relatorios', icon: <Icons.Clipboard />, label: 'Relatórios' },
+    { id: 'fluxo_caixa', icon: <Icons.Activity />, label: 'Fluxo de Caixa' },
+    { id: 'contratos', icon: <Icons.Briefcase />, label: 'Contratos' }
+  ];
 
   return (
     <div className="admin-financeiro">
@@ -562,7 +912,7 @@ const AdminFinanceiro = () => {
           <Icons.DollarSign />
           <div>
             <h1>Gestão Financeira</h1>
-            <p>Controle de pagamentos, recebimentos e documentos fiscais</p>
+            <p>Controle completo de finanças, impostos e documentos fiscais</p>
           </div>
         </div>
         <button className="btn-nova-transacao" onClick={() => handleOpenModal('create')}>
@@ -571,335 +921,843 @@ const AdminFinanceiro = () => {
         </button>
       </div>
 
-      {/* Tabs */}
-      <div className="financeiro-tabs">
-        <button 
-          className={`tab-btn ${activeTab === 'dashboard' ? 'active' : ''}`}
-          onClick={() => setActiveTab('dashboard')}
-        >
-          <Icons.PieChart />
-          Dashboard
-        </button>
-        <button 
-          className={`tab-btn ${activeTab === 'receitas' ? 'active' : ''}`}
-          onClick={() => { setActiveTab('receitas'); setFiltros({...filtros, tipo: 'receita'}); }}
-        >
-          <Icons.TrendingUp />
-          Receitas
-        </button>
-        <button 
-          className={`tab-btn ${activeTab === 'despesas' ? 'active' : ''}`}
-          onClick={() => { setActiveTab('despesas'); setFiltros({...filtros, tipo: 'despesa'}); }}
-        >
-          <Icons.TrendingDown />
-          Despesas
-        </button>
-        <button 
-          className={`tab-btn ${activeTab === 'documentos' ? 'active' : ''}`}
-          onClick={() => setActiveTab('documentos')}
-        >
-          <Icons.FileText />
-          Documentos
-        </button>
-      </div>
-
-      {/* Dashboard */}
-      {activeTab === 'dashboard' && (
-        <div className="financeiro-dashboard">
-          {/* Cards de Métricas */}
-          <div className="metricas-grid">
-            <div className="metrica-card receitas">
-              <div className="metrica-icon">
-                <Icons.TrendingUp />
-              </div>
-              <div className="metrica-info">
-                <span className="metrica-label">Receitas do Mês</span>
-                <span className="metrica-valor">{formatarMoeda(metricas.receitasMes)}</span>
-                <span className="metrica-sub">Realizado: {formatarMoeda(metricas.receitasPagas)}</span>
-              </div>
-            </div>
-
-            <div className="metrica-card despesas">
-              <div className="metrica-icon">
-                <Icons.TrendingDown />
-              </div>
-              <div className="metrica-info">
-                <span className="metrica-label">Despesas do Mês</span>
-                <span className="metrica-valor">{formatarMoeda(metricas.despesasMes)}</span>
-                <span className="metrica-sub">Realizado: {formatarMoeda(metricas.despesasPagas)}</span>
-              </div>
-            </div>
-
-            <div className={`metrica-card saldo ${metricas.saldoMes >= 0 ? 'positivo' : 'negativo'}`}>
-              <div className="metrica-icon">
-                <Icons.DollarSign />
-              </div>
-              <div className="metrica-info">
-                <span className="metrica-label">Saldo Previsto</span>
-                <span className="metrica-valor">{formatarMoeda(metricas.saldoMes)}</span>
-                <span className="metrica-sub">Realizado: {formatarMoeda(metricas.saldoRealizado)}</span>
-              </div>
-            </div>
-
-            <div className="metrica-card pendentes">
-              <div className="metrica-icon">
-                <Icons.Calendar />
-              </div>
-              <div className="metrica-info">
-                <span className="metrica-label">Pendentes</span>
-                <span className="metrica-valor">{metricas.totalPendentes}</span>
-                <span className="metrica-sub">{formatarMoeda(metricas.valorPendentes)}</span>
-              </div>
-            </div>
-
-            {metricas.totalAtrasadas > 0 && (
-              <div className="metrica-card atrasadas">
-                <div className="metrica-icon">
-                  <Icons.AlertCircle />
-                </div>
-                <div className="metrica-info">
-                  <span className="metrica-label">Atrasadas</span>
-                  <span className="metrica-valor">{metricas.totalAtrasadas}</span>
-                  <span className="metrica-sub">{formatarMoeda(metricas.valorAtrasadas)}</span>
-                </div>
-              </div>
-            )}
-          </div>
-
-          {/* Últimas Transações */}
-          <div className="ultimas-transacoes">
-            <h3>Últimas Transações</h3>
-            <div className="transacoes-list">
-              {transacoes.slice(0, 5).map(transacao => (
-                <div key={transacao.id} className={`transacao-item ${transacao.tipo}`}>
-                  <div className="transacao-info">
-                    <span className="transacao-descricao">{transacao.descricao}</span>
-                    <span className="transacao-entidade">{transacao.entidade_nome || '-'}</span>
-                  </div>
-                  <div className="transacao-detalhes">
-                    <span className={`transacao-valor ${transacao.tipo}`}>
-                      {transacao.tipo === 'receita' ? '+' : '-'} {formatarMoeda(transacao.valor)}
-                    </span>
-                    <span className={`transacao-status ${getStatusClass(transacao.status, transacao.data_vencimento)}`}>
-                      {getStatusLabel(transacao.status, transacao.data_vencimento)}
-                    </span>
-                  </div>
-                </div>
-              ))}
-            </div>
-          </div>
-        </div>
-      )}
-
-      {/* Lista de Transações (Receitas/Despesas) */}
-      {(activeTab === 'receitas' || activeTab === 'despesas') && (
-        <div className="financeiro-transacoes">
-          {/* Filtros */}
-          <div className="filtros-bar">
-            <div className="filtro-group">
-              <label>Status</label>
-              <select 
-                value={filtros.status} 
-                onChange={(e) => setFiltros({...filtros, status: e.target.value})}
-              >
-                <option value="todos">Todos</option>
-                <option value="pendente">Pendente</option>
-                <option value="pago">Pago</option>
-                <option value="cancelado">Cancelado</option>
-              </select>
-            </div>
-            <div className="filtro-group">
-              <label>Período</label>
-              <select 
-                value={filtros.periodo} 
-                onChange={(e) => setFiltros({...filtros, periodo: e.target.value})}
-              >
-                <option value="todos">Todos</option>
-                <option value="mes_atual">Mês Atual</option>
-                <option value="proximo_mes">Próximo Mês</option>
-              </select>
-            </div>
-            <div className="filtro-group">
-              <label>Categoria</label>
-              <select 
-                value={filtros.categoria} 
-                onChange={(e) => setFiltros({...filtros, categoria: e.target.value})}
-              >
-                <option value="todas">Todas</option>
-                {categoriasPadrao[filtros.tipo === 'todos' ? 'receita' : filtros.tipo]?.map(cat => (
-                  <option key={cat.id} value={cat.id}>{cat.nome}</option>
-                ))}
-              </select>
-            </div>
-          </div>
-
-          {/* Tabela de Transações */}
-          <div className="transacoes-table-container">
-            <table className="transacoes-table">
-              <thead>
-                <tr>
-                  <th>Descrição</th>
-                  <th>Entidade</th>
-                  <th>Categoria</th>
-                  <th>Vencimento</th>
-                  <th>Valor</th>
-                  <th>Status</th>
-                  <th>Ações</th>
-                </tr>
-              </thead>
-              <tbody>
-                {transacoesFiltradas.map(transacao => (
-                  <tr key={transacao.id}>
-                    <td>
-                      <div className="transacao-descricao-cell">
-                        <span>{transacao.descricao}</span>
-                        {transacao.numero_documento && (
-                          <small>{transacao.numero_documento}</small>
-                        )}
-                      </div>
-                    </td>
-                    <td>{transacao.entidade_nome || '-'}</td>
-                    <td>
-                      <span 
-                        className="categoria-badge"
-                        style={{ backgroundColor: getCategoriaCor(transacao.categoria, transacao.tipo) }}
-                      >
-                        {getCategoriaNome(transacao.categoria, transacao.tipo)}
-                      </span>
-                    </td>
-                    <td>{formatarData(transacao.data_vencimento)}</td>
-                    <td className={`valor-cell ${transacao.tipo}`}>
-                      {transacao.tipo === 'receita' ? '+' : '-'} {formatarMoeda(transacao.valor)}
-                    </td>
-                    <td>
-                      <span className={`status-badge ${getStatusClass(transacao.status, transacao.data_vencimento)}`}>
-                        {getStatusLabel(transacao.status, transacao.data_vencimento)}
-                      </span>
-                    </td>
-                    <td>
-                      <div className="acoes-cell">
-                        {transacao.status === 'pendente' && (
-                          <button 
-                            className="btn-acao confirmar"
-                            onClick={() => handleMarcarPago(transacao)}
-                            title="Marcar como Pago"
-                          >
-                            <Icons.Check />
-                          </button>
-                        )}
-                        <button 
-                          className="btn-acao editar"
-                          onClick={() => handleOpenModal('edit', transacao)}
-                          title="Editar"
-                        >
-                          <Icons.Edit />
-                        </button>
-                        <button 
-                          className="btn-acao anexar"
-                          onClick={() => { setSelectedTransacao(transacao); setShowDocumentoModal(true); }}
-                          title="Anexar Documento"
-                        >
-                          <Icons.Upload />
-                        </button>
-                        <button 
-                          className="btn-acao excluir"
-                          onClick={() => handleDelete(transacao.id)}
-                          title="Excluir"
-                        >
-                          <Icons.Trash />
-                        </button>
-                      </div>
-                    </td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
-            {transacoesFiltradas.length === 0 && (
-              <div className="empty-state">
-                <Icons.FileText />
-                <p>Nenhuma transação encontrada</p>
-              </div>
-            )}
-          </div>
-        </div>
-      )}
-
-      {/* Documentos */}
-      {activeTab === 'documentos' && (
-        <div className="financeiro-documentos">
-          <div className="documentos-header">
-            <h3>Documentos Fiscais</h3>
-            <button 
-              className="btn-upload"
-              onClick={() => { setSelectedTransacao(null); setShowDocumentoModal(true); }}
+      {/* Layout com menu lateral */}
+      <div className="financeiro-layout">
+        {/* Menu Lateral */}
+        <nav className="financeiro-sidebar">
+          {menuItems.map(item => (
+            <button
+              key={item.id}
+              className={`sidebar-item ${activeTab === item.id ? 'active' : ''}`}
+              onClick={() => { setActiveTab(item.id); setActiveSubTab(null); }}
             >
-              <Icons.Upload />
-              Upload de Documento
+              {item.icon}
+              <span>{item.label}</span>
             </button>
-          </div>
+          ))}
+        </nav>
 
-          <div className="documentos-grid">
-            {documentos.map(doc => (
-              <div key={doc.id} className="documento-card">
-                <div className="documento-icon">
-                  <Icons.FileText />
+        {/* Conteúdo Principal */}
+        <main className="financeiro-content">
+          {/* Dashboard */}
+          {activeTab === 'dashboard' && (
+            <div className="financeiro-dashboard">
+              <h2>Visão Geral</h2>
+              
+              {/* Cards de Métricas */}
+              <div className="metricas-grid">
+                <div className="metrica-card receitas">
+                  <div className="metrica-icon">
+                    <Icons.TrendingUp />
+                  </div>
+                  <div className="metrica-info">
+                    <span className="metrica-label">Receitas do Mês</span>
+                    <span className="metrica-valor">{formatarMoeda(metricas.receitasMes)}</span>
+                    <span className="metrica-sub">Realizado: {formatarMoeda(metricas.receitasPagas)}</span>
+                  </div>
                 </div>
-                <div className="documento-info">
-                  <span className="documento-tipo">{doc.tipo.replace('_', ' ')}</span>
-                  <span className="documento-numero">{doc.numero || 'Sem número'}</span>
-                  <span className="documento-descricao">{doc.descricao}</span>
-                  {doc.valor && (
-                    <span className="documento-valor">{formatarMoeda(doc.valor)}</span>
-                  )}
+
+                <div className="metrica-card despesas">
+                  <div className="metrica-icon">
+                    <Icons.TrendingDown />
+                  </div>
+                  <div className="metrica-info">
+                    <span className="metrica-label">Despesas do Mês</span>
+                    <span className="metrica-valor">{formatarMoeda(metricas.despesasMes)}</span>
+                    <span className="metrica-sub">Realizado: {formatarMoeda(metricas.despesasPagas)}</span>
+                  </div>
                 </div>
-                <div className="documento-acoes">
-                  {doc.arquivo && (
-                    <button className="btn-download" title="Visualizar">
-                      <Icons.Eye />
-                    </button>
-                  )}
-                  <button 
-                    className="btn-delete"
-                    onClick={() => {
-                      if (window.confirm('Excluir documento?')) {
-                        saveDocumentos(documentos.filter(d => d.id !== doc.id));
-                      }
-                    }}
-                    title="Excluir"
+
+                <div className={`metrica-card saldo ${metricas.saldoMes >= 0 ? 'positivo' : 'negativo'}`}>
+                  <div className="metrica-icon">
+                    <Icons.DollarSign />
+                  </div>
+                  <div className="metrica-info">
+                    <span className="metrica-label">Saldo Previsto</span>
+                    <span className="metrica-valor">{formatarMoeda(metricas.saldoMes)}</span>
+                    <span className="metrica-sub">Realizado: {formatarMoeda(metricas.saldoRealizado)}</span>
+                  </div>
+                </div>
+
+                <div className="metrica-card pendentes">
+                  <div className="metrica-icon">
+                    <Icons.Calendar />
+                  </div>
+                  <div className="metrica-info">
+                    <span className="metrica-label">Pendentes</span>
+                    <span className="metrica-valor">{metricas.totalPendentes}</span>
+                    <span className="metrica-sub vencidos">{metricas.vencidos} vencido(s)</span>
+                  </div>
+                </div>
+              </div>
+
+              {/* Últimas Movimentações */}
+              <div className="dashboard-section">
+                <h3>Últimas Movimentações</h3>
+                <div className="ultimas-movimentacoes">
+                  {transacoes.slice(0, 5).map(t => (
+                    <div key={t.id} className={`movimentacao-item ${t.tipo}`}>
+                      <div className="mov-info">
+                        <span className="mov-descricao">{t.descricao}</span>
+                        <span className="mov-data">{formatarData(t.data_vencimento)}</span>
+                      </div>
+                      <span className={`mov-valor ${t.tipo}`}>
+                        {t.tipo === 'receita' ? '+' : '-'} {formatarMoeda(t.valor)}
+                      </span>
+                    </div>
+                  ))}
+                </div>
+              </div>
+
+              {/* Fluxo de Caixa Resumido */}
+              <div className="dashboard-section">
+                <h3>Projeção de Fluxo de Caixa</h3>
+                <div className="fluxo-resumido">
+                  {fluxoCaixa.slice(0, 3).map((mes, idx) => (
+                    <div key={idx} className="fluxo-mes-card">
+                      <span className="fluxo-mes-nome">{mes.mes}</span>
+                      <div className="fluxo-valores">
+                        <span className="fluxo-receita">+{formatarMoeda(mes.receitas)}</span>
+                        <span className="fluxo-despesa">-{formatarMoeda(mes.despesas)}</span>
+                      </div>
+                      <span className={`fluxo-saldo ${mes.saldo >= 0 ? 'positivo' : 'negativo'}`}>
+                        {formatarMoeda(mes.saldo)}
+                      </span>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </div>
+          )}
+
+          {/* Receitas e Despesas */}
+          {(activeTab === 'receitas' || activeTab === 'despesas') && (
+            <div className="financeiro-transacoes">
+              <div className="transacoes-header">
+                <h2>{activeTab === 'receitas' ? 'Receitas' : 'Despesas'}</h2>
+                <button 
+                  className="btn-nova"
+                  onClick={() => {
+                    setFormData(prev => ({...prev, tipo: activeTab === 'receitas' ? 'receita' : 'despesa'}));
+                    handleOpenModal('create');
+                  }}
+                >
+                  <Icons.Plus />
+                  {activeTab === 'receitas' ? 'Nova Receita' : 'Nova Despesa'}
+                </button>
+              </div>
+
+              {/* Filtros */}
+              <div className="filtros-bar">
+                <div className="filtro-group">
+                  <label>Status</label>
+                  <select 
+                    value={filtros.status} 
+                    onChange={(e) => setFiltros({...filtros, status: e.target.value})}
                   >
-                    <Icons.Trash />
+                    <option value="todos">Todos</option>
+                    <option value="pendente">Pendente</option>
+                    <option value="pago">Pago</option>
+                    <option value="cancelado">Cancelado</option>
+                  </select>
+                </div>
+                <div className="filtro-group">
+                  <label>Período</label>
+                  <select 
+                    value={filtros.periodo} 
+                    onChange={(e) => setFiltros({...filtros, periodo: e.target.value})}
+                  >
+                    <option value="todos">Todos</option>
+                    <option value="mes_atual">Mês Atual</option>
+                    <option value="proximo_mes">Próximo Mês</option>
+                  </select>
+                </div>
+                <div className="filtro-group">
+                  <label>Categoria</label>
+                  <select 
+                    value={filtros.categoria} 
+                    onChange={(e) => setFiltros({...filtros, categoria: e.target.value})}
+                  >
+                    <option value="todas">Todas</option>
+                    {categoriasPadrao[activeTab === 'receitas' ? 'receita' : 'despesa']?.map(cat => (
+                      <option key={cat.id} value={cat.id}>{cat.nome}</option>
+                    ))}
+                  </select>
+                </div>
+              </div>
+
+              {/* Tabela */}
+              <div className="transacoes-table-container">
+                <table className="transacoes-table">
+                  <thead>
+                    <tr>
+                      <th>Descrição</th>
+                      <th>Entidade</th>
+                      <th>Categoria</th>
+                      <th>Vencimento</th>
+                      <th>Valor</th>
+                      <th>Status</th>
+                      <th>Ações</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {transacoesFiltradas
+                      .filter(t => t.tipo === (activeTab === 'receitas' ? 'receita' : 'despesa'))
+                      .map(transacao => (
+                      <tr key={transacao.id}>
+                        <td>
+                          <div className="transacao-descricao-cell">
+                            <span>{transacao.descricao}</span>
+                            {transacao.numero_documento && (
+                              <small>{transacao.numero_documento}</small>
+                            )}
+                          </div>
+                        </td>
+                        <td>{transacao.entidade_nome || '-'}</td>
+                        <td>
+                          <span 
+                            className="categoria-badge"
+                            style={{ backgroundColor: getCategoriaCor(transacao.categoria, transacao.tipo) }}
+                          >
+                            {getCategoriaNome(transacao.categoria, transacao.tipo)}
+                          </span>
+                        </td>
+                        <td>{formatarData(transacao.data_vencimento)}</td>
+                        <td className={`valor-cell ${transacao.tipo}`}>
+                          {transacao.tipo === 'receita' ? '+' : '-'} {formatarMoeda(transacao.valor)}
+                        </td>
+                        <td>
+                          <span className={`status-badge ${getStatusClass(transacao.status, transacao.data_vencimento)}`}>
+                            {getStatusLabel(transacao.status, transacao.data_vencimento)}
+                          </span>
+                        </td>
+                        <td>
+                          <div className="acoes-cell">
+                            {transacao.status === 'pendente' && (
+                              <button 
+                                className="btn-acao confirmar"
+                                onClick={() => handleMarcarPago(transacao)}
+                                title="Marcar como Pago"
+                              >
+                                <Icons.Check />
+                              </button>
+                            )}
+                            <button 
+                              className="btn-acao editar"
+                              onClick={() => handleOpenModal('edit', transacao)}
+                              title="Editar"
+                            >
+                              <Icons.Edit />
+                            </button>
+                            <button 
+                              className="btn-acao excluir"
+                              onClick={() => handleDelete(transacao.id)}
+                              title="Excluir"
+                            >
+                              <Icons.Trash />
+                            </button>
+                          </div>
+                        </td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+                {transacoesFiltradas.filter(t => t.tipo === (activeTab === 'receitas' ? 'receita' : 'despesa')).length === 0 && (
+                  <div className="empty-state">
+                    <Icons.FileText />
+                    <p>Nenhuma transação encontrada</p>
+                  </div>
+                )}
+              </div>
+            </div>
+          )}
+
+          {/* Notas Fiscais */}
+          {activeTab === 'notas_fiscais' && (
+            <div className="financeiro-notas">
+              <div className="notas-header">
+                <h2>Notas Fiscais e Documentos</h2>
+                <button 
+                  className="btn-upload"
+                  onClick={() => { setSelectedTransacao(null); setShowDocumentoModal(true); }}
+                >
+                  <Icons.Upload />
+                  Upload de Documento
+                </button>
+              </div>
+
+              <div className="notas-categorias">
+                <div className="categoria-section">
+                  <h3>Notas Fiscais de Serviço</h3>
+                  <div className="documentos-grid">
+                    {documentos.filter(d => d.tipo === 'nota_fiscal').map(doc => (
+                      <div key={doc.id} className="documento-card">
+                        <div className="documento-icon">
+                          <Icons.FileText />
+                        </div>
+                        <div className="documento-info">
+                          <span className="documento-numero">{doc.numero || 'Sem número'}</span>
+                          <span className="documento-descricao">{doc.descricao}</span>
+                          <span className="documento-data">{formatarData(doc.data_emissao)}</span>
+                          {doc.valor && <span className="documento-valor">{formatarMoeda(doc.valor)}</span>}
+                        </div>
+                        <div className="documento-acoes">
+                          <button className="btn-acao" title="Visualizar">
+                            <Icons.Eye />
+                          </button>
+                          <button className="btn-acao" title="Download">
+                            <Icons.Download />
+                          </button>
+                        </div>
+                      </div>
+                    ))}
+                    {documentos.filter(d => d.tipo === 'nota_fiscal').length === 0 && (
+                      <div className="empty-docs">
+                        <p>Nenhuma nota fiscal cadastrada</p>
+                      </div>
+                    )}
+                  </div>
+                </div>
+
+                <div className="categoria-section">
+                  <h3>Recibos</h3>
+                  <div className="documentos-grid">
+                    {documentos.filter(d => d.tipo === 'recibo').map(doc => (
+                      <div key={doc.id} className="documento-card">
+                        <div className="documento-icon">
+                          <Icons.FileText />
+                        </div>
+                        <div className="documento-info">
+                          <span className="documento-numero">{doc.numero || 'Sem número'}</span>
+                          <span className="documento-descricao">{doc.descricao}</span>
+                          <span className="documento-data">{formatarData(doc.data_emissao)}</span>
+                        </div>
+                      </div>
+                    ))}
+                    {documentos.filter(d => d.tipo === 'recibo').length === 0 && (
+                      <div className="empty-docs">
+                        <p>Nenhum recibo cadastrado</p>
+                      </div>
+                    )}
+                  </div>
+                </div>
+
+                <div className="categoria-section">
+                  <h3>Comprovantes</h3>
+                  <div className="documentos-grid">
+                    {documentos.filter(d => d.tipo === 'comprovante').map(doc => (
+                      <div key={doc.id} className="documento-card">
+                        <div className="documento-icon">
+                          <Icons.FileText />
+                        </div>
+                        <div className="documento-info">
+                          <span className="documento-descricao">{doc.descricao}</span>
+                          <span className="documento-data">{formatarData(doc.data_emissao)}</span>
+                        </div>
+                      </div>
+                    ))}
+                    {documentos.filter(d => d.tipo === 'comprovante').length === 0 && (
+                      <div className="empty-docs">
+                        <p>Nenhum comprovante cadastrado</p>
+                      </div>
+                    )}
+                  </div>
+                </div>
+              </div>
+            </div>
+          )}
+
+          {/* Calculadora de Impostos */}
+          {activeTab === 'calculadora' && (
+            <div className="financeiro-calculadora">
+              <h2>Calculadora de Impostos</h2>
+              <p className="calculadora-desc">Calcule os impostos devidos com base no regime tributário da empresa</p>
+
+              <div className="calculadora-form">
+                <div className="calc-row">
+                  <div className="calc-field">
+                    <label>Regime Tributário</label>
+                    <select 
+                      value={calcImpostos.regime}
+                      onChange={(e) => setCalcImpostos({...calcImpostos, regime: e.target.value})}
+                    >
+                      <option value="mei">MEI</option>
+                      <option value="simples_anexoIII">Simples Nacional - Anexo III (Serviços)</option>
+                      <option value="simples_anexoV">Simples Nacional - Anexo V (Serviços)</option>
+                      <option value="lucro_presumido">Lucro Presumido</option>
+                    </select>
+                  </div>
+                </div>
+
+                <div className="calc-row">
+                  <div className="calc-field">
+                    <label>Faturamento dos Últimos 12 Meses (R$)</label>
+                    <input 
+                      type="number"
+                      placeholder="Ex: 500000"
+                      value={calcImpostos.faturamento12Meses}
+                      onChange={(e) => setCalcImpostos({...calcImpostos, faturamento12Meses: e.target.value})}
+                    />
+                  </div>
+                  <div className="calc-field">
+                    <label>Faturamento do Mês Atual (R$)</label>
+                    <input 
+                      type="number"
+                      placeholder="Ex: 50000"
+                      value={calcImpostos.faturamentoMes}
+                      onChange={(e) => setCalcImpostos({...calcImpostos, faturamentoMes: e.target.value})}
+                    />
+                  </div>
+                </div>
+
+                {calcImpostos.regime === 'lucro_presumido' && (
+                  <div className="calc-row">
+                    <div className="calc-field">
+                      <label>Alíquota ISS (%)</label>
+                      <select 
+                        value={calcImpostos.aliquotaISS}
+                        onChange={(e) => setCalcImpostos({...calcImpostos, aliquotaISS: e.target.value})}
+                      >
+                        <option value="2">2%</option>
+                        <option value="3">3%</option>
+                        <option value="4">4%</option>
+                        <option value="5">5%</option>
+                      </select>
+                    </div>
+                  </div>
+                )}
+
+                <button className="btn-calcular" onClick={calcularImpostos}>
+                  <Icons.Calculator />
+                  Calcular Impostos
+                </button>
+              </div>
+
+              {resultadoImpostos && (
+                <div className="calculadora-resultado">
+                  <h3>Resultado do Cálculo</h3>
+                  <div className="resultado-header">
+                    <span className="regime-nome">{resultadoImpostos.impostos.regime}</span>
+                    {resultadoImpostos.impostos.anexo && (
+                      <span className="anexo-badge">{resultadoImpostos.impostos.anexo}</span>
+                    )}
+                  </div>
+
+                  <div className="resultado-grid">
+                    {resultadoImpostos.impostos.regime === 'Simples Nacional' && (
+                      <>
+                        <div className="resultado-item">
+                          <span className="item-label">Alíquota Nominal</span>
+                          <span className="item-valor">{resultadoImpostos.impostos.aliquotaNominal}%</span>
+                        </div>
+                        <div className="resultado-item">
+                          <span className="item-label">Alíquota Efetiva</span>
+                          <span className="item-valor">{resultadoImpostos.impostos.aliquotaEfetiva}%</span>
+                        </div>
+                        <div className="resultado-item destaque">
+                          <span className="item-label">Valor DAS</span>
+                          <span className="item-valor">{formatarMoeda(resultadoImpostos.impostos.valorDAS)}</span>
+                        </div>
+                      </>
+                    )}
+
+                    {resultadoImpostos.impostos.regime === 'Lucro Presumido' && (
+                      <>
+                        <div className="resultado-item">
+                          <span className="item-label">IRPJ</span>
+                          <span className="item-valor">{formatarMoeda(resultadoImpostos.impostos.irpj)}</span>
+                        </div>
+                        <div className="resultado-item">
+                          <span className="item-label">Adicional IR</span>
+                          <span className="item-valor">{formatarMoeda(resultadoImpostos.impostos.adicionalIR)}</span>
+                        </div>
+                        <div className="resultado-item">
+                          <span className="item-label">CSLL</span>
+                          <span className="item-valor">{formatarMoeda(resultadoImpostos.impostos.csll)}</span>
+                        </div>
+                        <div className="resultado-item">
+                          <span className="item-label">PIS</span>
+                          <span className="item-valor">{formatarMoeda(resultadoImpostos.impostos.pis)}</span>
+                        </div>
+                        <div className="resultado-item">
+                          <span className="item-label">COFINS</span>
+                          <span className="item-valor">{formatarMoeda(resultadoImpostos.impostos.cofins)}</span>
+                        </div>
+                        <div className="resultado-item">
+                          <span className="item-label">ISS</span>
+                          <span className="item-valor">{formatarMoeda(resultadoImpostos.impostos.iss)}</span>
+                        </div>
+                      </>
+                    )}
+
+                    {resultadoImpostos.impostos.regime === 'MEI' && (
+                      <div className="resultado-item">
+                        <span className="item-label">DAS-MEI (Serviços)</span>
+                        <span className="item-valor">{formatarMoeda(resultadoImpostos.impostos.das)}</span>
+                      </div>
+                    )}
+
+                    <div className="resultado-item total">
+                      <span className="item-label">Total de Impostos</span>
+                      <span className="item-valor">{formatarMoeda(resultadoImpostos.impostos.total)}</span>
+                    </div>
+                  </div>
+
+                  <div className="resultado-info">
+                    <p>* Valores calculados com base nas tabelas vigentes. Consulte um contador para valores exatos.</p>
+                  </div>
+                </div>
+              )}
+            </div>
+          )}
+
+          {/* Balanços */}
+          {activeTab === 'balancos' && (
+            <div className="financeiro-balancos">
+              <h2>Balanço Financeiro</h2>
+
+              <div className="balanco-periodo">
+                <label>Período:</label>
+                <select 
+                  value={periodoBalanco.mes}
+                  onChange={(e) => setPeriodoBalanco({...periodoBalanco, mes: parseInt(e.target.value)})}
+                >
+                  {[...Array(12)].map((_, i) => (
+                    <option key={i+1} value={i+1}>
+                      {new Date(2026, i, 1).toLocaleDateString('pt-BR', { month: 'long' })}
+                    </option>
+                  ))}
+                </select>
+                <select 
+                  value={periodoBalanco.ano}
+                  onChange={(e) => setPeriodoBalanco({...periodoBalanco, ano: parseInt(e.target.value)})}
+                >
+                  <option value="2024">2024</option>
+                  <option value="2025">2025</option>
+                  <option value="2026">2026</option>
+                </select>
+              </div>
+
+              <div className="balanco-resumo">
+                <div className="balanco-card receitas">
+                  <h3>Receitas</h3>
+                  <div className="balanco-valor">{formatarMoeda(balanco.totalReceitas)}</div>
+                  <div className="balanco-realizado">Realizado: {formatarMoeda(balanco.receitasRealizadas)}</div>
+                </div>
+                <div className="balanco-card despesas">
+                  <h3>Despesas</h3>
+                  <div className="balanco-valor">{formatarMoeda(balanco.totalDespesas)}</div>
+                  <div className="balanco-realizado">Realizado: {formatarMoeda(balanco.despesasRealizadas)}</div>
+                </div>
+                <div className={`balanco-card resultado ${balanco.lucroLiquido >= 0 ? 'positivo' : 'negativo'}`}>
+                  <h3>Resultado</h3>
+                  <div className="balanco-valor">{formatarMoeda(balanco.lucroLiquido)}</div>
+                  <div className="balanco-margem">Margem: {balanco.margemLucro}%</div>
+                </div>
+              </div>
+
+              <div className="balanco-detalhes">
+                <div className="balanco-coluna">
+                  <h3>Receitas por Categoria</h3>
+                  <div className="categoria-lista">
+                    {Object.entries(balanco.receitasPorCategoria).map(([cat, valor]) => (
+                      <div key={cat} className="categoria-item">
+                        <span className="cat-nome">{cat}</span>
+                        <span className="cat-valor">{formatarMoeda(valor)}</span>
+                      </div>
+                    ))}
+                    {Object.keys(balanco.receitasPorCategoria).length === 0 && (
+                      <p className="empty-msg">Nenhuma receita no período</p>
+                    )}
+                  </div>
+                </div>
+                <div className="balanco-coluna">
+                  <h3>Despesas por Categoria</h3>
+                  <div className="categoria-lista">
+                    {Object.entries(balanco.despesasPorCategoria).map(([cat, valor]) => (
+                      <div key={cat} className="categoria-item">
+                        <span className="cat-nome">{cat}</span>
+                        <span className="cat-valor">{formatarMoeda(valor)}</span>
+                      </div>
+                    ))}
+                    {Object.keys(balanco.despesasPorCategoria).length === 0 && (
+                      <p className="empty-msg">Nenhuma despesa no período</p>
+                    )}
+                  </div>
+                </div>
+              </div>
+
+              <div className="balanco-acoes">
+                <button className="btn-exportar">
+                  <Icons.Download />
+                  Exportar PDF
+                </button>
+                <button className="btn-imprimir">
+                  <Icons.Printer />
+                  Imprimir
+                </button>
+              </div>
+            </div>
+          )}
+
+          {/* Relatórios */}
+          {activeTab === 'relatorios' && (
+            <div className="financeiro-relatorios">
+              <h2>Relatórios Financeiros</h2>
+
+              <div className="relatorios-grid">
+                <div className="relatorio-card">
+                  <div className="relatorio-icon">
+                    <Icons.TrendingUp />
+                  </div>
+                  <h3>Relatório de Receitas</h3>
+                  <p>Análise detalhada de todas as receitas por período, categoria e cliente.</p>
+                  <button className="btn-gerar">
+                    <Icons.FileText />
+                    Gerar Relatório
+                  </button>
+                </div>
+
+                <div className="relatorio-card">
+                  <div className="relatorio-icon">
+                    <Icons.TrendingDown />
+                  </div>
+                  <h3>Relatório de Despesas</h3>
+                  <p>Análise detalhada de todas as despesas por período, categoria e fornecedor.</p>
+                  <button className="btn-gerar">
+                    <Icons.FileText />
+                    Gerar Relatório
+                  </button>
+                </div>
+
+                <div className="relatorio-card">
+                  <div className="relatorio-icon">
+                    <Icons.BarChart />
+                  </div>
+                  <h3>DRE - Demonstrativo de Resultados</h3>
+                  <p>Demonstrativo de Resultados do Exercício com receitas, custos e lucro.</p>
+                  <button className="btn-gerar">
+                    <Icons.FileText />
+                    Gerar Relatório
+                  </button>
+                </div>
+
+                <div className="relatorio-card">
+                  <div className="relatorio-icon">
+                    <Icons.Activity />
+                  </div>
+                  <h3>Fluxo de Caixa</h3>
+                  <p>Relatório completo de entradas e saídas de caixa por período.</p>
+                  <button className="btn-gerar">
+                    <Icons.FileText />
+                    Gerar Relatório
+                  </button>
+                </div>
+
+                <div className="relatorio-card">
+                  <div className="relatorio-icon">
+                    <Icons.Percent />
+                  </div>
+                  <h3>Relatório de Impostos</h3>
+                  <p>Resumo dos impostos pagos e a pagar por período.</p>
+                  <button className="btn-gerar">
+                    <Icons.FileText />
+                    Gerar Relatório
+                  </button>
+                </div>
+
+                <div className="relatorio-card">
+                  <div className="relatorio-icon">
+                    <Icons.Briefcase />
+                  </div>
+                  <h3>Relatório de Contratos</h3>
+                  <p>Análise de contratos ativos, receitas recorrentes e vencimentos.</p>
+                  <button className="btn-gerar">
+                    <Icons.FileText />
+                    Gerar Relatório
                   </button>
                 </div>
               </div>
-            ))}
-            {documentos.length === 0 && (
-              <div className="empty-state full-width">
-                <Icons.FileText />
-                <p>Nenhum documento cadastrado</p>
+            </div>
+          )}
+
+          {/* Fluxo de Caixa */}
+          {activeTab === 'fluxo_caixa' && (
+            <div className="financeiro-fluxo">
+              <h2>Fluxo de Caixa Projetado</h2>
+              <p className="fluxo-desc">Projeção de entradas e saídas para os próximos 6 meses</p>
+
+              <div className="fluxo-grid">
+                {fluxoCaixa.map((mes, idx) => (
+                  <div key={idx} className="fluxo-card">
+                    <div className="fluxo-mes">{mes.mes}</div>
+                    <div className="fluxo-detalhe">
+                      <div className="fluxo-linha receita">
+                        <span>Receitas</span>
+                        <span>+{formatarMoeda(mes.receitas)}</span>
+                      </div>
+                      <div className="fluxo-linha despesa">
+                        <span>Despesas</span>
+                        <span>-{formatarMoeda(mes.despesas)}</span>
+                      </div>
+                      <div className={`fluxo-linha saldo ${mes.saldo >= 0 ? 'positivo' : 'negativo'}`}>
+                        <span>Saldo</span>
+                        <span>{formatarMoeda(mes.saldo)}</span>
+                      </div>
+                    </div>
+                  </div>
+                ))}
               </div>
-            )}
-          </div>
-        </div>
-      )}
+
+              <div className="fluxo-acoes">
+                <button className="btn-atualizar">
+                  <Icons.RefreshCw />
+                  Atualizar Projeção
+                </button>
+                <button className="btn-exportar">
+                  <Icons.Download />
+                  Exportar
+                </button>
+              </div>
+            </div>
+          )}
+
+          {/* Contratos */}
+          {activeTab === 'contratos' && (
+            <div className="financeiro-contratos">
+              <div className="contratos-header">
+                <h2>Gestão de Contratos</h2>
+                <button 
+                  className="btn-novo"
+                  onClick={() => {
+                    setModalMode('create');
+                    setSelectedContrato(null);
+                    setContratoForm({
+                      cliente: '',
+                      descricao: '',
+                      valor_mensal: '',
+                      data_inicio: '',
+                      data_fim: '',
+                      dia_vencimento: '10',
+                      status: 'ativo'
+                    });
+                    setShowContratoModal(true);
+                  }}
+                >
+                  <Icons.Plus />
+                  Novo Contrato
+                </button>
+              </div>
+
+              <div className="contratos-resumo">
+                <div className="resumo-card">
+                  <span className="resumo-label">Contratos Ativos</span>
+                  <span className="resumo-valor">{contratos.filter(c => c.status === 'ativo').length}</span>
+                </div>
+                <div className="resumo-card">
+                  <span className="resumo-label">Receita Recorrente Mensal</span>
+                  <span className="resumo-valor">
+                    {formatarMoeda(contratos.filter(c => c.status === 'ativo').reduce((acc, c) => acc + c.valor_mensal, 0))}
+                  </span>
+                </div>
+              </div>
+
+              <div className="contratos-table-container">
+                <table className="contratos-table">
+                  <thead>
+                    <tr>
+                      <th>Cliente</th>
+                      <th>Descrição</th>
+                      <th>Valor Mensal</th>
+                      <th>Vigência</th>
+                      <th>Dia Venc.</th>
+                      <th>Status</th>
+                      <th>Ações</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {contratos.map(contrato => (
+                      <tr key={contrato.id}>
+                        <td>{contrato.cliente}</td>
+                        <td>{contrato.descricao}</td>
+                        <td>{formatarMoeda(contrato.valor_mensal)}</td>
+                        <td>
+                          {formatarData(contrato.data_inicio)} - {contrato.data_fim ? formatarData(contrato.data_fim) : 'Indeterminado'}
+                        </td>
+                        <td>Dia {contrato.dia_vencimento}</td>
+                        <td>
+                          <span className={`status-badge ${contrato.status}`}>
+                            {contrato.status === 'ativo' ? 'Ativo' : contrato.status === 'pausado' ? 'Pausado' : 'Encerrado'}
+                          </span>
+                        </td>
+                        <td>
+                          <div className="acoes-cell">
+                            <button 
+                              className="btn-acao editar"
+                              onClick={() => {
+                                setModalMode('edit');
+                                setSelectedContrato(contrato);
+                                setContratoForm({
+                                  cliente: contrato.cliente,
+                                  descricao: contrato.descricao,
+                                  valor_mensal: contrato.valor_mensal.toString(),
+                                  data_inicio: contrato.data_inicio,
+                                  data_fim: contrato.data_fim || '',
+                                  dia_vencimento: contrato.dia_vencimento,
+                                  status: contrato.status
+                                });
+                                setShowContratoModal(true);
+                              }}
+                              title="Editar"
+                            >
+                              <Icons.Edit />
+                            </button>
+                            <button 
+                              className="btn-acao excluir"
+                              onClick={() => {
+                                if (window.confirm('Tem certeza que deseja excluir este contrato?')) {
+                                  saveContratos(contratos.filter(c => c.id !== contrato.id));
+                                }
+                              }}
+                              title="Excluir"
+                            >
+                              <Icons.Trash />
+                            </button>
+                          </div>
+                        </td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+                {contratos.length === 0 && (
+                  <div className="empty-state">
+                    <Icons.Briefcase />
+                    <p>Nenhum contrato cadastrado</p>
+                  </div>
+                )}
+              </div>
+            </div>
+          )}
+        </main>
+      </div>
 
       {/* Modal de Transação */}
       {showModal && (
-        <div className="modal-overlay" onClick={handleCloseModal}>
-          <div className="modal-content" onClick={(e) => e.stopPropagation()}>
+        <div className="modal-overlay" onClick={() => setShowModal(false)}>
+          <div className="modal-content" onClick={e => e.stopPropagation()}>
             <div className="modal-header">
               <h2>{modalMode === 'edit' ? 'Editar Transação' : 'Nova Transação'}</h2>
-              <button className="modal-close" onClick={handleCloseModal}>
+              <button className="btn-fechar" onClick={() => setShowModal(false)}>
                 <Icons.X />
               </button>
             </div>
-            <form onSubmit={handleSubmit}>
+            <div className="modal-body">
               <div className="form-row">
                 <div className="form-group">
                   <label>Tipo</label>
                   <select 
                     value={formData.tipo}
                     onChange={(e) => setFormData({...formData, tipo: e.target.value, categoria: ''})}
-                    required
                   >
                     <option value="receita">Receita</option>
                     <option value="despesa">Despesa</option>
@@ -910,7 +1768,6 @@ const AdminFinanceiro = () => {
                   <select 
                     value={formData.status}
                     onChange={(e) => setFormData({...formData, status: e.target.value})}
-                    required
                   >
                     <option value="pendente">Pendente</option>
                     <option value="pago">Pago</option>
@@ -920,27 +1777,23 @@ const AdminFinanceiro = () => {
               </div>
 
               <div className="form-group">
-                <label>Descrição</label>
+                <label>Descrição *</label>
                 <input 
                   type="text"
                   value={formData.descricao}
                   onChange={(e) => setFormData({...formData, descricao: e.target.value})}
-                  placeholder="Descrição da transação"
-                  required
+                  placeholder="Ex: Consultoria BI - Cliente X"
                 />
               </div>
 
               <div className="form-row">
                 <div className="form-group">
-                  <label>Valor (R$)</label>
+                  <label>Valor (R$) *</label>
                   <input 
                     type="number"
-                    step="0.01"
-                    min="0"
                     value={formData.valor}
                     onChange={(e) => setFormData({...formData, valor: e.target.value})}
                     placeholder="0,00"
-                    required
                   />
                 </div>
                 <div className="form-group">
@@ -948,7 +1801,6 @@ const AdminFinanceiro = () => {
                   <select 
                     value={formData.categoria}
                     onChange={(e) => setFormData({...formData, categoria: e.target.value})}
-                    required
                   >
                     <option value="">Selecione...</option>
                     {categoriasPadrao[formData.tipo]?.map(cat => (
@@ -960,12 +1812,11 @@ const AdminFinanceiro = () => {
 
               <div className="form-row">
                 <div className="form-group">
-                  <label>Data de Vencimento</label>
+                  <label>Data de Vencimento *</label>
                   <input 
                     type="date"
                     value={formData.data_vencimento}
                     onChange={(e) => setFormData({...formData, data_vencimento: e.target.value})}
-                    required
                   />
                 </div>
                 <div className="form-group">
@@ -979,12 +1830,12 @@ const AdminFinanceiro = () => {
               </div>
 
               <div className="form-group">
-                <label>Cliente/Fornecedor</label>
+                <label>{formData.tipo === 'receita' ? 'Cliente' : 'Fornecedor'}</label>
                 <input 
                   type="text"
                   value={formData.entidade_nome}
                   onChange={(e) => setFormData({...formData, entidade_nome: e.target.value})}
-                  placeholder="Nome do cliente ou fornecedor"
+                  placeholder={formData.tipo === 'receita' ? 'Nome do cliente' : 'Nome do fornecedor'}
                 />
               </div>
 
@@ -996,13 +1847,13 @@ const AdminFinanceiro = () => {
                     onChange={(e) => setFormData({...formData, forma_pagamento: e.target.value})}
                   >
                     <option value="">Selecione...</option>
-                    {formasPagamento.map(forma => (
-                      <option key={forma} value={forma}>{forma}</option>
+                    {formasPagamento.map(fp => (
+                      <option key={fp} value={fp}>{fp}</option>
                     ))}
                   </select>
                 </div>
                 <div className="form-group">
-                  <label>Nº Documento/NF</label>
+                  <label>Número do Documento</label>
                   <input 
                     type="text"
                     value={formData.numero_documento}
@@ -1018,19 +1869,18 @@ const AdminFinanceiro = () => {
                   value={formData.observacoes}
                   onChange={(e) => setFormData({...formData, observacoes: e.target.value})}
                   placeholder="Observações adicionais..."
-                  rows={3}
+                  rows="3"
                 />
               </div>
-
-              <div className="modal-footer">
-                <button type="button" className="btn-cancelar" onClick={handleCloseModal}>
-                  Cancelar
-                </button>
-                <button type="submit" className="btn-salvar">
-                  {modalMode === 'edit' ? 'Salvar Alterações' : 'Criar Transação'}
-                </button>
-              </div>
-            </form>
+            </div>
+            <div className="modal-footer">
+              <button className="btn-cancelar" onClick={() => setShowModal(false)}>
+                Cancelar
+              </button>
+              <button className="btn-salvar" onClick={handleSaveTransacao}>
+                {modalMode === 'edit' ? 'Salvar Alterações' : 'Criar Transação'}
+              </button>
+            </div>
           </div>
         </div>
       )}
@@ -1038,53 +1888,38 @@ const AdminFinanceiro = () => {
       {/* Modal de Documento */}
       {showDocumentoModal && (
         <div className="modal-overlay" onClick={() => setShowDocumentoModal(false)}>
-          <div className="modal-content modal-documento" onClick={(e) => e.stopPropagation()}>
+          <div className="modal-content" onClick={e => e.stopPropagation()}>
             <div className="modal-header">
-              <h2>Anexar Documento</h2>
-              <button className="modal-close" onClick={() => setShowDocumentoModal(false)}>
+              <h2>Upload de Documento</h2>
+              <button className="btn-fechar" onClick={() => setShowDocumentoModal(false)}>
                 <Icons.X />
               </button>
             </div>
-            <form onSubmit={handleSubmitDocumento}>
+            <div className="modal-body">
+              <div className="form-group">
+                <label>Tipo de Documento</label>
+                <select 
+                  value={documentoForm.tipo}
+                  onChange={(e) => setDocumentoForm({...documentoForm, tipo: e.target.value})}
+                >
+                  <option value="nota_fiscal">Nota Fiscal</option>
+                  <option value="recibo">Recibo</option>
+                  <option value="comprovante">Comprovante</option>
+                  <option value="contrato">Contrato</option>
+                  <option value="outro">Outro</option>
+                </select>
+              </div>
+
               <div className="form-row">
-                <div className="form-group">
-                  <label>Tipo de Documento</label>
-                  <select 
-                    value={documentoForm.tipo}
-                    onChange={(e) => setDocumentoForm({...documentoForm, tipo: e.target.value})}
-                    required
-                  >
-                    <option value="nota_fiscal">Nota Fiscal</option>
-                    <option value="recibo">Recibo</option>
-                    <option value="boleto">Boleto</option>
-                    <option value="contrato">Contrato</option>
-                    <option value="comprovante">Comprovante</option>
-                    <option value="outro">Outro</option>
-                  </select>
-                </div>
                 <div className="form-group">
                   <label>Número</label>
                   <input 
                     type="text"
                     value={documentoForm.numero}
                     onChange={(e) => setDocumentoForm({...documentoForm, numero: e.target.value})}
-                    placeholder="Número do documento"
+                    placeholder="Ex: NF-001/2026"
                   />
                 </div>
-              </div>
-
-              <div className="form-group">
-                <label>Descrição</label>
-                <input 
-                  type="text"
-                  value={documentoForm.descricao}
-                  onChange={(e) => setDocumentoForm({...documentoForm, descricao: e.target.value})}
-                  placeholder="Descrição do documento"
-                  required
-                />
-              </div>
-
-              <div className="form-row">
                 <div className="form-group">
                   <label>Data de Emissão</label>
                   <input 
@@ -1093,56 +1928,148 @@ const AdminFinanceiro = () => {
                     onChange={(e) => setDocumentoForm({...documentoForm, data_emissao: e.target.value})}
                   />
                 </div>
+              </div>
+
+              <div className="form-group">
+                <label>Descrição *</label>
+                <input 
+                  type="text"
+                  value={documentoForm.descricao}
+                  onChange={(e) => setDocumentoForm({...documentoForm, descricao: e.target.value})}
+                  placeholder="Descrição do documento"
+                />
+              </div>
+
+              <div className="form-group">
+                <label>Valor (R$)</label>
+                <input 
+                  type="number"
+                  value={documentoForm.valor}
+                  onChange={(e) => setDocumentoForm({...documentoForm, valor: e.target.value})}
+                  placeholder="0,00"
+                />
+              </div>
+
+              <div className="form-group">
+                <label>Arquivo</label>
+                <div className="upload-area">
+                  <input 
+                    type="file"
+                    ref={fileInputRef}
+                    onChange={(e) => setDocumentoForm({...documentoForm, arquivo: e.target.files[0]})}
+                    accept=".pdf,.jpg,.jpeg,.png"
+                  />
+                  <Icons.Upload />
+                  <p>Clique para selecionar ou arraste o arquivo</p>
+                  <small>PDF, JPG ou PNG (máx. 10MB)</small>
+                </div>
+              </div>
+            </div>
+            <div className="modal-footer">
+              <button className="btn-cancelar" onClick={() => setShowDocumentoModal(false)}>
+                Cancelar
+              </button>
+              <button className="btn-salvar" onClick={handleSaveDocumento}>
+                Salvar Documento
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* Modal de Contrato */}
+      {showContratoModal && (
+        <div className="modal-overlay" onClick={() => setShowContratoModal(false)}>
+          <div className="modal-content" onClick={e => e.stopPropagation()}>
+            <div className="modal-header">
+              <h2>{modalMode === 'edit' ? 'Editar Contrato' : 'Novo Contrato'}</h2>
+              <button className="btn-fechar" onClick={() => setShowContratoModal(false)}>
+                <Icons.X />
+              </button>
+            </div>
+            <div className="modal-body">
+              <div className="form-group">
+                <label>Cliente *</label>
+                <input 
+                  type="text"
+                  value={contratoForm.cliente}
+                  onChange={(e) => setContratoForm({...contratoForm, cliente: e.target.value})}
+                  placeholder="Nome do cliente"
+                />
+              </div>
+
+              <div className="form-group">
+                <label>Descrição do Serviço *</label>
+                <input 
+                  type="text"
+                  value={contratoForm.descricao}
+                  onChange={(e) => setContratoForm({...contratoForm, descricao: e.target.value})}
+                  placeholder="Ex: Manutenção mensal - Sistema BI"
+                />
+              </div>
+
+              <div className="form-row">
                 <div className="form-group">
-                  <label>Valor (R$)</label>
+                  <label>Valor Mensal (R$) *</label>
                   <input 
                     type="number"
-                    step="0.01"
-                    min="0"
-                    value={documentoForm.valor}
-                    onChange={(e) => setDocumentoForm({...documentoForm, valor: e.target.value})}
+                    value={contratoForm.valor_mensal}
+                    onChange={(e) => setContratoForm({...contratoForm, valor_mensal: e.target.value})}
                     placeholder="0,00"
+                  />
+                </div>
+                <div className="form-group">
+                  <label>Dia de Vencimento</label>
+                  <select 
+                    value={contratoForm.dia_vencimento}
+                    onChange={(e) => setContratoForm({...contratoForm, dia_vencimento: e.target.value})}
+                  >
+                    {[...Array(28)].map((_, i) => (
+                      <option key={i+1} value={i+1}>Dia {i+1}</option>
+                    ))}
+                  </select>
+                </div>
+              </div>
+
+              <div className="form-row">
+                <div className="form-group">
+                  <label>Data de Início</label>
+                  <input 
+                    type="date"
+                    value={contratoForm.data_inicio}
+                    onChange={(e) => setContratoForm({...contratoForm, data_inicio: e.target.value})}
+                  />
+                </div>
+                <div className="form-group">
+                  <label>Data de Término</label>
+                  <input 
+                    type="date"
+                    value={contratoForm.data_fim}
+                    onChange={(e) => setContratoForm({...contratoForm, data_fim: e.target.value})}
                   />
                 </div>
               </div>
 
               <div className="form-group">
-                <label>Arquivo</label>
-                <div 
-                  className="file-upload-area"
-                  onClick={() => fileInputRef.current?.click()}
+                <label>Status</label>
+                <select 
+                  value={contratoForm.status}
+                  onChange={(e) => setContratoForm({...contratoForm, status: e.target.value})}
                 >
-                  <input 
-                    type="file"
-                    ref={fileInputRef}
-                    onChange={handleFileUpload}
-                    accept=".pdf,.jpg,.jpeg,.png,.doc,.docx,.xls,.xlsx"
-                    style={{ display: 'none' }}
-                  />
-                  {documentoForm.arquivo ? (
-                    <div className="file-selected">
-                      <Icons.FileText />
-                      <span>{documentoForm.arquivo.nome}</span>
-                    </div>
-                  ) : (
-                    <div className="file-placeholder">
-                      <Icons.Upload />
-                      <span>Clique para selecionar ou arraste um arquivo</span>
-                      <small>PDF, JPG, PNG, DOC, XLS (máx. 10MB)</small>
-                    </div>
-                  )}
-                </div>
+                  <option value="ativo">Ativo</option>
+                  <option value="pausado">Pausado</option>
+                  <option value="encerrado">Encerrado</option>
+                </select>
               </div>
-
-              <div className="modal-footer">
-                <button type="button" className="btn-cancelar" onClick={() => setShowDocumentoModal(false)}>
-                  Cancelar
-                </button>
-                <button type="submit" className="btn-salvar">
-                  Anexar Documento
-                </button>
-              </div>
-            </form>
+            </div>
+            <div className="modal-footer">
+              <button className="btn-cancelar" onClick={() => setShowContratoModal(false)}>
+                Cancelar
+              </button>
+              <button className="btn-salvar" onClick={handleSaveContrato}>
+                {modalMode === 'edit' ? 'Salvar Alterações' : 'Criar Contrato'}
+              </button>
+            </div>
           </div>
         </div>
       )}
