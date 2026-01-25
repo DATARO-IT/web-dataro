@@ -106,22 +106,14 @@ const Icons = {
       <path d="M13.73 21a2 2 0 0 1-3.46 0"></path>
     </svg>
   ),
-  Menu: () => (
-    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-      <rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect>
-      <line x1="9" y1="3" x2="9" y2="21"></line>
+  ChevronLeft: () => (
+    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+      <polyline points="15 18 9 12 15 6"></polyline>
     </svg>
   ),
-  Collapse: () => (
-    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-      <polyline points="11 17 6 12 11 7"></polyline>
-      <polyline points="18 17 13 12 18 7"></polyline>
-    </svg>
-  ),
-  Expand: () => (
-    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-      <polyline points="13 17 18 12 13 7"></polyline>
-      <polyline points="6 17 11 12 6 7"></polyline>
+  ChevronRight: () => (
+    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+      <polyline points="9 18 15 12 9 6"></polyline>
     </svg>
   )
 };
@@ -167,19 +159,21 @@ const AdminSidebar = ({ collapsed, setCollapsed, isDarkMode }) => {
 
   return (
     <aside className={`admin-sidebar ${themeClass} ${collapsed ? 'collapsed' : ''}`}>
+      {/* Botão de toggle na borda direita */}
+      <button 
+        className="sidebar-edge-toggle"
+        onClick={() => setCollapsed(!collapsed)}
+        title={collapsed ? 'Expandir menu' : 'Recolher menu'}
+      >
+        {collapsed ? <Icons.ChevronRight /> : <Icons.ChevronLeft />}
+      </button>
+
       {/* Header do Sidebar */}
       <div className="sidebar-header">
         <div className="sidebar-logo">
           <img src={logo} alt="DATA-RO" />
           {!collapsed && <span>DATA-RO</span>}
         </div>
-        <button 
-          className="sidebar-toggle"
-          onClick={() => setCollapsed(!collapsed)}
-          title={collapsed ? 'Expandir menu' : 'Recolher menu'}
-        >
-          {collapsed ? <Icons.Expand /> : <Icons.Collapse />}
-        </button>
       </div>
 
       {/* Menu de Navegação */}
