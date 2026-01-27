@@ -609,11 +609,11 @@
 }
 
 .admin-layout.light .header-title h1 {
-  color: #111827;
+  color: #065f46;
 }
 
 .admin-layout.light .header-subtitle {
-  color: #6b7280;
+  color: #047857;
 }
 
 .admin-layout.light .search-input {
@@ -628,7 +628,7 @@
 }
 
 .admin-layout.light .projeto-nome {
-  color: #111827;
+  color: #065f46;
 }
 
 .admin-layout.light .projeto-descricao {
@@ -636,7 +636,7 @@
 }
 
 .admin-layout.light .stat-value {
-  color: #111827;
+  color: #065f46;
 }
 
 .admin-layout.light .modal-content {
@@ -644,7 +644,7 @@
 }
 
 .admin-layout.light .modal-header h2 {
-  color: #111827;
+  color: #065f46;
 }
 
 .admin-layout.light .form-group label {

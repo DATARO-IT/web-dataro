@@ -36,7 +36,7 @@
 }
 
 .admin-usuarios.light .admin-usuarios-title h1 {
-  color: #ffffff !important;
+  color: #065f46 !important;
 }
 
 .admin-usuarios-title .header-subtitle {
@@ -49,7 +49,7 @@
 }
 
 .admin-usuarios.light .admin-usuarios-title .header-subtitle {
-  color: rgba(255, 255, 255, 0.85);
+  color: #047857;
 }
 
 /* Hover Glow */
@@ -210,7 +210,7 @@
 }
 
 .admin-usuarios.light .admin-metric-value {
-  color: #1a2744;
+  color: #065f46;
 }
 
 .admin-metric-label {
@@ -470,7 +470,7 @@
 }
 
 .admin-usuarios.light .admin-modal-header h2 {
-  color: #1a2744;
+  color: #065f46;
 }
 
 .admin-modal-close {
