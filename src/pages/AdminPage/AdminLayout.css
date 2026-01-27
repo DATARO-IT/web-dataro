@@ -11,9 +11,9 @@
   background: linear-gradient(135deg, #064e3b 0%, #022c22 40%, #0a0f0d 100%);
 }
 
-/* Tema Claro */
+/* Tema Claro - Tons de verde suaves */
 .admin-layout.light {
-  background: #f8fafc;
+  background: linear-gradient(135deg, #ecfdf5 0%, #d1fae5 50%, #a7f3d0 100%);
 }
 
 /* Main Content Area */
@@ -105,9 +105,9 @@
 }
 
 .admin-layout.light .admin-card {
-  background: #ffffff;
-  border: 1px solid #e5e7eb;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  background: rgba(255, 255, 255, 0.85);
+  border: 1px solid rgba(16, 185, 129, 0.3);
+  box-shadow: 0 1px 3px rgba(16, 185, 129, 0.1);
 }
 
 /* Textos */
@@ -124,7 +124,7 @@
 }
 
 .admin-layout.light .text-secondary {
-  color: #6b7280;
+  color: #047857;
 }
 
 .admin-layout.dark .text-accent {
