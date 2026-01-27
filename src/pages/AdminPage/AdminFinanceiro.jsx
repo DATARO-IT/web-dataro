@@ -209,6 +209,18 @@ const Icons = {
       <rect x="1" y="3" width="22" height="5"></rect>
       <line x1="10" y1="12" x2="14" y2="12"></line>
     </svg>
+  ),
+  ArrowUp: () => (
+    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+      <line x1="12" y1="19" x2="12" y2="5"></line>
+      <polyline points="5 12 12 5 19 12"></polyline>
+    </svg>
+  ),
+  ArrowDown: () => (
+    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+      <line x1="12" y1="5" x2="12" y2="19"></line>
+      <polyline points="19 12 12 19 5 12"></polyline>
+    </svg>
   )
 };
 
@@ -321,7 +333,9 @@ const AdminFinanceiro = () => {
     tipo: 'todos',
     status: 'todos',
     periodo: 'mes_atual',
-    categoria: 'todas'
+    categoria: 'todas',
+    ordenarPor: 'data_vencimento',
+    ordemAsc: false
   });
   const [formData, setFormData] = useState({
     tipo: 'receita',
@@ -724,7 +738,46 @@ const AdminFinanceiro = () => {
       });
     }
 
-    return resultado.sort((a, b) => new Date(a.data_vencimento) - new Date(b.data_vencimento));
+    // Ordenação dinâmica
+    resultado.sort((a, b) => {
+      let valorA, valorB;
+      
+      switch (filtros.ordenarPor) {
+        case 'data_vencimento':
+          valorA = new Date(a.data_vencimento || '1900-01-01');
+          valorB = new Date(b.data_vencimento || '1900-01-01');
+          break;
+        case 'data_pagamento':
+          valorA = new Date(a.data_pagamento || '1900-01-01');
+          valorB = new Date(b.data_pagamento || '1900-01-01');
+          break;
+        case 'valor':
+          valorA = parseFloat(a.valor) || 0;
+          valorB = parseFloat(b.valor) || 0;
+          break;
+        case 'descricao':
+          valorA = (a.descricao || '').toLowerCase();
+          valorB = (b.descricao || '').toLowerCase();
+          break;
+        case 'categoria':
+          valorA = (a.categoria || '').toLowerCase();
+          valorB = (b.categoria || '').toLowerCase();
+          break;
+        case 'status':
+          valorA = (a.status || '').toLowerCase();
+          valorB = (b.status || '').toLowerCase();
+          break;
+        default:
+          valorA = new Date(a.data_vencimento || '1900-01-01');
+          valorB = new Date(b.data_vencimento || '1900-01-01');
+      }
+      
+      if (valorA < valorB) return filtros.ordemAsc ? -1 : 1;
+      if (valorA > valorB) return filtros.ordemAsc ? 1 : -1;
+      return 0;
+    });
+    
+    return resultado;
   };
 
   const transacoesFiltradas = filtrarTransacoes();
@@ -1232,6 +1285,31 @@ const AdminFinanceiro = () => {
                       <option key={cat.id} value={cat.id}>{cat.nome}</option>
                     ))}
                   </select>
+                </div>
+                <div className="filtro-group">
+                  <label>Ordenar por</label>
+                  <select 
+                    value={filtros.ordenarPor} 
+                    onChange={(e) => setFiltros({...filtros, ordenarPor: e.target.value})}
+                  >
+                    <option value="data_vencimento">Data de Vencimento</option>
+                    <option value="data_pagamento">Data de Pagamento</option>
+                    <option value="valor">Valor</option>
+                    <option value="descricao">Descrição</option>
+                    <option value="categoria">Categoria</option>
+                    <option value="status">Status</option>
+                  </select>
+                </div>
+                <div className="filtro-group filtro-ordem">
+                  <label>Ordem</label>
+                  <button 
+                    className={`btn-ordem ${filtros.ordemAsc ? 'asc' : 'desc'}`}
+                    onClick={() => setFiltros({...filtros, ordemAsc: !filtros.ordemAsc})}
+                    title={filtros.ordemAsc ? 'Ordem Crescente' : 'Ordem Decrescente'}
+                  >
+                    {filtros.ordemAsc ? <Icons.ArrowUp /> : <Icons.ArrowDown />}
+                    {filtros.ordemAsc ? 'Crescente' : 'Decrescente'}
+                  </button>
                 </div>
               </div>
 
