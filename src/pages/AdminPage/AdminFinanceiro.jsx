@@ -396,65 +396,94 @@ const AdminFinanceiro = () => {
   
   const fileInputRef = useRef(null);
 
-  // Carregar dados do localStorage
+  // Carregar dados do Supabase (com fallback para localStorage)
   useEffect(() => {
-    const loadData = () => {
+    const loadData = async () => {
       try {
+        // Tentar carregar do Supabase primeiro
+        const { data: supaTransacoes, error: errTransacoes } = await supabase
+          .from('fin_transacoes')
+          .select('*')
+          .order('created_at', { ascending: false });
+        
+        const { data: supaDocumentos, error: errDocumentos } = await supabase
+          .from('fin_documentos')
+          .select('*')
+          .order('created_at', { ascending: false });
+        
+        const { data: supaContratos, error: errContratos } = await supabase
+          .from('fin_contratos')
+          .select('*')
+          .order('created_at', { ascending: false });
+        
+        const { data: supaBackups, error: errBackups } = await supabase
+          .from('fin_backups')
+          .select('*')
+          .order('created_at', { ascending: false });
+
+        // Transações
+        if (!errTransacoes && supaTransacoes && supaTransacoes.length > 0) {
+          setTransacoes(supaTransacoes);
+          localStorage.setItem('fin_transacoes', JSON.stringify(supaTransacoes));
+        } else {
+          // Fallback para localStorage
+          const savedTransacoes = localStorage.getItem('fin_transacoes');
+          if (savedTransacoes) {
+            const parsed = JSON.parse(savedTransacoes);
+            setTransacoes(parsed);
+            // Sincronizar com Supabase
+            await sincronizarTransacoesComSupabase(parsed);
+          }
+        }
+        
+        // Documentos
+        if (!errDocumentos && supaDocumentos && supaDocumentos.length > 0) {
+          setDocumentos(supaDocumentos);
+          localStorage.setItem('fin_documentos', JSON.stringify(supaDocumentos));
+        } else {
+          const savedDocumentos = localStorage.getItem('fin_documentos');
+          if (savedDocumentos) {
+            const parsed = JSON.parse(savedDocumentos);
+            setDocumentos(parsed);
+            await sincronizarDocumentosComSupabase(parsed);
+          }
+        }
+        
+        // Contratos
+        if (!errContratos && supaContratos && supaContratos.length > 0) {
+          setContratos(supaContratos);
+          localStorage.setItem('fin_contratos', JSON.stringify(supaContratos));
+        } else {
+          const savedContratos = localStorage.getItem('fin_contratos');
+          if (savedContratos) {
+            const parsed = JSON.parse(savedContratos);
+            setContratos(parsed);
+            await sincronizarContratosComSupabase(parsed);
+          }
+        }
+        
+        // Backups
+        if (!errBackups && supaBackups && supaBackups.length > 0) {
+          setBackups(supaBackups);
+          localStorage.setItem('fin_backups', JSON.stringify(supaBackups));
+        } else {
+          const savedBackups = localStorage.getItem('fin_backups');
+          if (savedBackups) {
+            setBackups(JSON.parse(savedBackups));
+          }
+        }
+      } catch (error) {
+        console.error('Erro ao carregar dados do Supabase:', error);
+        // Fallback completo para localStorage em caso de erro
         const savedTransacoes = localStorage.getItem('fin_transacoes');
         const savedDocumentos = localStorage.getItem('fin_documentos');
         const savedContratos = localStorage.getItem('fin_contratos');
-        
-        if (savedTransacoes) {
-          setTransacoes(JSON.parse(savedTransacoes));
-        } else {
-          // Dados de exemplo
-          const exemploTransacoes = gerarDadosExemplo();
-          setTransacoes(exemploTransacoes);
-          localStorage.setItem('fin_transacoes', JSON.stringify(exemploTransacoes));
-        }
-        
-        if (savedDocumentos) {
-          setDocumentos(JSON.parse(savedDocumentos));
-        }
-        
-        if (savedContratos) {
-          setContratos(JSON.parse(savedContratos));
-        } else {
-          const exemploContratos = [
-            {
-              id: '1',
-              cliente: 'CIMCERO',
-              descricao: 'Manutenção mensal - Rondônia em Números',
-              valor_mensal: 5000,
-              data_inicio: '2026-01-01',
-              data_fim: '2026-12-31',
-              dia_vencimento: '10',
-              status: 'ativo',
-              created_at: '2026-01-01'
-            },
-            {
-              id: '2',
-              cliente: 'Prefeitura de Ji-Paraná',
-              descricao: 'Consultoria BI - Pacote Anual',
-              valor_mensal: 3500,
-              data_inicio: '2026-01-01',
-              data_fim: '2026-06-30',
-              dia_vencimento: '15',
-              status: 'ativo',
-              created_at: '2026-01-01'
-            }
-          ];
-          setContratos(exemploContratos);
-          localStorage.setItem('fin_contratos', JSON.stringify(exemploContratos));
-        }
-        
-        // Carregar backups salvos
         const savedBackups = localStorage.getItem('fin_backups');
-        if (savedBackups) {
-          setBackups(JSON.parse(savedBackups));
-        }
-      } catch (error) {
-        console.error('Erro ao carregar dados:', error);
+        
+        if (savedTransacoes) setTransacoes(JSON.parse(savedTransacoes));
+        if (savedDocumentos) setDocumentos(JSON.parse(savedDocumentos));
+        if (savedContratos) setContratos(JSON.parse(savedContratos));
+        if (savedBackups) setBackups(JSON.parse(savedBackups));
       } finally {
         setLoading(false);
       }
@@ -463,105 +492,110 @@ const AdminFinanceiro = () => {
     loadData();
   }, []);
 
-  // Gerar dados de exemplo
-  const gerarDadosExemplo = () => {
-    return [
-      {
-        id: '1',
-        tipo: 'receita',
-        descricao: 'Consultoria BI - Prefeitura de Ji-Paraná',
-        valor: 15000,
-        data_vencimento: '2026-01-30',
-        data_pagamento: '2026-01-25',
-        status: 'pago',
-        categoria: 'consultoria',
-        forma_pagamento: 'Transferência Bancária',
-        numero_documento: 'NF-001/2026',
-        entidade_nome: 'Prefeitura de Ji-Paraná',
-        created_at: '2026-01-10'
-      },
-      {
-        id: '2',
-        tipo: 'receita',
-        descricao: 'Desenvolvimento Dashboard - CIMCERO',
-        valor: 25000,
-        data_vencimento: '2026-02-15',
-        status: 'pendente',
-        categoria: 'desenvolvimento',
-        entidade_nome: 'CIMCERO',
-        created_at: '2026-01-15'
-      },
-      {
-        id: '3',
-        tipo: 'despesa',
-        descricao: 'Servidor Cloud AWS',
-        valor: 2500,
-        data_vencimento: '2026-01-28',
-        data_pagamento: '2026-01-20',
-        status: 'pago',
-        categoria: 'infraestrutura',
-        forma_pagamento: 'Cartão de Crédito',
-        created_at: '2026-01-05'
-      },
-      {
-        id: '4',
-        tipo: 'despesa',
-        descricao: 'Licença Power BI Pro',
-        valor: 500,
-        data_vencimento: '2026-02-01',
-        status: 'pendente',
-        categoria: 'software',
-        created_at: '2026-01-20'
-      },
-      {
-        id: '5',
-        tipo: 'despesa',
-        descricao: 'Folha de Pagamento - Janeiro',
-        valor: 18000,
-        data_vencimento: '2026-01-31',
-        data_pagamento: '2026-01-30',
-        status: 'pago',
-        categoria: 'salarios',
-        forma_pagamento: 'Transferência Bancária',
-        created_at: '2026-01-25'
-      },
-      {
-        id: '6',
-        tipo: 'receita',
-        descricao: 'Treinamento Power BI - Equipe SEDUC',
-        valor: 8000,
-        data_vencimento: '2026-01-20',
-        data_pagamento: '2026-01-18',
-        status: 'pago',
-        categoria: 'treinamentos',
-        forma_pagamento: 'PIX',
-        numero_documento: 'NF-002/2026',
-        entidade_nome: 'SEDUC-RO',
-        created_at: '2026-01-05'
+  // Funções de sincronização com Supabase
+  const sincronizarTransacoesComSupabase = async (transacoesLocais) => {
+    try {
+      for (const transacao of transacoesLocais) {
+        const { error } = await supabase
+          .from('fin_transacoes')
+          .upsert(transacao, { onConflict: 'id' });
+        if (error) console.error('Erro ao sincronizar transação:', error);
       }
-    ];
+    } catch (error) {
+      console.error('Erro na sincronização de transações:', error);
+    }
   };
 
-  // Salvar transações
-  const saveTransacoes = (newTransacoes) => {
+  const sincronizarDocumentosComSupabase = async (documentosLocais) => {
+    try {
+      for (const documento of documentosLocais) {
+        const { error } = await supabase
+          .from('fin_documentos')
+          .upsert(documento, { onConflict: 'id' });
+        if (error) console.error('Erro ao sincronizar documento:', error);
+      }
+    } catch (error) {
+      console.error('Erro na sincronização de documentos:', error);
+    }
+  };
+
+  const sincronizarContratosComSupabase = async (contratosLocais) => {
+    try {
+      for (const contrato of contratosLocais) {
+        const { error } = await supabase
+          .from('fin_contratos')
+          .upsert(contrato, { onConflict: 'id' });
+        if (error) console.error('Erro ao sincronizar contrato:', error);
+      }
+    } catch (error) {
+      console.error('Erro na sincronização de contratos:', error);
+    }
+  };
+
+  // Gerar dados de exemplo (removido - não criar dados de exemplo automaticamente)
+  const gerarDadosExemplo = () => {
+    return [];
+  };
+
+
+
+  // Salvar transações (localStorage + Supabase)
+  const saveTransacoes = async (newTransacoes) => {
     setTransacoes(newTransacoes);
     localStorage.setItem('fin_transacoes', JSON.stringify(newTransacoes));
+    
+    // Sincronizar com Supabase
+    try {
+      // Identificar transações novas ou atualizadas
+      for (const transacao of newTransacoes) {
+        const { error } = await supabase
+          .from('fin_transacoes')
+          .upsert(transacao, { onConflict: 'id' });
+        if (error) console.error('Erro ao salvar transação no Supabase:', error);
+      }
+    } catch (error) {
+      console.error('Erro ao sincronizar transações com Supabase:', error);
+    }
   };
 
-  // Salvar documentos
-  const saveDocumentos = (newDocumentos) => {
+  // Salvar documentos (localStorage + Supabase)
+  const saveDocumentos = async (newDocumentos) => {
     setDocumentos(newDocumentos);
     localStorage.setItem('fin_documentos', JSON.stringify(newDocumentos));
+    
+    // Sincronizar com Supabase
+    try {
+      for (const documento of newDocumentos) {
+        const { error } = await supabase
+          .from('fin_documentos')
+          .upsert(documento, { onConflict: 'id' });
+        if (error) console.error('Erro ao salvar documento no Supabase:', error);
+      }
+    } catch (error) {
+      console.error('Erro ao sincronizar documentos com Supabase:', error);
+    }
   };
 
-  // Salvar contratos
-  const saveContratos = (newContratos) => {
+  // Salvar contratos (localStorage + Supabase)
+  const saveContratos = async (newContratos) => {
     setContratos(newContratos);
     localStorage.setItem('fin_contratos', JSON.stringify(newContratos));
+    
+    // Sincronizar com Supabase
+    try {
+      for (const contrato of newContratos) {
+        const { error } = await supabase
+          .from('fin_contratos')
+          .upsert(contrato, { onConflict: 'id' });
+        if (error) console.error('Erro ao salvar contrato no Supabase:', error);
+      }
+    } catch (error) {
+      console.error('Erro ao sincronizar contratos com Supabase:', error);
+    }
   };
 
-  // Funções de Backup
-  const criarBackup = (nome) => {
+  // Funções de Backup (localStorage + Supabase)
+  const criarBackup = async (nome) => {
     const novoBackup = {
       id: Date.now().toString(),
       nome: nome || `Backup ${new Date().toLocaleDateString('pt-BR')}`,
@@ -584,31 +618,62 @@ const AdminFinanceiro = () => {
     setBackups(novosBackups);
     localStorage.setItem('fin_backups', JSON.stringify(novosBackups));
     
+    // Salvar no Supabase
+    try {
+      const { error } = await supabase
+        .from('fin_backups')
+        .insert(novoBackup);
+      if (error) console.error('Erro ao salvar backup no Supabase:', error);
+    } catch (error) {
+      console.error('Erro ao sincronizar backup com Supabase:', error);
+    }
+    
     return novoBackup;
   };
 
-  const restaurarBackup = (backupId) => {
+  const restaurarBackup = async (backupId) => {
     const backup = backups.find(b => b.id === backupId);
     if (!backup) return false;
     
     // Restaurar dados
-    saveTransacoes(backup.dados.transacoes);
-    saveDocumentos(backup.dados.documentos);
-    saveContratos(backup.dados.contratos);
+    await saveTransacoes(backup.dados.transacoes);
+    await saveDocumentos(backup.dados.documentos);
+    await saveContratos(backup.dados.contratos);
     
     return true;
   };
 
-  const excluirBackup = (backupId) => {
+  const excluirBackup = async (backupId) => {
     const novosBackups = backups.filter(b => b.id !== backupId);
     setBackups(novosBackups);
     localStorage.setItem('fin_backups', JSON.stringify(novosBackups));
+    
+    // Excluir do Supabase
+    try {
+      const { error } = await supabase
+        .from('fin_backups')
+        .delete()
+        .eq('id', backupId);
+      if (error) console.error('Erro ao excluir backup do Supabase:', error);
+    } catch (error) {
+      console.error('Erro ao sincronizar exclusão de backup com Supabase:', error);
+    }
   };
 
-  const zerarDados = () => {
-    saveTransacoes([]);
-    saveDocumentos([]);
-    saveContratos([]);
+  const zerarDados = async () => {
+    // Zerar dados locais e no Supabase
+    await saveTransacoes([]);
+    await saveDocumentos([]);
+    await saveContratos([]);
+    
+    // Limpar todas as transações do Supabase
+    try {
+      await supabase.from('fin_transacoes').delete().neq('id', '');
+      await supabase.from('fin_documentos').delete().neq('id', '');
+      await supabase.from('fin_contratos').delete().neq('id', '');
+    } catch (error) {
+      console.error('Erro ao zerar dados no Supabase:', error);
+    }
   };
 
   const exportarBackupJSON = (backupId) => {
