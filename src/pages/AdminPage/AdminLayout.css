@@ -45,7 +45,7 @@
 }
 
 .admin-layout.light .admin-content-header h1 {
-  color: #065f46;
+  color: #10b981;
 }
 
 .admin-content-header p {
@@ -57,7 +57,7 @@
 }
 
 .admin-layout.light .admin-content-header p {
-  color: #047857;
+  color: #34d399;
 }
 
 /* Loading State */
@@ -124,7 +124,7 @@
 }
 
 .admin-layout.light .text-secondary {
-  color: #047857;
+  color: #34d399;
 }
 
 .admin-layout.dark .text-accent {

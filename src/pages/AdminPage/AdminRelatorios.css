@@ -208,11 +208,11 @@
 
 /* Light Mode */
 .admin-layout.light .relatorios-header .header-text h1 {
-  color: #065f46;
+  color: #10b981;
 }
 
 .admin-layout.light .relatorios-header .header-subtitle {
-  color: #047857;
+  color: #34d399;
 }
 
 .admin-layout.light .admin-relatorios .stat-card {
@@ -220,32 +220,32 @@
 }
 
 .admin-layout.light .admin-relatorios .stat-value {
-  color: #065f46;
+  color: #10b981;
 }
 
 .admin-layout.light .admin-relatorios .stat-label {
-  color: #047857;
+  color: #34d399;
 }
 
 .admin-layout.light .admin-relatorios .filter-group label {
-  color: #047857;
+  color: #34d399;
 }
 
 .admin-layout.light .admin-relatorios .filter-group select {
   background: rgba(16, 185, 129, 0.08);
-  color: #065f46;
+  color: #10b981;
 }
 
 .admin-layout.light .admin-relatorios .section-header h2 {
-  color: #065f46;
+  color: #10b981;
 }
 
 .admin-layout.light .relatorio-info h3 {
-  color: #065f46;
+  color: #10b981;
 }
 
 .admin-layout.light .relatorio-info p {
-  color: #047857;
+  color: #34d399;
 }
 
 /* Responsivo */

@@ -236,31 +236,31 @@
 
 /* Light Mode */
 .admin-layout.light .configuracoes-header .header-text h1 {
-  color: #065f46;
+  color: #10b981;
 }
 
 .admin-layout.light .configuracoes-header .header-subtitle {
-  color: #047857;
+  color: #34d399;
 }
 
 .admin-layout.light .config-section h2 {
-  color: #065f46;
+  color: #10b981;
 }
 
 .admin-layout.light .config-info h3 {
-  color: #065f46;
+  color: #10b981;
 }
 
 .admin-layout.light .config-info p {
-  color: #047857;
+  color: #34d399;
 }
 
 .admin-layout.light .config-item-input label {
-  color: #065f46;
+  color: #10b981;
 }
 
 .admin-layout.light .tab-btn {
-  color: #047857;
+  color: #34d399;
 }
 
 .admin-layout.light .tab-btn.active {

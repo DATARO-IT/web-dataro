@@ -75,7 +75,7 @@
 }
 
 .btn-novo:hover {
-  background: linear-gradient(135deg, #059669 0%, #047857 100%);
+  background: linear-gradient(135deg, #059669 0%, #34d399 100%);
   transform: translateY(-2px);
   box-shadow: 0 4px 12px rgba(16, 185, 129, 0.4);
 }
@@ -806,7 +806,7 @@
 }
 
 .btn-submit:hover:not(:disabled) {
-  background: linear-gradient(135deg, #059669 0%, #047857 100%);
+  background: linear-gradient(135deg, #059669 0%, #34d399 100%);
   transform: translateY(-1px);
 }
 
@@ -1145,11 +1145,11 @@
 
 /* Título e subtítulo no modo claro */
 .admin-layout.light .header-title h1 {
-  color: #065f46 !important;
+  color: #10b981 !important;
 }
 
 .admin-layout.light .header-title .header-subtitle {
-  color: #047857;
+  color: #34d399;
   border-left-color: rgba(16, 185, 129, 0.4);
 }
 
@@ -1311,7 +1311,7 @@
 }
 
 .admin-layout.light .modal-header h2 {
-  color: #065f46;
+  color: #10b981;
 }
 
 .admin-layout.light .btn-close {
@@ -1324,7 +1324,7 @@
 
 /* Formulário no modo claro */
 .admin-layout.light .section-title {
-  color: #065f46;
+  color: #10b981;
 }
 
 .admin-layout.light .section-info {
@@ -1532,7 +1532,7 @@
 }
 
 .pagination-btn-number.active:hover {
-  background: linear-gradient(135deg, #059669 0%, #047857 100%);
+  background: linear-gradient(135deg, #059669 0%, #34d399 100%);
 }
 
 .pagination-ellipsis {

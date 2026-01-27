@@ -395,23 +395,23 @@
 
 /* Light Mode */
 .admin-layout.light .contatos-header .header-text h1 {
-  color: #065f46;
+  color: #10b981;
 }
 
 .admin-layout.light .contatos-header .header-subtitle {
-  color: #047857;
+  color: #34d399;
 }
 
 .admin-layout.light .admin-contatos .section-header h2 {
-  color: #065f46;
+  color: #10b981;
 }
 
 .admin-layout.light .contato-info h3 {
-  color: #065f46;
+  color: #10b981;
 }
 
 .admin-layout.light .contato-detalhes .detalhe {
-  color: #047857;
+  color: #34d399;
 }
 
 .admin-layout.light .modal-content {
@@ -419,17 +419,17 @@
 }
 
 .admin-layout.light .modal-header h2 {
-  color: #065f46;
+  color: #10b981;
 }
 
 .admin-layout.light .form-group label {
-  color: #047857;
+  color: #34d399;
 }
 
 .admin-layout.light .form-group input,
 .admin-layout.light .form-group select,
 .admin-layout.light .form-group textarea {
-  color: #065f46;
+  color: #10b981;
 }
 
 /* Responsivo */

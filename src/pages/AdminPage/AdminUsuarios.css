@@ -36,7 +36,7 @@
 }
 
 .admin-usuarios.light .admin-usuarios-title h1 {
-  color: #065f46 !important;
+  color: #10b981 !important;
 }
 
 .admin-usuarios-title .header-subtitle {
@@ -49,7 +49,7 @@
 }
 
 .admin-usuarios.light .admin-usuarios-title .header-subtitle {
-  color: #047857;
+  color: #34d399;
 }
 
 /* Hover Glow */
@@ -79,7 +79,7 @@
 }
 
 .admin-btn-primary:hover {
-  background: linear-gradient(135deg, #059669 0%, #047857 100%);
+  background: linear-gradient(135deg, #059669 0%, #34d399 100%);
   transform: translateY(-2px);
   box-shadow: 0 4px 12px rgba(16, 185, 129, 0.4);
 }
@@ -210,7 +210,7 @@
 }
 
 .admin-usuarios.light .admin-metric-value {
-  color: #065f46;
+  color: #10b981;
 }
 
 .admin-metric-label {
@@ -470,7 +470,7 @@
 }
 
 .admin-usuarios.light .admin-modal-header h2 {
-  color: #065f46;
+  color: #10b981;
 }
 
 .admin-modal-close {

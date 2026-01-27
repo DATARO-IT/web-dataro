@@ -81,7 +81,7 @@
 }
 
 .btn-novo:hover {
-  background: linear-gradient(135deg, #059669 0%, #047857 100%);
+  background: linear-gradient(135deg, #059669 0%, #34d399 100%);
   transform: translateY(-2px);
   box-shadow: 0 4px 12px rgba(16, 185, 129, 0.4);
 }
@@ -1030,16 +1030,16 @@
    ============================================ */
 
 .admin-layout.light .admin-calendario {
-  color: #065f46;
+  color: #10b981;
 }
 
 /* Título e subtítulo no modo claro */
 .admin-layout.light .header-title h1 {
-  color: #065f46 !important;
+  color: #10b981 !important;
 }
 
 .admin-layout.light .header-title .header-subtitle {
-  color: #047857;
+  color: #34d399;
 }
 
 /* Barra de sincronização Google no modo claro */
@@ -1053,13 +1053,13 @@
 }
 
 .admin-layout.light .sync-status {
-  color: #047857;
+  color: #34d399;
 }
 
 .admin-layout.light .btn-sync {
   background: rgba(255, 255, 255, 0.8);
   border-color: rgba(16, 185, 129, 0.3);
-  color: #065f46;
+  color: #10b981;
 }
 
 .admin-layout.light .btn-sync:hover {
@@ -1069,7 +1069,7 @@
 }
 
 .admin-layout.light .toggle-label {
-  color: #065f46;
+  color: #10b981;
 }
 
 /* Calendário no modo claro */
@@ -1080,26 +1080,26 @@
 }
 
 .admin-layout.light .calendario-nav h2 {
-  color: #065f46;
+  color: #10b981;
 }
 
 .admin-layout.light .btn-nav {
   background: rgba(16, 185, 129, 0.1);
-  color: #065f46;
+  color: #10b981;
 }
 
 .admin-layout.light .btn-nav:hover {
   background: rgba(16, 185, 129, 0.2);
-  color: #047857;
+  color: #34d399;
 }
 
 .admin-layout.light .calendario-weekdays span {
-  color: #047857;
+  color: #34d399;
 }
 
 .admin-layout.light .calendario-grid .dia {
   background: rgba(255, 255, 255, 0.8);
-  color: #065f46;
+  color: #10b981;
   border-color: rgba(16, 185, 129, 0.2);
 }
 
@@ -1130,7 +1130,7 @@
 }
 
 .admin-layout.light .legenda-item span {
-  color: #065f46;
+  color: #10b981;
 }
 
 /* Lista de eventos no modo claro */
@@ -1141,7 +1141,7 @@
 }
 
 .admin-layout.light .eventos-header h3 {
-  color: #065f46;
+  color: #10b981;
 }
 
 .admin-layout.light .btn-ver-todos {
@@ -1167,34 +1167,34 @@
 }
 
 .admin-layout.light .evento-titulo {
-  color: #065f46;
+  color: #10b981;
 }
 
 .admin-layout.light .evento-meta span {
-  color: #047857;
+  color: #34d399;
 }
 
 .admin-layout.light .evento-descricao {
-  color: #065f46;
+  color: #10b981;
 }
 
 .admin-layout.light .evento-responsaveis span {
-  color: #047857;
+  color: #34d399;
 }
 
 .admin-layout.light .responsavel-tag {
   background: rgba(16, 185, 129, 0.15);
-  color: #065f46;
+  color: #10b981;
 }
 
 .admin-layout.light .btn-evento-action {
   background: rgba(16, 185, 129, 0.1);
-  color: #065f46;
+  color: #10b981;
 }
 
 .admin-layout.light .btn-evento-action:hover {
   background: rgba(16, 185, 129, 0.2);
-  color: #047857;
+  color: #34d399;
 }
 
 .admin-layout.light .btn-evento-action.delete:hover {
@@ -1204,7 +1204,7 @@
 
 /* Estado vazio no modo claro */
 .admin-layout.light .eventos-empty {
-  color: #047857;
+  color: #34d399;
 }
 
 .admin-layout.light .eventos-empty svg {
@@ -1227,21 +1227,21 @@
 }
 
 .admin-layout.light .modal-header h2 {
-  color: #065f46;
+  color: #10b981;
 }
 
 .admin-layout.light .btn-close {
-  color: #065f46;
+  color: #10b981;
 }
 
 .admin-layout.light .btn-close:hover {
-  color: #047857;
+  color: #34d399;
   background: rgba(16, 185, 129, 0.15);
 }
 
 /* Formulário no modo claro */
 .admin-layout.light .form-group label {
-  color: #065f46;
+  color: #10b981;
 }
 
 .admin-layout.light .form-group input,
@@ -1249,7 +1249,7 @@
 .admin-layout.light .form-group select {
   background: rgba(255, 255, 255, 0.9);
   border-color: rgba(16, 185, 129, 0.3);
-  color: #065f46;
+  color: #10b981;
 }
 
 .admin-layout.light .form-group input::placeholder,
@@ -1265,12 +1265,12 @@
 }
 
 .admin-layout.light .form-group small {
-  color: #047857;
+  color: #34d399;
 }
 
 /* Checkbox no modo claro */
 .admin-layout.light .checkbox-group label {
-  color: #065f46;
+  color: #10b981;
 }
 
 /* Responsáveis no modo claro */
@@ -1282,7 +1282,7 @@
 .admin-layout.light .responsavel-item {
   background: rgba(255, 255, 255, 0.8);
   border-color: rgba(16, 185, 129, 0.2);
-  color: #065f46;
+  color: #10b981;
 }
 
 .admin-layout.light .responsavel-item.selected {
@@ -1299,7 +1299,7 @@
 .admin-layout.light .btn-cancelar {
   background: rgba(16, 185, 129, 0.1);
   border-color: rgba(16, 185, 129, 0.3);
-  color: #065f46;
+  color: #10b981;
 }
 
 .admin-layout.light .btn-cancelar:hover {
@@ -1312,23 +1312,23 @@
 }
 
 .admin-layout.light .calendario-footer p {
-  color: #065f46;
+  color: #10b981;
 }
 
 .admin-layout.light .calendario-footer small {
-  color: #047857;
+  color: #34d399;
 }
 
 
 /* Header subtitle no modo claro */
 .admin-layout.light .header-title .header-subtitle {
-  color: #047857;
+  color: #34d399;
 }
 
 /* Page theme toggle no modo claro */
 .admin-layout.light .page-theme-toggle .theme-toggle {
   background: rgba(16, 185, 129, 0.15);
-  color: #065f46;
+  color: #10b981;
 }
 
 .admin-layout.light .page-theme-toggle .theme-toggle:hover {
@@ -1608,7 +1608,7 @@
 .admin-layout.light .btn-mes-ano:hover {
   background: rgba(16, 185, 129, 0.25);
   border-color: #10b981;
-  color: #047857;
+  color: #34d399;
 }
 
 .admin-layout.light .picker-dropdown {
@@ -1618,12 +1618,12 @@
 }
 
 .admin-layout.light .picker-item {
-  color: #065f46;
+  color: #10b981;
 }
 
 .admin-layout.light .picker-item:hover {
   background: rgba(16, 185, 129, 0.15);
-  color: #047857;
+  color: #34d399;
 }
 
 .admin-layout.light .picker-item.ativo {
@@ -1643,7 +1643,7 @@
 }
 
 .admin-layout.light .dia-semana-compact {
-  color: #047857;
+  color: #34d399;
 }
 
 .admin-layout.light .dia-cell-compact {
@@ -1655,7 +1655,7 @@
 }
 
 .admin-layout.light .dia-numero-compact {
-  color: #065f46;
+  color: #10b981;
 }
 
 .admin-layout.light .dia-cell-compact.outro-mes .dia-numero-compact {
@@ -1664,7 +1664,7 @@
 
 /* Lista de eventos no modo claro */
 .admin-layout.light .lista-header h3 {
-  color: #065f46;
+  color: #10b981;
 }
 
 .admin-layout.light .lista-eventos-container {
@@ -1673,7 +1673,7 @@
 }
 
 .admin-layout.light .lista-vazia p {
-  color: #047857;
+  color: #34d399;
 }
 
 .admin-layout.light .lista-vazia svg {
@@ -1681,19 +1681,19 @@
 }
 
 .admin-layout.light .evento-card-titulo {
-  color: #065f46;
+  color: #10b981;
 }
 
 .admin-layout.light .evento-card-info .meta-item {
-  color: #047857;
+  color: #34d399;
 }
 
 .admin-layout.light .evento-card-descricao {
-  color: #065f46;
+  color: #10b981;
 }
 
 .admin-layout.light .evento-card-responsaveis {
-  color: #047857;
+  color: #34d399;
   border-top-color: rgba(16, 185, 129, 0.2);
 }
 
@@ -1704,12 +1704,12 @@
 .admin-layout.light .btn-icon-small {
   background: rgba(16, 185, 129, 0.1);
   border-color: rgba(16, 185, 129, 0.2);
-  color: #065f46;
+  color: #10b981;
 }
 
 .admin-layout.light .btn-icon-small:hover {
   background: rgba(16, 185, 129, 0.2);
-  color: #047857;
+  color: #34d399;
 }
 
 /* Legenda compacta no modo claro */
@@ -1719,5 +1719,5 @@
 }
 
 .admin-layout.light .legenda-item-compact {
-  color: #065f46;
+  color: #10b981;
 }
