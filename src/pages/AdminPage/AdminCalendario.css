@@ -950,16 +950,16 @@
    ============================================ */
 
 .admin-layout.light .admin-calendario {
-  color: #1f2937;
+  color: #065f46;
 }
 
 /* Título e subtítulo no modo claro */
 .admin-layout.light .header-title h1 {
-  color: #111827 !important;
+  color: #065f46 !important;
 }
 
 .admin-layout.light .header-title .header-subtitle {
-  color: #6b7280;
+  color: #047857;
 }
 
 /* Barra de sincronização Google no modo claro */
@@ -973,13 +973,13 @@
 }
 
 .admin-layout.light .sync-status {
-  color: #6b7280;
+  color: #047857;
 }
 
 .admin-layout.light .btn-sync {
-  background: #ffffff;
-  border-color: #d1d5db;
-  color: #374151;
+  background: rgba(255, 255, 255, 0.8);
+  border-color: rgba(16, 185, 129, 0.3);
+  color: #065f46;
 }
 
 .admin-layout.light .btn-sync:hover {
@@ -989,48 +989,48 @@
 }
 
 .admin-layout.light .toggle-label {
-  color: #374151;
+  color: #065f46;
 }
 
 /* Calendário no modo claro */
 .admin-layout.light .calendario-container {
-  background: #ffffff;
-  border-color: #e5e7eb;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  background: rgba(255, 255, 255, 0.85);
+  border-color: rgba(16, 185, 129, 0.3);
+  box-shadow: 0 1px 3px rgba(16, 185, 129, 0.1);
 }
 
 .admin-layout.light .calendario-nav h2 {
-  color: #111827;
+  color: #065f46;
 }
 
 .admin-layout.light .btn-nav {
-  background: #f3f4f6;
-  color: #374151;
+  background: rgba(16, 185, 129, 0.1);
+  color: #065f46;
 }
 
 .admin-layout.light .btn-nav:hover {
-  background: #e5e7eb;
-  color: #111827;
+  background: rgba(16, 185, 129, 0.2);
+  color: #047857;
 }
 
 .admin-layout.light .calendario-weekdays span {
-  color: #6b7280;
+  color: #047857;
 }
 
 .admin-layout.light .calendario-grid .dia {
-  background: #ffffff;
-  color: #374151;
-  border-color: #e5e7eb;
+  background: rgba(255, 255, 255, 0.8);
+  color: #065f46;
+  border-color: rgba(16, 185, 129, 0.2);
 }
 
 .admin-layout.light .calendario-grid .dia:hover {
-  background: #f3f4f6;
-  border-color: #d1d5db;
+  background: rgba(16, 185, 129, 0.15);
+  border-color: rgba(16, 185, 129, 0.4);
 }
 
 .admin-layout.light .calendario-grid .dia.outro-mes {
-  color: #9ca3af;
-  background: #f9fafb;
+  color: #6b7280;
+  background: rgba(16, 185, 129, 0.05);
 }
 
 .admin-layout.light .calendario-grid .dia.hoje {
@@ -1045,23 +1045,23 @@
 
 /* Legenda no modo claro */
 .admin-layout.light .calendario-legenda {
-  background: #f9fafb;
-  border-color: #e5e7eb;
+  background: rgba(16, 185, 129, 0.08);
+  border-color: rgba(16, 185, 129, 0.2);
 }
 
 .admin-layout.light .legenda-item span {
-  color: #374151;
+  color: #065f46;
 }
 
 /* Lista de eventos no modo claro */
 .admin-layout.light .eventos-container {
-  background: #ffffff;
-  border-color: #e5e7eb;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  background: rgba(255, 255, 255, 0.85);
+  border-color: rgba(16, 185, 129, 0.3);
+  box-shadow: 0 1px 3px rgba(16, 185, 129, 0.1);
 }
 
 .admin-layout.light .eventos-header h3 {
-  color: #111827;
+  color: #065f46;
 }
 
 .admin-layout.light .btn-ver-todos {
@@ -1075,46 +1075,46 @@
 
 /* Cards de evento no modo claro */
 .admin-layout.light .evento-card {
-  background: #ffffff;
-  border-color: #e5e7eb;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+  background: rgba(255, 255, 255, 0.9);
+  border-color: rgba(16, 185, 129, 0.2);
+  box-shadow: 0 1px 3px rgba(16, 185, 129, 0.1);
 }
 
 .admin-layout.light .evento-card:hover {
-  background: #f9fafb;
-  border-color: #d1d5db;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  background: rgba(16, 185, 129, 0.1);
+  border-color: rgba(16, 185, 129, 0.4);
+  box-shadow: 0 4px 12px rgba(16, 185, 129, 0.15);
 }
 
 .admin-layout.light .evento-titulo {
-  color: #111827;
+  color: #065f46;
 }
 
 .admin-layout.light .evento-meta span {
-  color: #6b7280;
+  color: #047857;
 }
 
 .admin-layout.light .evento-descricao {
-  color: #4b5563;
+  color: #065f46;
 }
 
 .admin-layout.light .evento-responsaveis span {
-  color: #6b7280;
+  color: #047857;
 }
 
 .admin-layout.light .responsavel-tag {
-  background: #f3f4f6;
-  color: #374151;
+  background: rgba(16, 185, 129, 0.15);
+  color: #065f46;
 }
 
 .admin-layout.light .btn-evento-action {
-  background: #f3f4f6;
-  color: #6b7280;
+  background: rgba(16, 185, 129, 0.1);
+  color: #065f46;
 }
 
 .admin-layout.light .btn-evento-action:hover {
-  background: #e5e7eb;
-  color: #374151;
+  background: rgba(16, 185, 129, 0.2);
+  color: #047857;
 }
 
 .admin-layout.light .btn-evento-action.delete:hover {
@@ -1124,11 +1124,11 @@
 
 /* Estado vazio no modo claro */
 .admin-layout.light .eventos-empty {
-  color: #6b7280;
+  color: #047857;
 }
 
 .admin-layout.light .eventos-empty svg {
-  color: #9ca3af;
+  color: #10b981;
 }
 
 /* Modal no modo claro */
@@ -1137,44 +1137,44 @@
 }
 
 .admin-layout.light .modal-content {
-  background: #ffffff;
-  border-color: #e5e7eb;
+  background: linear-gradient(135deg, #ecfdf5 0%, #d1fae5 100%);
+  border-color: rgba(16, 185, 129, 0.3);
 }
 
 .admin-layout.light .modal-header {
-  background: #ffffff;
-  border-bottom-color: #e5e7eb;
+  background: transparent;
+  border-bottom-color: rgba(16, 185, 129, 0.3);
 }
 
 .admin-layout.light .modal-header h2 {
-  color: #111827;
+  color: #065f46;
 }
 
 .admin-layout.light .btn-close {
-  color: #6b7280;
+  color: #065f46;
 }
 
 .admin-layout.light .btn-close:hover {
-  color: #1f2937;
-  background: #f3f4f6;
+  color: #047857;
+  background: rgba(16, 185, 129, 0.15);
 }
 
 /* Formulário no modo claro */
 .admin-layout.light .form-group label {
-  color: #374151;
+  color: #065f46;
 }
 
 .admin-layout.light .form-group input,
 .admin-layout.light .form-group textarea,
 .admin-layout.light .form-group select {
-  background: #ffffff;
-  border-color: #d1d5db;
-  color: #1f2937;
+  background: rgba(255, 255, 255, 0.9);
+  border-color: rgba(16, 185, 129, 0.3);
+  color: #065f46;
 }
 
 .admin-layout.light .form-group input::placeholder,
 .admin-layout.light .form-group textarea::placeholder {
-  color: #9ca3af;
+  color: #6b7280;
 }
 
 .admin-layout.light .form-group input:focus,
@@ -1185,24 +1185,24 @@
 }
 
 .admin-layout.light .form-group small {
-  color: #6b7280;
+  color: #047857;
 }
 
 /* Checkbox no modo claro */
 .admin-layout.light .checkbox-group label {
-  color: #374151;
+  color: #065f46;
 }
 
 /* Responsáveis no modo claro */
 .admin-layout.light .responsaveis-list {
-  background: #f9fafb;
-  border-color: #e5e7eb;
+  background: rgba(16, 185, 129, 0.08);
+  border-color: rgba(16, 185, 129, 0.2);
 }
 
 .admin-layout.light .responsavel-item {
-  background: #ffffff;
-  border-color: #e5e7eb;
-  color: #374151;
+  background: rgba(255, 255, 255, 0.8);
+  border-color: rgba(16, 185, 129, 0.2);
+  color: #065f46;
 }
 
 .admin-layout.light .responsavel-item.selected {
@@ -1213,46 +1213,46 @@
 
 /* Footer do modal no modo claro */
 .admin-layout.light .modal-footer {
-  border-top-color: #e5e7eb;
+  border-top-color: rgba(16, 185, 129, 0.3);
 }
 
 .admin-layout.light .btn-cancelar {
-  background: #f3f4f6;
-  border-color: #d1d5db;
-  color: #374151;
+  background: rgba(16, 185, 129, 0.1);
+  border-color: rgba(16, 185, 129, 0.3);
+  color: #065f46;
 }
 
 .admin-layout.light .btn-cancelar:hover {
-  background: #e5e7eb;
+  background: rgba(16, 185, 129, 0.2);
 }
 
 /* Footer da página no modo claro */
 .admin-layout.light .calendario-footer {
-  border-top-color: #e5e7eb;
+  border-top-color: rgba(16, 185, 129, 0.3);
 }
 
 .admin-layout.light .calendario-footer p {
-  color: #111827;
+  color: #065f46;
 }
 
 .admin-layout.light .calendario-footer small {
-  color: #6b7280;
+  color: #047857;
 }
 
 
 /* Header subtitle no modo claro */
 .admin-layout.light .header-title .header-subtitle {
-  color: #374151;
+  color: #047857;
 }
 
 /* Page theme toggle no modo claro */
 .admin-layout.light .page-theme-toggle .theme-toggle {
-  background: rgba(0, 0, 0, 0.05);
-  color: #374151;
+  background: rgba(16, 185, 129, 0.15);
+  color: #065f46;
 }
 
 .admin-layout.light .page-theme-toggle .theme-toggle:hover {
-  background: rgba(0, 0, 0, 0.1);
+  background: rgba(16, 185, 129, 0.25);
 }
 
 /* Header title icon no modo claro */

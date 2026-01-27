@@ -18,11 +18,11 @@
   border-right: 1px solid rgba(16, 185, 129, 0.2);
 }
 
-/* Tema Claro - Branco */
+/* Tema Claro - Tons de verde suaves */
 .admin-sidebar.light-theme {
-  background: #ffffff;
-  border-right: 1px solid #e5e7eb;
-  box-shadow: 2px 0 8px rgba(0, 0, 0, 0.05);
+  background: linear-gradient(180deg, #ecfdf5 0%, #d1fae5 50%, #a7f3d0 100%);
+  border-right: 1px solid rgba(16, 185, 129, 0.3);
+  box-shadow: 2px 0 8px rgba(16, 185, 129, 0.1);
 }
 
 .admin-sidebar.collapsed {
@@ -87,7 +87,7 @@
 }
 
 .admin-sidebar.light-theme .sidebar-header {
-  border-bottom: 1px solid #e5e7eb;
+  border-bottom: 1px solid rgba(16, 185, 129, 0.3);
 }
 
 .sidebar-logo {
@@ -200,12 +200,12 @@
 
 /* Links - Tema Claro */
 .admin-sidebar.light-theme .sidebar-link {
-  color: #4b5563;
+  color: #065f46;
 }
 
 .admin-sidebar.light-theme .sidebar-link:hover {
-  background: #f3f4f6;
-  color: #111827;
+  background: rgba(16, 185, 129, 0.15);
+  color: #047857;
 }
 
 .admin-sidebar.light-theme .sidebar-link.active {
@@ -248,7 +248,7 @@
 }
 
 .admin-sidebar.light-theme .sidebar-footer {
-  border-top: 1px solid #e5e7eb;
+  border-top: 1px solid rgba(16, 185, 129, 0.3);
 }
 
 .sidebar-action-btn {
@@ -275,13 +275,13 @@
 }
 
 .admin-sidebar.light-theme .sidebar-action-btn {
-  border: 1px solid #e5e7eb;
-  color: #6b7280;
+  border: 1px solid rgba(16, 185, 129, 0.3);
+  color: #065f46;
 }
 
 .admin-sidebar.light-theme .sidebar-action-btn:hover {
-  background: #f3f4f6;
-  color: #374151;
+  background: rgba(16, 185, 129, 0.2);
+  color: #047857;
 }
 
 .admin-sidebar.collapsed .sidebar-action-btn {
@@ -306,7 +306,7 @@
 }
 
 .admin-sidebar.light-theme .sidebar-notifications {
-  background: #f3f4f6;
+  background: rgba(16, 185, 129, 0.1);
 }
 
 .notification-label {
@@ -321,7 +321,7 @@
 }
 
 .admin-sidebar.light-theme .notification-label {
-  color: #6b7280;
+  color: #065f46;
 }
 
 .notification-badge {
@@ -353,7 +353,7 @@
 }
 
 .admin-sidebar.light-theme .sidebar-user {
-  background: #f3f4f6;
+  background: rgba(16, 185, 129, 0.1);
 }
 
 .user-avatar {
@@ -389,7 +389,7 @@
 }
 
 .admin-sidebar.light-theme .user-name {
-  color: #111827;
+  color: #065f46;
 }
 
 .user-badge {
@@ -420,7 +420,7 @@
 }
 
 .admin-sidebar.light-theme .user-email {
-  color: #9ca3af;
+  color: #047857;
 }
 
 .admin-sidebar.collapsed .user-info {
@@ -451,13 +451,13 @@
 }
 
 .admin-sidebar.light-theme .sidebar-settings-btn {
-  background: #f3f4f6;
-  color: #6b7280;
+  background: rgba(16, 185, 129, 0.15);
+  color: #065f46;
 }
 
 .admin-sidebar.light-theme .sidebar-settings-btn:hover {
-  background: #e5e7eb;
-  color: #374151;
+  background: rgba(16, 185, 129, 0.25);
+  color: #047857;
 }
 
 /* Scrollbar personalizada */
@@ -479,12 +479,12 @@
 }
 
 .admin-sidebar.light-theme .sidebar-nav::-webkit-scrollbar-thumb {
-  background: #d1d5db;
+  background: rgba(16, 185, 129, 0.3);
   border-radius: 2px;
 }
 
 .admin-sidebar.light-theme .sidebar-nav::-webkit-scrollbar-thumb:hover {
-  background: #9ca3af;
+  background: rgba(16, 185, 129, 0.5);
 }
 
 /* Responsividade */
