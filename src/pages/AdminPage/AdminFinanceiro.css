@@ -457,6 +457,42 @@
   cursor: pointer;
 }
 
+.filtro-ordem {
+  min-width: 120px;
+}
+
+.btn-ordem {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.5rem 1rem;
+  border: 1px solid #e2e8f0;
+  border-radius: 6px;
+  background: white;
+  font-size: 0.9rem;
+  color: #1e293b;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.btn-ordem:hover {
+  border-color: #10b981;
+  background: #f0fdf4;
+}
+
+.btn-ordem svg {
+  width: 16px;
+  height: 16px;
+}
+
+.btn-ordem.asc {
+  color: #10b981;
+}
+
+.btn-ordem.desc {
+  color: #ef4444;
+}
+
 /* Tabela de Transações */
 .transacoes-table-container {
   overflow-x: auto;
