@@ -205,27 +205,27 @@
 
 /* Light Mode */
 .admin-layout.light .logs-header .header-text h1 {
-  color: #065f46;
+  color: #10b981;
 }
 
 .admin-layout.light .logs-header .header-subtitle {
-  color: #047857;
+  color: #34d399;
 }
 
 .admin-layout.light .admin-logs .section-header h2 {
-  color: #065f46;
+  color: #10b981;
 }
 
 .admin-layout.light .log-usuario {
-  color: #065f46;
+  color: #10b981;
 }
 
 .admin-layout.light .log-descricao {
-  color: #047857;
+  color: #34d399;
 }
 
 .admin-layout.light .log-meta {
-  color: #047857;
+  color: #34d399;
 }
 
 /* Responsivo */

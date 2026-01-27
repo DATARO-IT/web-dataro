@@ -388,7 +388,7 @@
 }
 
 .btn-acessar:hover {
-  background: linear-gradient(135deg, #059669 0%, #047857 100%);
+  background: linear-gradient(135deg, #059669 0%, #34d399 100%);
   transform: translateY(-1px);
 }
 
@@ -592,7 +592,7 @@
 }
 
 .btn-submit:hover:not(:disabled) {
-  background: linear-gradient(135deg, #059669 0%, #047857 100%);
+  background: linear-gradient(135deg, #059669 0%, #34d399 100%);
 }
 
 .btn-submit:disabled {
@@ -609,11 +609,11 @@
 }
 
 .admin-layout.light .header-title h1 {
-  color: #065f46;
+  color: #10b981;
 }
 
 .admin-layout.light .header-subtitle {
-  color: #047857;
+  color: #34d399;
 }
 
 .admin-layout.light .search-input {
@@ -628,7 +628,7 @@
 }
 
 .admin-layout.light .projeto-nome {
-  color: #065f46;
+  color: #10b981;
 }
 
 .admin-layout.light .projeto-descricao {
@@ -636,7 +636,7 @@
 }
 
 .admin-layout.light .stat-value {
-  color: #065f46;
+  color: #10b981;
 }
 
 .admin-layout.light .modal-content {
@@ -644,7 +644,7 @@
 }
 
 .admin-layout.light .modal-header h2 {
-  color: #065f46;
+  color: #10b981;
 }
 
 .admin-layout.light .form-group label {
@@ -699,8 +699,8 @@
 }
 
 .admin-layout.dark .card-header {
-  background: linear-gradient(135deg, #064e3b 0%, #065f46 100%);
-  border-bottom-color: #065f46;
+  background: linear-gradient(135deg, #064e3b 0%, #10b981 100%);
+  border-bottom-color: #10b981;
 }
 
 .admin-layout.dark .projeto-nome {

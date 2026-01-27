@@ -290,11 +290,11 @@
 
 /* Light Mode */
 .admin-layout.light .excluidos-header .header-text h1 {
-  color: #065f46;
+  color: #10b981;
 }
 
 .admin-layout.light .excluidos-header .header-subtitle {
-  color: #047857;
+  color: #34d399;
 }
 
 .admin-layout.light .warning-banner p {
@@ -302,15 +302,15 @@
 }
 
 .admin-layout.light .admin-arquivos-excluidos .section-header h2 {
-  color: #065f46;
+  color: #10b981;
 }
 
 .admin-layout.light .item-header h3 {
-  color: #065f46;
+  color: #10b981;
 }
 
 .admin-layout.light .item-meta {
-  color: #047857;
+  color: #34d399;
 }
 
 /* Responsivo */

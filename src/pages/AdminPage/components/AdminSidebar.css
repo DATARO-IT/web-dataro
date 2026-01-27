@@ -64,7 +64,7 @@
 }
 
 .admin-sidebar.light-theme .sidebar-edge-toggle:hover {
-  background: #047857;
+  background: #34d399;
   transform: translateY(-50%) scale(1.1);
 }
 
@@ -200,12 +200,12 @@
 
 /* Links - Tema Claro */
 .admin-sidebar.light-theme .sidebar-link {
-  color: #065f46;
+  color: #10b981;
 }
 
 .admin-sidebar.light-theme .sidebar-link:hover {
   background: rgba(16, 185, 129, 0.15);
-  color: #047857;
+  color: #34d399;
 }
 
 .admin-sidebar.light-theme .sidebar-link.active {
@@ -276,12 +276,12 @@
 
 .admin-sidebar.light-theme .sidebar-action-btn {
   border: 1px solid rgba(16, 185, 129, 0.3);
-  color: #065f46;
+  color: #10b981;
 }
 
 .admin-sidebar.light-theme .sidebar-action-btn:hover {
   background: rgba(16, 185, 129, 0.2);
-  color: #047857;
+  color: #34d399;
 }
 
 .admin-sidebar.collapsed .sidebar-action-btn {
@@ -321,7 +321,7 @@
 }
 
 .admin-sidebar.light-theme .notification-label {
-  color: #065f46;
+  color: #10b981;
 }
 
 .notification-badge {
@@ -389,7 +389,7 @@
 }
 
 .admin-sidebar.light-theme .user-name {
-  color: #065f46;
+  color: #10b981;
 }
 
 .user-badge {
@@ -420,7 +420,7 @@
 }
 
 .admin-sidebar.light-theme .user-email {
-  color: #047857;
+  color: #34d399;
 }
 
 .admin-sidebar.collapsed .user-info {
@@ -452,12 +452,12 @@
 
 .admin-sidebar.light-theme .sidebar-settings-btn {
   background: rgba(16, 185, 129, 0.15);
-  color: #065f46;
+  color: #10b981;
 }
 
 .admin-sidebar.light-theme .sidebar-settings-btn:hover {
   background: rgba(16, 185, 129, 0.25);
-  color: #047857;
+  color: #34d399;
 }
 
 /* Scrollbar personalizada */

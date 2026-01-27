@@ -272,27 +272,27 @@
 
 /* Light Mode */
 .admin-layout.light .documentos-header .header-text h1 {
-  color: #065f46;
+  color: #10b981;
 }
 
 .admin-layout.light .documentos-header .header-subtitle {
-  color: #047857;
+  color: #34d399;
 }
 
 .admin-layout.light .admin-documentos .section-header h2 {
-  color: #065f46;
+  color: #10b981;
 }
 
 .admin-layout.light .documento-info h3 {
-  color: #065f46;
+  color: #10b981;
 }
 
 .admin-layout.light .documento-meta {
-  color: #047857;
+  color: #34d399;
 }
 
 .admin-layout.light .cliente-nome {
-  color: #047857;
+  color: #34d399;
 }
 
 /* Responsivo */
