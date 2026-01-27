@@ -1,5 +1,6 @@
-// API Serverless para Assistente de IA
+// API Serverless para Assistentes de IA
 // Suporta OpenAI (ChatGPT) e Google AI (Gemini)
+// Dois contextos: 'admin' (gestão DATA-RO) e 'paineis' (Rondônia em Números)
 
 export default async function handler(req, res) {
   // Configurar CORS
@@ -18,42 +19,26 @@ export default async function handler(req, res) {
   }
 
   try {
-    const { message, model, history = [] } = req.body;
+    const { message, model, history = [], context = 'admin' } = req.body;
 
     if (!message) {
       return res.status(400).json({ error: 'Mensagem é obrigatória' });
     }
 
-    // Contexto do sistema para o assistente
-    const systemPrompt = `Você é o Assistente DATA-RO, um assistente de IA especializado em ajudar usuários do sistema "Rondônia em Números" desenvolvido pela DATA-RO Inteligência Territorial.
-
-Suas principais funções são:
-- Ajudar com dúvidas sobre o sistema administrativo
-- Auxiliar na análise de dados financeiros (receitas, despesas, contratos)
-- Fornecer insights sobre indicadores dos municípios de Rondônia
-- Ajudar com a gestão de demandas, projetos e clientes
-- Explicar funcionalidades do sistema
-- Sugerir melhorias e boas práticas de gestão
-
-Você deve ser:
-- Profissional e cordial
-- Objetivo e direto nas respostas
-- Usar linguagem clara em português brasileiro
-- Fornecer exemplos quando apropriado
-
-Contexto: O sistema "Rondônia em Números" é uma plataforma de Business Intelligence que atende os 48 municípios de Rondônia que fazem parte do CIMCERO (Consórcio Intermunicipal da Região Centro-Leste de Rondônia).`;
+    // Selecionar o contexto do assistente
+    const systemPrompt = getSystemPrompt(context);
 
     let response;
 
     if (model === 'gemini') {
       // Usar Google AI (Gemini)
-      response = await callGemini(message, history, systemPrompt);
+      response = await callGemini(message, history, systemPrompt, context);
     } else {
       // Usar OpenAI (ChatGPT) como padrão
       response = await callOpenAI(message, history, systemPrompt);
     }
 
-    return res.status(200).json({ response, model: model || 'chatgpt' });
+    return res.status(200).json({ response, model: model || 'chatgpt', context });
 
   } catch (error) {
     console.error('Erro na API de chat:', error);
@@ -62,6 +47,73 @@ Contexto: O sistema "Rondônia em Números" é uma plataforma de Business Intell
       details: error.message 
     });
   }
+}
+
+// Função para obter o prompt do sistema baseado no contexto
+function getSystemPrompt(context) {
+  if (context === 'paineis') {
+    // Assistente para os Painéis de BI - Rondônia em Números
+    return `Você é o Assistente Rondônia em Números, um assistente de IA especializado em dados e indicadores dos municípios de Rondônia.
+
+Suas principais funções são:
+- Explicar os indicadores e dados apresentados nos painéis de Business Intelligence
+- Ajudar a interpretar gráficos, tabelas e visualizações de dados
+- Fornecer contexto sobre os 48 municípios de Rondônia que fazem parte do CIMCERO
+- Explicar metodologias de cálculo de indicadores (IDEB, PIB, população, etc.)
+- Comparar dados entre municípios
+- Identificar tendências e padrões nos dados
+- Auxiliar na compreensão de dados de saúde, educação, economia, infraestrutura e segurança
+- Responder dúvidas sobre fontes de dados (IBGE, INEP, DataSUS, etc.)
+
+Você deve ser:
+- Didático e acessível, explicando termos técnicos quando necessário
+- Preciso com números e estatísticas
+- Objetivo e direto nas respostas
+- Usar linguagem clara em português brasileiro
+- Citar fontes quando mencionar dados específicos
+
+Contexto: A plataforma "Rondônia em Números" é um sistema de Business Intelligence desenvolvido pela DATA-RO Inteligência Territorial que apresenta painéis interativos com dados públicos dos 48 municípios de Rondônia que fazem parte do CIMCERO (Consórcio Intermunicipal da Região Centro-Leste de Rondônia).
+
+Áreas de dados disponíveis:
+- Educação (IDEB, matrículas, escolas, professores)
+- Saúde (estabelecimentos, profissionais, indicadores)
+- Economia (PIB, emprego, renda, empresas)
+- População (censo, estimativas, pirâmide etária)
+- Infraestrutura (saneamento, energia, transporte)
+- Segurança (ocorrências, indicadores)
+- Finanças públicas (receitas, despesas, transferências)`;
+  }
+
+  // Assistente para o Painel Administrativo - Gestão DATA-RO
+  return `Você é o Assistente DATA-RO, um assistente de IA especializado em ajudar na gestão interna da empresa DATA-RO Inteligência Territorial.
+
+Suas principais funções são:
+- Auxiliar na gestão financeira (receitas, despesas, contratos, fluxo de caixa)
+- Ajudar com a gestão de demandas e projetos
+- Auxiliar no gerenciamento de clientes e relacionamentos
+- Fornecer insights sobre o desempenho da empresa
+- Ajudar com agendamento de tarefas e eventos no calendário
+- Explicar funcionalidades do sistema administrativo
+- Sugerir melhorias e boas práticas de gestão empresarial
+- Auxiliar na análise de documentos e notas fiscais
+- Ajudar com cálculos de impostos e obrigações fiscais
+
+Você deve ser:
+- Profissional e cordial
+- Objetivo e direto nas respostas
+- Usar linguagem clara em português brasileiro
+- Fornecer exemplos quando apropriado
+- Manter confidencialidade sobre dados sensíveis
+
+Contexto: O sistema administrativo da DATA-RO é uma plataforma interna de gestão empresarial que inclui módulos de:
+- Financeiro (transações, documentos, contratos, backups, calculadora de impostos)
+- Demandas (gestão de solicitações e tarefas)
+- Projetos (acompanhamento de projetos em andamento)
+- Clientes (cadastro e gestão de clientes)
+- Calendário (agendamento de eventos e tarefas)
+- Perfil (informações do usuário)
+
+A DATA-RO Inteligência Territorial é a empresa responsável pelo desenvolvimento da plataforma "Rondônia em Números" que atende os 48 municípios do CIMCERO.`;
 }
 
 // Função para chamar a API da OpenAI
@@ -105,7 +157,7 @@ async function callOpenAI(message, history, systemPrompt) {
 }
 
 // Função para chamar a API do Google AI (Gemini)
-async function callGemini(message, history, systemPrompt) {
+async function callGemini(message, history, systemPrompt, context) {
   const GOOGLE_AI_API_KEY = process.env.GOOGLE_AI_API_KEY;
   
   if (!GOOGLE_AI_API_KEY) {
@@ -115,14 +167,20 @@ async function callGemini(message, history, systemPrompt) {
   // Formatar histórico para o Gemini
   const contents = [];
   
+  // Nome do assistente baseado no contexto
+  const assistantName = context === 'paineis' ? 'Assistente Rondônia em Números' : 'Assistente DATA-RO';
+  const welcomeMessage = context === 'paineis' 
+    ? 'Entendido! Sou o Assistente Rondônia em Números e estou pronto para ajudar você a entender os dados e indicadores dos municípios de Rondônia. Como posso ajudá-lo?'
+    : 'Entendido! Sou o Assistente DATA-RO e estou pronto para ajudar com a gestão da empresa. Como posso ajudá-lo?';
+  
   // Adicionar contexto do sistema como primeira mensagem do usuário
   contents.push({
     role: 'user',
-    parts: [{ text: `Contexto: ${systemPrompt}\n\nPor favor, responda como o Assistente DATA-RO.` }]
+    parts: [{ text: `Contexto: ${systemPrompt}\n\nPor favor, responda como o ${assistantName}.` }]
   });
   contents.push({
     role: 'model',
-    parts: [{ text: 'Entendido! Sou o Assistente DATA-RO e estou pronto para ajudar com o sistema "Rondônia em Números". Como posso ajudá-lo?' }]
+    parts: [{ text: welcomeMessage }]
   });
 
   // Adicionar histórico de conversa

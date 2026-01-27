@@ -461,7 +461,8 @@ const Dashboard = () => {
       {showAIAssistant && (
         <AIAssistant 
           municipios={municipios}
-          onClose={() => setShowAIAssistant(false)} 
+          onClose={() => setShowAIAssistant(false)}
+          context="paineis"
         />
       )}
 

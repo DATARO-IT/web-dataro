@@ -2,12 +2,40 @@ import React, { useState, useRef, useEffect } from 'react';
 import { useAuth } from '../../contexts/AuthContext';
 import './AIAssistant.css';
 
-const AIAssistant = ({ municipios = [], onClose }) => {
+// Configurações por contexto
+const CONTEXT_CONFIG = {
+  admin: {
+    name: 'Assistente DATA-RO',
+    welcomeMessage: 'Olá! Sou o Assistente DATA-RO. Posso ajudá-lo com:\n\n• Gestão financeira (receitas, despesas, contratos)\n• Gerenciamento de demandas e projetos\n• Cadastro e gestão de clientes\n• Agendamento de tarefas e eventos\n• Dúvidas sobre o sistema administrativo\n\nComo posso ajudá-lo hoje?',
+    quickActions: [
+      { label: '💰 Resumo Financeiro', prompt: 'Me dê um resumo das funcionalidades financeiras do sistema' },
+      { label: '📋 Gerenciar Demandas', prompt: 'Como funciona o gerenciamento de demandas?' },
+      { label: '📅 Calendário', prompt: 'Como usar o calendário para agendar tarefas?' },
+      { label: '❓ Ajuda', prompt: 'Quais são as principais funcionalidades do sistema administrativo?' }
+    ],
+    color: '#2e7d32'
+  },
+  paineis: {
+    name: 'Assistente Rondônia em Números',
+    welcomeMessage: 'Olá! Sou o Assistente Rondônia em Números. Posso ajudá-lo a:\n\n• Entender os indicadores dos municípios\n• Interpretar gráficos e visualizações\n• Comparar dados entre municípios\n• Explicar metodologias de cálculo\n• Identificar tendências nos dados\n\nSobre qual município ou indicador você gostaria de saber mais?',
+    quickActions: [
+      { label: '📊 Comparar Municípios', prompt: 'Como posso comparar dados entre municípios?' },
+      { label: '📈 Indicadores IDEB', prompt: 'Explique o que é o IDEB e como interpretar os dados' },
+      { label: '🏥 Dados de Saúde', prompt: 'Quais indicadores de saúde estão disponíveis?' },
+      { label: '❓ Ajuda', prompt: 'Quais tipos de dados estão disponíveis nos painéis?' }
+    ],
+    color: '#1565c0'
+  }
+};
+
+const AIAssistant = ({ municipios = [], onClose, context = 'admin' }) => {
+  const config = CONTEXT_CONFIG[context] || CONTEXT_CONFIG.admin;
+  
   const [messages, setMessages] = useState([
     {
       id: 1,
       type: 'assistant',
-      content: 'Olá! Sou o Assistente DATA-RO. Posso ajudá-lo a:\n\n• Cruzar dados entre diferentes municípios\n• Buscar informações sobre editais e recursos federais\n• Analisar indicadores dos painéis de BI\n• Identificar oportunidades de captação de recursos\n• Responder dúvidas sobre o sistema\n\nComo posso ajudá-lo hoje?',
+      content: config.welcomeMessage,
       timestamp: new Date()
     }
   ]);
@@ -24,6 +52,18 @@ const AIAssistant = ({ municipios = [], onClose }) => {
   useEffect(() => {
     scrollToBottom();
   }, [messages]);
+
+  // Resetar mensagens quando o contexto mudar
+  useEffect(() => {
+    setMessages([
+      {
+        id: Date.now(),
+        type: 'assistant',
+        content: config.welcomeMessage,
+        timestamp: new Date()
+      }
+    ]);
+  }, [context]);
 
   const handleSendMessage = async () => {
     if (!inputValue.trim() || isLoading) return;
@@ -55,7 +95,8 @@ const AIAssistant = ({ municipios = [], onClose }) => {
         body: JSON.stringify({
           message: currentInput,
           model: selectedModel,
-          history: history
+          history: history,
+          context: context
         })
       });
 
@@ -95,8 +136,8 @@ const AIAssistant = ({ municipios = [], onClose }) => {
     }
   };
 
-  const handleQuickAction = (action) => {
-    setInputValue(action);
+  const handleQuickAction = (prompt) => {
+    setInputValue(prompt);
   };
 
   const handleClearChat = () => {
@@ -116,18 +157,27 @@ const AIAssistant = ({ municipios = [], onClose }) => {
 
   return (
     <div className="ai-assistant-overlay">
-      <div className="ai-assistant-container chat-only">
+      <div className={`ai-assistant-container chat-only context-${context}`}>
         {/* Header */}
-        <div className="ai-assistant-header">
+        <div className="ai-assistant-header" style={{ background: `linear-gradient(135deg, ${config.color} 0%, ${config.color}dd 100%)` }}>
           <div className="header-left">
             <div className="ai-avatar">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                <path d="M12 2a10 10 0 1 0 10 10A10 10 0 0 0 12 2z"/>
-                <path d="M12 6v6l4 2"/>
-              </svg>
+              {context === 'paineis' ? (
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                  <path d="M3 3v18h18"/>
+                  <path d="M18 17V9"/>
+                  <path d="M13 17V5"/>
+                  <path d="M8 17v-3"/>
+                </svg>
+              ) : (
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                  <path d="M12 2a10 10 0 1 0 10 10A10 10 0 0 0 12 2z"/>
+                  <path d="M12 6v6l4 2"/>
+                </svg>
+              )}
             </div>
             <div className="header-info">
-              <h3>Assistente DATA-RO</h3>
+              <h3>{config.name}</h3>
               <span className="status-online">
                 {selectedModel === 'chatgpt' ? '🟢 ChatGPT' : '🔵 Gemini'}
               </span>
@@ -213,18 +263,11 @@ const AIAssistant = ({ municipios = [], onClose }) => {
 
         {/* Quick Actions */}
         <div className="quick-actions">
-          <button onClick={() => handleQuickAction('Quais editais estão disponíveis?')}>
-            📋 Ver Editais
-          </button>
-          <button onClick={() => handleQuickAction('Comparar municípios')}>
-            📊 Comparar Municípios
-          </button>
-          <button onClick={() => handleQuickAction('Recursos do FNDE')}>
-            💰 Recursos FNDE
-          </button>
-          <button onClick={() => handleQuickAction('Como funciona o sistema?')}>
-            ❓ Ajuda
-          </button>
+          {config.quickActions.map((action, index) => (
+            <button key={index} onClick={() => handleQuickAction(action.prompt)}>
+              {action.label}
+            </button>
+          ))}
         </div>
 
         {/* Input Area */}
@@ -241,6 +284,7 @@ const AIAssistant = ({ municipios = [], onClose }) => {
             className="send-button" 
             onClick={handleSendMessage}
             disabled={!inputValue.trim() || isLoading}
+            style={{ background: config.color }}
           >
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
               <line x1="22" y1="2" x2="11" y2="13"/>

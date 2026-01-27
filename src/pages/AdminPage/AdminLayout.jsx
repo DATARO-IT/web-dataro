@@ -56,7 +56,8 @@ const AdminLayout = () => {
       {/* Modal do Assistente de IA */}
       {showAIAssistant && (
         <AIAssistant 
-          onClose={() => setShowAIAssistant(false)} 
+          onClose={() => setShowAIAssistant(false)}
+          context="admin"
         />
       )}
     </div>
