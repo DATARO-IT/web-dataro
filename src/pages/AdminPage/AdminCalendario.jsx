@@ -100,6 +100,24 @@ const Icons = {
       <rect x="14" y="14" width="7" height="7"></rect>
       <rect x="3" y="14" width="7" height="7"></rect>
     </svg>
+  ),
+  Sync: () => (
+    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+      <path d="M21.5 2v6h-6M2.5 22v-6h6M2 11.5a10 10 0 0 1 18.8-4.3M22 12.5a10 10 0 0 1-18.8 4.2"></path>
+    </svg>
+  ),
+  Google: () => (
+    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+      <path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4"/>
+      <path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/>
+      <path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z" fill="#FBBC05"/>
+      <path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"/>
+    </svg>
+  ),
+  Cloud: () => (
+    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+      <path d="M18 10h-1.26A8 8 0 1 0 9 20h9a5 5 0 0 0 0-10z"></path>
+    </svg>
   )
 };
 
@@ -129,6 +147,10 @@ const AdminCalendario = () => {
   const [selectedEvento, setSelectedEvento] = useState(null);
   const [loading, setLoading] = useState(true);
   const [usuarios, setUsuarios] = useState([]);
+  const [googleEvents, setGoogleEvents] = useState([]);
+  const [syncStatus, setSyncStatus] = useState('idle'); // idle, syncing, success, error
+  const [lastSync, setLastSync] = useState(null);
+  const [showGoogleEvents, setShowGoogleEvents] = useState(true);
   
   const [formData, setFormData] = useState({
     titulo: '',
@@ -200,6 +222,61 @@ const AdminCalendario = () => {
       console.error('Erro ao carregar usuários:', error);
     }
   };
+
+  // Sincronizar com Google Calendar
+  const syncGoogleCalendar = async () => {
+    setSyncStatus('syncing');
+    try {
+      // Calcular período de 3 meses
+      const timeMin = new Date(currentDate.getFullYear(), currentDate.getMonth() - 1, 1).toISOString();
+      const timeMax = new Date(currentDate.getFullYear(), currentDate.getMonth() + 2, 0).toISOString();
+
+      const response = await fetch('/api/calendar', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          action: 'list',
+          timeMin,
+          timeMax
+        })
+      });
+
+      const data = await response.json();
+
+      if (data.success && data.events) {
+        setGoogleEvents(data.events);
+        setLastSync(new Date());
+        setSyncStatus('success');
+        
+        // Salvar última sincronização no localStorage
+        localStorage.setItem('google_calendar_last_sync', new Date().toISOString());
+        localStorage.setItem('google_calendar_events', JSON.stringify(data.events));
+      } else {
+        throw new Error(data.error || 'Erro ao sincronizar');
+      }
+    } catch (error) {
+      console.error('Erro ao sincronizar Google Calendar:', error);
+      setSyncStatus('error');
+      
+      // Tentar carregar do cache local
+      const cachedEvents = localStorage.getItem('google_calendar_events');
+      if (cachedEvents) {
+        setGoogleEvents(JSON.parse(cachedEvents));
+        const cachedSync = localStorage.getItem('google_calendar_last_sync');
+        if (cachedSync) setLastSync(new Date(cachedSync));
+      }
+    }
+  };
+
+  // Carregar eventos do Google Calendar ao iniciar
+  useEffect(() => {
+    const cachedEvents = localStorage.getItem('google_calendar_events');
+    if (cachedEvents) {
+      setGoogleEvents(JSON.parse(cachedEvents));
+      const cachedSync = localStorage.getItem('google_calendar_last_sync');
+      if (cachedSync) setLastSync(new Date(cachedSync));
+    }
+  }, []);
 
   const handleSaveEvento = async () => {
     try {
@@ -405,10 +482,19 @@ const AdminCalendario = () => {
   };
 
   const getEventosForDate = (date) => {
-    return eventos.filter(evento => {
+    // Eventos locais/Supabase
+    const eventosLocais = eventos.filter(evento => {
       const eventoDate = new Date(evento.data_inicio);
       return eventoDate.toDateString() === date.toDateString();
-    });
+    }).map(e => ({ ...e, source: 'local' }));
+
+    // Eventos do Google Calendar (se habilitado)
+    const eventosGoogle = showGoogleEvents ? googleEvents.filter(evento => {
+      const eventoDate = new Date(evento.data_inicio);
+      return eventoDate.toDateString() === date.toDateString();
+    }).map(e => ({ ...e, source: 'google' })) : [];
+
+    return [...eventosLocais, ...eventosGoogle];
   };
 
   const isToday = (date) => {
@@ -453,6 +539,47 @@ const AdminCalendario = () => {
           <button className="btn-novo-evento" onClick={() => handleOpenModal()}>
             <Icons.Plus />
             <span>Novo Evento</span>
+          </button>
+        </div>
+      </div>
+
+      {/* Barra de Sincronização Google Calendar */}
+      <div className="google-sync-bar">
+        <div className="sync-info">
+          <Icons.Google />
+          <span className="sync-label">Google Agenda</span>
+          {lastSync && (
+            <span className="last-sync">
+              Última sincronização: {lastSync.toLocaleString('pt-BR')}
+            </span>
+          )}
+          {googleEvents.length > 0 && (
+            <span className="events-count">
+              {googleEvents.length} evento{googleEvents.length !== 1 ? 's' : ''}
+            </span>
+          )}
+        </div>
+        <div className="sync-actions">
+          <label className="toggle-google-events">
+            <input
+              type="checkbox"
+              checked={showGoogleEvents}
+              onChange={(e) => setShowGoogleEvents(e.target.checked)}
+            />
+            <span>Mostrar eventos do Google</span>
+          </label>
+          <button 
+            className={`btn-sync ${syncStatus}`}
+            onClick={syncGoogleCalendar}
+            disabled={syncStatus === 'syncing'}
+          >
+            <Icons.Sync />
+            <span>
+              {syncStatus === 'syncing' ? 'Sincronizando...' : 
+               syncStatus === 'success' ? 'Sincronizado' :
+               syncStatus === 'error' ? 'Erro - Tentar novamente' :
+               'Sincronizar'}
+            </span>
           </button>
         </div>
       </div>
