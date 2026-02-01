@@ -2757,3 +2757,305 @@
 .dark-mode .empty-state svg {
   color: #6b7280;
 }
+
+
+/* ===== FLUXO DE CAIXA ANUAL ===== */
+
+.financeiro-fluxo .fluxo-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1.5rem;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.financeiro-fluxo .fluxo-header h2 {
+  margin: 0;
+  color: #1f2937;
+}
+
+.financeiro-fluxo .fluxo-desc {
+  margin: 0.25rem 0 0 0;
+  color: #6b7280;
+  font-size: 0.875rem;
+}
+
+.fluxo-ano-selector {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  background: white;
+  padding: 0.5rem 1rem;
+  border-radius: 8px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.btn-ano {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  border: none;
+  background: #f3f4f6;
+  border-radius: 8px;
+  cursor: pointer;
+  color: #374151;
+  transition: all 0.2s;
+}
+
+.btn-ano:hover {
+  background: #10b981;
+  color: white;
+}
+
+.ano-atual {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: #1f2937;
+  min-width: 60px;
+  text-align: center;
+}
+
+/* Resumo Anual */
+.fluxo-resumo-anual {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+.fluxo-resumo-anual .resumo-card {
+  background: white;
+  padding: 1.25rem;
+  border-radius: 12px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  text-align: center;
+}
+
+.fluxo-resumo-anual .resumo-card.receitas {
+  border-left: 4px solid #10b981;
+}
+
+.fluxo-resumo-anual .resumo-card.despesas {
+  border-left: 4px solid #ef4444;
+}
+
+.fluxo-resumo-anual .resumo-card.saldo.positivo {
+  border-left: 4px solid #10b981;
+}
+
+.fluxo-resumo-anual .resumo-card.saldo.negativo {
+  border-left: 4px solid #ef4444;
+}
+
+.fluxo-resumo-anual .resumo-label {
+  display: block;
+  font-size: 0.875rem;
+  color: #6b7280;
+  margin-bottom: 0.5rem;
+}
+
+.fluxo-resumo-anual .resumo-card.receitas .resumo-valor {
+  color: #10b981;
+}
+
+.fluxo-resumo-anual .resumo-card.despesas .resumo-valor {
+  color: #ef4444;
+}
+
+.fluxo-resumo-anual .resumo-card.saldo.positivo .resumo-valor {
+  color: #10b981;
+}
+
+.fluxo-resumo-anual .resumo-card.saldo.negativo .resumo-valor {
+  color: #ef4444;
+}
+
+.fluxo-resumo-anual .resumo-valor {
+  display: block;
+  font-size: 1.5rem;
+  font-weight: 700;
+}
+
+/* Grade de 12 meses */
+.fluxo-grid-anual {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+.fluxo-card-mes {
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.fluxo-card-mes:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.fluxo-card-mes.positivo {
+  border-top: 3px solid #10b981;
+}
+
+.fluxo-card-mes.negativo {
+  border-top: 3px solid #ef4444;
+}
+
+.fluxo-mes-header {
+  background: #f9fafb;
+  padding: 0.75rem 1rem;
+  border-bottom: 1px solid #e5e7eb;
+}
+
+.fluxo-mes-nome {
+  font-weight: 600;
+  color: #1f2937;
+  font-size: 0.95rem;
+}
+
+.fluxo-mes-valores {
+  padding: 1rem;
+}
+
+.fluxo-valor-linha {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.375rem 0;
+}
+
+.fluxo-valor-linha .label {
+  font-size: 0.8rem;
+  color: #6b7280;
+}
+
+.fluxo-valor-linha .valor {
+  font-weight: 600;
+  font-size: 0.9rem;
+}
+
+.fluxo-valor-linha.receita .valor {
+  color: #10b981;
+}
+
+.fluxo-valor-linha.despesa .valor {
+  color: #ef4444;
+}
+
+.fluxo-valor-linha.saldo {
+  border-top: 1px solid #e5e7eb;
+  margin-top: 0.5rem;
+  padding-top: 0.75rem;
+}
+
+.fluxo-valor-linha.saldo .label {
+  font-weight: 600;
+  color: #374151;
+}
+
+.fluxo-valor-linha.saldo .valor.positivo {
+  color: #10b981;
+}
+
+.fluxo-valor-linha.saldo .valor.negativo {
+  color: #ef4444;
+}
+
+/* Responsividade */
+@media (max-width: 1200px) {
+  .fluxo-grid-anual {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media (max-width: 900px) {
+  .fluxo-grid-anual {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  
+  .fluxo-resumo-anual {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 600px) {
+  .fluxo-grid-anual {
+    grid-template-columns: 1fr;
+  }
+  
+  .financeiro-fluxo .fluxo-header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}
+
+/* ===== MODO ESCURO - FLUXO DE CAIXA ANUAL ===== */
+
+.dark-mode .financeiro-fluxo .fluxo-header h2 {
+  color: #e5e7eb;
+}
+
+.dark-mode .financeiro-fluxo .fluxo-desc {
+  color: #9ca3af;
+}
+
+.dark-mode .fluxo-ano-selector {
+  background: #1e3a3a;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+}
+
+.dark-mode .btn-ano {
+  background: #0d2626;
+  color: #e5e7eb;
+}
+
+.dark-mode .btn-ano:hover {
+  background: #10b981;
+  color: white;
+}
+
+.dark-mode .ano-atual {
+  color: #e5e7eb;
+}
+
+.dark-mode .fluxo-resumo-anual .resumo-card {
+  background: #1e3a3a;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+}
+
+.dark-mode .fluxo-resumo-anual .resumo-label {
+  color: #9ca3af;
+}
+
+.dark-mode .fluxo-card-mes {
+  background: #1e3a3a;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+}
+
+.dark-mode .fluxo-mes-header {
+  background: #0d2626;
+  border-bottom-color: #374151;
+}
+
+.dark-mode .fluxo-mes-nome {
+  color: #e5e7eb;
+}
+
+.dark-mode .fluxo-valor-linha .label {
+  color: #9ca3af;
+}
+
+.dark-mode .fluxo-valor-linha.saldo {
+  border-top-color: #374151;
+}
+
+.dark-mode .fluxo-valor-linha.saldo .label {
+  color: #e5e7eb;
+}
