@@ -382,6 +382,8 @@ const AdminFinanceiro = () => {
     entidade_id: null,
     tipo_documento: 'cpf',
     cpf_cnpj: '',
+    cidade: '',
+    estado: '',
     anexo: null,
     anexo_nome: ''
   });
@@ -695,6 +697,8 @@ const AdminFinanceiro = () => {
           entidade_id: transacao.entidade_id || null,
           tipo_documento: transacao.tipo_documento || null,
           cpf_cnpj: transacao.cpf_cnpj || null,
+          cidade: transacao.cidade || null,
+          estado: transacao.estado || null,
           anexo_url: (transacao.anexo && transacao.anexo.startsWith('http')) ? transacao.anexo : null,
           anexo_nome: transacao.anexo_nome || null,
           created_at: transacao.created_at || new Date().toISOString(),
@@ -3263,6 +3267,54 @@ const AdminFinanceiro = () => {
                     placeholder={formData.tipo_documento === 'cpf' ? '000.000.000-00' : '00.000.000/0000-00'}
                     maxLength={formData.tipo_documento === 'cpf' ? 14 : 18}
                   />
+                </div>
+              </div>
+
+              <div className="form-row">
+                <div className="form-group">
+                  <label>Cidade</label>
+                  <input 
+                    type="text"
+                    value={formData.cidade}
+                    onChange={(e) => setFormData({...formData, cidade: e.target.value})}
+                    placeholder="Digite a cidade"
+                  />
+                </div>
+                <div className="form-group">
+                  <label>Estado (UF)</label>
+                  <select 
+                    value={formData.estado}
+                    onChange={(e) => setFormData({...formData, estado: e.target.value})}
+                  >
+                    <option value="">Selecione...</option>
+                    <option value="AC">AC</option>
+                    <option value="AL">AL</option>
+                    <option value="AP">AP</option>
+                    <option value="AM">AM</option>
+                    <option value="BA">BA</option>
+                    <option value="CE">CE</option>
+                    <option value="DF">DF</option>
+                    <option value="ES">ES</option>
+                    <option value="GO">GO</option>
+                    <option value="MA">MA</option>
+                    <option value="MT">MT</option>
+                    <option value="MS">MS</option>
+                    <option value="MG">MG</option>
+                    <option value="PA">PA</option>
+                    <option value="PB">PB</option>
+                    <option value="PR">PR</option>
+                    <option value="PE">PE</option>
+                    <option value="PI">PI</option>
+                    <option value="RJ">RJ</option>
+                    <option value="RN">RN</option>
+                    <option value="RS">RS</option>
+                    <option value="RO">RO</option>
+                    <option value="RR">RR</option>
+                    <option value="SC">SC</option>
+                    <option value="SP">SP</option>
+                    <option value="SE">SE</option>
+                    <option value="TO">TO</option>
+                  </select>
                 </div>
               </div>
 
