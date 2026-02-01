@@ -83,6 +83,13 @@ const Icons = {
       <line x1="3" y1="10" x2="21" y2="10"></line>
     </svg>
   ),
+  Wallet: () => (
+    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+      <path d="M21 12V7H5a2 2 0 0 1 0-4h14v4"></path>
+      <path d="M3 5v14a2 2 0 0 0 2 2h16v-5"></path>
+      <path d="M18 12a2 2 0 0 0 0 4h4v-4h-4z"></path>
+    </svg>
+  ),
   Filter: () => (
     <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
       <polygon points="22 3 2 3 10 12.46 10 19 14 21 14 12.46 22 3"></polygon>
@@ -976,21 +983,56 @@ const AdminFinanceiro = () => {
     const mesAtual = hoje.getMonth();
     const anoAtual = hoje.getFullYear();
 
+    // Filtrar transações do mês atual
     const transacoesMes = transacoes.filter(t => {
       const dataVenc = new Date(t.data_vencimento + 'T00:00:00');
       return dataVenc.getMonth() === mesAtual && dataVenc.getFullYear() === anoAtual;
     });
 
-    const receitasMes = transacoesMes.filter(t => t.tipo === 'receita').reduce((acc, t) => acc + t.valor, 0);
-    const despesasMes = transacoesMes.filter(t => t.tipo === 'despesa').reduce((acc, t) => acc + t.valor, 0);
-    const receitasPagas = transacoesMes.filter(t => t.tipo === 'receita' && t.status === 'pago').reduce((acc, t) => acc + t.valor, 0);
-    const despesasPagas = transacoesMes.filter(t => t.tipo === 'despesa' && t.status === 'pago').reduce((acc, t) => acc + t.valor, 0);
+    // Filtrar pagamentos a colaboradores do mês atual
+    const pagamentosMes = pagamentos.filter(p => {
+      const dataPag = new Date(p.data_pagamento + 'T00:00:00');
+      return dataPag.getMonth() === mesAtual && dataPag.getFullYear() === anoAtual;
+    });
+
+    // Calcular receitas (garantindo que valor seja número)
+    const receitasMes = transacoesMes
+      .filter(t => t.tipo === 'receita')
+      .reduce((acc, t) => acc + (parseFloat(t.valor) || 0), 0);
+    
+    // Calcular despesas de transações (garantindo que valor seja número)
+    const despesasTransacoesMes = transacoesMes
+      .filter(t => t.tipo === 'despesa')
+      .reduce((acc, t) => acc + (parseFloat(t.valor) || 0), 0);
+    
+    // Calcular pagamentos a colaboradores (garantindo que valor seja número)
+    const pagamentosColaboradoresMes = pagamentosMes
+      .reduce((acc, p) => acc + (parseFloat(p.valor) || 0), 0);
+    
+    // Total de despesas = despesas de transações + pagamentos a colaboradores
+    const despesasMes = despesasTransacoesMes + pagamentosColaboradoresMes;
+    
+    // Receitas pagas/realizadas
+    const receitasPagas = transacoesMes
+      .filter(t => t.tipo === 'receita' && t.status === 'pago')
+      .reduce((acc, t) => acc + (parseFloat(t.valor) || 0), 0);
+    
+    // Despesas pagas/realizadas (transações + pagamentos já são realizados)
+    const despesasTransacoesPagas = transacoesMes
+      .filter(t => t.tipo === 'despesa' && t.status === 'pago')
+      .reduce((acc, t) => acc + (parseFloat(t.valor) || 0), 0);
+    const despesasPagas = despesasTransacoesPagas + pagamentosColaboradoresMes;
+    
+    // Pendentes e vencidos
     const totalPendentes = transacoes.filter(t => t.status === 'pendente').length;
     const vencidos = transacoes.filter(t => {
       if (t.status !== 'pendente') return false;
       const venc = new Date(t.data_vencimento + 'T00:00:00');
       return venc < hoje;
     }).length;
+
+    // Caixa = Receitas Realizadas - Despesas Realizadas (incluindo pagamentos)
+    const caixaMes = receitasPagas - despesasPagas;
 
     return {
       receitasMes,
@@ -999,6 +1041,8 @@ const AdminFinanceiro = () => {
       despesasPagas,
       saldoMes: receitasMes - despesasMes,
       saldoRealizado: receitasPagas - despesasPagas,
+      caixaMes,
+      pagamentosColaboradoresMes,
       totalPendentes,
       vencidos
     };
@@ -1505,6 +1549,17 @@ const AdminFinanceiro = () => {
                     <span className="metrica-label">Saldo Previsto</span>
                     <span className="metrica-valor">{formatarMoeda(metricas.saldoMes)}</span>
                     <span className="metrica-sub">Realizado: {formatarMoeda(metricas.saldoRealizado)}</span>
+                  </div>
+                </div>
+
+                <div className={`metrica-card caixa ${metricas.caixaMes >= 0 ? 'positivo' : 'negativo'}`}>
+                  <div className="metrica-icon">
+                    <Icons.Wallet />
+                  </div>
+                  <div className="metrica-info">
+                    <span className="metrica-label">Caixa</span>
+                    <span className="metrica-valor">{formatarMoeda(metricas.caixaMes)}</span>
+                    <span className="metrica-sub">Pagamentos: {formatarMoeda(metricas.pagamentosColaboradoresMes)}</span>
                   </div>
                 </div>
 

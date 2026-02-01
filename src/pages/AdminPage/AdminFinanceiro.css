@@ -3059,3 +3059,80 @@
 .dark-mode .fluxo-valor-linha.saldo .label {
   color: #e5e7eb;
 }
+
+
+/* ===== Card Caixa ===== */
+.metrica-card.caixa {
+  border-left-color: #8b5cf6;
+}
+
+.metrica-card.caixa .metrica-icon {
+  background: linear-gradient(135deg, #8b5cf6 0%, #7c3aed 100%);
+  color: white;
+}
+
+.metrica-card.caixa.positivo {
+  border-left-color: #10b981;
+}
+
+.metrica-card.caixa.positivo .metrica-icon {
+  background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+}
+
+.metrica-card.caixa.negativo {
+  border-left-color: #ef4444;
+}
+
+.metrica-card.caixa.negativo .metrica-icon {
+  background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%);
+}
+
+.metrica-card.caixa .metrica-valor {
+  color: #8b5cf6;
+}
+
+.metrica-card.caixa.positivo .metrica-valor {
+  color: #10b981;
+}
+
+.metrica-card.caixa.negativo .metrica-valor {
+  color: #ef4444;
+}
+
+/* Ajustar grid para 5 cards */
+.metricas-grid {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 1rem;
+}
+
+@media (max-width: 1400px) {
+  .metricas-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media (max-width: 900px) {
+  .metricas-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 600px) {
+  .metricas-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Dark mode para card Caixa */
+.dark-mode .metrica-card.caixa {
+  background: #1e3a3a;
+}
+
+.dark-mode .metrica-card.caixa .metrica-label {
+  color: #e5e7eb;
+}
+
+.dark-mode .metrica-card.caixa .metrica-sub {
+  color: #9ca3af;
+}
