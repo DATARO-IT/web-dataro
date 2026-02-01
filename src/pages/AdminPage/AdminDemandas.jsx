@@ -93,6 +93,32 @@ const tiposDemanda = [
 const AdminDemandas = () => {
   const { adminUser } = useAdminAuth();
   const navigate = useNavigate();
+  
+  // Verificar se o usuário é administrador (role = 'admin' ou 'administrador' ou is_super_admin = true)
+  const isAdmin = adminUser?.role === 'admin' || 
+                  adminUser?.role === 'administrador' || 
+                  adminUser?.role === 'Administrador' ||
+                  adminUser?.is_super_admin === true;
+  
+  // Função para registrar log de atividade
+  const registrarLog = async (acao, descricao, dadosAnteriores = null, dadosNovos = null) => {
+    try {
+      await supabase.from('admin_logs').insert([{
+        usuario_id: adminUser?.id || null,
+        usuario_nome: adminUser?.nome || 'Desconhecido',
+        usuario_email: adminUser?.email || 'Desconhecido',
+        acao: acao,
+        modulo: 'demandas',
+        descricao: descricao,
+        dados_anteriores: dadosAnteriores,
+        dados_novos: dadosNovos,
+        created_at: new Date().toISOString()
+      }]);
+    } catch (error) {
+      console.error('Erro ao registrar log:', error);
+    }
+  };
+  
   const [stats, setStats] = useState({
     total: 0,
     pendentes: 0,
@@ -203,6 +229,12 @@ const AdminDemandas = () => {
   };
 
   const handleOpenModal = (demanda = null) => {
+    // Verificar permissão de administrador
+    if (!isAdmin) {
+      alert('Você não tem permissão para gerenciar demandas.');
+      return;
+    }
+    
     if (demanda) {
       setEditingDemanda(demanda);
       setFormData({
@@ -270,6 +302,14 @@ const AdminDemandas = () => {
           .eq('id', editingDemanda.id);
 
         if (updateError) throw updateError;
+        
+        // Registrar log de atualização
+        await registrarLog(
+          'atualizar',
+          `Demanda "${dataToSave.titulo}" atualizada`,
+          editingDemanda,
+          dataToSave
+        );
       } else {
         // Criar nova demanda
         dataToSave.criado_por = adminUser?.id || null;
@@ -280,6 +320,14 @@ const AdminDemandas = () => {
           .insert([dataToSave]);
 
         if (insertError) throw insertError;
+        
+        // Registrar log de criação
+        await registrarLog(
+          'criar',
+          `Nova demanda "${dataToSave.titulo}" criada`,
+          null,
+          dataToSave
+        );
       }
 
       handleCloseModal();
@@ -293,6 +341,12 @@ const AdminDemandas = () => {
   };
 
   const handleDelete = async (demanda) => {
+    // Verificar permissão de administrador
+    if (!isAdmin) {
+      alert('Você não tem permissão para excluir demandas.');
+      return;
+    }
+    
     if (!window.confirm(`Tem certeza que deseja excluir a demanda "${demanda.titulo}"?`)) {
       return;
     }
@@ -304,6 +358,15 @@ const AdminDemandas = () => {
         .eq('id', demanda.id);
 
       if (error) throw error;
+      
+      // Registrar log de exclusão
+      await registrarLog(
+        'excluir',
+        `Demanda "${demanda.titulo}" excluída`,
+        demanda,
+        null
+      );
+      
       fetchData();
     } catch (err) {
       console.error('Erro ao excluir demanda:', err);
@@ -325,10 +388,12 @@ const AdminDemandas = () => {
           <h1>Gestão de Demandas</h1>
           <span className="header-subtitle">Gerencie todas as demandas dos clientes</span>
         </div>
-        <button className="btn-nova-demanda" onClick={() => handleOpenModal()}>
-          <Icons.Plus />
-          Nova Demanda
-        </button>
+        {isAdmin && (
+          <button className="btn-nova-demanda" onClick={() => handleOpenModal()}>
+            <Icons.Plus />
+            Nova Demanda
+          </button>
+        )}
       </div>
 
       {/* Cards de Estatísticas */}
@@ -506,14 +571,16 @@ const AdminDemandas = () => {
                       Criado em: {new Date(demanda.created_at).toLocaleDateString('pt-BR')}
                     </span>
                   </div>
-                  <div className="demanda-actions">
-                    <button className="btn-action btn-edit" onClick={() => handleOpenModal(demanda)} title="Editar">
-                      <Icons.Edit />
-                    </button>
-                    <button className="btn-action btn-delete" onClick={() => handleDelete(demanda)} title="Excluir">
-                      <Icons.Trash />
-                    </button>
-                  </div>
+                  {isAdmin && (
+                    <div className="demanda-actions">
+                      <button className="btn-action btn-edit" onClick={() => handleOpenModal(demanda)} title="Editar">
+                        <Icons.Edit />
+                      </button>
+                      <button className="btn-action btn-delete" onClick={() => handleDelete(demanda)} title="Excluir">
+                        <Icons.Trash />
+                      </button>
+                    </div>
+                  )}
                 </div>
               </div>
             ))}
