@@ -221,6 +221,20 @@ const Icons = {
       <line x1="12" y1="5" x2="12" y2="19"></line>
       <polyline points="19 12 12 19 5 12"></polyline>
     </svg>
+  ),
+  Users: () => (
+    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+      <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
+      <circle cx="9" cy="7" r="4"></circle>
+      <path d="M23 21v-2a4 4 0 0 0-3-3.87"></path>
+      <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
+    </svg>
+  ),
+  Search: () => (
+    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+      <circle cx="11" cy="11" r="8"></circle>
+      <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+    </svg>
   )
 };
 
@@ -394,6 +408,28 @@ const AdminFinanceiro = () => {
   const [backupNome, setBackupNome] = useState('');
   const [showConfirmZerar, setShowConfirmZerar] = useState(false);
   
+  // Estados para pagamentos de colaboradores
+  const [pagamentos, setPagamentos] = useState([]);
+  const [colaboradores, setColaboradores] = useState([]);
+  const [showPagamentoModal, setShowPagamentoModal] = useState(false);
+  const [selectedPagamento, setSelectedPagamento] = useState(null);
+  const [pagamentoForm, setPagamentoForm] = useState({
+    colaborador_id: '',
+    colaborador_nome: '',
+    valor: '',
+    data_pagamento: '',
+    descricao: '',
+    forma_pagamento: 'PIX',
+    observacoes: ''
+  });
+  const [filtrosPagamento, setFiltrosPagamento] = useState({
+    colaborador: 'todos',
+    dataInicio: '',
+    dataFim: '',
+    ordenarPor: 'data_pagamento',
+    ordemAsc: false
+  });
+  
   const fileInputRef = useRef(null);
 
   // Carregar dados do Supabase (com fallback para localStorage)
@@ -471,6 +507,27 @@ const AdminFinanceiro = () => {
           if (savedBackups) {
             setBackups(JSON.parse(savedBackups));
           }
+        }
+        
+        // Carregar colaboradores (admin_usuarios)
+        const { data: supaColaboradores, error: errColaboradores } = await supabase
+          .from('admin_usuarios')
+          .select('id, nome, email')
+          .eq('ativo', true)
+          .order('nome', { ascending: true });
+        
+        if (!errColaboradores && supaColaboradores) {
+          setColaboradores(supaColaboradores);
+        }
+        
+        // Carregar pagamentos de colaboradores
+        const { data: supaPagamentos, error: errPagamentos } = await supabase
+          .from('pagamentos_colaboradores')
+          .select('*')
+          .order('data_pagamento', { ascending: false });
+        
+        if (!errPagamentos && supaPagamentos) {
+          setPagamentos(supaPagamentos);
         }
       } catch (error) {
         console.error('Erro ao carregar dados do Supabase:', error);
@@ -593,6 +650,117 @@ const AdminFinanceiro = () => {
       console.error('Erro ao sincronizar contratos com Supabase:', error);
     }
   };
+
+  // Funções para pagamentos de colaboradores
+  const handleSavePagamento = async () => {
+    if (!pagamentoForm.colaborador_id || !pagamentoForm.valor || !pagamentoForm.data_pagamento) {
+      alert('Por favor, preencha todos os campos obrigatórios.');
+      return;
+    }
+    
+    const colaboradorSelecionado = colaboradores.find(c => c.id === pagamentoForm.colaborador_id);
+    const valorNumerico = parseMoeda(pagamentoForm.valor);
+    
+    const pagamentoData = {
+      colaborador_id: pagamentoForm.colaborador_id,
+      colaborador_nome: colaboradorSelecionado?.nome || pagamentoForm.colaborador_nome,
+      valor: valorNumerico,
+      data_pagamento: pagamentoForm.data_pagamento,
+      descricao: pagamentoForm.descricao,
+      forma_pagamento: pagamentoForm.forma_pagamento,
+      observacoes: pagamentoForm.observacoes,
+      criado_por: adminUser?.id,
+      updated_at: new Date().toISOString()
+    };
+    
+    try {
+      if (modalMode === 'edit' && selectedPagamento) {
+        // Atualizar pagamento existente
+        const { error } = await supabase
+          .from('pagamentos_colaboradores')
+          .update(pagamentoData)
+          .eq('id', selectedPagamento.id);
+        
+        if (error) throw error;
+        
+        setPagamentos(pagamentos.map(p => 
+          p.id === selectedPagamento.id ? { ...p, ...pagamentoData } : p
+        ));
+      } else {
+        // Criar novo pagamento
+        const { data, error } = await supabase
+          .from('pagamentos_colaboradores')
+          .insert([pagamentoData])
+          .select();
+        
+        if (error) throw error;
+        
+        if (data && data[0]) {
+          setPagamentos([data[0], ...pagamentos]);
+        }
+      }
+      
+      setShowPagamentoModal(false);
+      setPagamentoForm({
+        colaborador_id: '',
+        colaborador_nome: '',
+        valor: '',
+        data_pagamento: '',
+        descricao: '',
+        forma_pagamento: 'PIX',
+        observacoes: ''
+      });
+      setSelectedPagamento(null);
+    } catch (error) {
+      console.error('Erro ao salvar pagamento:', error);
+      alert('Erro ao salvar pagamento. Tente novamente.');
+    }
+  };
+  
+  const handleDeletePagamento = async (pagamentoId) => {
+    if (!window.confirm('Tem certeza que deseja excluir este pagamento?')) return;
+    
+    try {
+      const { error } = await supabase
+        .from('pagamentos_colaboradores')
+        .delete()
+        .eq('id', pagamentoId);
+      
+      if (error) throw error;
+      
+      setPagamentos(pagamentos.filter(p => p.id !== pagamentoId));
+    } catch (error) {
+      console.error('Erro ao excluir pagamento:', error);
+      alert('Erro ao excluir pagamento. Tente novamente.');
+    }
+  };
+  
+  // Filtrar e ordenar pagamentos
+  const pagamentosFiltrados = pagamentos
+    .filter(p => {
+      if (filtrosPagamento.colaborador !== 'todos' && p.colaborador_id !== filtrosPagamento.colaborador) return false;
+      if (filtrosPagamento.dataInicio && p.data_pagamento < filtrosPagamento.dataInicio) return false;
+      if (filtrosPagamento.dataFim && p.data_pagamento > filtrosPagamento.dataFim) return false;
+      return true;
+    })
+    .sort((a, b) => {
+      const campo = filtrosPagamento.ordenarPor;
+      let valorA = a[campo];
+      let valorB = b[campo];
+      
+      if (campo === 'valor') {
+        valorA = parseFloat(valorA) || 0;
+        valorB = parseFloat(valorB) || 0;
+      }
+      
+      if (filtrosPagamento.ordemAsc) {
+        return valorA > valorB ? 1 : -1;
+      } else {
+        return valorA < valorB ? 1 : -1;
+      }
+    });
+  
+  const totalPagamentosFiltrados = pagamentosFiltrados.reduce((acc, p) => acc + (parseFloat(p.valor) || 0), 0);
 
   // Funções de Backup (localStorage + Supabase)
   const criarBackup = async (nome) => {
@@ -1176,6 +1344,7 @@ const AdminFinanceiro = () => {
     { id: 'relatorios', icon: <Icons.Clipboard />, label: 'Relatórios' },
     { id: 'fluxo_caixa', icon: <Icons.Activity />, label: 'Fluxo de Caixa' },
     { id: 'contratos', icon: <Icons.Briefcase />, label: 'Contratos' },
+    { id: 'pagamentos', icon: <Icons.Users />, label: 'Pagamentos' },
     { id: 'backups', icon: <Icons.Database />, label: 'Backups' }
   ];
 
@@ -2055,6 +2224,204 @@ const AdminFinanceiro = () => {
             </div>
           )}
 
+          {/* Pagamentos a Colaboradores */}
+          {activeTab === 'pagamentos' && (
+            <div className="financeiro-pagamentos">
+              <div className="pagamentos-header">
+                <h2>Pagamentos a Colaboradores</h2>
+                <button 
+                  className="btn-novo"
+                  onClick={() => {
+                    setModalMode('create');
+                    setSelectedPagamento(null);
+                    setPagamentoForm({
+                      colaborador_id: '',
+                      colaborador_nome: '',
+                      valor: '',
+                      data_pagamento: new Date().toISOString().split('T')[0],
+                      descricao: '',
+                      forma_pagamento: 'PIX',
+                      observacoes: ''
+                    });
+                    setShowPagamentoModal(true);
+                  }}
+                >
+                  <Icons.Plus />
+                  Novo Pagamento
+                </button>
+              </div>
+
+              {/* Resumo */}
+              <div className="pagamentos-resumo">
+                <div className="resumo-card">
+                  <span className="resumo-label">Total de Pagamentos</span>
+                  <span className="resumo-valor">{pagamentosFiltrados.length}</span>
+                </div>
+                <div className="resumo-card">
+                  <span className="resumo-label">Valor Total</span>
+                  <span className="resumo-valor">R$ {formatarMoeda(totalPagamentosFiltrados)}</span>
+                </div>
+              </div>
+
+              {/* Filtros */}
+              <div className="pagamentos-filtros">
+                <div className="filtro-group">
+                  <label>Colaborador</label>
+                  <select
+                    value={filtrosPagamento.colaborador}
+                    onChange={(e) => setFiltrosPagamento({...filtrosPagamento, colaborador: e.target.value})}
+                  >
+                    <option value="todos">Todos</option>
+                    {colaboradores.map(col => (
+                      <option key={col.id} value={col.id}>{col.nome}</option>
+                    ))}
+                  </select>
+                </div>
+                <div className="filtro-group">
+                  <label>Data Início</label>
+                  <input
+                    type="date"
+                    value={filtrosPagamento.dataInicio}
+                    onChange={(e) => setFiltrosPagamento({...filtrosPagamento, dataInicio: e.target.value})}
+                  />
+                </div>
+                <div className="filtro-group">
+                  <label>Data Fim</label>
+                  <input
+                    type="date"
+                    value={filtrosPagamento.dataFim}
+                    onChange={(e) => setFiltrosPagamento({...filtrosPagamento, dataFim: e.target.value})}
+                  />
+                </div>
+                <button 
+                  className="btn-limpar-filtros"
+                  onClick={() => setFiltrosPagamento({
+                    colaborador: 'todos',
+                    dataInicio: '',
+                    dataFim: '',
+                    ordenarPor: 'data_pagamento',
+                    ordemAsc: false
+                  })}
+                >
+                  Limpar Filtros
+                </button>
+              </div>
+
+              {/* Tabela de Pagamentos */}
+              <div className="pagamentos-table-container">
+                <table className="pagamentos-table">
+                  <thead>
+                    <tr>
+                      <th 
+                        className={`sortable ${filtrosPagamento.ordenarPor === 'colaborador_nome' ? 'active' : ''}`}
+                        onClick={() => setFiltrosPagamento({
+                          ...filtrosPagamento,
+                          ordenarPor: 'colaborador_nome',
+                          ordemAsc: filtrosPagamento.ordenarPor === 'colaborador_nome' ? !filtrosPagamento.ordemAsc : false
+                        })}
+                      >
+                        Colaborador
+                        {filtrosPagamento.ordenarPor === 'colaborador_nome' && (
+                          filtrosPagamento.ordemAsc ? <Icons.ArrowUp /> : <Icons.ArrowDown />
+                        )}
+                      </th>
+                      <th 
+                        className={`sortable ${filtrosPagamento.ordenarPor === 'valor' ? 'active' : ''}`}
+                        onClick={() => setFiltrosPagamento({
+                          ...filtrosPagamento,
+                          ordenarPor: 'valor',
+                          ordemAsc: filtrosPagamento.ordenarPor === 'valor' ? !filtrosPagamento.ordemAsc : false
+                        })}
+                      >
+                        Valor
+                        {filtrosPagamento.ordenarPor === 'valor' && (
+                          filtrosPagamento.ordemAsc ? <Icons.ArrowUp /> : <Icons.ArrowDown />
+                        )}
+                      </th>
+                      <th 
+                        className={`sortable ${filtrosPagamento.ordenarPor === 'data_pagamento' ? 'active' : ''}`}
+                        onClick={() => setFiltrosPagamento({
+                          ...filtrosPagamento,
+                          ordenarPor: 'data_pagamento',
+                          ordemAsc: filtrosPagamento.ordenarPor === 'data_pagamento' ? !filtrosPagamento.ordemAsc : false
+                        })}
+                      >
+                        Data
+                        {filtrosPagamento.ordenarPor === 'data_pagamento' && (
+                          filtrosPagamento.ordemAsc ? <Icons.ArrowUp /> : <Icons.ArrowDown />
+                        )}
+                      </th>
+                      <th>Descrição</th>
+                      <th 
+                        className={`sortable ${filtrosPagamento.ordenarPor === 'forma_pagamento' ? 'active' : ''}`}
+                        onClick={() => setFiltrosPagamento({
+                          ...filtrosPagamento,
+                          ordenarPor: 'forma_pagamento',
+                          ordemAsc: filtrosPagamento.ordenarPor === 'forma_pagamento' ? !filtrosPagamento.ordemAsc : false
+                        })}
+                      >
+                        Forma Pgto.
+                        {filtrosPagamento.ordenarPor === 'forma_pagamento' && (
+                          filtrosPagamento.ordemAsc ? <Icons.ArrowUp /> : <Icons.ArrowDown />
+                        )}
+                      </th>
+                      <th>Ações</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {pagamentosFiltrados.map(pagamento => (
+                      <tr key={pagamento.id}>
+                        <td>{pagamento.colaborador_nome}</td>
+                        <td className="valor-cell">R$ {formatarMoeda(pagamento.valor)}</td>
+                        <td>{formatarData(pagamento.data_pagamento)}</td>
+                        <td>{pagamento.descricao || '-'}</td>
+                        <td>{pagamento.forma_pagamento}</td>
+                        <td>
+                          <div className="acoes-cell">
+                            <button 
+                              className="btn-acao editar"
+                              onClick={() => {
+                                setModalMode('edit');
+                                setSelectedPagamento(pagamento);
+                                setPagamentoForm({
+                                  colaborador_id: pagamento.colaborador_id,
+                                  colaborador_nome: pagamento.colaborador_nome,
+                                  valor: formatarMoeda(pagamento.valor),
+                                  data_pagamento: pagamento.data_pagamento,
+                                  descricao: pagamento.descricao || '',
+                                  forma_pagamento: pagamento.forma_pagamento || 'PIX',
+                                  observacoes: pagamento.observacoes || ''
+                                });
+                                setShowPagamentoModal(true);
+                              }}
+                              title="Editar"
+                            >
+                              <Icons.Edit />
+                            </button>
+                            <button 
+                              className="btn-acao excluir"
+                              onClick={() => handleDeletePagamento(pagamento.id)}
+                              title="Excluir"
+                            >
+                              <Icons.Trash />
+                            </button>
+                          </div>
+                        </td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+                {pagamentosFiltrados.length === 0 && (
+                  <div className="empty-state">
+                    <Icons.Users />
+                    <p>Nenhum pagamento registrado</p>
+                    <small>Clique em "Novo Pagamento" para registrar um pagamento</small>
+                  </div>
+                )}
+              </div>
+            </div>
+          )}
+
           {/* Backups */}
           {activeTab === 'backups' && (
             <div className="financeiro-backups">
@@ -2752,6 +3119,102 @@ const AdminFinanceiro = () => {
               </button>
               <button className="btn-salvar" onClick={handleSaveContrato}>
                 {modalMode === 'edit' ? 'Salvar Alterações' : 'Criar Contrato'}
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* Modal de Pagamento a Colaborador */}
+      {showPagamentoModal && (
+        <div className="modal-overlay" onClick={() => setShowPagamentoModal(false)}>
+          <div className="modal-content" onClick={e => e.stopPropagation()}>
+            <div className="modal-header">
+              <h2>{modalMode === 'edit' ? 'Editar Pagamento' : 'Novo Pagamento'}</h2>
+              <button className="btn-fechar" onClick={() => setShowPagamentoModal(false)}>
+                <Icons.X />
+              </button>
+            </div>
+            <div className="modal-body">
+              <div className="form-group">
+                <label>Colaborador *</label>
+                <select 
+                  value={pagamentoForm.colaborador_id}
+                  onChange={(e) => {
+                    const colaborador = colaboradores.find(c => c.id === e.target.value);
+                    setPagamentoForm({
+                      ...pagamentoForm, 
+                      colaborador_id: e.target.value,
+                      colaborador_nome: colaborador?.nome || ''
+                    });
+                  }}
+                >
+                  <option value="">Selecione um colaborador</option>
+                  {colaboradores.map(col => (
+                    <option key={col.id} value={col.id}>{col.nome}</option>
+                  ))}
+                </select>
+              </div>
+
+              <div className="form-row">
+                <div className="form-group">
+                  <label>Valor (R$) *</label>
+                  <input 
+                    type="text"
+                    inputMode="numeric"
+                    value={pagamentoForm.valor}
+                    onChange={(e) => handleValorChange(e, setPagamentoForm, 'valor')}
+                    placeholder="0,00"
+                  />
+                </div>
+                <div className="form-group">
+                  <label>Data do Pagamento *</label>
+                  <input 
+                    type="date"
+                    value={pagamentoForm.data_pagamento}
+                    onChange={(e) => setPagamentoForm({...pagamentoForm, data_pagamento: e.target.value})}
+                  />
+                </div>
+              </div>
+
+              <div className="form-group">
+                <label>Descrição</label>
+                <input 
+                  type="text"
+                  value={pagamentoForm.descricao}
+                  onChange={(e) => setPagamentoForm({...pagamentoForm, descricao: e.target.value})}
+                  placeholder="Ex: Salário janeiro/2026, Comissão, Bônus, etc."
+                />
+              </div>
+
+              <div className="form-group">
+                <label>Forma de Pagamento</label>
+                <select 
+                  value={pagamentoForm.forma_pagamento}
+                  onChange={(e) => setPagamentoForm({...pagamentoForm, forma_pagamento: e.target.value})}
+                >
+                  {formasPagamento.map(forma => (
+                    <option key={forma} value={forma}>{forma}</option>
+                  ))}
+                </select>
+              </div>
+
+              <div className="form-group">
+                <label>Observações</label>
+                <textarea 
+                  value={pagamentoForm.observacoes}
+                  onChange={(e) => setPagamentoForm({...pagamentoForm, observacoes: e.target.value})}
+                  placeholder="Observações adicionais..."
+                  rows={3}
+                />
+              </div>
+            </div>
+            <div className="modal-footer">
+              <button className="btn-cancelar" onClick={() => setShowPagamentoModal(false)}>
+                Cancelar
+              </button>
+              <button className="btn-salvar" onClick={handleSavePagamento}>
+                {modalMode === 'edit' ? 'Salvar Alterações' : 'Registrar Pagamento'}
               </button>
             </div>
           </div>
