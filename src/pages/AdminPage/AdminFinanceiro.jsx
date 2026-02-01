@@ -2309,31 +2309,40 @@ const AdminFinanceiro = () => {
                 </div>
               </div>
 
-              {/* Grade de 12 meses */}
-              <div className="fluxo-grid-anual">
-                {fluxoCaixa.map((mes, idx) => (
-                  <div key={idx} className={`fluxo-card-mes ${mes.saldo >= 0 ? 'positivo' : 'negativo'}`}>
-                    <div className="fluxo-mes-header">
-                      <span className="fluxo-mes-nome">{mes.mes}</span>
-                    </div>
-                    <div className="fluxo-mes-valores">
-                      <div className="fluxo-valor-linha receita">
-                        <span className="label">Receitas</span>
-                        <span className="valor">+{formatarMoeda(mes.receitas)}</span>
-                      </div>
-                      <div className="fluxo-valor-linha despesa">
-                        <span className="label">Despesas</span>
-                        <span className="valor">-{formatarMoeda(mes.despesas)}</span>
-                      </div>
-                      <div className="fluxo-valor-linha saldo">
-                        <span className="label">Saldo</span>
-                        <span className={`valor ${mes.saldo >= 0 ? 'positivo' : 'negativo'}`}>
+              {/* Tabela de Fluxo de Caixa */}
+              <div className="fluxo-caixa-tabela-container">
+                <table className="fluxo-caixa-tabela">
+                  <thead>
+                    <tr>
+                      <th>Mês</th>
+                      <th>Receitas</th>
+                      <th>Despesas</th>
+                      <th>Saldo</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {fluxoCaixa.map((mes, idx) => (
+                      <tr key={idx}>
+                        <td className="mes-nome">{mes.mes}</td>
+                        <td className="receita">+{formatarMoeda(mes.receitas)}</td>
+                        <td className="despesa">-{formatarMoeda(mes.despesas)}</td>
+                        <td className={mes.saldo >= 0 ? 'saldo-positivo' : 'saldo-negativo'}>
                           {formatarMoeda(mes.saldo)}
-                        </span>
-                      </div>
-                    </div>
-                  </div>
-                ))}
+                        </td>
+                      </tr>
+                    ))}
+                  </tbody>
+                  <tfoot>
+                    <tr>
+                      <td className="mes-nome">Total Anual</td>
+                      <td className="receita">+{formatarMoeda(fluxoCaixa.reduce((acc, m) => acc + m.receitas, 0))}</td>
+                      <td className="despesa">-{formatarMoeda(fluxoCaixa.reduce((acc, m) => acc + m.despesas, 0))}</td>
+                      <td className={fluxoCaixa.reduce((acc, m) => acc + m.saldo, 0) >= 0 ? 'saldo-positivo' : 'saldo-negativo'}>
+                        {formatarMoeda(fluxoCaixa.reduce((acc, m) => acc + m.saldo, 0))}
+                      </td>
+                    </tr>
+                  </tfoot>
+                </table>
               </div>
 
               <div className="fluxo-acoes">
