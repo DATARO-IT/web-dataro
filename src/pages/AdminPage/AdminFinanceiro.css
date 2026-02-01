@@ -3215,6 +3215,69 @@
   border: 1px solid #a7f3d0;
 }
 
+/* ===== Seletores de Período Personalizados ===== */
+.periodo-selectors {
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
+}
+
+.periodo-select {
+  padding: 0.5rem 0.75rem;
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: #374151;
+  background: white;
+  border: 1px solid #d1d5db;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  outline: none;
+}
+
+.periodo-select:hover {
+  border-color: #10b981;
+}
+
+.periodo-select:focus {
+  border-color: #10b981;
+  box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.1);
+}
+
+/* Dark mode para seletores */
+.dark-mode .periodo-select {
+  background: #1e3a3a;
+  color: #d1d5db;
+  border-color: #374151;
+}
+
+.dark-mode .periodo-select:hover,
+.dark-mode .periodo-select:focus {
+  border-color: #10b981;
+}
+
+/* Responsividade dos filtros de período */
+@media (max-width: 768px) {
+  .periodo-filter {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.75rem;
+  }
+  
+  .periodo-buttons {
+    flex-wrap: wrap;
+  }
+  
+  .periodo-selectors {
+    width: 100%;
+  }
+  
+  .periodo-select {
+    flex: 1;
+    min-width: 100px;
+  }
+}
+
 /* ===== Padronização dos Cards de Métricas ===== */
 .metrica-card {
   display: flex;
