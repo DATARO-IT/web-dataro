@@ -164,6 +164,11 @@ const Icons = {
       <polyline points="6 9 12 15 18 9"></polyline>
     </svg>
   ),
+  ChevronLeft: () => (
+    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+      <polyline points="15 18 9 12 15 6"></polyline>
+    </svg>
+  ),
   ChevronRight: () => (
     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
       <polyline points="9 18 15 12 9 6"></polyline>
@@ -429,6 +434,9 @@ const AdminFinanceiro = () => {
     ordenarPor: 'data_pagamento',
     ordemAsc: false
   });
+  
+  // Estado para o ano selecionado no fluxo de caixa
+  const [anoFluxoCaixa, setAnoFluxoCaixa] = useState(new Date().getFullYear());
   
   const fileInputRef = useRef(null);
 
@@ -1349,13 +1357,13 @@ const AdminFinanceiro = () => {
     };
   };
 
-  // Fluxo de Caixa Projetado
+  // Fluxo de Caixa Anual - Mostra todos os 12 meses do ano selecionado
   const calcularFluxoCaixa = () => {
-    const hoje = new Date();
     const meses = [];
+    const nomesMeses = ['Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho', 'Julho', 'Agosto', 'Setembro', 'Outubro', 'Novembro', 'Dezembro'];
     
-    for (let i = 0; i < 6; i++) {
-      const mes = new Date(hoje.getFullYear(), hoje.getMonth() + i, 1);
+    for (let i = 0; i < 12; i++) {
+      const mes = new Date(anoFluxoCaixa, i, 1);
       const transacoesMes = transacoes.filter(t => {
         const data = new Date(t.data_vencimento + 'T00:00:00');
         return data.getMonth() === mes.getMonth() && data.getFullYear() === mes.getFullYear();
@@ -1375,7 +1383,9 @@ const AdminFinanceiro = () => {
       const despesas = transacoesMes.filter(t => t.tipo === 'despesa').reduce((acc, t) => acc + t.valor, 0);
 
       meses.push({
-        mes: mes.toLocaleDateString('pt-BR', { month: 'short', year: 'numeric' }),
+        mes: nomesMeses[i],
+        mesNumero: i + 1,
+        ano: anoFluxoCaixa,
         receitas,
         despesas,
         saldo: receitas - despesas
@@ -2145,25 +2155,65 @@ const AdminFinanceiro = () => {
           {/* Fluxo de Caixa */}
           {activeTab === 'fluxo_caixa' && (
             <div className="financeiro-fluxo">
-              <h2>Fluxo de Caixa Projetado</h2>
-              <p className="fluxo-desc">Projeção de entradas e saídas para os próximos 6 meses</p>
+              <div className="fluxo-header">
+                <div>
+                  <h2>Fluxo de Caixa Anual</h2>
+                  <p className="fluxo-desc">Visão consolidada de receitas e despesas por mês</p>
+                </div>
+                <div className="fluxo-ano-selector">
+                  <button 
+                    className="btn-ano"
+                    onClick={() => setAnoFluxoCaixa(anoFluxoCaixa - 1)}
+                  >
+                    <Icons.ChevronLeft />
+                  </button>
+                  <span className="ano-atual">{anoFluxoCaixa}</span>
+                  <button 
+                    className="btn-ano"
+                    onClick={() => setAnoFluxoCaixa(anoFluxoCaixa + 1)}
+                  >
+                    <Icons.ChevronRight />
+                  </button>
+                </div>
+              </div>
 
-              <div className="fluxo-grid">
+              {/* Resumo Anual */}
+              <div className="fluxo-resumo-anual">
+                <div className="resumo-card receitas">
+                  <span className="resumo-label">Total Receitas</span>
+                  <span className="resumo-valor">+{formatarMoeda(fluxoCaixa.reduce((acc, m) => acc + m.receitas, 0))}</span>
+                </div>
+                <div className="resumo-card despesas">
+                  <span className="resumo-label">Total Despesas</span>
+                  <span className="resumo-valor">-{formatarMoeda(fluxoCaixa.reduce((acc, m) => acc + m.despesas, 0))}</span>
+                </div>
+                <div className={`resumo-card saldo ${fluxoCaixa.reduce((acc, m) => acc + m.saldo, 0) >= 0 ? 'positivo' : 'negativo'}`}>
+                  <span className="resumo-label">Saldo Anual</span>
+                  <span className="resumo-valor">{formatarMoeda(fluxoCaixa.reduce((acc, m) => acc + m.saldo, 0))}</span>
+                </div>
+              </div>
+
+              {/* Grade de 12 meses */}
+              <div className="fluxo-grid-anual">
                 {fluxoCaixa.map((mes, idx) => (
-                  <div key={idx} className="fluxo-card">
-                    <div className="fluxo-mes">{mes.mes}</div>
-                    <div className="fluxo-detalhe">
-                      <div className="fluxo-linha receita">
-                        <span>Receitas</span>
-                        <span>+{formatarMoeda(mes.receitas)}</span>
+                  <div key={idx} className={`fluxo-card-mes ${mes.saldo >= 0 ? 'positivo' : 'negativo'}`}>
+                    <div className="fluxo-mes-header">
+                      <span className="fluxo-mes-nome">{mes.mes}</span>
+                    </div>
+                    <div className="fluxo-mes-valores">
+                      <div className="fluxo-valor-linha receita">
+                        <span className="label">Receitas</span>
+                        <span className="valor">+{formatarMoeda(mes.receitas)}</span>
                       </div>
-                      <div className="fluxo-linha despesa">
-                        <span>Despesas</span>
-                        <span>-{formatarMoeda(mes.despesas)}</span>
+                      <div className="fluxo-valor-linha despesa">
+                        <span className="label">Despesas</span>
+                        <span className="valor">-{formatarMoeda(mes.despesas)}</span>
                       </div>
-                      <div className={`fluxo-linha saldo ${mes.saldo >= 0 ? 'positivo' : 'negativo'}`}>
-                        <span>Saldo</span>
-                        <span>{formatarMoeda(mes.saldo)}</span>
+                      <div className="fluxo-valor-linha saldo">
+                        <span className="label">Saldo</span>
+                        <span className={`valor ${mes.saldo >= 0 ? 'positivo' : 'negativo'}`}>
+                          {formatarMoeda(mes.saldo)}
+                        </span>
                       </div>
                     </div>
                   </div>
@@ -2171,13 +2221,9 @@ const AdminFinanceiro = () => {
               </div>
 
               <div className="fluxo-acoes">
-                <button className="btn-atualizar">
-                  <Icons.RefreshCw />
-                  Atualizar Projeção
-                </button>
                 <button className="btn-exportar">
                   <Icons.Download />
-                  Exportar
+                  Exportar Relatório
                 </button>
               </div>
             </div>
