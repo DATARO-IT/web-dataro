@@ -1258,6 +1258,11 @@ const AdminFinanceiro = () => {
         numero_documento: transacao.numero_documento || '',
         observacoes: transacao.observacoes || '',
         entidade_nome: transacao.entidade_nome || '',
+        entidade_id: transacao.entidade_id || null,
+        tipo_documento: transacao.tipo_documento || 'cpf',
+        cpf_cnpj: transacao.cpf_cnpj || '',
+        cidade: transacao.cidade || '',
+        estado: transacao.estado || '',
         anexo: transacao.anexo || null,
         anexo_nome: transacao.anexo_nome || ''
       });
@@ -1278,6 +1283,11 @@ const AdminFinanceiro = () => {
         numero_documento: '',
         observacoes: '',
         entidade_nome: '',
+        entidade_id: null,
+        tipo_documento: 'cpf',
+        cpf_cnpj: '',
+        cidade: '',
+        estado: '',
         anexo: null,
         anexo_nome: ''
       });
